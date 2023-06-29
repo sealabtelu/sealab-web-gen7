@@ -17,6 +17,9 @@ import themeConfig from "./configs/themeConfig";
 // ** Toast
 import { Toaster } from "react-hot-toast";
 
+// ** i18n
+import './configs/i18n'
+
 // ** Spinner (Splash Screen)
 import Spinner from "./@core/components/spinner/Fallback-spinner";
 
