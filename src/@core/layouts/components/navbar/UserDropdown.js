@@ -1,6 +1,9 @@
 // ** React Imports
 import { Link } from "react-router-dom";
 
+// ** Utils
+import { getUserData } from "@utils";
+
 // ** Custom Components
 import Avatar from "@components/avatar";
 
@@ -11,7 +14,6 @@ import {
   CheckSquare,
   MessageSquare,
   Settings,
-  CreditCard,
   HelpCircle,
   Power,
 } from "react-feather";
@@ -24,10 +26,9 @@ import {
   DropdownItem,
 } from "reactstrap";
 
-// ** Default Avatar Image
-import defaultAvatar from "@src/assets/images/portrait/small/avatar-s-11.jpg";
-
 const UserDropdown = () => {
+  const user = getUserData();
+
   return (
     <UncontrolledDropdown tag="li" className="dropdown-user nav-item">
       <DropdownToggle
@@ -37,14 +38,15 @@ const UserDropdown = () => {
         onClick={(e) => e.preventDefault()}
       >
         <div className="user-nav d-sm-flex d-none">
-          <span className="user-name fw-bold">John Doe</span>
-          <span className="user-status">Admin</span>
+          <span className="user-name fw-bold">{user.name}</span>
+          <span className="user-status">{user.role}</span>
         </div>
         <Avatar
-          img={defaultAvatar}
-          imgHeight="40"
-          imgWidth="40"
+          content={user.name}
+          contentStyles={{ width: '40px', height: '40px' }}
+          color='light-info'
           status="online"
+          initials
         />
       </DropdownToggle>
       <DropdownMenu end>
@@ -72,10 +74,6 @@ const UserDropdown = () => {
         >
           <Settings size={14} className="me-75" />
           <span className="align-middle">Settings</span>
-        </DropdownItem>
-        <DropdownItem tag={Link} to="/" onClick={(e) => e.preventDefault()}>
-          <CreditCard size={14} className="me-75" />
-          <span className="align-middle">Pricing</span>
         </DropdownItem>
         <DropdownItem tag={Link} to="/" onClick={(e) => e.preventDefault()}>
           <HelpCircle size={14} className="me-75" />

@@ -85,7 +85,6 @@ const Login = () => {
           const data = { ...res.data.data, appToken: res.data.data.appToken }
           dispatch(handleLogin(data))
           navigate(getHomeRouteForLoggedInUser(data.role))
-          console.log(JSON.parse(localStorage.getItem('userData')))
           toast(t => (
             <ToastContent t={t} role={data.role} name={data.name || data.username || 'Unknown'} />
           ))
@@ -94,7 +93,7 @@ const Login = () => {
           console.log(err);
           setError('username', {
             type: 'manual',
-            // message: err.response.data.message
+            message: err.response.data.message
           })
         });
     } else {
@@ -178,7 +177,7 @@ const Login = () => {
               </g>
             </g>
           </svg>
-          <h2 className="brand-text text-primary ms-1">Vuexy</h2>
+          <h2 className="brand-text text-primary ms-1">i-Smile</h2>
         </Link>
         <Col className="d-none d-lg-flex align-items-center p-5" lg="8" sm="12">
           <div className="w-100 d-lg-flex align-items-center justify-content-center px-5">
@@ -192,7 +191,7 @@ const Login = () => {
         >
           <Col className="px-xl-2 mx-auto" sm="8" md="6" lg="12">
             <CardTitle tag="h2" className="fw-bold mb-1">
-              Welcome to Vuexy! 👋
+              Welcome to i-Smile Laboratory! 👋
             </CardTitle>
             <CardText className="mb-2">
               Please sign-in to your account and start the adventure
@@ -206,11 +205,11 @@ const Login = () => {
                   NIM/Username
                 </Label>
                 <Controller
-                  id='username'
                   name='username'
                   control={control}
                   render={({ field }) => (
                     <Input
+                      id='login-username'
                       autoFocus
                       type='text'
                       placeholder='NIM or Username SSO'
@@ -225,11 +224,11 @@ const Login = () => {
                   Password
                 </Label>
                 <Controller
-                  id='password'
                   name='password'
                   control={control}
                   render={({ field }) => (
                     <InputPasswordToggle
+                      id='login-password'
                       className='input-group-merge'
                       // invalid={errors.password && true}
                       {...field} />
