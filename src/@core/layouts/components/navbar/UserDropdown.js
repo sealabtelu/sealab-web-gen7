@@ -1,8 +1,14 @@
 // ** React Imports
 import { Link } from "react-router-dom";
+import { useEffect, useState } from 'react'
 
 // ** Utils
 import { getUserData } from "@utils";
+import { isUserLoggedIn } from '@utils'
+
+// ** Store & Actions
+import { useDispatch } from 'react-redux'
+import { handleLogout } from '@store/authentication'
 
 // ** Custom Components
 import Avatar from "@components/avatar";
@@ -27,7 +33,18 @@ import {
 } from "reactstrap";
 
 const UserDropdown = () => {
-  const user = getUserData();
+  // ** Store Vars
+  const dispatch = useDispatch()
+
+  // ** State
+  const [userData, setUserData] = useState(getUserData())
+
+  //** ComponentDidMount
+  // useEffect(() => {
+  //   if (isUserLoggedIn() !== null) {
+  //     setUserData(getUserData())
+  //   }
+  // }, [])
 
   return (
     <UncontrolledDropdown tag="li" className="dropdown-user nav-item">
@@ -38,11 +55,11 @@ const UserDropdown = () => {
         onClick={(e) => e.preventDefault()}
       >
         <div className="user-nav d-sm-flex d-none">
-          <span className="user-name fw-bold">{user.name}</span>
-          <span className="user-status">{user.role}</span>
+          <span className="user-name fw-bold">{userData.name}</span>
+          <span className="user-status">{userData.role}</span>
         </div>
         <Avatar
-          content={user.name}
+          content={userData.name}
           contentStyles={{ width: '40px', height: '40px' }}
           color='light-info'
           status="online"
@@ -79,7 +96,7 @@ const UserDropdown = () => {
           <HelpCircle size={14} className="me-75" />
           <span className="align-middle">FAQ</span>
         </DropdownItem>
-        <DropdownItem tag={Link} to="/login">
+        <DropdownItem tag={Link} to="/login" onClick={() => dispatch(handleLogout())}>
           <Power size={14} className="me-75" />
           <span className="align-middle">Logout</span>
         </DropdownItem>
