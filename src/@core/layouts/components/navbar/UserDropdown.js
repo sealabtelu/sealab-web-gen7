@@ -37,7 +37,10 @@ const UserDropdown = () => {
   const dispatch = useDispatch()
 
   // ** State
-  const [userData, setUserData] = useState(getUserData())
+  const [userData, setUserData] = useState(getUserData() ?? {
+    name: "Nora Whitefall",
+    role: "The Creator"
+  })
 
   //** ComponentDidMount
   // useEffect(() => {

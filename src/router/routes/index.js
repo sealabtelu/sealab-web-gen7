@@ -1,10 +1,10 @@
 // ** React Imports
-import { Fragment, lazy } from "react";
+import { Fragment } from "react";
 
 // ** Routes Imports
 import AuthenticationRoutes from './Authentication'
+import AssistantRoutes from "./Assistant";
 
-import { Navigate } from "react-router-dom";
 // ** Layouts
 import BlankLayout from "@layouts/BlankLayout";
 import VerticalLayout from "@src/layouts/VerticalLayout";
@@ -25,38 +25,15 @@ const getLayout = {
 };
 
 // ** Document title
-const TemplateTitle = "%s - i-Smile";
+const TemplateTitle = "%s - SEA Lab";
 
 // ** Default Route
 const DefaultRoute = "/home";
 
-const Home = lazy(() => import("../../views/Home"));
-const SecondPage = lazy(() => import("../../views/SecondPage"));
-const Error = lazy(() => import("../../views/Error"));
-
 // ** Merge Routes
 const Routes = [
-  {
-    path: "/",
-    index: true,
-    element: <Navigate replace to={DefaultRoute} />,
-  },
-  {
-    path: "/home",
-    element: <Home />,
-  },
-  {
-    path: "/second-page",
-    element: <SecondPage />,
-  },
-  {
-    path: "/error",
-    element: <Error />,
-    meta: {
-      layout: "blank",
-    },
-  },
   ...AuthenticationRoutes,
+  ...AssistantRoutes,
 ];
 
 const getRouteMeta = (route) => {
