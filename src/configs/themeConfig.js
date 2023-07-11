@@ -1,12 +1,12 @@
 // Logo Import
-import logo from "@src/assets/images/logo/logo.svg";
+import logo from "@src/assets/images/logo/logo.png";
 
 // You can customize the template with the help of this file
 
 //Template config options
 const themeConfig = {
   app: {
-    appName: "i-Smile",
+    appName: "SEA Lab",
     appLogoImage: logo,
   },
   layout: {
