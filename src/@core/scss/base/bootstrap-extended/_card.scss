@@ -6,9 +6,9 @@
     box-shadow: none !important;
   }
   .card-title {
-    font-weight: 500;
+    font-weight: bold;
     font-size: 1.285rem;
-    margin-bottom: 1.53rem; // Considering sub-title minus margin
+    margin-bottom: 1.53rem;
   }
   .card-bordered {
     border: $card-border-width solid $card-border-color;
@@ -55,6 +55,7 @@
     align-items: center;
     flex-wrap: wrap;
     justify-content: space-between;
+    padding-bottom: 0;
     .card-title {
       margin-bottom: 0;
     }
@@ -250,6 +251,7 @@
   .card-body {
     position: relative;
     padding: 5rem 2.3rem $card-spacer-y 2.3rem;
+    font-weight: bold;
 
     .profile-image-wrapper {
       display: flex;

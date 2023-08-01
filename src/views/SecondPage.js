@@ -1,21 +1,36 @@
 import { Card, CardHeader, CardBody, CardTitle, CardText } from "reactstrap";
 
-const SecondPage = () => {
+const tugasPendahuluan = () => {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Create Awesome 🙌</CardTitle>
-      </CardHeader>
-      <CardBody>
-        <CardText>This is your second page.</CardText>
-        <CardText>
-          Chocolate sesame snaps pie carrot cake pastry pie lollipop muffin.
-          Carrot cake dragée chupa chups jujubes. Macaroon liquorice cookie
-          wafer tart marzipan bonbon. Gingerbread jelly-o dragée chocolate.
-        </CardText>
-      </CardBody>
-    </Card>
+    <div>
+      <Card>
+        <CardHeader>
+          <CardTitle>MODUL 1 - Searching</CardTitle>
+        </CardHeader>
+        <CardBody>
+          <CardText>Last edited: Sat, 13 July 19:20</CardText>
+        </CardBody>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>MODUL 2</CardTitle>
+        </CardHeader>
+        <CardBody>
+          <CardText>Knowledge Representation</CardText>
+        </CardBody>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>MODUL 3</CardTitle>
+        </CardHeader>
+        <CardBody>
+          <CardText>Logika Fuzzy - Fuzzifikasi</CardText>
+        </CardBody>
+      </Card>
+    </div>
   );
 };
 
-export default SecondPage;
+export default tugasPendahuluan;

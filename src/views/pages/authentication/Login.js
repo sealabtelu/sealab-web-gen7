@@ -248,7 +248,7 @@ const Login = () => {
                   Remember Me
                 </Label>
               </div>
-              <Button type='submit' color='success' block>
+              <Button type='submit' color='primary' block>
                 Sign in
               </Button>
             </Form>

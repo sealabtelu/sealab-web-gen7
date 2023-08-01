@@ -8,9 +8,15 @@ export default [
     navLink: "/home",
   },
   {
-    id: "secondPage",
-    title: "Second Page",
+    id: "tugasPendahuluan",
+    title: "Tugas Pendahuluan",
     icon: <Mail size={20} />,
-    navLink: "/second-page",
+    navLink: "/tugas-pendahuluan",
+  },
+  {
+    id: "tugasAwal",
+    title: "Tes Awal",
+    icon: <Mail size={20} />,
+    navLink: "/tes-awal",
   },
 ];

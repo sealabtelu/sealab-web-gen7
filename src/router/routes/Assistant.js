@@ -1,7 +1,7 @@
 import { lazy } from 'react'
 
 const Home = lazy(() => import("../../views/Home"));
-const SecondPage = lazy(() => import("../../views/SecondPage"));
+const TugasPendahuluan = lazy(() => import("../../views/SecondPage"));
 const Error = lazy(() => import("../../views/Error"));
 
 const AssistantRoutes = [
@@ -10,8 +10,8 @@ const AssistantRoutes = [
         element: <Home />,
     },
     {
-        path: "/second-page",
-        element: <SecondPage />,
+        path: "/tugas-pendahuluan",
+        element: <TugasPendahuluan />,
     },
     {
         path: "/error",
