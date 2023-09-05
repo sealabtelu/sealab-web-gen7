@@ -2,7 +2,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 
 // ** Custom Hooks
-import { useSkin } from "@hooks/useSkin";
+import { useSkin } from "@hooks/useSkin"
 import useJwt from '@src/auth/jwt/useJwt'
 
 // ** Third Party Components
@@ -16,7 +16,7 @@ import { handleLogin } from '@store/authentication'
 
 // ** Custom Components
 import Avatar from '@components/avatar'
-import InputPasswordToggle from "@components/input-password-toggle";
+import InputPasswordToggle from "@components/input-password-toggle"
 
 // ** Utils
 import { getHomeRouteForLoggedInUser } from '@utils'
@@ -31,15 +31,15 @@ import {
   Button,
   CardText,
   CardTitle,
-  FormFeedback,
-} from "reactstrap";
+  FormFeedback
+} from "reactstrap"
 
 // ** Illustrations Imports
-import illustrationsLight from "@src/assets/images/pages/login-v2.svg";
-import illustrationsDark from "@src/assets/images/pages/login-v2-dark.svg";
+import illustrationsLight from "@src/assets/images/pages/login-v2.svg"
+import illustrationsDark from "@src/assets/images/pages/login-v2-dark.svg"
 
 // ** Styles
-import "@styles/react/pages/page-authentication.scss";
+import "@styles/react/pages/page-authentication.scss"
 
 const ToastContent = ({ t, name, role }) => {
   return (
@@ -65,7 +65,7 @@ const defaultValues = {
 
 const Login = () => {
   // ** Hooks
-  const { skin } = useSkin();
+  const { skin } = useSkin()
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const {
@@ -75,7 +75,7 @@ const Login = () => {
     formState: { errors }
   } = useForm({ defaultValues })
 
-  const source = skin === "dark" ? illustrationsDark : illustrationsLight;
+  const source = skin === "dark" ? illustrationsDark : illustrationsLight
 
   const onSubmit = data => {
     if (Object.values(data).every(field => field.length > 0)) {
@@ -90,12 +90,12 @@ const Login = () => {
           ))
         })
         .catch(err => {
-          console.log(err);
+          console.log(err)
           setError('username', {
             type: 'manual',
             message: err.response.data.message
           })
-        });
+        })
     } else {
       for (const key in data) {
         if (data[key].length === 0) {
@@ -249,7 +249,7 @@ const Login = () => {
         </Col>
       </Row>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

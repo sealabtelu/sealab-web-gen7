@@ -1,36 +1,36 @@
 // ** React Imports
-import { Navigate } from "react-router-dom";
-import { useContext, Suspense } from "react";
+import { Navigate } from "react-router-dom"
+import { Suspense } from "react"
 
 // ** Utils
-import { getUserData } from "@utils";
+import { getUserData } from "@utils"
 
 // ** Context Imports
 // import { AbilityContext } from "@src/utility/context/Can";
 
 // ** Spinner Import
-import Spinner from "../spinner/Loading-spinner";
+import Spinner from "../spinner/Loading-spinner"
 
 const PrivateRoute = ({ children, route }) => {
   // ** Hooks & Vars
   // const ability = useContext(AbilityContext);
-  const user = getUserData();
+  const user = getUserData()
 
   if (route) {
     // let action = null;
     // let resource = null;
-    let restrictedRoute = false;
+    let restrictedRoute = false
 
     if (route.meta) {
       // action = route.meta.action;
       // resource = route.meta.resource;
-      restrictedRoute = route.meta.restricted;
+      restrictedRoute = route.meta.restricted
     }
     if (!user) {
-      return <Navigate to="/login" />;
+      return <Navigate to="/login" />
     }
     if (user && restrictedRoute) {
-      return <Navigate to={getHomeRouteForLoggedInUser(user.role)} />;
+      return <Navigate to={getHomeRouteForLoggedInUser(user.role)} />
     }
     // if (user && restrictedRoute && user.role === "Student") {
     //   return <Navigate to="/access-control" />;
@@ -44,7 +44,7 @@ const PrivateRoute = ({ children, route }) => {
     <Suspense fallback={<Spinner className="content-loader" />}>
       {children}
     </Suspense>
-  );
-};
+  )
+}
 
-export default PrivateRoute;
+export default PrivateRoute

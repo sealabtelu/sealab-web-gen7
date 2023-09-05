@@ -1,17 +1,16 @@
 // ** React Imports
-import { Link } from "react-router-dom";
-import { useEffect, useState } from 'react'
+import { Link } from "react-router-dom"
+import { useState } from 'react'
 
 // ** Utils
-import { getUserData } from "@utils";
-import { isUserLoggedIn } from '@utils'
+import { getUserData } from "@utils"
 
 // ** Store & Actions
 import { useDispatch } from 'react-redux'
 import { handleLogout } from '@store/authentication'
 
 // ** Custom Components
-import Avatar from "@components/avatar";
+import Avatar from "@components/avatar"
 
 // ** Third Party Components
 import {
@@ -21,26 +20,23 @@ import {
   MessageSquare,
   Settings,
   HelpCircle,
-  Power,
-} from "react-feather";
+  Power
+} from "react-feather"
 
 // ** Reactstrap Imports
 import {
   UncontrolledDropdown,
   DropdownMenu,
   DropdownToggle,
-  DropdownItem,
-} from "reactstrap";
+  DropdownItem
+} from "reactstrap"
 
 const UserDropdown = () => {
   // ** Store Vars
   const dispatch = useDispatch()
 
   // ** State
-  const [userData, setUserData] = useState(getUserData() ?? {
-    name: "Nora Whitefall",
-    role: "The Creator"
-  })
+  const [userData] = useState(getUserData(true))
 
   //** ComponentDidMount
   // useEffect(() => {
@@ -105,7 +101,7 @@ const UserDropdown = () => {
         </DropdownItem>
       </DropdownMenu>
     </UncontrolledDropdown>
-  );
-};
+  )
+}
 
-export default UserDropdown;
+export default UserDropdown

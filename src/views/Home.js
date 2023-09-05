@@ -4,8 +4,8 @@ import {
   CardBody,
   CardTitle,
   CardText,
-  CardLink,
-} from "reactstrap";
+  CardLink
+} from "reactstrap"
 
 const Home = () => {
   return (
@@ -51,7 +51,7 @@ const Home = () => {
         </CardBody>
       </Card>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
