@@ -1,50 +1,52 @@
 // ** React Imports
-import { Fragment } from "react";
+import { Fragment } from "react"
 
 // ** Routes Imports
 import AuthenticationRoutes from './Authentication'
-import AssistantRoutes from "./Assistant";
+import AssistantRoutes from "./Assistant"
+import StudentRoutes from "./Student"
 
 // ** Layouts
-import BlankLayout from "@layouts/BlankLayout";
-import VerticalLayout from "@src/layouts/VerticalLayout";
-import HorizontalLayout from "@src/layouts/HorizontalLayout";
-import LayoutWrapper from "@src/@core/layouts/components/layout-wrapper";
+import BlankLayout from "@layouts/BlankLayout"
+import VerticalLayout from "@src/layouts/VerticalLayout"
+import HorizontalLayout from "@src/layouts/HorizontalLayout"
+import LayoutWrapper from "@src/@core/layouts/components/layout-wrapper"
 
 // ** Route Components
 import PublicRoute from '@components/routes/PublicRoute'
 import PrivateRoute from '@components/routes/PrivateRoute'
 
 // ** Utils
-import { isObjEmpty } from "@utils";
+import { isObjEmpty } from "@utils"
 
 const getLayout = {
   blank: <BlankLayout />,
   vertical: <VerticalLayout />,
-  horizontal: <HorizontalLayout />,
-};
+  horizontal: <HorizontalLayout />
+}
 
 // ** Document title
-const TemplateTitle = "%s - SEA Lab";
+const TemplateTitle = "%s - SEA Lab"
 
 // ** Default Route
-const DefaultRoute = "/home";
+const DefaultRoute = "/home"
 
 // ** Merge Routes
 const Routes = [
   ...AuthenticationRoutes,
   ...AssistantRoutes,
-];
+  ...StudentRoutes
+]
 
 const getRouteMeta = (route) => {
   if (isObjEmpty(route.element.props)) {
     if (route.meta) {
-      return { routeMeta: route.meta };
+      return { routeMeta: route.meta }
     } else {
-      return {};
+      return {}
     }
   }
-};
+}
 
 // ** Return Filtered Array of Routes & Paths
 const MergeLayoutRoutes = (layout, defaultLayout) => {
