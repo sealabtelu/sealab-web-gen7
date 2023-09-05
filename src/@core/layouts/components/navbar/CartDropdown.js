@@ -1,11 +1,11 @@
 // ** React Imports
-import { Link } from "react-router-dom";
-import { useEffect, Fragment, useState } from "react";
+import { Link } from "react-router-dom"
+import { useEffect, Fragment, useState } from "react"
 
 // ** Third Party Components
-import InputNumber from "rc-input-number";
-import PerfectScrollbar from "react-perfect-scrollbar";
-import { ShoppingCart, X, Plus, Minus } from "react-feather";
+import InputNumber from "rc-input-number"
+import PerfectScrollbar from "react-perfect-scrollbar"
+import { ShoppingCart, X, Plus, Minus } from "react-feather"
 
 // ** Reactstrap Imports
 import {
@@ -14,57 +14,57 @@ import {
   DropdownToggle,
   DropdownItem,
   Badge,
-  Button,
-} from "reactstrap";
+  Button
+} from "reactstrap"
 
 // ** Store & Actions
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux"
 import {
   getCartItems,
   deleteCartItem,
-  getProduct,
-} from "@src/views/apps/ecommerce/store";
+  getProduct
+} from "@src/views/apps/ecommerce/store"
 
 // ** Styles
-import "@styles/react/libs/input-number/input-number.scss";
+import "@styles/react/libs/input-number/input-number.scss"
 
 const CartDropdown = () => {
   // ** State
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false)
 
   // ** Store Vars
-  const dispatch = useDispatch();
-  const store = useSelector((state) => state.ecommerce);
+  const dispatch = useDispatch()
+  const store = useSelector((state) => state.ecommerce)
 
   // ** ComponentDidMount
   useEffect(() => {
-    dispatch(getCartItems());
-  }, []);
+    dispatch(getCartItems())
+  }, [])
 
   // ** Function to toggle Dropdown
-  const toggle = () => setDropdownOpen((prevState) => !prevState);
+  const toggle = () => setDropdownOpen((prevState) => !prevState)
 
   // ** Function to call on Dropdown Item Click
   const handleDropdownItemClick = (id) => {
-    dispatch(getProduct(id));
-    toggle();
-  };
+    dispatch(getProduct(id))
+    toggle()
+  }
 
   // ** Loops through Cart Array to return Cart Items
   const renderCartItems = () => {
     if (store.cart.length) {
-      let total = 0;
+      let total = 0
 
       return (
         <Fragment>
           <PerfectScrollbar
             className="scrollable-container media-list"
             options={{
-              wheelPropagation: false,
+              wheelPropagation: false
             }}
           >
             {store.cart.map((item) => {
-              total += item.price;
+              total += item.price
 
               return (
                 <div key={item.id} className="list-item align-items-center">
@@ -105,7 +105,7 @@ const CartDropdown = () => {
                     <h5 className="cart-item-price">${item.price}</h5>
                   </div>
                 </div>
-              );
+              )
             })}
           </PerfectScrollbar>
           <li className="dropdown-menu-footer">
@@ -126,11 +126,11 @@ const CartDropdown = () => {
             </Button>
           </li>
         </Fragment>
-      );
+      )
     } else {
-      return <p className="m-0 p-1 text-center">Your cart is empty</p>;
+      return <p className="m-0 p-1 text-center">Your cart is empty</p>
     }
-  };
+  }
 
   return (
     <Dropdown
@@ -163,7 +163,7 @@ const CartDropdown = () => {
         {renderCartItems()}
       </DropdownMenu>
     </Dropdown>
-  );
-};
+  )
+}
 
-export default CartDropdown;
+export default CartDropdown

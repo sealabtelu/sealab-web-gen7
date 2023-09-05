@@ -1,26 +1,26 @@
 // ** React Imports
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom"
 
 // ** Third Party Components
-import classnames from "classnames";
-import { useTranslation } from "react-i18next";
+import classnames from "classnames"
+import { useTranslation } from "react-i18next"
 
 // ** Reactstrap Imports
-import { Badge } from "reactstrap";
+import { Badge } from "reactstrap"
 
 const VerticalNavMenuLink = ({ item, activeItem }) => {
   // ** Conditional Link Tag, if item has newTab or externalLink props use <a> tag else use NavLink
-  const LinkTag = item.externalLink ? "a" : NavLink;
+  const LinkTag = item.externalLink ? "a" : NavLink
 
   // ** Hooks
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   return (
     <li
       className={classnames({
         "nav-item": !item.children,
         disabled: item.disabled,
-        active: item.navLink === activeItem,
+        active: item.navLink === activeItem
       })}
     >
       <LinkTag

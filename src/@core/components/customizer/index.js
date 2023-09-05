@@ -1,17 +1,17 @@
 // ** React Imports
-import { useState } from "react";
+import { useState } from "react"
 
 // ** Third Party Components
-import Select from "react-select";
-import classnames from "classnames";
-import { Settings, X } from "react-feather";
-import PerfectScrollbar from "react-perfect-scrollbar";
+import Select from "react-select"
+import classnames from "classnames"
+import { Settings, X } from "react-feather"
+import PerfectScrollbar from "react-perfect-scrollbar"
 
 // ** Reactstrap Imports
-import { Input, Label } from "reactstrap";
+import { Input, Label } from "reactstrap"
 
 // ** Styles
-import "@styles/react/libs/react-select/_react-select.scss";
+import "@styles/react/libs/react-select/_react-select.scss"
 
 const Customizer = (props) => {
   // ** Props
@@ -34,17 +34,17 @@ const Customizer = (props) => {
     setFooterType,
     setNavbarColor,
     setContentWidth,
-    setMenuCollapsed,
-  } = props;
+    setMenuCollapsed
+  } = props
 
   // ** State
-  const [openCustomizer, setOpenCustomizer] = useState(false);
+  const [openCustomizer, setOpenCustomizer] = useState(false)
 
   // ** Toggles Customizer
   const handleToggle = (e) => {
-    e.preventDefault();
-    setOpenCustomizer(!openCustomizer);
-  };
+    e.preventDefault()
+    setOpenCustomizer(!openCustomizer)
+  }
 
   // ** Render Layout Skin Options
   const renderSkinsRadio = () => {
@@ -52,30 +52,30 @@ const Customizer = (props) => {
       {
         name: "light",
         label: "Light",
-        checked: skin === "light",
+        checked: skin === "light"
       },
       {
         name: "bordered",
         label: "Bordered",
-        checked: skin === "bordered",
+        checked: skin === "bordered"
       },
       {
         name: "dark",
         label: "Dark",
-        checked: skin === "dark",
+        checked: skin === "dark"
       },
       {
         name: "semi-dark",
         label: "Semi Dark",
-        checked: skin === "semi-dark",
-      },
-    ];
+        checked: skin === "semi-dark"
+      }
+    ]
 
     return skinsArr.map((radio, index) => {
-      const marginCondition = index !== skinsArr.length - 1;
+      const marginCondition = index !== skinsArr.length - 1
 
       if (layout === "horizontal" && radio.name === "semi-dark") {
-        return null;
+        return null
       }
 
       return (
@@ -93,9 +93,9 @@ const Customizer = (props) => {
             {radio.label}
           </Label>
         </div>
-      );
-    });
-  };
+      )
+    })
+  }
 
   // ** Render Navbar Colors Options
   const renderNavbarColors = () => {
@@ -107,20 +107,20 @@ const Customizer = (props) => {
       "danger",
       "info",
       "warning",
-      "dark",
-    ];
+      "dark"
+    ]
 
     return colorsArr.map((color) => (
       <li
         key={color}
         className={classnames(`color-box bg-${color}`, {
           selected: navbarColor === color,
-          border: color === "white",
+          border: color === "white"
         })}
         onClick={() => setNavbarColor(color)}
       ></li>
-    ));
-  };
+    ))
+  }
 
   // ** Render Navbar Type Options
   const renderNavbarTypeRadio = () => {
@@ -128,30 +128,30 @@ const Customizer = (props) => {
       {
         name: "floating",
         label: "Floating",
-        checked: navbarType === "floating",
+        checked: navbarType === "floating"
       },
       {
         name: "sticky",
         label: "Sticky",
-        checked: navbarType === "sticky",
+        checked: navbarType === "sticky"
       },
       {
         name: "static",
         label: "Static",
-        checked: navbarType === "static",
+        checked: navbarType === "static"
       },
       {
         name: "hidden",
         label: "Hidden",
-        checked: navbarType === "hidden",
-      },
-    ];
+        checked: navbarType === "hidden"
+      }
+    ]
 
     return navbarTypeArr.map((radio, index) => {
-      const marginCondition = index !== navbarTypeArr.length - 1;
+      const marginCondition = index !== navbarTypeArr.length - 1
 
       if (layout === "horizontal" && radio.name === "hidden") {
-        return null;
+        return null
       }
 
       return (
@@ -169,9 +169,9 @@ const Customizer = (props) => {
             {radio.label}
           </Label>
         </div>
-      );
-    });
-  };
+      )
+    })
+  }
 
   // ** Render Footer Type Options
   const renderFooterTypeRadio = () => {
@@ -179,22 +179,22 @@ const Customizer = (props) => {
       {
         name: "sticky",
         label: "Sticky",
-        checked: footerType === "sticky",
+        checked: footerType === "sticky"
       },
       {
         name: "static",
         label: "Static",
-        checked: footerType === "static",
+        checked: footerType === "static"
       },
       {
         name: "hidden",
         label: "Hidden",
-        checked: footerType === "hidden",
-      },
-    ];
+        checked: footerType === "hidden"
+      }
+    ]
 
     return footerTypeArr.map((radio, index) => {
-      const marginCondition = index !== footerTypeArr.length - 1;
+      const marginCondition = index !== footerTypeArr.length - 1
 
       return (
         <div
@@ -211,14 +211,14 @@ const Customizer = (props) => {
             {radio.label}
           </Label>
         </div>
-      );
-    });
-  };
+      )
+    })
+  }
 
   return (
     <div
       className={classnames("customizer d-none d-md-block", {
-        open: openCustomizer,
+        open: openCustomizer
       })}
     >
       <a
@@ -302,8 +302,8 @@ const Customizer = (props) => {
                   id="vertical-layout"
                   checked={layout === "vertical"}
                   onChange={() => {
-                    setLayout("vertical");
-                    setLastLayout("vertical");
+                    setLayout("vertical")
+                    setLastLayout("vertical")
                   }}
                 />
                 <Label className="form-check-label" for="vertical-layout">
@@ -316,8 +316,8 @@ const Customizer = (props) => {
                   id="horizontal-layout"
                   checked={layout === "horizontal"}
                   onChange={() => {
-                    setLayout("horizontal");
-                    setLastLayout("horizontal");
+                    setLayout("horizontal")
+                    setLastLayout("horizontal")
                   }}
                 />
                 <Label className="form-check-label" for="horizontal-layout">
@@ -385,7 +385,7 @@ const Customizer = (props) => {
         </div>
       </PerfectScrollbar>
     </div>
-  );
-};
+  )
+}
 
-export default Customizer;
+export default Customizer

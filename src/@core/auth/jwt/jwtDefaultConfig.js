@@ -8,5 +8,5 @@ export default {
   tokenType: "Bearer",
 
   // ** Value of this property will be used as key to store JWT token in storage
-  storageTokenKeyName: "appToken",
-};
+  storageTokenKeyName: "appToken"
+}

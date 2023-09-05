@@ -1,79 +1,79 @@
 // ** React Imports
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
 
 // ** Third Party Components
-import axios from "axios";
-import classnames from "classnames";
-import * as Icon from "react-feather";
+import axios from "axios"
+import classnames from "classnames"
+import * as Icon from "react-feather"
 
 // ** Reactstrap Imports
-import { NavItem, NavLink } from "reactstrap";
+import { NavItem, NavLink } from "reactstrap"
 
 // ** Store & Actions
-import { useDispatch } from "react-redux";
-import { handleSearchQuery } from "@store/navbar";
+import { useDispatch } from "react-redux"
+import { handleSearchQuery } from "@store/navbar"
 
 // ** Custom Components
-import Autocomplete from "@components/autocomplete";
+import Autocomplete from "@components/autocomplete"
 
 const NavbarSearch = () => {
   // ** Store Vars
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   // ** States
-  const [suggestions, setSuggestions] = useState([]);
-  const [navbarSearch, setNavbarSearch] = useState(false);
+  const [suggestions, setSuggestions] = useState([])
+  const [navbarSearch, setNavbarSearch] = useState(false)
 
   // ** ComponentDidMount
   useEffect(() => {
     axios.get("/api/main-search/data").then(({ data }) => {
-      setSuggestions(data.searchArr);
-    });
-  }, []);
+      setSuggestions(data.searchArr)
+    })
+  }, [])
 
   // ** Removes query in store
-  const handleClearQueryInStore = () => dispatch(handleSearchQuery(""));
+  const handleClearQueryInStore = () => dispatch(handleSearchQuery(""))
 
   // ** Function to handle external Input click
   const handleExternalClick = () => {
     if (navbarSearch === true) {
-      setNavbarSearch(false);
-      handleClearQueryInStore();
+      setNavbarSearch(false)
+      handleClearQueryInStore()
     }
-  };
+  }
 
   // ** Function to clear input value
   const handleClearInput = (setUserInput) => {
     if (!navbarSearch) {
-      setUserInput("");
-      handleClearQueryInStore();
+      setUserInput("")
+      handleClearQueryInStore()
     }
-  };
+  }
 
   // ** Function to close search on ESC & ENTER Click
   const onKeyDown = (e) => {
     if (e.keyCode === 27 || e.keyCode === 13) {
       setTimeout(() => {
-        setNavbarSearch(false);
-        handleClearQueryInStore();
-      }, 1);
+        setNavbarSearch(false)
+        handleClearQueryInStore()
+      }, 1)
     }
-  };
+  }
 
   // ** Function to handle search suggestion Click
   const handleSuggestionItemClick = () => {
-    setNavbarSearch(false);
-    handleClearQueryInStore();
-  };
+    setNavbarSearch(false)
+    handleClearQueryInStore()
+  }
 
   // ** Function to handle search list Click
   const handleListItemClick = (func, link, e) => {
-    func(link, e);
+    func(link, e)
     setTimeout(() => {
-      setNavbarSearch(false);
-    }, 1);
-    handleClearQueryInStore();
-  };
+      setNavbarSearch(false)
+    }, 1)
+    handleClearQueryInStore()
+  }
 
   return (
     <NavItem className="nav-search" onClick={() => setNavbarSearch(true)}>
@@ -82,7 +82,7 @@ const NavbarSearch = () => {
       </NavLink>
       <div
         className={classnames("search-input", {
-          open: navbarSearch === true,
+          open: navbarSearch === true
         })}
       >
         <div className="search-input-icon">
@@ -99,8 +99,7 @@ const NavbarSearch = () => {
             autoFocus={true}
             onSuggestionItemClick={handleSuggestionItemClick}
             externalClick={handleExternalClick}
-            clearInput={(userInput, setUserInput) =>
-              handleClearInput(setUserInput)
+            clearInput={(userInput, setUserInput) => handleClearInput(setUserInput)
             }
             onKeyDown={onKeyDown}
             onChange={(e) => dispatch(handleSearchQuery(e.target.value))}
@@ -112,24 +111,22 @@ const NavbarSearch = () => {
               onSuggestionItemClick,
               onSuggestionItemHover
             ) => {
-              const IconTag = Icon[item.icon ? item.icon : "X"];
+              const IconTag = Icon[item.icon ? item.icon : "X"]
               return (
                 <li
                   className={classnames("suggestion-item", {
-                    active: filteredData.indexOf(item) === activeSuggestion,
+                    active: filteredData.indexOf(item) === activeSuggestion
                   })}
                   key={i}
-                  onClick={(e) =>
-                    handleListItemClick(onSuggestionItemClick, item.link, e)
+                  onClick={(e) => handleListItemClick(onSuggestionItemClick, item.link, e)
                   }
-                  onMouseEnter={() =>
-                    onSuggestionItemHover(filteredData.indexOf(item))
+                  onMouseEnter={() => onSuggestionItemHover(filteredData.indexOf(item))
                   }
                 >
                   <div
                     className={classnames({
                       "d-flex justify-content-between align-items-center":
-                        item.file || item.img,
+                        item.file || item.img
                     })}
                   >
                     <div className="item-container d-flex">
@@ -169,7 +166,7 @@ const NavbarSearch = () => {
                     ) : null}
                   </div>
                 </li>
-              );
+              )
             }}
           />
         ) : null}
@@ -177,15 +174,15 @@ const NavbarSearch = () => {
           <Icon.X
             className="ficon"
             onClick={(e) => {
-              e.stopPropagation();
-              setNavbarSearch(false);
-              handleClearQueryInStore();
+              e.stopPropagation()
+              setNavbarSearch(false)
+              handleClearQueryInStore()
             }}
           />
         </div>
       </div>
     </NavItem>
-  );
-};
+  )
+}
 
-export default NavbarSearch;
+export default NavbarSearch

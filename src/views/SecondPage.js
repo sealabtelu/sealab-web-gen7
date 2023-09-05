@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardBody, CardTitle, CardText } from "reactstrap";
+import { Card, CardHeader, CardBody, CardTitle, CardText } from "reactstrap"
 
 const SecondPage = () => {
   return (
@@ -15,7 +15,7 @@ const SecondPage = () => {
         </CardText>
       </CardBody>
     </Card>
-  );
-};
+  )
+}
 
-export default SecondPage;
+export default SecondPage

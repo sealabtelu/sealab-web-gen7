@@ -1,17 +1,17 @@
 // ** React Imports
-import { Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Fragment } from "react"
+import { Link } from "react-router-dom"
 
 // ** Third Party Components
-import Proptypes from "prop-types";
-import classnames from "classnames";
+import Proptypes from "prop-types"
+import classnames from "classnames"
 import {
   Grid,
   CheckSquare,
   MessageSquare,
   Mail,
-  Calendar,
-} from "react-feather";
+  Calendar
+} from "react-feather"
 
 // ** Reactstrap Imports
 import {
@@ -20,17 +20,17 @@ import {
   DropdownItem,
   BreadcrumbItem,
   DropdownToggle,
-  UncontrolledButtonDropdown,
-} from "reactstrap";
+  UncontrolledButtonDropdown
+} from "reactstrap"
 
 const BreadCrumbs = (props) => {
   // ** Props
-  const { data, title } = props;
+  const { data, title } = props
 
   const renderBreadCrumbs = () => {
     return data.map((item, index) => {
-      const Wrapper = item.link ? Link : Fragment;
-      const isLastItem = data.length - 1 === index;
+      const Wrapper = item.link ? Link : Fragment
+      const isLastItem = data.length - 1 === index
       return (
         <BreadcrumbItem
           tag="li"
@@ -42,9 +42,9 @@ const BreadCrumbs = (props) => {
             {item.title}
           </Wrapper>
         </BreadcrumbItem>
-      );
-    });
-  };
+      )
+    })
+  }
 
   return (
     <div className="content-header row">
@@ -98,9 +98,9 @@ const BreadCrumbs = (props) => {
         </div>
       </div>
     </div>
-  );
-};
-export default BreadCrumbs;
+  )
+}
+export default BreadCrumbs
 
 // ** PropTypes
 BreadCrumbs.propTypes = {
@@ -108,7 +108,7 @@ BreadCrumbs.propTypes = {
   data: Proptypes.arrayOf(
     Proptypes.shape({
       link: Proptypes.string,
-      title: Proptypes.string.isRequired,
+      title: Proptypes.string.isRequired
     })
-  ),
-};
+  )
+}
