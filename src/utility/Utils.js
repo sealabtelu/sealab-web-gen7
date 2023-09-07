@@ -56,7 +56,6 @@ export const formatDateToMonthShort = (value, toTimeForCurrentDay = true) => {
 export const isUserLoggedIn = () => localStorage.getItem("userData")
 export const getUserData = (useDummy = false) => {
   const userData = JSON.parse(localStorage.getItem("userData"))
-  console.log(useDummy, userData)
   if (useDummy && userData === null) {
     return {
       name: "Nora Whitefall",
