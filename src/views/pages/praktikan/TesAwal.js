@@ -1,6 +1,6 @@
 import { Card, CardHeader, CardBody, CardTitle, CardText } from "reactstrap"
 
-const SecondPage = () => {
+const TesAwal = () => {
   return (
     <Card>
       <CardHeader>
@@ -18,4 +18,4 @@ const SecondPage = () => {
   )
 }
 
-export default SecondPage
+export default TesAwal

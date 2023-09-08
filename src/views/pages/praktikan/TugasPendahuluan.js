@@ -7,7 +7,7 @@ import {
   CardLink
 } from "reactstrap"
 
-const Home = () => {
+const TugasPendahuluan = () => {
   return (
     <div>
       <Card>
@@ -54,4 +54,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default TugasPendahuluan
