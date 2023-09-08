@@ -7,11 +7,11 @@ const Footer = () => {
       <span className="float-md-start d-block d-md-inline-block mt-25">
         COPYRIGHT © {new Date().getFullYear()}{" "}
         <a
-          href="https://linktr.ee/sealaboratory"
+          href="https://linktr.ee/ismilelab"
           target="_blank"
           rel="noopener noreferrer"
         >
-          SEA Laboratory
+          I-Smile Laboratory
         </a>
         <span className="d-none d-sm-inline-block">, All rights Reserved</span>
       </span>

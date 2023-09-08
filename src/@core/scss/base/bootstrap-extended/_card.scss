@@ -1,5 +1,4 @@
 .card {
-  padding: 16px;
   margin-bottom: $content-padding;
   box-shadow: $card-box-shadow;
   transition: all 0.3s ease-in-out, background 0s, color 0s, border-color 0s;
@@ -17,12 +16,8 @@
   }
   .card-title {
     font-weight: bolder;
-    font-size: x-large;
+    font-size: large;
     margin-bottom: 1.53rem; // Considering sub-title minus margin\
-  }
-  .card-title-overlay {
-    text-align: center;
-    color: #D5546D;
   }
   .card-bordered {
     border: $card-border-width solid $card-border-color;

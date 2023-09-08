@@ -4,7 +4,6 @@ import {  Book, Clipboard, BookOpen, FileText } from "react-feather"
 const TugasPendahuluan = lazy(() => import("../../views/pages/praktikan/TugasPendahuluan"))
 const TesAwal = lazy(() => import("../../views/pages/praktikan/TesAwal"))
 const Jurnal = lazy (() => import("../../views/pages/praktikan/Jurnal"))
-const OverlayJurnal = lazy (() => import ('../../views/pages/praktikan/OverlayJurnal'))
 const Error = lazy(() => import("../../views/Error"))
 
 const StudentRoutes = [
@@ -18,7 +17,7 @@ const StudentRoutes = [
     },
     {
         path: "/student/jurnal",
-        element: <OverlayJurnal />
+        element: <Jurnal />
     },
     {
         path: "/error",

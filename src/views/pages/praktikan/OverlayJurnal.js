@@ -1,24 +1,25 @@
 /* eslint-disable react/prop-types */
-import { Card, CardBody,CardHeader, CardTitle, Button, CardSubtitle, Row, Col } from "reactstrap";
+import { Card, Button, Row, Col, Container } from "reactstrap";
+import { Upload } from "react-feather";
 
-export default function OverlayJurnal({ moduleTitle, lastUpdate, moduleNumber,linkSoal, linkSubmit,linkTemplate }) {
+export default function OverlayJurnal({ moduleTitle, moduleNumber,linkSubmit,linkSoal}) {
     return (
-        <Card>
+        <Card style={{padding:'10px'}}>
             {/* INFO */}
-            <CardTitle className="card-title-overlay">HARAP DIBACA</CardTitle>
-                <ol type="1" className=" flex flex-col gap-2 list-decimal font-normal text-xs hyphens-manual sm:text-sm">
-                    <li className="">
+            <h1 style={{color:"#D5546D", fontSize:"18px", fontWeight:'bold', margin:'10px', textAlign:'center'}}>HARAP DIBACA</h1>
+                <ol type="1">
+                    <li>
                         Tugas Pendahuluan dikerjakan sesuai dengan NIM terakhir Praktikan.<br />
                         <b>Contoh:</b> 1103211233 [mengerjakan soal NIM Ganjil]<br />
                         <b>Contoh:</b> 1103211234 [mengerjakan soal NIM Genap]
                     </li>
-                    <li className="">
+                    <li>
                         Tugas Pendahuluan dikerjakan menggunakan Template Tugas Pendahuluan di word dan dikumpulkan dalam format PDF
                     </li>
-                    <li className="">
+                    <li>
                         Jika terdapat soal yang memerlukan jawaban untuk ditulis manual maka jawaban dapat di foto/scan dan kemudian di masukan ke dalam File Tugas Pendahuluan.
                     </li>
-                    <li className="">
+                    <li>
                         Jawaban Tugas Pendahuluan diketik secara berurutan. Soal kemudian Jawaban.
                     </li>
                     <li>
@@ -34,32 +35,28 @@ export default function OverlayJurnal({ moduleTitle, lastUpdate, moduleNumber,li
                     </li>
                 </ol>
 
-            <hr className="border-[1px] border-gray-300" />
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <hr style={{ width: '98%', border: '1px solid grey', opacity: '0.5' }} />
+                </div>
             
             {/* SUBMIT */}
-            <div className="flex justify-between py-2 gap-2">
-                    <div className="flex flex-col gap-1 basis-full">
-                        <p className="text-xs sm:text-sm font-normal text-[#1CAB43]">Tugas Pendahuluan</p>
-                        <h3 className="text-sm sm:text-lg font-bold">MODUL {moduleNumber}: {moduleTitle}</h3>
-                        <div className="flex">
-                            <div className="text-slate-500 flex flex-col gap-0.5 sm:gap-1">
-                                <p className="text-[10px] sm:text-xs font-semibold">Due Date &nbsp;&nbsp; </p>
-                                <p className="text-[10px] sm:text-xs font-semibold">Time Remaining &nbsp;&nbsp; </p>
-                                <p className="text-[10px] sm:text-xs font-semibold">Time Submitted: &nbsp;&nbsp; </p>
-                            </div>
-                            <div className="flex flex-col gap-0.5 sm:gap-1">
-                                <p className="text-[10px] sm:text-xs font-normal">: Monday, 7 September 2023,23:59</p>
-                                <p className="text-[10px] sm:text-xs font-normal">: 1 Hour 23 Min.</p>
-                                <p className="text-[10px] sm:text-xs font-normal">: {lastUpdate}</p>
-                            </div>
-                        </div>
+            <Container>
+                <Row style={{marginBottom:"1rem"}}>
+                    <Col>
+                        <p style={{color:'#1CAB43', marginBottom:'4px'}}>Tugas Pendahuluan</p>
+                        <h3 style={{fontSize:'18px'}}>MODUL {moduleNumber}: {moduleTitle}</h3>
+                        <p style={{margin:'0px', fontSize:'13px'}}><b>Due Date: </b> &nbsp; Monday, 7 September 2023, 23:59 </p>
+                        <p style={{margin:'0px', fontSize:'13px'}}><b>Time Remaining:</b> &nbsp; 1 Hour 23 Min</p>
+                        <p style={{margin:'0px', fontSize:'13px'}}><b>Time Submitted:</b> &nbsp; </p>
+                    </Col>
+                    <Col xs='12' sm='6'>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.5rem' }}>
+                        <Button href={linkSoal} target="_blank" rel="noopener noreferrer"color="primary" style={{ width: '150px' }}>Soal Jurnal</Button>
+                        <Button href={linkSubmit} target="_blank" rel="noopener noreferrer" color="white" style={{ width: '150px', fontWeight:'bolder', color:'black' }}>Submit File &nbsp;<Upload size={14}/></Button>
                     </div>
-                    <div className="flex flex-col w-40 sm:w-64 gap-2">
-                        {/* <a className="p-2 bg-[#4DD7BE] text-white text-[10px] sm:text-sm rounded font-semibold shadow-md hover:shadow-none text-center" href={linkTemplate}>Template Tugas Pendahuluan</a> */}
-                        <a className="p-2 bg-[#4DD7BE] text-white text-[10px] sm:text-sm rounded font-semibold shadow-md hover:shadow-none text-center" href={linkSoal}>Soal Jurnal</a>
-                        <a className="p-2 bg-white text-black text-[10px] sm:text-sm rounded font-semibold hover:ring-2 hover:ring-gray-300 flex items-center justify-center gap-1 " href={linkSubmit}>Submit File <span className="material-symbols-rounded">upload</span></a>
-                    </div>
-            </div>
+                    </Col>
+                </Row>
+            </Container>
         </Card>
     )
 }

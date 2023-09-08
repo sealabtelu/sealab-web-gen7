@@ -1,87 +1,88 @@
 import React, { useState } from 'react'; // Import React
-import { Card, CardBody,CardHeader, CardTitle, Button, CardSubtitle, Row, Col } from "reactstrap";
+import { Card, CardHeader, CardTitle, Button } from "reactstrap";
 import OverlayJurnal from "./OverlayJurnal";
 
-const moduleTitle = {
-    "MODUL 1": "Searching",
-    "MODUL 2": "Knowledge Representation",
-    "MODUL 3": "Fuzzyfikasi",
-    "MODUL 4": "Defuzzyfikasi: Mamdani",
-    "MODUL 5": "Defuzzyfikasi: Sugeno",
-    "MODUL 6": "Algoritma Genetika",
-}
+const modules = [
+    {
+        id: "MODUL 1",
+        title: "Searching",
+        links: {
+        soal: "https://www.soaljurnal1.com",
+        submit: "https://www.submitjurnal1.com",
+        },
+    },
+    {
+        id: "MODUL 2",
+        title: "Knowledge Representation",
+        links: {
+        soal: "https://www.soaljurnal2.com",
+        submit: "https://www.submitjurnal2.com",
+        },
+    },
+    {
+        id: "MODUL 3",
+        title: "Fuzzyfikasi",
+        links: {
+        soal: "https://www.soaljurnal3.com",
+        submit: "https://www.submitjurnal3.com",
+        },
+    },
+    {
+        id: "MODUL 4",
+        title: "Defuzzyfikasi: Mamdani",
+        links: {
+        soal: "https://www.soaljurnal4.com",
+        submit: "https://www.submitjurnal4.com",
+        },
+    },
+    {
+        id: "MODUL 5",
+        title: "Defuzzyfikasi: Sugeno",
+        links: {
+        soal: "https://www.soaljurnal5.com",
+        submit: "https://www.submitjurnal5.com",
+        },
+    },
+    {
+        id: "MODUL 6",
+        title: "Algoritma Genetika",
+        links: {
+        soal: "https://www.soaljurnal6.com",
+        submit: "https://www.submitjurnal6.com",
+        },
+    },
+];
 
 export default function Jurnal() {
-    const [isOpenClicked, setIsOpenClicked] = useState(false);
-    const [selectedModule, setSelectedModule] = useState(null);
-
-    const linkSoal = {
-        "MODUL 1": "https://www.soaltp1.com",
-        "MODUL 2": "https://www.soaltp2.com",
-        "MODUL 3": "https://www.soaltp3.com",
-        "MODUL 4": "https://www.soaltp4.com",
-        "MODUL 5": "https://www.soaltp5.com",
-        "MODUL 6": "https://www.soaltp6.com",
-    }
-
-    const linkSubmit = {
-        "MODUL 1": "https://www.submittp1.com",
-        "MODUL 2": "https://www.submittp2.com",
-        "MODUL 3": "https://www.submittp3.com",
-        "MODUL 4": "https://www.submittp4.com",
-        "MODUL 5": "https://www.submittp5.com",
-        "MODUL 6": "https://www.submittp6.com",
-    }
+    const [isOpenClicked, setIsOpenClicked] = useState(null);
 
     const handleOpenClick = (moduleId) => {
         setIsOpenClicked(moduleId);
-        setSelectedModule(moduleId);
-    }
+    };
+
     return (
         <div>
-            <Card>
-                <CardHeader>
-                    <CardTitle>MODUL 1 - {moduleTitle["MODUL 1"]}</CardTitle>
-                    <Button color="primary">Open</Button>
-                </CardHeader>
-            </Card>
-            
-            <Card>
-                <CardHeader>
-                    <CardTitle>MODUL 2 - {moduleTitle["MODUL 2"]}</CardTitle>
-                    <Button color="primary">Open</Button>
-                </CardHeader>
-            </Card>
-            
-            <Card>
-                <CardHeader>
-                    <CardTitle>MODUL 3 - {moduleTitle["MODUL 3"]}</CardTitle>
-                    <Button color="primary">Open</Button>
-                </CardHeader>
-            </Card>
-            
-            <Card>
-                <CardHeader>
-                    <CardTitle>MODUL 4 - {moduleTitle["MODUL 4"]}</CardTitle>
-                    <Button color="primary">Open</Button>
-                </CardHeader>
-            </Card>
-            
-            <Card>
-                <CardHeader>
-                    <CardTitle>MODUL 5 - {moduleTitle["MODUL 5"]}</CardTitle>
-                    <Button color="primary">Open</Button>
-                </CardHeader>
-            </Card>
-            
-            <Card>
-                <CardHeader>
-                    <CardTitle>MODUL 6 - {moduleTitle["MODUL 6"]}</CardTitle>
-                    <Button color="primary">Open</Button>
-                </CardHeader>
-            </Card>
-            
+        {modules.map((module) => (
+            <div key={module.id}>
+                {isOpenClicked === module.id && (
+                    <OverlayJurnal
+                    moduleTitle={module.title}
+                    moduleNumber={module.id.split(' ')[1]}
+                    linkSoal={module.links.soal}
+                    linkSubmit={module.links.submit}
+                    />
+                )}
+
+                {isOpenClicked !== module.id && (
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>{`${module.id} - ${module.title}`}</CardTitle>
+                            <Button color="primary" onClick={() => handleOpenClick(module.id)}>Open</Button>
+                        </CardHeader>
+                    </Card>
+                )}
+            </div>
+        ))}
         </div>
     );
-};
-
+}
