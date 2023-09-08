@@ -57,4 +57,9 @@ export const StudentMenu = [
     },
 ]
 
-export default StudentRoutes
+export default StudentRoutes.map(item => ({
+    ...item,
+    meta: {
+        role: 'Student'
+    }
+}))

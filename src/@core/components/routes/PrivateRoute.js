@@ -28,6 +28,10 @@ const PrivateRoute = ({ children, route }) => {
     }
     if (!user) {
       return <Navigate to="/login" />
+    } else {
+      if (user.role !== route.meta?.role) {
+        return <Navigate to='/auth/not-auth' />
+      }
     }
     if (user && restrictedRoute) {
       return <Navigate to={getHomeRouteForLoggedInUser(user.role)} />

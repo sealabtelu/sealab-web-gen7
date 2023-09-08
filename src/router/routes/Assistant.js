@@ -29,13 +29,6 @@ const AssistantRoutes = [
     {
         path: "/assistant/preliminary-assignment/question",
         element: <Question />
-    },
-    {
-        path: "/error",
-        element: <Error />,
-        meta: {
-            layout: "blank"
-        }
     }
 ]
 
@@ -78,4 +71,9 @@ export const AssistantMenu = [
     }
 ]
 
-export default AssistantRoutes
+export default AssistantRoutes.map(item => ({
+    ...item,
+    meta: {
+        role: 'Assistant'
+    }
+}))
