@@ -1,6 +1,4 @@
-import axios from 'axios'
-
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 // ** Custom Components
@@ -12,21 +10,24 @@ import * as Icon from 'react-feather'
 // ** Reactstrap Imports
 import { Card, CardHeader, CardTitle, CardBody, Button } from 'reactstrap'
 
-const PreliminaryAssignment = () => {
+// ** Store & Actions
+import { useDispatch, useSelector } from 'react-redux'
+import { selectModule, getModules } from '@store/api/module'
 
-  const [module, setModule] = useState([])
+
+const ModuleList = () => {
+
+  // ** Store Vars
+  const dispatch = useDispatch()
+  const store = useSelector(state => state.module)
+
   useEffect(() => {
-    axios.get("/module/list").then(res => {
-      // Gatau knp tp harus gini anjir aneh battt
-      const data = { ...res.data }
-      setModule(data.data)
-    })
+    dispatch(getModules())
   }, [])
 
   const renderListModule = () => {
-    if (module.length > 0) {
-      return module.map((item, index) => {
-        console.log(item)
+    if (store.modules?.length > 0) {
+      return store.modules.map((item, index) => {
         return (
           <div key={item.id} className='module-item'>
             <div className='d-flex'>
@@ -36,14 +37,13 @@ const PreliminaryAssignment = () => {
                 <small>Total Question: 0</small>
               </div>
             </div>
-            <Button color='relief-primary' tag={Link} to={`/assistant/preliminary-assignment/question-list/${item.id}`}>View</Button>
-            {/* <div className={`fw-bolder ${item.down ? 'text-danger' : 'text-success'}`}>{item.amount}</div> */}
+            <Button color='relief-primary' tag={Link} to='/assistant/preliminary-assignment/question-list' onClick={() => dispatch(selectModule(item))}>View</Button>
           </div>
         )
       })
     } else {
       return (
-        <div>Tidak ada data yang tersedia.</div>
+        <div>No data available</div>
       )
     }
   }
@@ -59,4 +59,4 @@ const PreliminaryAssignment = () => {
   )
 }
 
-export default PreliminaryAssignment
+export default ModuleList

@@ -5,20 +5,36 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 export const getModules = createAsyncThunk('module/getModules', async () => {
-  await axios.get('module/list').then(res => {
-    const data = { ...res.data.data }
-    return { data }
+  return await axios.get('module/list').then(res => {
+    return res.data.data
   })
 })
+
+const initialSelectedModule = () => {
+  const item = window.localStorage.getItem('selectedModule')
+  return item ? JSON.parse(item) : {}
+}
+
 
 export const moduleSlice = createSlice({
   name: 'module',
   initialState: {
-    module: []
+    modules: [],
+    selectedModule: initialSelectedModule()
   },
-  reducers: {}
+  reducers: {
+    selectModule: (state, action) => {
+      state.selectedModule = action.payload
+      localStorage.setItem('selectedModule', JSON.stringify(action.payload))
+    }
+  },
+  extraReducers: builder => {
+    builder.addCase(getModules.fulfilled, (state, action) => {
+      state.modules = action.payload
+    })
+  }
 })
 
-// export const { handleLogin, handleLogout } = authSlice.actions
+export const { selectModule } = moduleSlice.actions
 
 export default moduleSlice.reducer

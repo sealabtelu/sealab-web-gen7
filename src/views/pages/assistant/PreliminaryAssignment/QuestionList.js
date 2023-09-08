@@ -2,7 +2,10 @@ import axios from 'axios'
 
 import { useEffect, useState, Fragment } from 'react'
 
-import { Link, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+
+// ** Store & Actions
+import {  useSelector } from 'react-redux'
 
 // ** Styles
 import '@styles/react/libs/editor/editor.scss'
@@ -17,23 +20,23 @@ import { Edit, Delete, HelpCircle, PlusSquare } from 'react-feather'
 // ** Reactstrap Imports
 import { Card, CardHeader, CardTitle, CardBody, Button } from 'reactstrap'
 
-const PreliminaryAssignment = () => {
-  const { id } = useParams()
+const QuestionList = () => {
+
+  const store = useSelector(state => state.module)
+
   // ** State
   const [questions, setQuestions] = useState([])
-  const [module, setModule] = useState('')
 
   useEffect(() => {
-    axios.get(`/preliminary-assignment-question/module/${id}`).then(res => {
+    axios.get(`/preliminary-assignment-question/module/${store.selectedModule.id}`).then(res => {
       // Gatau knp tp harus gini anjir aneh battt
       const data = { ...res.data }
       setQuestions(data.data)
-      setModule(data.data[0].moduleInfo)
     })
   }, [])
 
   const renderListQuestion = () => {
-    if (questions.length > 0) {
+    if (questions?.length > 0) {
       return questions.map((item, index) => {
         return (
           <Card className='question-item' key={item.id}>
@@ -77,7 +80,7 @@ const PreliminaryAssignment = () => {
     <Fragment>
       <Card>
         <CardHeader>
-          <CardTitle tag='h4'>{module}</CardTitle>
+          <CardTitle tag='h4'>{`Module ${store.selectedModule.seelabsId}: ${store.selectedModule.name}`}</CardTitle>
         </CardHeader>
         <CardBody className='question-header'>
           <h6>{`Total Question: ${questions.length}`}</h6>
@@ -93,4 +96,4 @@ const PreliminaryAssignment = () => {
   )
 }
 
-export default PreliminaryAssignment
+export default QuestionList

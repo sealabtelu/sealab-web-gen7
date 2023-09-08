@@ -23,7 +23,7 @@ const AssistantRoutes = [
         element: <ModuleList />
     },
     {
-        path: "/assistant/preliminary-assignment/question-list/:id",
+        path: "/assistant/preliminary-assignment/question-list",
         element: <QuestionList />
     },
     {
