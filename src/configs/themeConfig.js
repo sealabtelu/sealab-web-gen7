@@ -6,7 +6,7 @@ import logo from "@src/assets/images/logo/logo.png"
 //Template config options
 const themeConfig = {
   app: {
-    appName: "SEA Lab",
+    appName: "I-Smile",
     appLogoImage: logo
   },
   layout: {
