@@ -2,11 +2,11 @@
 import { Card, Button, Row, Col, Container } from "reactstrap";
 import { Upload } from "react-feather";
 
-export default function OverlayJurnal({ moduleTitle, moduleNumber,linkSubmit,linkSoal}) {
+export default function OverlayJurnal({ moduleTitle, moduleNumber,linkSubmit,linkSoal,duedate}) {
     return (
-        <Card style={{padding:'10px'}}>
+        <Card className="card-overlay-jurnal">
             {/* INFO */}
-            <h1 style={{color:"#D5546D", fontSize:"18px", fontWeight:'bold', margin:'10px', textAlign:'center'}}>HARAP DIBACA</h1>
+            <h1>HARAP DIBACA</h1>
                 <ol type="1">
                     <li>
                         Tugas Pendahuluan dikerjakan sesuai dengan NIM terakhir Praktikan.<br />
@@ -35,23 +35,21 @@ export default function OverlayJurnal({ moduleTitle, moduleNumber,linkSubmit,lin
                     </li>
                 </ol>
 
-                <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <hr style={{ width: '98%', border: '1px solid grey', opacity: '0.5' }} />
-                </div>
+                    <hr />
             
             {/* SUBMIT */}
             <Container>
-                <Row style={{marginBottom:"1rem"}}>
+                <Row>
                     <Col>
-                        <p style={{color:'#1CAB43', marginBottom:'4px'}}>Tugas Pendahuluan</p>
-                        <h3 style={{fontSize:'18px'}}>MODUL {moduleNumber}: {moduleTitle}</h3>
-                        <p style={{margin:'0px', fontSize:'13px'}}><b>Due Date: </b> &nbsp; Monday, 7 September 2023, 23:59 </p>
-                        <p style={{margin:'0px', fontSize:'13px'}}><b>Time Remaining:</b> &nbsp; 1 Hour 23 Min</p>
-                        <p style={{margin:'0px', fontSize:'13px'}}><b>Time Submitted:</b> &nbsp; </p>
+                        <h2>Jurnal</h2>
+                        <h3>MODUL {moduleNumber}: {moduleTitle}</h3>
+                        <p><b>Due Date: </b> &nbsp;{duedate}</p>
+                        <p><b>Time Remaining:</b> &nbsp; 1 Hour 23 Min</p>
+                        <p><b>Time Submitted:</b> &nbsp; </p>
                     </Col>
                     <Col xs='12' sm='6'>
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.5rem' }}>
-                        <Button href={linkSoal} target="_blank" rel="noopener noreferrer"color="primary" style={{ width: '150px' }}>Soal Jurnal</Button>
+                    <div className="button-container">
+                        <Button href={linkSoal} target="_blank" rel="noopener noreferrer"color="relief-primary" style={{ width: '150px' }}>Soal Jurnal</Button>
                         <Button href={linkSubmit} target="_blank" rel="noopener noreferrer" color="white" style={{ width: '150px', fontWeight:'bolder', color:'black' }}>Submit File &nbsp;<Upload size={14}/></Button>
                     </div>
                     </Col>
