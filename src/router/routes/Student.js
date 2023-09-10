@@ -1,23 +1,23 @@
 import { lazy } from 'react'
 import {  Book, Clipboard, BookOpen, FileText } from "react-feather"
 
-const TugasPendahuluan = lazy(() => import("../../views/pages/praktikan/TugasPendahuluan"))
-const TesAwal = lazy(() => import("../../views/pages/praktikan/TesAwal"))
-const Jurnal = lazy (() => import("../../views/pages/praktikan/Jurnal"))
+const HomeAssigment = lazy(() => import("../../views/pages/student/HomeAssignment"))
+const PreTest = lazy(() => import("../../views/pages/student/PreTest"))
+const Journal = lazy (() => import("../../views/pages/student/Journal"))
 const Error = lazy(() => import("../../views/Error"))
 
 const StudentRoutes = [
     {
-        path: "/student/tugas-pendahuluan",
-        element: <TugasPendahuluan />
+        path: "/student/home-assignment",
+        element: <HomeAssigment />
     },
     {
-        path: "/student/tes-awal",
-        element: <TesAwal />
+        path: "/student/pre-test",
+        element: <PreTest />
     },
     {
-        path: "/student/jurnal",
-        element: <Jurnal />
+        path: "/student/journal",
+        element: <Journal />
     },
     {
         path: "/error",
@@ -30,26 +30,26 @@ const StudentRoutes = [
 
 export const StudentMenu = [
     {
-        id: "tugasPendahuluan",
-        title: "Tugas Pendahuluan",
+        id: "homeAssignment",
+        title: "Home Assignment",
         icon: <BookOpen size={20} />,
-        navLink: "/student/tugas-pendahuluan"
+        navLink: "/student/home-assignment"
     },
     {
-        id: "tesAwal",
-        title: "Tes Awal",
+        id: "preTest",
+        title: "Pre Test",
         icon: <Clipboard size={20} />,
-        navLink: "student/tes-awal"
+        navLink: "student/pre-test"
     },
     {
-        id: "jurnal",
-        title: "Jurnal",
+        id: "journal",
+        title: "Journal",
         icon: <FileText size={20} />,
-        navLink: "student/jurnal"
+        navLink: "student/journal"
     },
     {
-        id: "modulPraktikum",
-        title: "Modul Praktikum",
+        id: "labworkModule",
+        title: "Labwork Module",
         icon: <Book size={20} />,
         navLink: "https://drive.google.com/file/d/1ZbEN7-_Bd2Zv0Slb-aHuOabnwMjCgZ2w/view?usp=drive_link",
         target :"blank",
