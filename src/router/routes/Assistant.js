@@ -4,9 +4,10 @@ import { Mail, Home, Clipboard, Bookmark, Edit3, PenTool, Book } from "react-fea
 
 const HomeAssistant = lazy(() => import("../../views/pages/student/HomeAssignment"))
 const SecondPage = lazy(() => import("../../views/pages/student/PreTest"))
-const ModuleList = lazy(() => import("../../views/pages/assistant/PreliminaryAssignment/ModuleList"))
-const QuestionList = lazy(() => import("../../views/pages/assistant/PreliminaryAssignment/QuestionList"))
-const Question = lazy(() => import("../../views/pages/assistant/PreliminaryAssignment/Question"))
+const HAModuleList = lazy(() => import("../../views/pages/assistant/HomeAssignment/HAModuleList"))
+const HAQuestionList = lazy(() => import("../../views/pages/assistant/HomeAssignment/HAQuestionList"))
+const HAQuestion = lazy(() => import("../../views/pages/assistant/HomeAssignment/HAQuestion"))
+const PRTModuleList = lazy(() => import("../../views/pages/assistant/PreTest/PRTModuleList"))
 const Error = lazy(() => import("../../views/Error"))
 
 const AssistantRoutes = [
@@ -20,15 +21,19 @@ const AssistantRoutes = [
     },
     {
         path: "/assistant/preliminary-assignment",
-        element: <ModuleList />
+        element: <HAModuleList />
     },
     {
         path: "/assistant/preliminary-assignment/question-list",
-        element: <QuestionList />
+        element: <HAQuestionList />
     },
     {
         path: "/assistant/preliminary-assignment/question",
-        element: <Question />
+        element: <HAQuestion />
+    },
+    {
+        path: "/assistant/pre-test",
+        element: <PRTModuleList />
     }
 ]
 
@@ -40,7 +45,7 @@ export const AssistantMenu = [
         navLink: "/assistant/home"
     },
     {
-        id: "moduleList",
+        id: "homeAssignment",
         title: "Home Assignment",
         icon: <Clipboard size={20} />,
         navLink: "/assistant/preliminary-assignment"
@@ -49,7 +54,7 @@ export const AssistantMenu = [
         id: "preTest",
         title: "Pre Test",
         icon: <Edit3 size={20} />,
-        // navLink: "/assistant/preliminary-assignment/question-list"
+        navLink: "/assistant/pre-test"
     },
     {
         id: "journal",

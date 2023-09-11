@@ -1,8 +1,8 @@
-// ** Redux Imports
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-
 // ** Axios Imports
 import axios from 'axios'
+
+// ** Redux Imports
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 export const getModules = createAsyncThunk('module/getModules', async () => {
   return await axios.get('module/list').then(res => {

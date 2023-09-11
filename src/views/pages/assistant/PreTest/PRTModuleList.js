@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { selectModule, getModules } from '@store/api/module'
 
 
-const ModuleList = () => {
+const HAModuleList = () => {
 
   // ** Store Vars
   const dispatch = useDispatch()
@@ -51,7 +51,7 @@ const ModuleList = () => {
   return (
     <Card className='card-module'>
       <CardHeader>
-        <CardTitle tag='h4'>Home Assignment</CardTitle>
+        <CardTitle tag='h4'>Pre Test</CardTitle>
         <Icon.MoreVertical size={18} className='cursor-pointer' />
       </CardHeader>
       <CardBody>{renderListModule()}</CardBody>
@@ -59,4 +59,4 @@ const ModuleList = () => {
   )
 }
 
-export default ModuleList
+export default HAModuleList

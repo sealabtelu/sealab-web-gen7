@@ -1,43 +1,32 @@
-import axios from 'axios'
-
-import { useEffect, useState, Fragment } from 'react'
+import { useEffect, Fragment } from 'react'
 
 import { Link } from 'react-router-dom'
 
 // ** Store & Actions
-import {  useSelector } from 'react-redux'
-
-// ** Styles
-import '@styles/react/libs/editor/editor.scss'
+import { useDispatch, useSelector } from 'react-redux'
+import { getQuestion } from '@store/api/homeAssignmentQuestion'
 
 // ** Custom Components
 import Avatar from '@components/avatar'
 
 // ** Icons Imports
-import * as Icon from 'react-feather'
 import { Edit, Delete, HelpCircle, PlusSquare } from 'react-feather'
 
 // ** Reactstrap Imports
 import { Card, CardHeader, CardTitle, CardBody, Button } from 'reactstrap'
 
-const QuestionList = () => {
-
-  const store = useSelector(state => state.module)
-
-  // ** State
-  const [questions, setQuestions] = useState([])
+const HAQuestionList = () => {
+  const dispatch = useDispatch()
+  const module = useSelector(state => state.module)
+  const question = useSelector(state => state.homeAssignmentQuestion)
 
   useEffect(() => {
-    axios.get(`/preliminary-assignment-question/module/${store.selectedModule.id}`).then(res => {
-      // Gatau knp tp harus gini anjir aneh battt
-      const data = { ...res.data }
-      setQuestions(data.data)
-    })
+    dispatch(getQuestion())
   }, [])
 
   const renderListQuestion = () => {
-    if (questions?.length > 0) {
-      return questions.map((item, index) => {
+    if (question.PAQuestions?.length > 0) {
+      return question.PAQuestions.map((item, index) => {
         return (
           <Card className='question-item' key={item.id}>
             <CardHeader className='question-title'>
@@ -59,11 +48,11 @@ const QuestionList = () => {
             </CardHeader>
             <CardBody>
               <div>
-                {item.question}
+                <div dangerouslySetInnerHTML={{ __html: item.question }}></div>
                 <div className="divider my-2">
                   <div className="divider-text">Answer Key</div>
                 </div>
-                {item.answerKey}
+                <div dangerouslySetInnerHTML={{ __html: item.answerKey }}></div>
               </div>
             </CardBody>
           </Card>
@@ -80,10 +69,10 @@ const QuestionList = () => {
     <Fragment>
       <Card>
         <CardHeader>
-          <CardTitle tag='h4'>{`Module ${store.selectedModule.seelabsId}: ${store.selectedModule.name}`}</CardTitle>
+          <CardTitle tag='h4'>{`Module ${module.selectedModule.seelabsId}: ${module.selectedModule.name}`}</CardTitle>
         </CardHeader>
         <CardBody className='question-header'>
-          <h6>{`Total Question: ${questions.length}`}</h6>
+          <h6>{`Total Question: ${question.PAQuestions.length}`}</h6>
           <Button color='relief-success' tag={Link} to='/assistant/preliminary-assignment/question'>
             <PlusSquare size={14} />
             <span className='align-middle ms-25'>Add</span>
@@ -96,4 +85,4 @@ const QuestionList = () => {
   )
 }
 
-export default QuestionList
+export default HAQuestionList
