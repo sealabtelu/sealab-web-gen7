@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { selectModule, getModules } from '@store/api/module'
 
 
-const HAModuleList = () => {
+const PRTModuleList = () => {
 
   // ** Store Vars
   const dispatch = useDispatch()
@@ -59,4 +59,4 @@ const HAModuleList = () => {
   )
 }
 
-export default HAModuleList
+export default PRTModuleList
