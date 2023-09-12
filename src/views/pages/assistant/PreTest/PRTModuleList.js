@@ -37,7 +37,7 @@ const HAModuleList = () => {
                 <small>Total Question: 0</small>
               </div>
             </div>
-            <Button color='relief-primary' tag={Link} to='/assistant/preliminary-assignment/question-list' onClick={() => dispatch(selectModule(item))}>View</Button>
+            <Button color='relief-primary' tag={Link} to='/assistant/pre-test/question-list' onClick={() => dispatch(selectModule(item))}>View</Button>
           </div>
         )
       })
