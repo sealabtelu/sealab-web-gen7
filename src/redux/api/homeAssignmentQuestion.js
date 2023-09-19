@@ -24,11 +24,10 @@ const initialSelectedQuestion = () => {
   return item ? JSON.parse(item) : {}
 }
 
-
 export const homeAssignmentQuestionSlice = createSlice({
   name: 'question',
   initialState: {
-    PAQuestions: [],
+    questions: [],
     selectedQuestion: initialSelectedQuestion()
   },
   reducers: {
@@ -39,7 +38,7 @@ export const homeAssignmentQuestionSlice = createSlice({
   },
   extraReducers: builder => {
     builder.addCase(getQuestion.fulfilled, (state, action) => {
-      state.PAQuestions = action.payload
+      state.questions = action.payload
     })
   }
 })

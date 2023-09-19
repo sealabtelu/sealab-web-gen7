@@ -5,7 +5,7 @@ import axios from 'axios'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 export const getQuestion = createAsyncThunk('question/getQuestion', async (_, { getState }) => {
-  return await axios.get(`/preliminary-assignment-question/module/${getState().module.selectedModule.id}`).then(res => {
+  return await axios.get(`/pre-test-question/module/${getState().module.selectedModule.id}`).then(res => {
     return res.data.data
   })
 })
@@ -24,22 +24,21 @@ const initialSelectedQuestion = () => {
   return item ? JSON.parse(item) : {}
 }
 
-
 export const preTestQuestionSlice = createSlice({
   name: 'question',
   initialState: {
-    PRTQuestions: [],
+    questions: [],
     selectedQuestion: initialSelectedQuestion()
   },
   reducers: {
     selectQuestion: (state, action) => {
       state.selectedQuestion = action.payload
-      localStorage.setItem('selectedQuestion', JSON.stringify(action.payload))
+      // localStorage.setItem('selectedQuestion', JSON.stringify(action.payload))
     }
   },
   extraReducers: builder => {
     builder.addCase(getQuestion.fulfilled, (state, action) => {
-      state.PRTQuestions = action.payload
+      state.questions = action.payload
     })
   }
 })

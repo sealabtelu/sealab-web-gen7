@@ -18,15 +18,15 @@ import { Card, CardHeader, CardTitle, CardBody, Button } from 'reactstrap'
 const HAQuestionList = () => {
   const dispatch = useDispatch()
   const module = useSelector(state => state.module)
-  const question = useSelector(state => state.homeAssignmentQuestion)
+  const homeAssignment = useSelector(state => state.homeAssignmentQuestion)
 
   useEffect(() => {
     dispatch(getQuestion())
   }, [])
 
   const renderListQuestion = () => {
-    if (question.PAQuestions?.length > 0) {
-      return question.PAQuestions.map((item, index) => {
+    if (homeAssignment.questions?.length > 0) {
+      return homeAssignment.questions.map((item, index) => {
         return (
           <Card className='question-item' key={item.id}>
             <CardHeader className='question-title'>
@@ -72,7 +72,7 @@ const HAQuestionList = () => {
           <CardTitle tag='h4'>{`Module ${module.selectedModule.seelabsId}: ${module.selectedModule.name}`}</CardTitle>
         </CardHeader>
         <CardBody className='question-header'>
-          <h6>{`Total Question: ${question.PAQuestions.length}`}</h6>
+          <h6>{`Total Question: ${homeAssignment.questions.length}`}</h6>
           <Button color='relief-success' tag={Link} to='/assistant/preliminary-assignment/question'>
             <PlusSquare size={14} />
             <span className='align-middle ms-25'>Add</span>
