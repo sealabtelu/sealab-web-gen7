@@ -17,14 +17,15 @@ import draftToHtml from 'draftjs-to-html'
 
 // ** Store & Actions
 import { useDispatch } from 'react-redux'
-import { addQuestion } from '@store/api/homeAssignmentQuestion'
+import { addQuestion } from '@store/api/preTestQuestion'
 
 // ** Reactstrap Imports
 import { Card, CardHeader, CardTitle, CardBody, Button, Label, Form, Row, Col, Input } from 'reactstrap'
 
 const defaultValues = {
+  isTrue: null,
   question: EditorState.createEmpty(),
-  answerKey: EditorState.createEmpty()
+  options: ['', '', '', '']
 }
 
 const PRTQuestion = () => {
@@ -33,19 +34,20 @@ const PRTQuestion = () => {
 
   const {
     control,
-    handleSubmit
+    handleSubmit,
+    formState: { errors }
   } = useForm({ defaultValues })
 
   const onSubmit = data => {
-    if (Object.values(data).every(field => field.blocks)) {
-      dispatch(addQuestion({
-        question: draftToHtml(data.question),
-        answerKey: draftToHtml(data.answerKey)
-      })).then(() => {
-        navigate('/assistant/pre-test/question-list')
-      })
-    } else {
-    }
+    dispatch(addQuestion({
+      question: draftToHtml(data.question),
+      options: data.options.map((item, index) => ({
+        option: item,
+        isTrue: parseInt(data.isTrue) === index
+      }))
+    })).then(() => {
+      navigate('/assistant/pre-test/question-list')
+    })
   }
 
   return (
@@ -82,54 +84,34 @@ const PRTQuestion = () => {
             />
           </div>
           <div className="mb-1">
-  <Label className="form-label" for="field-answer">
-    <h5>Answer Key</h5>
-  </Label>
-  <Controller
-    name='answerKey'
-    control={control}
-    render={({ field }) => (
-      <Row xs='2'>
-          <Col style={{display:'flex',flexDirection:'column', gap:'14px'}}>
-            <div className='form-check'>
-              <Input type='radio' id='ex1-active' name='ex1' defaultChecked />
-              {/* <Label className='form-check-label' for='ex1-active'>
-                A. 
-              </Label> */}
-              <Input type='textarea' name='text' id='exampleText' rows='2' placeholder='Pilihan A' />
-            </div>
-
-            <div className='form-check'>
-                <Input type='radio' id='ex1-active' name='ex1' defaultChecked />
-                {/* <Label className='form-check-label' for='ex1-active'>
-                  B.
-                </Label> */}
-                <Input type='textarea' name='text' id='exampleText' rows='2' placeholder='Pilihan B' />
-              </div>
-          </Col>
-
-          <Col style={{display:'flex',flexDirection:'column', gap:'14px'}}>
-            <div className='form-check'>
-                <Input type='radio' id='ex1-active' name='ex1' defaultChecked />
-                {/* <Label className='form-check-label' for='ex1-active'>
-                  C.
-                </Label> */}
-                <Input type='textarea' name='text' id='exampleText' rows='2' placeholder='Pilihan C' />
-            </div>
-
-            <div className='form-check'>
-                <Input type='radio' id='ex1-active' name='ex1' defaultChecked />
-                {/* <Label className='form-check-label' for='ex1-active'>
-                  D.
-                </Label> */}
-                <Input type='textarea' name='text' id='exampleText' rows='2' placeholder='Pilihan D' />
-              </div>
-          </Col>
-      </Row>
-    )}
-  />
-</div>
-
+            <Label className="form-label" for="field-answer">
+              <h5>Answer Key</h5>
+            </Label>
+            <Row>
+              {defaultValues.options.map((item, index) => (
+                <Col md='6' sx='12' className='mb-2' key={index}>
+                  <div className='form-check'>
+                    <Controller
+                      name='isTrue'
+                      control={control}
+                      rules={{ required: 'Choose the goddamn right choice dude!' }}
+                      render={({ field }) => (
+                        <Input type='radio' {...field} value={index} />
+                      )}
+                    />
+                    <Controller
+                      name={`options[${index}]`}
+                      control={control}
+                      render={({ field }) => (
+                        <Input type='textarea' rows='2' placeholder={`Option ${index + 1}`} {...field} />
+                      )}
+                    />
+                  </div>
+                </Col>
+              ))}
+              {errors.isTrue && <p>{errors.isTrue.message}</p>}
+            </Row>
+          </div>
         </CardBody>
       </Card>
     </Form>
