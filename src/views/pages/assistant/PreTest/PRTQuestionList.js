@@ -53,14 +53,12 @@ const PRTQuestionList = () => {
                   <div className="divider-text">Answer Key</div>
                 </div>
                 <div className='option-list-wrapper'>
-                  <div className='option-list true-answer'>
-                    <div className='flower'>🌸</div>
-                    Jawaban yang benar, The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-                  </div>
                   {item.options.map((answerKey, index) => (
-                    <div key={index} className='option-list'>
-                      <div className='flower'>💮</div>
-                      {answerKey.option}
+                    <div
+                      key={index}
+                      className={`option-list ${answerKey.isTrue ? "true-answer" : ""}`}
+                    >
+                      {String.fromCharCode(65 + index)}. {answerKey.option}
                     </div>
                   ))}
                 </div>
