@@ -1,8 +1,9 @@
 import { lazy } from 'react'
 import {  Book, Clipboard, BookOpen, FileText } from "react-feather"
 
+const PRTQuestionList = lazy (() => import('../../views/pages/student/PreTest/PRTQuestionList'))
 const HomeAssigment = lazy(() => import("../../views/pages/student/HomeAssignment"))
-const PreTest = lazy(() => import("../../views/pages/student/PreTest"))
+const PreTest = lazy(() => import("../../views/pages/student/PreTest/PreTest"))
 const Journal = lazy (() => import("../../views/pages/student/Journal"))
 const Error = lazy(() => import("../../views/Error"))
 
@@ -14,6 +15,10 @@ const StudentRoutes = [
     {
         path: "/student/pre-test",
         element: <PreTest />
+    },
+    {
+        path: "/student/pre-test/questionList",
+        element: <PRTQuestionList />
     },
     {
         path: "/student/journal",
