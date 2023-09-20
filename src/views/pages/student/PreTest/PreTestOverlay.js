@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Card, Button, Row, Col, Container } from "reactstrap";
+import { Link } from 'react-router-dom'
+
 
 export default function PreTestOverlay({ moduleTitle, moduleNumber,linkSoal,duedate}) {
     return (
@@ -48,7 +50,7 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber,linkSoal,dued
                     </Col>
                     <Col xs='12' sm='6'>
                     <div className="button-container">
-                        <Button href={linkSoal} target="_blank" rel="noopener noreferrer"color="relief-primary" >Soal Tes Awal</Button>
+                        <Button tag={Link} to='/student/pre-test/questionList' color="relief-primary" >Soal Tes Awal</Button>
                     </div>
                     </Col>
                 </Row>
