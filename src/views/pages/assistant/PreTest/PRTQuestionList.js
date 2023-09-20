@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 // ** Store & Actions
 import { useDispatch, useSelector } from 'react-redux'
-import { getQuestion } from '@store/api/homeAssignmentQuestion'
+import { getQuestion } from '@store/api/preTestQuestion'
 
 // ** Custom Components
 import Avatar from '@components/avatar'
@@ -15,18 +15,18 @@ import { Edit, Delete, HelpCircle, PlusSquare } from 'react-feather'
 // ** Reactstrap Imports
 import { Card, CardHeader, CardTitle, CardBody, Button } from 'reactstrap'
 
-const HAQuestionList = () => {
+const PRTQuestionList = () => {
   const dispatch = useDispatch()
   const module = useSelector(state => state.module)
-  const homeAssignment = useSelector(state => state.homeAssignmentQuestion)
+  const preTest = useSelector(state => state.preTestQuestion)
 
   useEffect(() => {
     dispatch(getQuestion())
   }, [])
 
   const renderListQuestion = () => {
-    if (homeAssignment.questions?.length > 0) {
-      return homeAssignment.questions.map((item, index) => {
+    if (preTest.questions?.length > 0) {
+      return preTest.questions.map((item, index) => {
         return (
           <Card className='question-item' key={item.id}>
             <CardHeader className='question-title'>
@@ -37,7 +37,7 @@ const HAQuestionList = () => {
                 </div>
               </div>
               <div>
-                <Button color='relief-primary' tag={Link} to='/assistant/preliminary-assignment/question'>
+                <Button color='relief-primary' tag={Link} to='/assistant/pre-test/question'>
                   <Edit size={14} />
                   <span className='align-middle ms-25'>Edit</span>
                 </Button>
@@ -52,7 +52,9 @@ const HAQuestionList = () => {
                 <div className="divider my-2">
                   <div className="divider-text">Answer Key</div>
                 </div>
-                <div dangerouslySetInnerHTML={{ __html: item.answerKey }}></div>
+                {item.options.map((answerKey, index) => (
+                  <div key={index}>{answerKey.option}</div>
+                ))}
               </div>
             </CardBody>
           </Card>
@@ -72,8 +74,8 @@ const HAQuestionList = () => {
           <CardTitle tag='h4'>{`Module ${module.selectedModule.seelabsId}: ${module.selectedModule.name}`}</CardTitle>
         </CardHeader>
         <CardBody className='question-header'>
-          <h6>{`Total Question: ${homeAssignment.questions.length}`}</h6>
-          <Button color='relief-success' tag={Link} to='/assistant/preliminary-assignment/question'>
+          <h6>{`Total Question: ${preTest.questions.length}`}</h6>
+          <Button color='relief-success' tag={Link} to='/assistant/pre-test/question'>
             <PlusSquare size={14} />
             <span className='align-middle ms-25'>Add</span>
           </Button>
@@ -85,4 +87,4 @@ const HAQuestionList = () => {
   )
 }
 
-export default HAQuestionList
+export default PRTQuestionList

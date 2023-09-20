@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { selectModule, getModules } from '@store/api/module'
 
 
-const HAModuleList = () => {
+const PRTModuleList = () => {
 
   // ** Store Vars
   const dispatch = useDispatch()
@@ -37,7 +37,7 @@ const HAModuleList = () => {
                 <small>Total Question: 0</small>
               </div>
             </div>
-            <Button color='relief-primary' tag={Link} to='/assistant/preliminary-assignment/question-list' onClick={() => dispatch(selectModule(item))}>View</Button>
+            <Button color='relief-primary' tag={Link} to='/assistant/pre-test/question-list' onClick={() => dispatch(selectModule(item))}>View</Button>
           </div>
         )
       })
@@ -59,4 +59,4 @@ const HAModuleList = () => {
   )
 }
 
-export default HAModuleList
+export default PRTModuleList
