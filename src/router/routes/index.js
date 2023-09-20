@@ -1,5 +1,5 @@
 // ** React Imports
-import { Fragment } from "react"
+import { Fragment, lazy } from "react"
 
 // ** Routes Imports
 import AuthenticationRoutes from './Authentication'
@@ -19,6 +19,8 @@ import PrivateRoute from '@components/routes/PrivateRoute'
 // ** Utils
 import { isObjEmpty } from "@utils"
 
+const Landing = lazy(() => import("../../views/Landing"))
+
 const getLayout = {
   blank: <BlankLayout />,
   vertical: <VerticalLayout />,
@@ -35,7 +37,16 @@ const DefaultRoute = "/home"
 const Routes = [
   ...AuthenticationRoutes,
   ...AssistantRoutes,
-  ...StudentRoutes
+  ...StudentRoutes,
+  {
+    path: '/landing',
+    element: <Landing />,
+    meta: {
+      layout: 'blank',
+      publicRoute: true,
+      restricted: false
+    }
+  }
 ]
 
 const getRouteMeta = (route) => {
