@@ -1,10 +1,10 @@
 import { lazy } from 'react'
-import {  Book, Clipboard, BookOpen, FileText } from "react-feather"
+import { Book, Clipboard, BookOpen, FileText } from "react-feather"
 
-const PRTQuestionList = lazy (() => import('../../views/pages/student/PreTest/PRTQuestionList'))
+const PRTQuestionList = lazy(() => import('../../views/pages/student/PreTest/PRTQuestionList'))
 const HomeAssigment = lazy(() => import("../../views/pages/student/HomeAssignment"))
 const PreTest = lazy(() => import("../../views/pages/student/PreTest/PreTest"))
-const Journal = lazy (() => import("../../views/pages/student/Journal"))
+const Journal = lazy(() => import("../../views/pages/student/Journal"))
 const Error = lazy(() => import("../../views/Error"))
 
 const StudentRoutes = [
@@ -57,9 +57,9 @@ export const StudentMenu = [
         title: "Labwork Module",
         icon: <Book size={20} />,
         navLink: "https://drive.google.com/file/d/1ZbEN7-_Bd2Zv0Slb-aHuOabnwMjCgZ2w/view?usp=drive_link",
-        target :"blank",
-        rel:"noopener noreferrer"
-    },
+        target: "blank",
+        rel: "noopener noreferrer"
+    }
 ]
 
 export default StudentRoutes.map(item => ({
