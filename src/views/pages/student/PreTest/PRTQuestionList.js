@@ -36,15 +36,6 @@ const PRTQuestionList = () => {
                   <h4>{`Question ${index + 1}`}</h4>
                 </div>
               </div>
-              <div>
-                <Button color='relief-primary' tag={Link} to='/assistant/pre-test/question'>
-                  <Edit size={14} />
-                  <span className='align-middle ms-25'>Edit</span>
-                </Button>
-                <Button className='btn-icon ms-1' color='relief-danger'>
-                  <Delete size={16} />
-                </Button>
-              </div>
             </CardHeader>
             <CardBody>
               <div>
@@ -53,14 +44,16 @@ const PRTQuestionList = () => {
                   <div className="divider-text">Answer Key</div>
                 </div>
                 <div className='option-list-wrapper'>
-                  {item.options.map((answerKey, index) => (
-                    <div
-                      key={index}
-                      className={`option-list ${answerKey.isTrue ? "true-answer" : ""}`}
-                    >
-                      {String.fromCharCode(65 + index)}. {answerKey.option}
-                    </div>
-                  ))}
+                {item.options.map((answerKey, index) => (
+                  <label key={index} className="option-list">
+                    <input
+                      type="radio"
+                      name={`answer${item.id}`} // Use a unique name for each group of radio buttons
+                      value={answerKey.option} // Set the value to "A", "B", etc.
+                    />
+                    {String.fromCharCode(65 + index)}. {answerKey.option}
+                  </label>
+                ))}
                 </div>
               </div>
             </CardBody>
@@ -82,10 +75,6 @@ const PRTQuestionList = () => {
         </CardHeader>
         <CardBody className='question-header'>
           <h6>{`Total Question: ${preTest.questions.length}`}</h6>
-          <Button color='relief-success' tag={Link} to='/assistant/pre-test/question'>
-            <PlusSquare size={14} />
-            <span className='align-middle ms-25'>Add</span>
-          </Button>
         </CardBody>
       </Card>
 

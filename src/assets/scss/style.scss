@@ -15,6 +15,7 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+
 	h6 {
 		margin-bottom: 0;
 	}
@@ -68,7 +69,7 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 	}
 }
 
-.card-student{
+.card-student {
 	margin-bottom: 1rem;
 }
 
@@ -77,73 +78,83 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 
 	/* INFO */
 	h1 {
-	color: #D5546D;
-	font-size: 18px;
-	font-weight: bold;
-	margin: 10px;
-	text-align: center;
+		color: #D5546D;
+		font-size: 18px;
+		font-weight: bold;
+		margin: 10px;
+		text-align: center;
 	}
 
 
 	hr {
 		border: 1px solid grey;
 		opacity: 0.5;
-		}
+	}
 
 	/* SUBMIT */
 	.container {
-	margin-bottom: 1rem;
-	.col {
-		h2 {
-		color: #1CAB43;
-		margin-bottom: 4px;
-		font-size: small;
+		margin-bottom: 1rem;
+
+		.col {
+			h2 {
+				color: #1CAB43;
+				margin-bottom: 4px;
+				font-size: small;
+			}
+
+			h3 {
+				font-size: 18px;
+			}
+
+			p {
+				margin: 0;
+				font-size: 13px;
+
+				b {
+					font-weight: bold;
+				}
+			}
 		}
-		h3 {
-		font-size: 18px;
-		}
-		p {
-		margin: 0;
-		font-size: 13px;
-		b {
-			font-weight: bold;
-		}
-		}
-	}
-	.col-12.col-sm-6 {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: flex-end;
-		gap: 0.5rem;
-		.button-container{
+
+		.col-12.col-sm-6 {
 			display: flex;
 			flex-direction: column;
+			justify-content: center;
 			align-items: flex-end;
 			gap: 0.5rem;
-			button {
-			width: 150px;			
-			font-weight: bold;
-			&.submit {
-				color: black;
+
+			.button-container {
+				display: flex;
+				flex-direction: column;
+				align-items: flex-end;
+				gap: 0.5rem;
+
+				button {
+					width: 150px;
+					font-weight: bold;
+
+					&.submit {
+						color: black;
 					}
 				}
 			}
 		}
 	}
-} 
+}
 
 .option-list-wrapper {
 	display: flex;
 	flex-direction: column;
 	gap: 8px;
+
 	.option-list {
 		display: flex;
 		gap: 4px;
 		padding: 0.5rem 1rem;
-		font-weight: 200;
+		font-weight: 5000;
 		border-radius: 8px;
 		border: solid 1px #e7e7e7;
+		color: black;
 
 		.flower {
 			font-size: large;
