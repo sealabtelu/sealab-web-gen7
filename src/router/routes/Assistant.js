@@ -3,7 +3,6 @@ import { lazy } from 'react'
 import { Mail, Home, Clipboard, Bookmark, Edit3, PenTool, Book } from "react-feather"
 
 const HomeAssistant = lazy(() => import("../../views/pages/student/HomeAssignment"))
-const SecondPage = lazy(() => import("../../views/pages/student/PreTest/PreTest"))
 const HAModuleList = lazy(() => import("../../views/pages/assistant/HomeAssignment/HAModuleList"))
 const HAQuestionList = lazy(() => import("../../views/pages/assistant/HomeAssignment/HAQuestionList"))
 const HAQuestion = lazy(() => import("../../views/pages/assistant/HomeAssignment/HAQuestion"))
@@ -16,10 +15,6 @@ const AssistantRoutes = [
     {
         path: "/assistant/home",
         element: <HomeAssistant />
-    },
-    {
-        path: "/assistant/second-page",
-        element: <SecondPage />
     },
     {
         path: "/assistant/preliminary-assignment",
@@ -44,7 +39,7 @@ const AssistantRoutes = [
     {
         path: "/assistant/pre-test/question",
         element: <PRTQuestion />
-    },
+    }
 ]
 
 export const AssistantMenu = [
@@ -69,19 +64,19 @@ export const AssistantMenu = [
     {
         id: "journal",
         title: "Journal",
-        icon: <PenTool size={20} />,
+        icon: <PenTool size={20} />
         // navLink: "/assistant/preliminary-assignment/question"
     },
     {
         id: "inputScore",
         title: "Input Score",
-        icon: <Clipboard size={20} />,
+        icon: <Clipboard size={20} />
         // navLink: "/assistant/journal"
     },
     {
         id: "bap",
         title: "BAP",
-        icon: <Bookmark size={20} />,
+        icon: <Bookmark size={20} />
         // navLink: "/assistant/journal"
     }
 ]
