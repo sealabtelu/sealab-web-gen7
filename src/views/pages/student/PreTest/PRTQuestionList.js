@@ -10,10 +10,10 @@ import { getQuestion } from '@store/api/preTestQuestion'
 import Avatar from '@components/avatar'
 
 // ** Icons Imports
-import { Edit, Delete, HelpCircle, PlusSquare } from 'react-feather'
+import { HelpCircle } from 'react-feather'
 
 // ** Reactstrap Imports
-import { Card, CardHeader, CardTitle, CardBody, Button } from 'reactstrap'
+import { Card, CardHeader, CardTitle, CardBody, Button, Row, Col } from 'reactstrap'
 
 const PRTQuestionList = () => {
   const dispatch = useDispatch()
@@ -40,9 +40,9 @@ const PRTQuestionList = () => {
             <CardBody>
               <div>
                 <div dangerouslySetInnerHTML={{ __html: item.question }}></div>
-                <div className="divider my-2">
+                {/* <div className="divider my-2">
                   <div className="divider-text">Answer Key</div>
-                </div>
+                </div> */}
                 <div className='option-list-wrapper'>
                 {item.options.map((answerKey, index) => (
                   <label key={index} className="option-list">
@@ -70,15 +70,25 @@ const PRTQuestionList = () => {
   return (
     <Fragment>
       <Card>
-        <CardHeader>
-          <CardTitle tag='h4'>{`Module ${module.selectedModule.seelabsId}: ${module.selectedModule.name}`}</CardTitle>
-        </CardHeader>
-        <CardBody className='question-header'>
-          <h6>{`Total Question: ${preTest.questions.length}`}</h6>
-        </CardBody>
+        <Row>
+          <Col>
+            <CardHeader>
+              <CardTitle className="question-header">
+                {`Module ${module.selectedModule.seelabsId}: ${module.selectedModule.name}`}
+              </CardTitle>
+            </CardHeader>
+          </Col>
+          <Col>
+            <CardBody className='question-header'>
+              {`Total Question: ${preTest.questions.length}`}
+            </CardBody>
+          </Col>
+        </Row>
       </Card>
-
       {renderListQuestion()}
+      <Button color="relief-primary" className='submit-button'>
+        Submit
+      </Button>
     </Fragment>
   )
 }
