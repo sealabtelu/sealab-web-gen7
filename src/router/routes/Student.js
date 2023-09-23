@@ -5,7 +5,7 @@ const HAQuestionList = lazy(() => import('../../views/pages/student/HomeAssignme
 const PRTQuestionList = lazy(() => import('../../views/pages/student/PreTest/PRTQuestionList'))
 const HomeAssigment = lazy(() => import("../../views/pages/student/HomeAssignment/HomeAssignment"))
 const PreTest = lazy(() => import("../../views/pages/student/PreTest/PreTest"))
-const Journal = lazy(() => import("../../views/pages/student/Journal"))
+const Journal = lazy(() => import("../../views/pages/student/Journal/Journal"))
 const Error = lazy(() => import("../../views/Error"))
 
 const StudentRoutes = [
