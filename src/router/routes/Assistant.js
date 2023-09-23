@@ -2,7 +2,7 @@ import { lazy } from 'react'
 
 import { Mail, Home, Clipboard, Bookmark, Edit3, PenTool, Book } from "react-feather"
 
-const HomeAssistant = lazy(() => import("../../views/pages/student/HomeAssignment"))
+const HomeAssistant = lazy(() => import("../../views/pages/student/HomeAssignment/HomeAssignment"))
 const HAModuleList = lazy(() => import("../../views/pages/assistant/HomeAssignment/HAModuleList"))
 const HAQuestionList = lazy(() => import("../../views/pages/assistant/HomeAssignment/HAQuestionList"))
 const HAQuestion = lazy(() => import("../../views/pages/assistant/HomeAssignment/HAQuestion"))
