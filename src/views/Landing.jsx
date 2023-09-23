@@ -66,7 +66,7 @@ export default function Landing() {
 
             {/* ASISTANT */}
             {/* FOOTER */}
-            <div className="footer">
+            <div className="footer-landing">
                 <div className="wrapper">
                     <h3>Address</h3>
                     <p>Gedung TULT 1405 Lantai 14, Jl. Telekomunikasi Terusan Buah Batu, Bandung-40257, Indonesia</p>
