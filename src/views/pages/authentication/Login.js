@@ -177,7 +177,7 @@ const Login = () => {
               </g>
             </g>
           </svg>
-          <h2 className="brand-text text-primary ms-1">SEA</h2>
+          <h2 className="brand-text text-primary ms-1">I-Smile</h2>
         </Link>
         <Col className="d-none d-lg-flex align-items-center p-5" lg="8" sm="12">
           <div className="w-100 d-lg-flex align-items-center justify-content-center px-5">
@@ -191,7 +191,7 @@ const Login = () => {
         >
           <Col className="px-xl-2 mx-auto" sm="8" md="6" lg="12">
             <CardTitle tag="h2" className="fw-bold mb-1">
-              Welcome to I-Smile Lboratory! 👋
+              Welcome to I-Smile Laboratory! 👋
             </CardTitle>
             <CardText className="mb-2">
               Please sign-in to your account and start the adventure

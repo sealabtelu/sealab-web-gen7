@@ -20,7 +20,7 @@ export const addQuestion = createAsyncThunk('question/addQuestion', async (param
 })
 
 const initialSelectedQuestion = () => {
-  const item = window.localStorage.getItem('selectedQuestion')
+  const item = window.localStorage.getItem('selectedPRTQ')
   return item ? JSON.parse(item) : {}
 }
 
@@ -33,7 +33,7 @@ export const preTestQuestionSlice = createSlice({
   reducers: {
     selectQuestion: (state, action) => {
       state.selectedQuestion = action.payload
-      // localStorage.setItem('selectedQuestion', JSON.stringify(action.payload))
+      localStorage.setItem('selectedPRTQ', JSON.stringify(action.payload))
     }
   },
   extraReducers: builder => {

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 // ** Store & Actions
 import { useDispatch, useSelector } from 'react-redux'
-import { getQuestion } from '@store/api/homeAssignmentQuestion'
+import { getQuestion, deleteQuestion } from '@store/api/homeAssignmentQuestion'
 
 // ** Custom Components
 import Avatar from '@components/avatar'
@@ -15,6 +15,12 @@ import { Edit, Delete, HelpCircle, PlusSquare } from 'react-feather'
 // ** Reactstrap Imports
 import { Card, CardHeader, CardTitle, CardBody, Button } from 'reactstrap'
 
+// ** Third Party Components
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+const MySwal = withReactContent(Swal)
+
 const HAQuestionList = () => {
   const dispatch = useDispatch()
   const module = useSelector(state => state.module)
@@ -22,7 +28,46 @@ const HAQuestionList = () => {
 
   useEffect(() => {
     dispatch(getQuestion())
-  }, [])
+  }, [homeAssignment])
+
+  const handleDelete = async id => {
+    return await MySwal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      customClass: {
+        confirmButton: 'btn btn-primary',
+        cancelButton: 'btn btn-outline-danger ms-1'
+      },
+      buttonsStyling: false
+    }).then(result => {
+      if (result.value) {
+        dispatch(deleteQuestion({ id })).then(({ payload }) => {
+          if (payload.status === 200) {
+            MySwal.fire({
+              icon: 'success',
+              title: 'Deleted!',
+              text: 'Your file has been deleted.',
+              customClass: {
+                confirmButton: 'btn btn-success'
+              }
+            })
+          } else {
+            MySwal.fire({
+              title: 'Failed',
+              text: 'Something wrong...',
+              icon: 'error',
+              customClass: {
+                confirmButton: 'btn btn-success'
+              }
+            })    
+          }
+        })
+      }
+    })
+  }
 
   const renderListQuestion = () => {
     if (homeAssignment.questions?.length > 0) {
@@ -41,7 +86,7 @@ const HAQuestionList = () => {
                   <Edit size={14} />
                   <span className='align-middle ms-25'>Edit</span>
                 </Button>
-                <Button className='btn-icon ms-1' color='relief-danger'>
+                <Button className='btn-icon ms-1' color='relief-danger' onClick={() => { handleDelete(item.id) }}>
                   <Delete size={16} />
                 </Button>
               </div>
