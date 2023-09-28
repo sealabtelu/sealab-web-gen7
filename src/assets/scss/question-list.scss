@@ -1,0 +1,28 @@
+.question-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+.question-item {
+  .question-title {
+    .title {
+      display: flex;
+      align-items: center;
+
+      h4 {
+        margin-bottom: 0;
+      }
+    }
+
+    .avatar {
+      margin-right: 1.2rem;
+
+      .avatar-content {
+        width: 42px;
+        height: 42px;
+      }
+    }
+  }
+}

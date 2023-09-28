@@ -19,6 +19,9 @@ import { Card, CardHeader, CardTitle, CardBody, Button } from 'reactstrap'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
+// ** Styles
+import '@src/assets/scss/question-list.scss'
+
 const MySwal = withReactContent(Swal)
 
 const PRTQuestionList = () => {

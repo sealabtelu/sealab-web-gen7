@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 // ** Styles
 import '@styles/react/libs/editor/editor.scss'
+import '@src/assets/scss/question-list.scss'
 
 // ** Custom Components
 import Avatar from '@components/avatar'

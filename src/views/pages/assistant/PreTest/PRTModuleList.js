@@ -14,6 +14,8 @@ import { Card, CardHeader, CardTitle, CardBody, Button } from 'reactstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectModule, getModules } from '@store/api/module'
 
+// ** Styles
+import '@src/assets/scss/module-list.scss'
 
 const PRTModuleList = () => {
 
