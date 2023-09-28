@@ -17,9 +17,9 @@ import { getUserData, getHomeRouteForLoggedInUser } from '../utility/Utils'
 import { getRoutes } from "./routes"
 
 // ** Components
-const Error = lazy(() => import('../views/pages/misc/Error'))
 const Login = lazy(() => import('../views/pages/authentication/Login'))
 const Landing = lazy(() => import("../views/Landing"))
+const Error = lazy(() => import('../views/pages/misc/Error'))
 const NotAuthorized = lazy(() => import('../views/pages/misc/NotAuthorized'))
 
 const Router = () => {
@@ -46,6 +46,11 @@ const Router = () => {
       path: '/home',
       index: true,
       element: <Navigate replace to={getHomeRoute()} />
+    },
+    {
+      path: '/error',
+      element: <BlankLayout />,
+      children: [{ path: '/error', element: <Error /> }]
     },
     {
       path: '/auth/not-auth',

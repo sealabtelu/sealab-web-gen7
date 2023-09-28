@@ -9,7 +9,6 @@ const HAQuestion = lazy(() => import("../../views/pages/assistant/HomeAssignment
 const PRTModuleList = lazy(() => import("../../views/pages/assistant/PreTest/PRTModuleList"))
 const PRTQuestionList = lazy(() => import("../../views/pages/assistant/PreTest/PRTQuestionList.js"))
 const PRTQuestion = lazy(() => import("../../views/pages/assistant/PreTest/PRTQuestion"))
-const Error = lazy(() => import("../../views/Error"))
 
 const AssistantRoutes = [
     {
@@ -25,7 +24,7 @@ const AssistantRoutes = [
         element: <HAQuestionList />
     },
     {
-        path: "/assistant/preliminary-assignment/question",
+        path: "/assistant/preliminary-assignment/question/:action",
         element: <HAQuestion />
     },
     {

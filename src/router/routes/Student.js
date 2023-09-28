@@ -6,7 +6,6 @@ const PRTQuestionList = lazy(() => import('../../views/pages/student/PreTest/PRT
 const HomeAssigment = lazy(() => import("../../views/pages/student/HomeAssignment/HomeAssignment"))
 const PreTest = lazy(() => import("../../views/pages/student/PreTest/PreTest"))
 const Journal = lazy(() => import("../../views/pages/student/Journal/Journal"))
-const Error = lazy(() => import("../../views/Error"))
 
 const StudentRoutes = [
     {
@@ -28,13 +27,6 @@ const StudentRoutes = [
     {
         path: "/student/journal",
         element: <Journal />
-    },
-    {
-        path: "/error",
-        element: <Error />,
-        meta: {
-            layout: "blank"
-        }
     }
 ]
 

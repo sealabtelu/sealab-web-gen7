@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 // ** Store & Actions
 import { useDispatch, useSelector } from 'react-redux'
-import { getQuestion, deleteQuestion } from '@store/api/homeAssignmentQuestion'
+import { getListQuestion, deleteQuestion, selectQuestion } from '@store/api/homeAssignmentQuestion'
 
 // ** Custom Components
 import Avatar from '@components/avatar'
@@ -27,8 +27,8 @@ const HAQuestionList = () => {
   const homeAssignment = useSelector(state => state.homeAssignmentQuestion)
 
   useEffect(() => {
-    dispatch(getQuestion())
-  }, [homeAssignment])
+    dispatch(getListQuestion())
+  }, [])
 
   const handleDelete = async id => {
     return await MySwal.fire({
@@ -54,6 +54,7 @@ const HAQuestionList = () => {
                 confirmButton: 'btn btn-success'
               }
             })
+            dispatch(getListQuestion())
           } else {
             MySwal.fire({
               title: 'Failed',
@@ -62,7 +63,7 @@ const HAQuestionList = () => {
               customClass: {
                 confirmButton: 'btn btn-success'
               }
-            })    
+            })
           }
         })
       }
@@ -82,7 +83,7 @@ const HAQuestionList = () => {
                 </div>
               </div>
               <div>
-                <Button color='relief-primary' tag={Link} to='/assistant/preliminary-assignment/question'>
+                <Button color='relief-primary' tag={Link} to='/assistant/preliminary-assignment/question/edit' onClick={() => { dispatch(selectQuestion(item)) }}>
                   <Edit size={14} />
                   <span className='align-middle ms-25'>Edit</span>
                 </Button>
@@ -118,7 +119,7 @@ const HAQuestionList = () => {
         </CardHeader>
         <CardBody className='question-header'>
           <h6>{`Total Question: ${homeAssignment.questions.length}`}</h6>
-          <Button color='relief-success' tag={Link} to='/assistant/preliminary-assignment/question'>
+          <Button color='relief-success' tag={Link} to='/assistant/preliminary-assignment/question/add'>
             <PlusSquare size={14} />
             <span className='align-middle ms-25'>Add</span>
           </Button>

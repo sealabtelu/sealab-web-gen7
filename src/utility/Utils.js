@@ -21,6 +21,10 @@ const isToday = (date) => {
   )
 }
 
+export const capitalize = (inputString) => {
+  return inputString.charAt(0).toUpperCase() + inputString.slice(1)
+}
+
 /**
  ** Format and return date in Humanize format
  ** Intl docs: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/format
