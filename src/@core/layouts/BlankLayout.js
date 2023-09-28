@@ -1,33 +1,33 @@
 // ** React Imports
-import { Outlet } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Outlet } from "react-router-dom"
+import { useEffect, useState } from "react"
 
 // ** Custom Hooks
-import { useSkin } from "@hooks/useSkin";
+import { useSkin } from "@hooks/useSkin"
 
 // ** Third Party Components
-import classnames from "classnames";
+import classnames from "classnames"
 
 const BlankLayout = () => {
   // ** States
-  const [isMounted, setIsMounted] = useState(false);
+  const [isMounted, setIsMounted] = useState(false)
 
   // ** Hooks
-  const { skin } = useSkin();
+  const { skin } = useSkin()
 
   useEffect(() => {
-    setIsMounted(true);
-    return () => setIsMounted(false);
-  }, []);
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
 
   if (!isMounted) {
-    return null;
+    return null
   }
 
   return (
     <div
       className={classnames("blank-page", {
-        "dark-layout": skin === "dark",
+        "dark-layout": skin === "dark"
       })}
     >
       <div className="app-content content">
@@ -38,7 +38,7 @@ const BlankLayout = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default BlankLayout;
+export default BlankLayout

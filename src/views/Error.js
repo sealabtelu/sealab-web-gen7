@@ -1,24 +1,24 @@
 // ** React Imports
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 // ** Reactstrap Imports
-import { Button } from "reactstrap";
+import { Button } from "reactstrap"
 
 // ** Custom Hooks
-import { useSkin } from "@hooks/useSkin";
+import { useSkin } from "@hooks/useSkin"
 
 // ** Illustrations Imports
-import illustrationsLight from "@src/assets/images/pages/error.svg";
-import illustrationsDark from "@src/assets/images/pages/error-dark.svg";
+import illustrationsLight from "@src/assets/images/pages/error.svg"
+import illustrationsDark from "@src/assets/images/pages/error-dark.svg"
 
 // ** Styles
-import "@styles/base/pages/page-misc.scss";
+import "@styles/base/pages/page-misc.scss"
 
 const Error = () => {
   // ** Hooks
-  const { skin } = useSkin();
+  const { skin } = useSkin()
 
-  const source = skin === "dark" ? illustrationsDark : illustrationsLight;
+  const source = skin === "dark" ? illustrationsDark : illustrationsLight
 
   return (
     <div className="misc-wrapper">
@@ -109,6 +109,6 @@ const Error = () => {
         </div>
       </div>
     </div>
-  );
-};
-export default Error;
+  )
+}
+export default Error

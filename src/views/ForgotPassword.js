@@ -1,11 +1,11 @@
 // ** React Imports
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 // ** Custom Hooks
-import { useSkin } from "@hooks/useSkin";
+import { useSkin } from "@hooks/useSkin"
 
 // ** Icons Imports
-import { ChevronLeft } from "react-feather";
+import { ChevronLeft } from "react-feather"
 
 // ** Reactstrap Imports
 import {
@@ -16,21 +16,21 @@ import {
   Form,
   Label,
   Input,
-  Button,
-} from "reactstrap";
+  Button
+} from "reactstrap"
 
 // ** Illustrations Imports
-import illustrationsLight from "@src/assets/images/pages/forgot-password-v2.svg";
-import illustrationsDark from "@src/assets/images/pages/forgot-password-v2-dark.svg";
+import illustrationsLight from "@src/assets/images/pages/forgot-password-v2.svg"
+import illustrationsDark from "@src/assets/images/pages/forgot-password-v2-dark.svg"
 
 // ** Styles
-import "@styles/react/pages/page-authentication.scss";
+import "@styles/react/pages/page-authentication.scss"
 
 const ForgotPassword = () => {
   // ** Hooks
-  const { skin } = useSkin();
+  const { skin } = useSkin()
 
-  const source = skin === "dark" ? illustrationsDark : illustrationsLight;
+  const source = skin === "dark" ? illustrationsDark : illustrationsLight
 
   return (
     <div className="auth-wrapper auth-cover">
@@ -151,7 +151,7 @@ const ForgotPassword = () => {
         </Col>
       </Row>
     </div>
-  );
-};
+  )
+}
 
-export default ForgotPassword;
+export default ForgotPassword

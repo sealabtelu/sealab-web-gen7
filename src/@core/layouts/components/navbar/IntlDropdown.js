@@ -1,32 +1,32 @@
 // ** Third Party Components
-import { useTranslation } from "react-i18next";
-import ReactCountryFlag from "react-country-flag";
+import { useTranslation } from "react-i18next"
+import ReactCountryFlag from "react-country-flag"
 
 // ** Reactstrap Imports
 import {
   UncontrolledDropdown,
   DropdownMenu,
   DropdownItem,
-  DropdownToggle,
-} from "reactstrap";
+  DropdownToggle
+} from "reactstrap"
 
 const IntlDropdown = () => {
   // ** Hooks
-  const { i18n } = useTranslation();
+  const { i18n } = useTranslation()
 
   // ** Vars
   const langObj = {
     en: "English",
     de: "German",
     fr: "French",
-    pt: "Portuguese",
-  };
+    pt: "Portuguese"
+  }
 
   // ** Function to switch Language
   const handleLangUpdate = (e, lang) => {
-    e.preventDefault();
-    i18n.changeLanguage(lang);
-  };
+    e.preventDefault()
+    i18n.changeLanguage(lang)
+  }
 
   return (
     <UncontrolledDropdown
@@ -82,7 +82,7 @@ const IntlDropdown = () => {
         </DropdownItem>
       </DropdownMenu>
     </UncontrolledDropdown>
-  );
-};
+  )
+}
 
-export default IntlDropdown;
+export default IntlDropdown

@@ -1,15 +1,15 @@
 // ** React Imports
-import { useEffect, useState, Fragment, forwardRef } from "react";
+import { useEffect, useState, Fragment, forwardRef } from "react"
 
 // ** Third Party Components
-import Stepper from "bs-stepper";
-import classnames from "classnames";
-import { PropTypes } from "prop-types";
-import { ChevronRight } from "react-feather";
+import Stepper from "bs-stepper"
+import classnames from "classnames"
+import { PropTypes } from "prop-types"
+import { ChevronRight } from "react-feather"
 
 // ** Styles
-import "bs-stepper/dist/css/bs-stepper.min.css";
-import "../../../@core/scss/base/plugins/forms/form-wizard.scss";
+import "bs-stepper/dist/css/bs-stepper.min.css"
+import "../../../@core/scss/base/plugins/forms/form-wizard.scss"
 
 const Wizard = forwardRef((props, ref) => {
   // ** Props
@@ -22,27 +22,27 @@ const Wizard = forwardRef((props, ref) => {
     className,
     headerClassName,
     contentClassName,
-    contentWrapperClassName,
-  } = props;
+    contentWrapperClassName
+  } = props
 
   // ** State
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0)
 
   // ** Vars
-  let stepper = null;
+  let stepper = null
 
   // ** Step change listener on mount
   useEffect(() => {
-    stepper = new Stepper(ref.current, options);
+    stepper = new Stepper(ref.current, options)
 
     ref.current.addEventListener("shown.bs-stepper", function (event) {
-      setActiveIndex(event.detail.indexStep);
-    });
+      setActiveIndex(event.detail.indexStep)
+    })
 
     if (instance) {
-      instance(stepper);
+      instance(stepper)
     }
-  }, []);
+  }, [])
 
   // ** Renders Wizard Header
   const renderHeader = () => {
@@ -55,7 +55,7 @@ const Wizard = forwardRef((props, ref) => {
           <div
             className={classnames("step", {
               crossed: activeIndex > index,
-              active: index === activeIndex,
+              active: index === activeIndex
             })}
             data-target={`#${step.id}`}
           >
@@ -72,9 +72,9 @@ const Wizard = forwardRef((props, ref) => {
             </button>
           </div>
         </Fragment>
-      );
-    });
-  };
+      )
+    })
+  }
 
   // ** Renders Wizard Content
   const renderContent = () => {
@@ -83,16 +83,16 @@ const Wizard = forwardRef((props, ref) => {
         <div
           className={classnames("content", {
             [contentClassName]: contentClassName,
-            "active dstepper-block": activeIndex === index,
+            "active dstepper-block": activeIndex === index
           })}
           id={step.id}
           key={step.id}
         >
           {step.content}
         </div>
-      );
-    });
-  };
+      )
+    })
+  }
 
   return (
     <div
@@ -101,35 +101,35 @@ const Wizard = forwardRef((props, ref) => {
         [className]: className,
         vertical: type === "vertical",
         "vertical wizard-modern": type === "modern-vertical",
-        "wizard-modern": type === "modern-horizontal",
+        "wizard-modern": type === "modern-horizontal"
       })}
     >
       <div
         className={classnames("bs-stepper-header", {
-          [headerClassName]: headerClassName,
+          [headerClassName]: headerClassName
         })}
       >
         {renderHeader()}
       </div>
       <div
         className={classnames("bs-stepper-content", {
-          [contentWrapperClassName]: contentWrapperClassName,
+          [contentWrapperClassName]: contentWrapperClassName
         })}
       >
         {renderContent()}
       </div>
     </div>
-  );
-});
+  )
+})
 
-export default Wizard;
+export default Wizard
 
 // ** Default Props
 Wizard.defaultProps = {
   options: {},
   type: "horizontal",
-  separator: <ChevronRight size={17} />,
-};
+  separator: <ChevronRight size={17} />
+}
 
 // ** PropTypes
 Wizard.propTypes = {
@@ -147,7 +147,7 @@ Wizard.propTypes = {
       title: PropTypes.string.isRequired,
       subtitle: PropTypes.string,
       icon: PropTypes.any,
-      content: PropTypes.any.isRequired,
+      content: PropTypes.any.isRequired
     })
-  ).isRequired,
-};
+  ).isRequired
+}

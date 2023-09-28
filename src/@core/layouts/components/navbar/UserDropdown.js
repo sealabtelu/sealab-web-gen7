@@ -1,8 +1,16 @@
 // ** React Imports
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
+import { useState } from 'react'
+
+// ** Utils
+import { getUserData } from "@utils"
+
+// ** Store & Actions
+import { useDispatch } from 'react-redux'
+import { handleLogout } from '@store/authentication'
 
 // ** Custom Components
-import Avatar from "@components/avatar";
+import Avatar from "@components/avatar"
 
 // ** Third Party Components
 import {
@@ -11,23 +19,32 @@ import {
   CheckSquare,
   MessageSquare,
   Settings,
-  CreditCard,
   HelpCircle,
-  Power,
-} from "react-feather";
+  Power
+} from "react-feather"
 
 // ** Reactstrap Imports
 import {
   UncontrolledDropdown,
   DropdownMenu,
   DropdownToggle,
-  DropdownItem,
-} from "reactstrap";
-
-// ** Default Avatar Image
-import defaultAvatar from "@src/assets/images/portrait/small/avatar-s-11.jpg";
+  DropdownItem
+} from "reactstrap"
 
 const UserDropdown = () => {
+  // ** Store Vars
+  const dispatch = useDispatch()
+
+  // ** State
+  const [userData] = useState(getUserData(true))
+
+  //** ComponentDidMount
+  // useEffect(() => {
+  //   if (isUserLoggedIn() !== null) {
+  //     setUserData(getUserData())
+  //   }
+  // }, [])
+
   return (
     <UncontrolledDropdown tag="li" className="dropdown-user nav-item">
       <DropdownToggle
@@ -37,14 +54,15 @@ const UserDropdown = () => {
         onClick={(e) => e.preventDefault()}
       >
         <div className="user-nav d-sm-flex d-none">
-          <span className="user-name fw-bold">John Doe</span>
-          <span className="user-status">Admin</span>
+          <span className="user-name fw-bold">{userData.name}</span>
+          <span className="user-status">{userData.role}</span>
         </div>
         <Avatar
-          img={defaultAvatar}
-          imgHeight="40"
-          imgWidth="40"
+          content={userData.name}
+          contentStyles={{ width: '40px', height: '40px' }}
+          color='light-info'
           status="online"
+          initials
         />
       </DropdownToggle>
       <DropdownMenu end>
@@ -74,20 +92,16 @@ const UserDropdown = () => {
           <span className="align-middle">Settings</span>
         </DropdownItem>
         <DropdownItem tag={Link} to="/" onClick={(e) => e.preventDefault()}>
-          <CreditCard size={14} className="me-75" />
-          <span className="align-middle">Pricing</span>
-        </DropdownItem>
-        <DropdownItem tag={Link} to="/" onClick={(e) => e.preventDefault()}>
           <HelpCircle size={14} className="me-75" />
           <span className="align-middle">FAQ</span>
         </DropdownItem>
-        <DropdownItem tag={Link} to="/login">
+        <DropdownItem tag={Link} to="/login" onClick={() => dispatch(handleLogout())}>
           <Power size={14} className="me-75" />
           <span className="align-middle">Logout</span>
         </DropdownItem>
       </DropdownMenu>
     </UncontrolledDropdown>
-  );
-};
+  )
+}
 
-export default UserDropdown;
+export default UserDropdown

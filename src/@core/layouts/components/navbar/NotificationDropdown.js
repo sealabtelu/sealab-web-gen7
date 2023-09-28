@@ -1,13 +1,13 @@
 // ** React Imports
-import { Fragment } from "react";
+import { Fragment } from "react"
 
 // ** Custom Components
-import Avatar from "@components/avatar";
+import Avatar from "@components/avatar"
 
 // ** Third Party Components
-import classnames from "classnames";
-import PerfectScrollbar from "react-perfect-scrollbar";
-import { Bell, X, Check, AlertTriangle } from "react-feather";
+import classnames from "classnames"
+import PerfectScrollbar from "react-perfect-scrollbar"
+import { Bell, X, Check, AlertTriangle } from "react-feather"
 
 // ** Reactstrap Imports
 import {
@@ -17,12 +17,12 @@ import {
   DropdownMenu,
   DropdownItem,
   DropdownToggle,
-  UncontrolledDropdown,
-} from "reactstrap";
+  UncontrolledDropdown
+} from "reactstrap"
 
 // ** Avatar Imports
-import avatar3 from "@src/assets/images/portrait/small/avatar-s-3.jpg";
-import avatar15 from "@src/assets/images/portrait/small/avatar-s-15.jpg";
+import avatar3 from "@src/assets/images/portrait/small/avatar-s-3.jpg"
+import avatar15 from "@src/assets/images/portrait/small/avatar-s-15.jpg"
 
 const NotificationDropdown = () => {
   // ** Notification Array
@@ -34,7 +34,7 @@ const NotificationDropdown = () => {
         <p className="media-heading">
           <span className="fw-bolder">Congratulation Sam 🎉</span>winner!
         </p>
-      ),
+      )
     },
     {
       img: avatar15,
@@ -43,7 +43,7 @@ const NotificationDropdown = () => {
         <p className="media-heading">
           <span className="fw-bolder">New message</span>&nbsp;received
         </p>
-      ),
+      )
     },
     {
       avatarContent: "MD",
@@ -53,7 +53,7 @@ const NotificationDropdown = () => {
         <p className="media-heading">
           <span className="fw-bolder">Revised Order 👋</span>&nbsp;checkout
         </p>
-      ),
+      )
     },
     {
       title: <h6 className="fw-bolder me-auto mb-0">System Notifications</h6>,
@@ -66,7 +66,7 @@ const NotificationDropdown = () => {
             defaultChecked
           />
         </div>
-      ),
+      )
     },
     {
       avatarIcon: <X size={14} />,
@@ -76,7 +76,7 @@ const NotificationDropdown = () => {
         <p className="media-heading">
           <span className="fw-bolder">Server down</span>&nbsp;registered
         </p>
-      ),
+      )
     },
     {
       avatarIcon: <Check size={14} />,
@@ -86,7 +86,7 @@ const NotificationDropdown = () => {
         <p className="media-heading">
           <span className="fw-bolder">Sales report</span>&nbsp;generated
         </p>
-      ),
+      )
     },
     {
       avatarIcon: <AlertTriangle size={14} />,
@@ -96,9 +96,9 @@ const NotificationDropdown = () => {
         <p className="media-heading">
           <span className="fw-bolder">High memory</span>&nbsp;usage
         </p>
-      ),
-    },
-  ];
+      )
+    }
+  ]
 
   // ** Function to render Notifications
   /*eslint-disable */
@@ -203,7 +203,7 @@ const NotificationDropdown = () => {
         </li>
       </DropdownMenu>
     </UncontrolledDropdown>
-  );
-};
+  )
+}
 
-export default NotificationDropdown;
+export default NotificationDropdown

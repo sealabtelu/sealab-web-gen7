@@ -1,14 +1,14 @@
 // ** React Imports
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 // ** Custom Hooks
-import { useSkin } from "@hooks/useSkin";
+import { useSkin } from "@hooks/useSkin"
 
 // ** Icons Imports
-import { Facebook, Twitter, Mail, GitHub } from "react-feather";
+import { Facebook, Twitter, Mail, GitHub } from "react-feather"
 
 // ** Custom Components
-import InputPasswordToggle from "@components/input-password-toggle";
+import InputPasswordToggle from "@components/input-password-toggle"
 
 // ** Reactstrap Imports
 import {
@@ -19,21 +19,21 @@ import {
   Form,
   Label,
   Input,
-  Button,
-} from "reactstrap";
+  Button
+} from "reactstrap"
 
 // ** Illustrations Imports
-import illustrationsLight from "@src/assets/images/pages/register-v2.svg";
-import illustrationsDark from "@src/assets/images/pages/register-v2-dark.svg";
+import illustrationsLight from "@src/assets/images/pages/register-v2.svg"
+import illustrationsDark from "@src/assets/images/pages/register-v2-dark.svg"
 
 // ** Styles
-import "@styles/react/pages/page-authentication.scss";
+import "@styles/react/pages/page-authentication.scss"
 
 const Register = () => {
   // ** Hooks
-  const { skin } = useSkin();
+  const { skin } = useSkin()
 
-  const source = skin === "dark" ? illustrationsDark : illustrationsLight;
+  const source = skin === "dark" ? illustrationsDark : illustrationsLight
 
   return (
     <div className="auth-wrapper auth-cover">
@@ -202,7 +202,7 @@ const Register = () => {
         </Col>
       </Row>
     </div>
-  );
-};
+  )
+}
 
-export default Register;
+export default Register

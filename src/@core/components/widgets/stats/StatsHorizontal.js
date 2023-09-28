@@ -1,9 +1,9 @@
 // ** Third Party Components
-import PropTypes from "prop-types";
-import classnames from "classnames";
+import PropTypes from "prop-types"
+import classnames from "classnames"
 
 // ** Reactstrap Imports
-import { Card, CardBody } from "reactstrap";
+import { Card, CardBody } from "reactstrap"
 
 const StatsHorizontal = ({
   icon,
@@ -12,7 +12,7 @@ const StatsHorizontal = ({
   renderStats,
   statTitle,
   className,
-  statsMargin,
+  statsMargin
 }) => {
   return (
     <Card>
@@ -25,7 +25,7 @@ const StatsHorizontal = ({
               <h2
                 className={classnames("fw-bolder", {
                   "mb-0": !statsMargin,
-                  [statsMargin]: statsMargin,
+                  [statsMargin]: statsMargin
                 })}
               >
                 {stats}
@@ -44,10 +44,10 @@ const StatsHorizontal = ({
         </div>
       </CardBody>
     </Card>
-  );
-};
+  )
+}
 
-export default StatsHorizontal;
+export default StatsHorizontal
 
 // ** PropTypes
 StatsHorizontal.propTypes = {
@@ -66,6 +66,6 @@ StatsHorizontal.propTypes = {
     "mb-2",
     "mb-3",
     "mb-4",
-    "mb-5",
-  ]),
-};
+    "mb-5"
+  ])
+}

@@ -1,16 +1,16 @@
-import { Mail, Home } from "react-feather";
+import { useState } from 'react'
 
-export default [
-  {
-    id: "home",
-    title: "Home",
-    icon: <Home size={20} />,
-    navLink: "/home",
-  },
-  {
-    id: "secondPage",
-    title: "Second Page",
-    icon: <Mail size={20} />,
-    navLink: "/second-page",
-  },
-];
+import { AssistantMenu } from "../../router/routes/Assistant"
+import { StudentMenu } from "../../router/routes/Student"
+
+import { getUserData } from "@utils"
+
+const pageMenu = () => {
+
+  // ** State
+  const [userData] = useState(getUserData(true))
+
+  return userData.role === "Assistant" ? AssistantMenu : StudentMenu
+}
+
+export default pageMenu

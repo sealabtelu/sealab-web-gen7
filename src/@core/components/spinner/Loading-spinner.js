@@ -1,10 +1,10 @@
-import classnames from "classnames";
+import classnames from "classnames"
 
 const ComponentSpinner = ({ className }) => {
   return (
     <div
       className={classnames("fallback-spinner", {
-        [className]: className,
+        [className]: className
       })}
     >
       <div className="loading">
@@ -13,7 +13,7 @@ const ComponentSpinner = ({ className }) => {
         <div className="effect-3 effects"></div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ComponentSpinner;
+export default ComponentSpinner

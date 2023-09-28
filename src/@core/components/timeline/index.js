@@ -1,34 +1,34 @@
 // ** Third Party Components
-import Proptypes from "prop-types";
-import classnames from "classnames";
+import Proptypes from "prop-types"
+import classnames from "classnames"
 
 const Timeline = (props) => {
   // ** Props
-  const { data, tag, className } = props;
+  const { data, tag, className } = props
 
   // ** Custom Tagg
-  const Tag = tag ? tag : "ul";
+  const Tag = tag ? tag : "ul"
 
   return (
     <Tag
       className={classnames("timeline", {
-        [className]: className,
+        [className]: className
       })}
     >
       {data.map((item, i) => {
-        const ItemTag = item.tag ? item.tag : "li";
+        const ItemTag = item.tag ? item.tag : "li"
 
         return (
           <ItemTag
             key={i}
             className={classnames("timeline-item", {
-              [item.className]: className,
+              [item.className]: className
             })}
           >
             <span
               className={classnames("timeline-point", {
                 [`timeline-point-${item.color}`]: item.color,
-                "timeline-point-indicator": !item.icon,
+                "timeline-point-indicator": !item.icon
               })}
             >
               {item.icon ? item.icon : null}
@@ -38,7 +38,7 @@ const Timeline = (props) => {
                 className={classnames(
                   "d-flex justify-content-between flex-sm-row flex-column",
                   {
-                    "mb-sm-0 mb-1": item.meta,
+                    "mb-sm-0 mb-1": item.meta
                   }
                 )}
               >
@@ -46,7 +46,7 @@ const Timeline = (props) => {
                 {item.meta ? (
                   <span
                     className={classnames("timeline-event-time", {
-                      [item.metaClassName]: item.metaClassName,
+                      [item.metaClassName]: item.metaClassName
                     })}
                   >
                     {item.meta}
@@ -55,7 +55,7 @@ const Timeline = (props) => {
               </div>
               <p
                 className={classnames({
-                  "mb-0": i === data.length - 1 && !item.customContent,
+                  "mb-0": i === data.length - 1 && !item.customContent
                 })}
               >
                 {item.content}
@@ -63,17 +63,17 @@ const Timeline = (props) => {
               {item.customContent ? item.customContent : null}
             </div>
           </ItemTag>
-        );
+        )
       })}
     </Tag>
-  );
-};
+  )
+}
 
-export default Timeline;
+export default Timeline
 
 // ** PropTypes
 Timeline.propTypes = {
   tag: Proptypes.string,
   className: Proptypes.string,
-  data: Proptypes.array.isRequired,
-};
+  data: Proptypes.array.isRequired
+}

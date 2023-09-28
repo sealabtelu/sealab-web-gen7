@@ -1,34 +1,34 @@
 // ** React Imports
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom"
 
 // ** Third Party Components
-import classnames from "classnames";
-import { useTranslation } from "react-i18next";
+import classnames from "classnames"
+import { useTranslation } from "react-i18next"
 
 const HorizontalNavMenuLink = ({ item, isChild, setMenuOpen }) => {
   // ** Conditional Link Tag, if item has newTab or externalLink props use <a> tag else use NavLink
-  const LinkTag = item.externalLink ? "a" : NavLink;
+  const LinkTag = item.externalLink ? "a" : NavLink
 
   // ** Hooks
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   const handleClick = () => {
     if (setMenuOpen) {
-      setMenuOpen(false);
+      setMenuOpen(false)
     }
-  };
+  }
 
   return (
     <li
       onClick={handleClick}
       className={classnames("nav-item", {
-        disabled: item.disabled,
+        disabled: item.disabled
       })}
     >
       <LinkTag
         className={classnames("d-flex align-items-center", {
           "dropdown-item": isChild,
-          "nav-link": !isChild,
+          "nav-link": !isChild
         })}
         target={item.newTab ? "_blank" : undefined}
         /*eslint-disable */
@@ -61,7 +61,7 @@ const HorizontalNavMenuLink = ({ item, isChild, setMenuOpen }) => {
         <span>{t(item.title)}</span>
       </LinkTag>
     </li>
-  );
-};
+  )
+}
 
-export default HorizontalNavMenuLink;
+export default HorizontalNavMenuLink
