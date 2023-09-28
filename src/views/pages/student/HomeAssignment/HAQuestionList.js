@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 // ** Store & Actions
 import { useDispatch, useSelector } from 'react-redux'
-import { getQuestion } from '@store/api/homeAssignmentQuestion'
+import { getListQuestion } from '@store/api/homeAssignmentQuestion'
 
 // ** Custom Components
 import Avatar from '@components/avatar'
@@ -22,7 +22,7 @@ const HAQuestionList = () => {
   const homeAssignment = useSelector(state => state.homeAssignmentQuestion)
 
   useEffect(() => {
-    dispatch(getQuestion())
+    dispatch(getListQuestion())
   }, [])
 
   const renderListQuestion = () => {

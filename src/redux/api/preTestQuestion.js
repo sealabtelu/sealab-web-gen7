@@ -4,8 +4,10 @@ import axios from 'axios'
 // ** Redux Imports
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
+const endpoint = '/pre-test-question'
+
 export const getQuestion = createAsyncThunk('question/getQuestion', async (_, { getState }) => {
-  return await axios.get(`/pre-test-question/module/${getState().module.selectedModule.id}`).then(res => {
+  return await axios.get(`${endpoint}/module/${getState().module.selectedModule.id}`).then(res => {
     return res.data.data
   })
 })
@@ -16,7 +18,11 @@ export const addQuestion = createAsyncThunk('question/addQuestion', async (param
     idModule: getState().module.selectedModule.id,
     Type: "Text"
   }
-  return await axios.post('/pre-test-question', data)
+  return await axios.post(endpoint, data)
+})
+
+export const deleteQuestion = createAsyncThunk('question/deleteQuestion', async (id) => {
+  return await axios.delete(endpoint, { params: id })
 })
 
 const initialSelectedQuestion = () => {
