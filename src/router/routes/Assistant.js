@@ -9,6 +9,8 @@ const HAQuestion = lazy(() => import("../../views/pages/assistant/HomeAssignment
 const PRTModuleList = lazy(() => import("../../views/pages/assistant/PreTest/PRTModuleList"))
 const PRTQuestionList = lazy(() => import("../../views/pages/assistant/PreTest/PRTQuestionList.js"))
 const PRTQuestion = lazy(() => import("../../views/pages/assistant/PreTest/PRTQuestion"))
+const PilihGroup = lazy(() => import("../../views/pages/assistant/InputScore/PilihGroup"))
+const InputNilai = lazy(() => import("../../views/pages/assistant/InputScore/InputNilai"))
 const Error = lazy(() => import("../../views/Error"))
 
 const AssistantRoutes = [
@@ -39,6 +41,14 @@ const AssistantRoutes = [
     {
         path: "/assistant/pre-test/question",
         element: <PRTQuestion />
+    },
+    {
+        path: "/assistant/pilih-group",
+        element: <PilihGroup />
+    },
+    {
+        path: "/assistant/pilih-group/input-nilai",
+        element: <InputNilai />
     }
 ]
 
@@ -70,8 +80,8 @@ export const AssistantMenu = [
     {
         id: "inputScore",
         title: "Input Score",
-        icon: <Clipboard size={20} />
-        // navLink: "/assistant/journal"
+        icon: <Clipboard size={20} />,
+        navLink: "/assistant/pilih-group"
     },
     {
         id: "bap",
