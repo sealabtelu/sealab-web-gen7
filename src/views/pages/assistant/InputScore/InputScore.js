@@ -1,14 +1,17 @@
 // ** Styles
-import "../../../../assets/scss/pilih-group.scss"
+import '@src/assets/scss/pilih-group.scss'
 import '@styles/react/libs/flatpickr/flatpickr.scss'
 
 // ** Third Party Components
 import Select from 'react-select'
+
 // ** Utils
 import { selectThemeColors } from '@utils'
 
 // ** Reactstrap Imports
 import { Card, CardHeader, CardTitle, CardBody, Row, Col, Label, Button, Table, Badge, UncontrolledDropdown, DropdownMenu, DropdownItem, DropdownToggle, Input } from 'reactstrap'
+import { useDispatch, useSelector } from 'react-redux'
+// import { getListGroup, getGroupDetail } from '@store/api/seelabs'
 
 // ** Demo Components
 import PickerDefault from './PickerDefault'
@@ -19,43 +22,18 @@ const fileOptions = [
   { value: 'tp', label: 'Tugas Pendahuluan' }
 ]
 
-const moduleOptions = [
-  { value: 1, label: '1' },
-  { value: 2, label: '2' },
-  { value: 3, label: '3' },
-  { value: 4, label: '4' },
-  { value: 5, label: '5' },
-  { value: 6, label: '6' }
-]
-
 const PdfURL = [
   { id: 1, url: "https://pdfobject.com/pdf/sample.pdf" },
   { id: 2, url: "https://www.africau.edu/images/default/sample.pdf" },
   { id: 3, url: "https://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf" }
 ]
 
-const groupName = [
-  {
-    uid: "39528",
-    name: "DANNY HAMTAR PANGESTU"
-  },
-  {
-    uid: "39245",
-    name: "MUHAMAD AFRI MARLIANSYAH"
-  },
-  {
-    uid: "39550",
-    name: "PARIKESIT"
-  },
-  {
-    uid: "39542",
-    name: "RAIHANA FAWAZ"
-  }
-]
+const InputScore = () => {
+  const dispatch = useDispatch()
 
-const InputNilai = () => {
+  const { selectedGroup, moduleOptions } = useSelector(state => state.seelabs)
+
   const [counter, setCounter] = useState(0)
-
   //increase counter
   const increase = () => {
     if (counter < PdfURL.length - 1) {
@@ -116,7 +94,7 @@ const InputNilai = () => {
             {/* PDF */}
             <Row>
               {/* { counter &&  */}
-              <iframe id="PdfContainer" src={PdfURL[counter].url}></iframe>
+              <embed id="PdfContainer" src={PdfURL[counter].url} type="application/pdf"></embed>
               {/* } */}
             </Row>
           </Col>
@@ -153,7 +131,7 @@ const InputNilai = () => {
               <Table responsive>
                 <thead>
                   <tr>
-                    <th>Group</th>
+                    {/* <th>Group</th> */}
                     <th>Name</th>
                     <th>TA</th>
                     <th>TP</th>
@@ -163,45 +141,25 @@ const InputNilai = () => {
                 </thead>
                 <tbody>
                   {
-                    groupName.map((item, i) => {
-                      if (i === 0) {
-                        return (
-                          <tr key={i}>
-                            <td rowSpan={groupName.length} scope="row">32</td>
-                            <td>{item.name}</td>
-                            <td>
-                              <input type="number" min="0" max="100" className="input-group-field-number text-center" placeholder="..." />
-                            </td>
-                            <td>
-                              <input type="number" min="0" max="100" className="input-group-field-number text-center" placeholder="..." />
-                            </td>
-                            <td>
-                              <input type="number" min="0" max="100" className="input-group-field-number text-center" placeholder="..." />
-                            </td>
-                            <td>
-                              <input type="number" min="0" max="100" className="input-group-field-number text-center" placeholder="..." />
-                            </td>
-                          </tr>
-                        )
-                      } else {
-                        return (
-                          <tr key={i}>
-                            <td>{item.name}</td>
-                            <td>
-                              <input type="number" min="0" max="100" className="input-group-field-number text-center" placeholder="..." />
-                            </td>
-                            <td>
-                              <input type="number" min="0" max="100" className="input-group-field-number text-center" placeholder="..." />
-                            </td>
-                            <td>
-                              <input type="number" min="0" max="100" className="input-group-field-number text-center" placeholder="..." />
-                            </td>
-                            <td>
-                              <input type="number" min="0" max="100" className="input-group-field-number text-center" placeholder="..." />
-                            </td>
-                          </tr>
-                        )
-                      }
+                    selectedGroup.map((item, i) => {
+                      return (
+                        <tr key={i}>
+                          {/* {i === 0 && <td rowSpan={selectedGroup.length} scope="row">32</td>} */}
+                          <td>{item.name}</td>
+                          <td>
+                            <input type="number" min="0" max="100" className="input-group-field-number text-center" placeholder="..." />
+                          </td>
+                          <td>
+                            <input type="number" min="0" max="100" className="input-group-field-number text-center" placeholder="..." />
+                          </td>
+                          <td>
+                            <input type="number" min="0" max="100" className="input-group-field-number text-center" placeholder="..." />
+                          </td>
+                          <td>
+                            <input type="number" min="0" max="100" className="input-group-field-number text-center" placeholder="..." />
+                          </td>
+                        </tr>
+                      )
                     })
                   }
                 </tbody>
@@ -225,4 +183,4 @@ const InputNilai = () => {
     </Card>
   )
 }
-export default InputNilai
+export default InputScore

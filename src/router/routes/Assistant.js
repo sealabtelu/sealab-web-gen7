@@ -9,8 +9,8 @@ const HAQuestion = lazy(() => import("../../views/pages/assistant/HomeAssignment
 const PRTModuleList = lazy(() => import("../../views/pages/assistant/PreTest/PRTModuleList"))
 const PRTQuestionList = lazy(() => import("../../views/pages/assistant/PreTest/PRTQuestionList.js"))
 const PRTQuestion = lazy(() => import("../../views/pages/assistant/PreTest/PRTQuestion"))
-const PilihGroup = lazy(() => import("../../views/pages/assistant/InputScore/PilihGroup"))
-const InputNilai = lazy(() => import("../../views/pages/assistant/InputScore/InputNilai"))
+const SelectGroup = lazy(() => import("../../views/pages/assistant/InputScore/SelectGroup"))
+const InputScore = lazy(() => import("../../views/pages/assistant/InputScore/InputScore"))
 
 const AssistantRoutes = [
     {
@@ -43,11 +43,11 @@ const AssistantRoutes = [
     },
     {
         path: "/assistant/pilih-group",
-        element: <PilihGroup />
+        element: <SelectGroup />
     },
     {
         path: "/assistant/pilih-group/input-nilai",
-        element: <InputNilai />
+        element: <InputScore />
     }
 ]
 
