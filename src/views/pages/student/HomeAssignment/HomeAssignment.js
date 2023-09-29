@@ -1,65 +1,11 @@
-import React, { useState } from 'react'; // Import React
+import React, { useState,useEffect } from 'react'; // Import React
 import { Card, CardHeader, CardTitle, Button } from "reactstrap";
 import OverlayHA from './HAOverlay';
+import { useDispatch, useSelector } from 'react-redux'
+import { getModules } from '@store/api/module';
+
 
 export default function HomeAssigment() {
-
-    const [modules, setModules] = useState([
-    {
-        id: "MODUL 1",
-        title: "Searching",
-        links: {
-        soal: "https://www.soaljurnal1.com",
-        submit: "https://www.submitjurnal1.com",
-        },
-        duedate:"Monday, 7 September 2023, 23:59"
-    },
-    {
-        id: "MODUL 2",
-        title: "Knowledge Representation",
-        links: {
-        soal: "https://www.soaljurnal2.com",
-        submit: "https://www.submitjurnal2.com",
-        },
-        duedate:"Monday, 7 September 2023, 23:59"
-    },
-    {
-        id: "MODUL 3",
-        title: "Fuzzyfikasi",
-        links: {
-        soal: "https://www.soaljurnal3.com",
-        submit: "https://www.submitjurnal3.com",
-        },
-        duedate:"Monday, 7 September 2023, 23:59"
-    },
-    {
-        id: "MODUL 4",
-        title: "Defuzzyfikasi: Mamdani",
-        links: {
-        soal: "https://www.soaljurnal4.com",
-        submit: "https://www.submitjurnal4.com",
-        },
-        duedate:"Monday, 7 September 2023, 23:59"
-    },
-    {
-        id: "MODUL 5",
-        title: "Defuzzyfikasi: Sugeno",
-        links: {
-        soal: "https://www.soaljurnal5.com",
-        submit: "https://www.submitjurnal5.com",
-        },
-        duedate:"Monday, 7 September 2023, 23:59"
-    },
-    {
-        id: "MODUL 6",
-        title: "Algoritma Genetika",
-        links: {
-        soal: "https://www.soaljurnal6.com",
-        submit: "https://www.submitjurnal6.com",
-        },
-        duedate:"Monday, 7 September 2023, 23:59"
-    },
-]);
 
     const [isOpenClicked, setIsOpenClicked] = useState(null);
 
@@ -67,29 +13,65 @@ export default function HomeAssigment() {
         setIsOpenClicked(moduleId);
     };
 
+    const dispatch = useDispatch()
+    const module = useSelector(state => state.module)
+
+    useEffect(() => {
+        dispatch(getModules())
+    }, [])
+
     return (
         <div>
-        {modules.map((module) => (
-            <div key={module.id}>
-                {isOpenClicked === module.id && (
-                    <OverlayHA
-                    moduleTitle={module.title}
-                    moduleNumber={module.id.split(' ')[1]}
-                    // linkSoal={module.links.soal}
-                    // linkSubmit={module.links.submit}
-                    duedate={module.duedate}
-                    />
-                )}
+            <Card className="card-overlay-jurnal">
+            {/* INFO */}
+            <h1>HARAP DIBACA</h1>
+                <ol type="1">
+                    <li>
+                        Tugas Pendahuluan dikerjakan sesuai dengan NIM terakhir Praktikan.<br />
+                        <b>Contoh:</b> 1103211233 [mengerjakan soal NIM Ganjil]<br />
+                        <b>Contoh:</b> 1103211234 [mengerjakan soal NIM Genap]
+                    </li>
+                    <li>
+                        Tugas Pendahuluan dikerjakan menggunakan Template Tugas Pendahuluan di word dan dikumpulkan dalam format PDF
+                    </li>
+                    <li>
+                        Jika terdapat soal yang memerlukan jawaban untuk ditulis manual maka jawaban dapat di foto/scan dan kemudian di masukan ke dalam File Tugas Pendahuluan.
+                    </li>
+                    <li>
+                        Jawaban Tugas Pendahuluan diketik secara berurutan. Soal kemudian Jawaban.
+                    </li>
+                    <li>
+                        Format penamaan file Tugas Pendahuluan sebagai berikut:<br />
+                        <b>TP_NAMA_NIM_MODUL_HARI_SHIFT&shy;_KELOMPOK</b><br />
+                        <b>Contoh: TP_MUHAMMAD HILMY AZIZ_1103190001_MODUL 1_RABU_SHIFT 2_13</b>
+                    </li>
+                    <li>
+                        Tugas Pendahuluan dikumpulkan melalui website i-Smile dengan batas pengumpulan <b>Hari Sabtu 23:59 WIB.</b>
+                    </li>
+                    <li>
+                        Seluruh informasi kebutuhan untuk Praktikum Kecerdasan Buatan dapat diakses melalui Website i-Smile.
+                    </li>
+                </ol>
+        </Card>
+        {module.modules.map((item, index) => (
+            <div key={item.id}>
+            {isOpenClicked === item.id && (
+                <OverlayHA
+                moduleTitle={item.name}
+                moduleNumber={index + 1}
+                // linkSoal={module.links.soal}
+                />
+            )}
 
-                {isOpenClicked !== module.id && (
-                    <Card className='card-student'>
-                        <CardHeader>
-                            <CardTitle>{`${module.id} - ${module.title}`}</CardTitle>
-                            <Button color="relief-primary" onClick={() => handleOpenClick(module.id)}>Open</Button>
-                        </CardHeader>
-                    </Card>
-                )}
-            </div>
+            {isOpenClicked !== item.id && (
+                <Card className='card-student'>
+                    <CardHeader>
+                        <CardTitle>Modul {index + 1} - {item.name}</CardTitle>
+                        <Button color="relief-primary" onClick={() => handleOpenClick(item.id)}>Open</Button>
+                    </CardHeader>
+                </Card>
+            )}
+        </div>
         ))}
         </div>
     );
