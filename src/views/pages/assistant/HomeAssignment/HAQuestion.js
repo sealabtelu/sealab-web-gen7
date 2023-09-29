@@ -38,6 +38,8 @@ const HAQuestion = () => {
   const navigate = useNavigate()
   const { action } = useParams()
   const homeAssignment = useSelector(state => state.homeAssignmentQuestion)
+  const {loading} = homeAssignment
+
   const {
     control,
     reset,
@@ -64,8 +66,10 @@ const HAQuestion = () => {
       question: draftToHtml(convertToRaw(question.getCurrentContent())),
       answerKey: draftToHtml(convertToRaw(answerKey.getCurrentContent()))
     }
-    dispatch(isEdit ? editQuestion(data) : addQuestion(data)).then(() => {
-      navigate('/assistant/preliminary-assignment/question-list')
+    dispatch(isEdit ? editQuestion(data) : addQuestion(data)).then(({ payload: { status } }) => {
+      if (status === 200) {
+        navigate('/assistant/preliminary-assignment/question-list')
+      }
     })
   }
 
@@ -80,7 +84,7 @@ const HAQuestion = () => {
             </div>
           </div>
           <div>
-            <Button color='relief-success' type='submit'>
+            <Button color='relief-success' type='submit' disabled={loading} >
               {action === 'edit' ? <Edit size={14} /> : <PlusSquare size={14} />}
               <span className='align-middle'> {capitalize(action)}</span>
             </Button>
