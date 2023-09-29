@@ -11,7 +11,7 @@ import { getListQuestion } from '@store/api/homeAssignmentQuestion'
 import Avatar from '@components/avatar'
 
 // ** Icons Imports
-import { Edit, Delete, HelpCircle, PlusSquare } from 'react-feather'
+import { HelpCircle } from 'react-feather'
 
 // ** Reactstrap Imports
 import { Card, CardHeader, CardTitle, CardBody, Button, Row, Col } from 'reactstrap'
