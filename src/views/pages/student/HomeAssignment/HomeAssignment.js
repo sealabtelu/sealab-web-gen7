@@ -59,7 +59,7 @@ export default function HomeAssigment() {
                 <OverlayHA
                 moduleTitle={item.name}
                 moduleNumber={index + 1}
-                // linkSoal={module.links.soal}
+                item={item}
                 />
             )}
 

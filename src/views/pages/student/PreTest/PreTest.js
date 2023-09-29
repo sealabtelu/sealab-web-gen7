@@ -59,7 +59,7 @@ export default function PreTest() {
                 <PreTestOverlay
                 moduleTitle={item.name}
                 moduleNumber={index + 1}
-                // linkSoal={module.links.soal}
+                item={item}
                 />
             )}
 
