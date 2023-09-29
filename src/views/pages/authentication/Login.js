@@ -31,7 +31,8 @@ import {
   Button,
   CardText,
   CardTitle,
-  FormFeedback
+  FormFeedback,
+  Spinner
 } from "reactstrap"
 
 // ** Illustrations Imports
@@ -41,6 +42,7 @@ import illustrationsDark from "@src/assets/images/pages/login-v2-dark.svg"
 
 // ** Styles
 import "@styles/react/pages/page-authentication.scss"
+import { useState } from 'react'
 
 const ToastContent = ({ t, name, role }) => {
   return (
@@ -76,11 +78,14 @@ const Login = () => {
     formState: { errors }
   } = useForm({ defaultValues })
 
+  const [isLoading, setIsLoading] = useState(false)
+
   const source = skin === "dark" ? illustrationsDark : illustrationsLight
 
-  const onSubmit = data => {
+  const onSubmit = async data => {
     if (Object.values(data).every(field => field.length > 0)) {
-      useJwt
+      setIsLoading(true)
+      await useJwt
         .login({ username: data.username, password: data.password })
         .then(res => {
           const data = { ...res.data.data, appToken: res.data.data.appToken }
@@ -97,6 +102,7 @@ const Login = () => {
             message: err.response.data.message
           })
         })
+      setIsLoading(false)
     } else {
       for (const key in data) {
         if (data[key].length === 0) {
@@ -149,6 +155,7 @@ const Login = () => {
                       autoFocus
                       type='text'
                       placeholder='NIM or Username SSO'
+                      disabled={isLoading}
                       // invalid={errors.username && true}
                       {...field} />
                   )}
@@ -166,19 +173,21 @@ const Login = () => {
                     <InputPasswordToggle
                       id='login-password'
                       className='input-group-merge'
+                      disabled={isLoading}
                       // invalid={errors.password && true}
                       {...field} />
                   )}
                 />
               </div>
-              <div className="form-check mb-1">
+              {/* <div className="form-check mb-1">
                 <Input type="checkbox" id="remember-me" />
                 <Label className="form-check-label" for="remember-me">
                   Remember Me
                 </Label>
-              </div>
-              <Button type='submit' color="primary" block>
-                Sign in
+              </div> */}
+              <Button className='mt-2' type='submit' color="primary" block disabled={isLoading}>
+                {isLoading && <Spinner color='white' size='sm' />}
+                <span className='ms-50'>Sign in</span>
               </Button>
             </Form>
           </Col>
