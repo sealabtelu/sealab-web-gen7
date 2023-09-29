@@ -1,7 +1,4 @@
 import { useEffect, Fragment } from 'react'
-
-import { Link } from 'react-router-dom'
-
 // ** Store & Actions
 import { useDispatch, useSelector } from 'react-redux'
 import { getQuestion } from '@store/api/preTestQuestion'
@@ -10,10 +7,13 @@ import { getQuestion } from '@store/api/preTestQuestion'
 import Avatar from '@components/avatar'
 
 // ** Icons Imports
-import { HelpCircle } from 'react-feather'
+import { HelpCircle,Upload } from 'react-feather'
 
 // ** Reactstrap Imports
-import { Card, CardHeader, CardTitle, CardBody, Button, Row, Col } from 'reactstrap'
+import { Card, CardHeader, CardTitle, CardBody, Button, Row, Col,Input } from 'reactstrap'
+
+import '@src/assets/scss/question-list.scss'
+
 
 const PRTQuestionList = () => {
   const dispatch = useDispatch()
@@ -23,6 +23,10 @@ const PRTQuestionList = () => {
   useEffect(() => {
     dispatch(getQuestion())
   }, [])
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
 
   const renderListQuestion = () => {
     if (preTest.questions?.length > 0) {
@@ -86,9 +90,9 @@ const PRTQuestionList = () => {
         </Row>
       </Card>
       {renderListQuestion()}
-      <Button color="relief-primary" className='submit-button'>
-        Submit
-      </Button>
+        <Button color="flat-dark" className='submit-button'>
+          Submit File <Upload size={12} style={{ marginLeft: '5px', color: 'black'}} />
+        </Button>
     </Fragment>
   )
 }
