@@ -95,12 +95,20 @@ const Login = () => {
             <ToastContent t={t} role={data.role} name={data.name || data.username || 'Unknown'} />
           ))
         })
-        .catch(err => {
-          console.log(err)
-          setError('username', {
-            type: 'manual',
-            message: err.response.data.message
-          })
+        .catch(({ response: { data, status } }) => {
+          if (status === 404) {
+            setError('username', {
+              type: 'manual',
+              message: data.message
+            })
+          } else if (status === 401) {
+            setError('password', {
+              type: 'manual',
+              message: data.message
+            })
+          } else {
+            console.log(err)
+          }
         })
       setIsLoading(false)
     } else {
@@ -156,7 +164,7 @@ const Login = () => {
                       type='text'
                       placeholder='NIM or Username SSO'
                       disabled={isLoading}
-                      // invalid={errors.username && true}
+                      invalid={errors.username && true}
                       {...field} />
                   )}
                 />
@@ -174,10 +182,11 @@ const Login = () => {
                       id='login-password'
                       className='input-group-merge'
                       disabled={isLoading}
-                      // invalid={errors.password && true}
+                      invalid={errors.password && true}
                       {...field} />
                   )}
                 />
+                {errors.password && <FormFeedback>{errors.password.message}</FormFeedback>}
               </div>
               {/* <div className="form-check mb-1">
                 <Input type="checkbox" id="remember-me" />
@@ -186,7 +195,7 @@ const Login = () => {
                 </Label>
               </div> */}
               <Button className='mt-2' type='submit' color="primary" block disabled={isLoading}>
-                {isLoading && <Spinner color='white' size='sm' />}
+                {isLoading && <Spinner color='light' size='sm' />}
                 <span className='ms-50'>Sign in</span>
               </Button>
             </Form>
