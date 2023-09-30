@@ -22,6 +22,9 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 .card-overlay-jurnal {
 	padding: 10px;
 	margin-bottom: 1rem;
+	li {
+		line-height: 1.5; /* Set line height for better readability */
+	}
 
 	.title-overlay {
 		color: #4dd7be;
@@ -34,11 +37,6 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 		font-weight: bold;
 		margin: 10px;
 		text-align: center;
-	}
-
-	hr {
-		border: 1px solid grey;
-		opacity: 0.5;
 	}
 
 	/* SUBMIT */
