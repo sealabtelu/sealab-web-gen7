@@ -38,7 +38,7 @@ const AssistantRoutes = [
         element: <PRTQuestionList />
     },
     {
-        path: "/assistant/pre-test/question",
+        path: "/assistant/pre-test/question/:action",
         element: <PRTQuestion />
     },
     {

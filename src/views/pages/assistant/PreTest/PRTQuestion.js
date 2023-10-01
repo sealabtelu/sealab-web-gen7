@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 
 // ** Styles
 import '@styles/react/libs/editor/editor.scss'
@@ -12,42 +12,90 @@ import { Edit, HelpCircle, PlusSquare } from 'react-feather'
 
 // ** Third Party Components
 import { useForm, Controller } from 'react-hook-form'
-import { EditorState } from 'draft-js'
+import { EditorState, ContentState, convertToRaw } from 'draft-js'
 import { Editor } from 'react-draft-wysiwyg'
 import draftToHtml from 'draftjs-to-html'
+import htmlToDraft from 'html-to-draftjs'
 
 // ** Store & Actions
-import { useDispatch } from 'react-redux'
-import { addQuestion } from '@store/api/preTestQuestion'
+import { useDispatch, useSelector } from 'react-redux'
+import { addQuestion, editQuestion, clearSelected } from '@store/api/preTestQuestion'
+
+// ** Utils
+import { capitalize, isObjEmpty } from "@utils"
 
 // ** Reactstrap Imports
-import { Card, CardHeader, CardTitle, CardBody, Button, Label, Form, Row, Col, Input } from 'reactstrap'
+import { Card, CardHeader, CardTitle, CardBody, Button, Label, Form, Row, Col, Input, Spinner } from 'reactstrap'
+import { useEffect } from 'react'
 
 const defaultValues = {
-  isTrue: null,
+  isTrue: undefined,
   question: EditorState.createEmpty(),
-  options: ['', '', '', '']
+  options: [
+    {
+      id: null,
+      option: ''
+    },
+    {
+      id: null,
+      option: ''
+    },
+    {
+      id: null,
+      option: ''
+    },
+    {
+      id: null,
+      option: ''
+    }
+  ]
 }
 
 const PRTQuestion = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { action } = useParams()
+  const {
+    loading,
+    selectedQuestion
+  } = useSelector(state => state.preTestQuestion)
 
   const {
     control,
+    reset,
     handleSubmit,
+    getValues,
     formState: { errors }
   } = useForm({ defaultValues })
 
-  const onSubmit = data => {
-    dispatch(addQuestion({
-      question: draftToHtml(data.question),
-      options: data.options.map((item, index) => ({
-        option: item,
-        isTrue: parseInt(data.isTrue) === index
+  useEffect(() => {
+    if (action === 'edit' && !isObjEmpty(selectedQuestion)) {
+      const { question, options } = selectedQuestion
+      reset({
+        isTrue: options.findIndex(item => item.isTrue).toString(),
+        question: EditorState.createWithContent(ContentState.createFromBlockArray(htmlToDraft(question))),
+        options
+      })
+    } else if (action === 'add') {
+      dispatch(clearSelected())
+    } else {
+      navigate('/error')
+    }
+  }, [])
+
+  const onSubmit = ({ question, options, isTrue }) => {
+    const isEdit = action === 'edit' && !isObjEmpty(selectedQuestion)
+    const data = {
+      question: draftToHtml(convertToRaw(question.getCurrentContent())),
+      options: options.map((item, index) => ({
+        ...item,
+        isTrue: isTrue === index.toString()
       }))
-    })).then(() => {
-      navigate('/assistant/pre-test/question-list')
+    }
+    dispatch(isEdit ? editQuestion(data) : addQuestion(data)).then(({ payload: { status } }) => {
+      if (status === 200) {
+        navigate('/assistant/pre-test/question-list')
+      }
     })
   }
 
@@ -62,9 +110,9 @@ const PRTQuestion = () => {
             </div>
           </div>
           <div>
-            <Button color='relief-success' type='submit'>
-              <Edit size={14} />
-              <span className='align-middle'> Add</span>
+            <Button color='relief-success' type='submit' disabled={loading} >
+              {loading ? <Spinner color='primary' type='grow' size='sm' /> : action === 'edit' ? <Edit size={14} /> : <PlusSquare size={14} />}
+              <span className='align-middle'> {capitalize(action)}</span>
             </Button>
           </div>
         </CardHeader>
@@ -80,7 +128,9 @@ const PRTQuestion = () => {
                 <Editor
                   id='field-question'
                   placeholder='Enter the question here...'
-                  {...field} />
+                  editorState={field.value}
+                  onEditorStateChange={field.onChange}
+                />
               )}
             />
           </div>
@@ -89,7 +139,7 @@ const PRTQuestion = () => {
               <h5>Answer Key</h5>
             </Label>
             <Row>
-              {defaultValues.options.map((item, index) => (
+              {getValues().options.map((item, index) => (
                 <Col md='6' sx='12' className='mb-2' key={index}>
                   <div className='form-check'>
                     <Controller
@@ -97,11 +147,20 @@ const PRTQuestion = () => {
                       control={control}
                       rules={{ required: 'Choose the goddamn right choice dude!' }}
                       render={({ field }) => (
-                        <Input type='radio' {...field} value={index} />
+                        <Input type='radio' {...field} value={index} checked={field.value === index.toString()} />
                       )}
                     />
+                    {item.id && (
+                      <Controller
+                        name={`options[${index}].id`}
+                        control={control}
+                        render={({ field }) => (
+                          <Input type='hidden' {...field} />
+                        )}
+                      />
+                    )}
                     <Controller
-                      name={`options[${index}]`}
+                      name={`options[${index}].option`}
                       control={control}
                       render={({ field }) => (
                         <Input type='textarea' rows='2' placeholder={`Option ${index + 1}`} {...field} />

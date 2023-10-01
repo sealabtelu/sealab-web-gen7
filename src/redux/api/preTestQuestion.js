@@ -2,11 +2,11 @@
 import axios from 'axios'
 
 // ** Redux Imports
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk, isAnyOf } from '@reduxjs/toolkit'
 
 const endpoint = '/pre-test-question'
 
-export const getQuestion = createAsyncThunk('question/getQuestion', async (_, { getState }) => {
+export const getListQuestion = createAsyncThunk('question/getListQuestion', async (_, { getState }) => {
   return await axios.get(`${endpoint}/module/${getState().module.selectedModule.id}`).then(res => {
     return res.data.data
   })
@@ -19,6 +19,15 @@ export const addQuestion = createAsyncThunk('question/addQuestion', async (param
     Type: "Text"
   }
   return await axios.post(endpoint, data)
+})
+
+export const editQuestion = createAsyncThunk('question/editQuestion', async (param, { getState }) => {
+  const data = {
+    ...param,
+    idModule: getState().module.selectedModule.id,
+    id: getState().preTestQuestion.selectedQuestion.id
+  }
+  return await axios.put(endpoint, data)
 })
 
 export const deleteQuestion = createAsyncThunk('question/deleteQuestion', async (id) => {
@@ -34,21 +43,34 @@ export const preTestQuestionSlice = createSlice({
   name: 'question',
   initialState: {
     questions: [],
+    loading: false,
     selectedQuestion: initialSelectedQuestion()
   },
   reducers: {
     selectQuestion: (state, action) => {
       state.selectedQuestion = action.payload
       localStorage.setItem('selectedPRTQ', JSON.stringify(action.payload))
+    },
+    clearSelected: (state) => {
+      state.selectedQuestion = {}
+      localStorage.removeItem('selectedPRTQ')
     }
   },
   extraReducers: builder => {
-    builder.addCase(getQuestion.fulfilled, (state, action) => {
-      state.questions = action.payload
-    })
+    builder
+      .addCase(getListQuestion.fulfilled, (state, action) => {
+        state.questions = action.payload
+        state.loading = false
+      })
+      .addMatcher(isAnyOf(addQuestion.fulfilled, editQuestion.fulfilled, addQuestion.rejected, editQuestion.rejected), (state) => {
+        state.loading = false
+      })
+      .addMatcher(isAnyOf(addQuestion.pending, editQuestion.pending), (state) => {
+        state.loading = true
+      })
   }
 })
 
-export const { selectQuestion } = preTestQuestionSlice.actions
+export const { selectQuestion, clearSelected } = preTestQuestionSlice.actions
 
 export default preTestQuestionSlice.reducer
