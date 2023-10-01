@@ -27,7 +27,7 @@ import { addQuestion, editQuestion, clearSelected } from '@store/api/homeAssignm
 import { capitalize, isObjEmpty } from "@utils"
 
 // ** Reactstrap Imports
-import { Card, CardHeader, CardTitle, CardBody, Button, Label, Form } from 'reactstrap'
+import { Card, CardHeader, CardTitle, CardBody, Button, Label, Form, Spinner } from 'reactstrap'
 const defaultValues = {
   question: EditorState.createEmpty(),
   answerKey: EditorState.createEmpty()
@@ -37,8 +37,10 @@ const HAQuestion = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { action } = useParams()
-  const homeAssignment = useSelector(state => state.homeAssignmentQuestion)
-  const {loading} = homeAssignment
+  const {
+    loading,
+    selectedQuestion
+  } = useSelector(state => state.homeAssignmentQuestion)
 
   const {
     control,
@@ -47,8 +49,8 @@ const HAQuestion = () => {
   } = useForm({ defaultValues })
 
   useEffect(() => {
-    if (action === 'edit' && !isObjEmpty(homeAssignment.selectedQuestion)) {
-      const { question, answerKey } = homeAssignment.selectedQuestion
+    if (action === 'edit' && !isObjEmpty(selectedQuestion)) {
+      const { question, answerKey } = selectedQuestion
       reset({
         question: EditorState.createWithContent(ContentState.createFromBlockArray(htmlToDraft(question))),
         answerKey: EditorState.createWithContent(ContentState.createFromBlockArray(htmlToDraft(answerKey)))
@@ -61,7 +63,7 @@ const HAQuestion = () => {
   }, [])
 
   const onSubmit = ({ question, answerKey }) => {
-    const isEdit = action === 'edit' && !isObjEmpty(homeAssignment.selectedQuestion)
+    const isEdit = action === 'edit' && !isObjEmpty(selectedQuestion)
     const data = {
       question: draftToHtml(convertToRaw(question.getCurrentContent())),
       answerKey: draftToHtml(convertToRaw(answerKey.getCurrentContent()))
@@ -85,7 +87,7 @@ const HAQuestion = () => {
           </div>
           <div>
             <Button color='relief-success' type='submit' disabled={loading} >
-              {action === 'edit' ? <Edit size={14} /> : <PlusSquare size={14} />}
+            {loading ? <Spinner color='primary' type='grow' size='sm' /> : action === 'edit' ? <Edit size={14} /> : <PlusSquare size={14} />}
               <span className='align-middle'> {capitalize(action)}</span>
             </Button>
           </div>
