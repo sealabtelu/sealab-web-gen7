@@ -8,7 +8,7 @@ import Avatar from '@components/avatar'
 import * as Icon from 'react-feather'
 
 // ** Reactstrap Imports
-import { Card, CardHeader, CardTitle, CardBody, Button } from 'reactstrap'
+import { Card, CardHeader, CardTitle, CardBody, Button, Input, Label } from 'reactstrap'
 
 // ** Store & Actions
 import { useDispatch, useSelector } from 'react-redux'
@@ -39,7 +39,19 @@ const HAModuleList = () => {
                 <small>Total Question: 0</small>
               </div>
             </div>
-            <Button color='relief-primary' tag={Link} to='/assistant/preliminary-assignment/question-list' onClick={() => dispatch(selectModule(item))}>View</Button>
+            <div style={{display: "flex", flexDirection: "row", alignItems: 'center'}}>
+              
+              {/* Kalo butuh label Closed/Open*/}
+              {/* <Label for='switch-success' className='form-check-label'>
+                Switch
+              </Label> */}
+              <div className='form-switch form-check-success m-50'>
+                <Input type='switch' id='switch-success' name='success' defaultChecked/>
+              </div>
+
+
+              <Button color='relief-primary' tag={Link} to='/assistant/preliminary-assignment/question-list' onClick={() => dispatch(selectModule(item))}>View</Button>
+            </div>
           </div>
         )
       })
