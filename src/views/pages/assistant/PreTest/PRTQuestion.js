@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 // ** Styles
 import '@styles/react/libs/editor/editor.scss'
@@ -33,19 +33,15 @@ const defaultValues = {
   question: EditorState.createEmpty(),
   options: [
     {
-      id: null,
       option: ''
     },
     {
-      id: null,
       option: ''
     },
     {
-      id: null,
       option: ''
     },
     {
-      id: null,
       option: ''
     }
   ]
