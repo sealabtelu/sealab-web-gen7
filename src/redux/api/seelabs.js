@@ -21,7 +21,7 @@ export const getGroupDetail = createAsyncThunk('seelabs/getGroupDetail', async (
 export const inputScore = createAsyncThunk('seelabs/inputScore', async (param, { getState }) => {
   const data = {
     ...getState().seelabs.currentDSG,
-    date: param.date[0],
+    date: new Date(param.date[0].getTime() - (param.date[0].getTimezoneOffset() * 60000)),
     module: param.module.value,
     scores: param.scores.map(item => ({
       ...item,

@@ -167,7 +167,7 @@ const InputScore = () => {
                       <Flatpickr
                         className='form-control'
                         disabled={isLoading || isSubmitLoading}
-                        // options={{ dateFormat: 'Y-m-d', enableTime: false }}
+                        // options={{ enableTime: false }}
                         {...field} />
                     )}
                   />
