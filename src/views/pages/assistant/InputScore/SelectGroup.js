@@ -12,7 +12,7 @@ import { selectThemeColors, isObjEmpty } from '@utils'
 // ** Reactstrap Imports
 import { Card, CardHeader, CardTitle, CardBody, Form, Row, Col, Label, Button, Table, Spinner } from 'reactstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { getListGroup, getGroupDetail } from '@store/api/seelabs'
+import { getGroupList, getGroupDetail } from '@store/api/seelabs'
 
 const SelectGroup = () => {
   const dispatch = useDispatch()
@@ -34,7 +34,7 @@ const SelectGroup = () => {
   } = useForm({ defaultValues })
 
   const onSubmit = ({ day, shift }) => {
-    dispatch(getListGroup(
+    dispatch(getGroupList(
       {
         day: day.value,
         shift: shift.value
@@ -105,12 +105,12 @@ const SelectGroup = () => {
                   return item.names.map((name, index) => {
                     return (
                       <tr key={index}>
-                        {index === 0 && <td rowSpan={item.names.length} scope="row">{item.id_group}</td>}
+                        {index === 0 && <td rowSpan={item.names.length} scope="row">{item.idGroup}</td>}
                         <td>{name}</td>
                         {index === 0 &&
                           <td rowSpan={item.names.length} scope="row">
                             <NavLink to="/assistant/pilih-group/input-nilai">
-                              <Button.Ripple color='primary' disabled={isLoading} onClick={() => dispatch(getGroupDetail(item.id_group))}>Input</Button.Ripple>
+                              <Button.Ripple color='primary' disabled={isLoading} onClick={() => dispatch(getGroupDetail(item.idGroup))}>Input</Button.Ripple>
                             </NavLink>
                           </td>
                         }

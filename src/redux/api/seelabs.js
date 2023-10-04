@@ -6,18 +6,34 @@ import { createSlice, createAsyncThunk, isAnyOf } from '@reduxjs/toolkit'
 
 const endpoint = '/seelabs'
 
-export const getListGroup = createAsyncThunk('seelabs/getListGroup', async (param) => {
-  return await axios.post(`${endpoint}/score/list-group`, param).then(res => {
+export const getGroupList = createAsyncThunk('seelabs/getGroupList', async (param) => {
+  return await axios.post(`${endpoint}/group/list`, param).then(res => {
     return res.data.data
   })
 })
 
 export const getGroupDetail = createAsyncThunk('seelabs/getGroupDetail', async (group, { getState }) => {
   const data = {
-    ...getState().seelabs.currentDayShift,
+    ...getState().seelabs.currentDSG,
     group
   }
-  return await axios.post(`${endpoint}/score/list-group`, data).then(res => {
+  return await axios.post(`${endpoint}/group/detail`, data).then(res => {
+    return res.data.data
+  })
+})
+
+export const inputScore = createAsyncThunk('seelabs/inputScore', async (param, { getState }) => {
+  console.log(getState().seelabs)
+  const data = {
+    ...getState().seelabs.currentDSG,
+    ...param,
+    module: param.module.value,
+    scores: param.scores.map(item => ({
+      ...item,
+      status: item.d !== 0
+    }))
+  }
+  return await axios.post(`${endpoint}/score`, data).then(res => {
     return res.data.data
   })
 })
@@ -27,13 +43,13 @@ const initialGroups = () => {
   return item ? JSON.parse(item) : {}
 }
 
-const initialSelectedGroup = () => {
-  const item = window.localStorage.getItem('seelabsSelectedGroups')
+const initialGroupDetail = () => {
+  const item = window.localStorage.getItem('seelabsGroupDetail')
   return item ? JSON.parse(item) : {}
 }
 
-const initialCurrentDayShift = () => {
-  const item = window.localStorage.getItem('seelabsCurrentDayShift')
+const initialCurrentDSG = () => {
+  const item = window.localStorage.getItem('seelabsCurrentDSG')
   return item ? JSON.parse(item) : {}
 }
 
@@ -41,8 +57,8 @@ export const moduleSlice = createSlice({
   name: 'seelabs',
   initialState: {
     groups: initialGroups(),
-    selectedGroup: initialSelectedGroup(),
-    currentDayShift: initialCurrentDayShift(),
+    groupDetail: initialGroupDetail(),
+    currentDSG: initialCurrentDSG(),
     isLoading: false,
     dayOptions: [
       { value: 1, label: 'Senin' },
@@ -69,26 +85,34 @@ export const moduleSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(getListGroup.fulfilled, (state, action) => {
+      .addCase(getGroupList.fulfilled, (state, action) => {
         state.groups = action.payload
-        state.currentDayShift = action.meta.arg
-        localStorage.setItem('seelabsCurrentDayShift', JSON.stringify(action.meta.arg))
+        state.currentDSG = action.meta.arg
+        localStorage.setItem('seelabsGroups', JSON.stringify(action.payload))
+        localStorage.setItem('seelabsCurrentDSG', JSON.stringify(action.meta.arg))
       })
       .addCase(getGroupDetail.fulfilled, (state, action) => {
-        state.currentDayShift = {}
-        state.selectedGroup = action.payload
-        localStorage.removeItem('currentDayShift')
-        localStorage.setItem('seelabsSelectedGroups', JSON.stringify(action.payload))
+        const data = {
+          ...state.currentDSG,
+          group: action.meta.arg
+        }
+        state.groupDetail = action.payload
+        state.groups = {}
+        state.currentDSG = data
+        console.log(action)
+        localStorage.setItem('seelabsGroupDetail', JSON.stringify(action.payload))
+        localStorage.setItem('seelabsCurrentDSG', JSON.stringify(data))
+        localStorage.removeItem('seelabsGroups')
       })
-      .addMatcher(isAnyOf(getListGroup.pending, getGroupDetail.pending), (state) => {
+      .addMatcher(isAnyOf(getGroupList.pending, getGroupDetail.pending), (state) => {
         state.isLoading = true
       })
-      .addMatcher(isAnyOf(getListGroup.fulfilled, getListGroup.rejected, getGroupDetail.fulfilled, getGroupDetail.rejected), (state) => {
+      .addMatcher(isAnyOf(getGroupList.rejected, getGroupDetail.rejected, getGroupList.fulfilled, getGroupDetail.fulfilled), (state) => {
         state.isLoading = false
       })
   }
 })
 
-export const { selectGroup } = moduleSlice.actions
+export const { } = moduleSlice.actions
 
 export default moduleSlice.reducer
