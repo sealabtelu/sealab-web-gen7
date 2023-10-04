@@ -42,11 +42,11 @@ const AssistantRoutes = [
         element: <PRTQuestion />
     },
     {
-        path: "/assistant/pilih-group",
+        path: "/assistant/select-group",
         element: <SelectGroup />
     },
     {
-        path: "/assistant/pilih-group/input-nilai",
+        path: "/assistant/select-group/input-score",
         element: <InputScore />
     }
 ]
@@ -80,7 +80,7 @@ export const AssistantMenu = [
         id: "inputScore",
         title: "Input Score",
         icon: <Clipboard size={20} />,
-        navLink: "/assistant/pilih-group"
+        navLink: "/assistant/select-group"
     },
     {
         id: "bap",

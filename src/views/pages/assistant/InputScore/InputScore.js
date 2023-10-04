@@ -11,6 +11,7 @@ import Flatpickr from 'react-flatpickr'
 // ** Utils
 import { selectThemeColors } from '@utils'
 import { useForm, Controller } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
 // ** Reactstrap Imports
 import {
@@ -23,7 +24,8 @@ import {
   Button,
   Table,
   Form,
-  Input
+  Input,
+  Spinner
 } from 'reactstrap'
 
 import { useDispatch, useSelector } from 'react-redux'
@@ -42,32 +44,22 @@ const PdfURL = [
 
 const InputScore = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  const { groupDetail, moduleOptions } = useSelector(state => state.seelabs)
-
-  const defaultValues = {
-
-    module: moduleOptions[0],
-    date: new Date(),
-    scores: groupDetail.map((item) => {
-      return {
-        uid: item.uid,
-        ta: 0,
-        tp: 0,
-        d: 0,
-        i1: 0,
-        i2: 0
-      }
-    })
-  }
+  const {
+    groupDetail,
+    moduleOptions,
+    isLoading,
+    isSubmitLoading
+  } = useSelector(state => state.seelabs)
 
   const {
     control,
-    getValues,
     handleSubmit
-  } = useForm({ defaultValues })
+  } = useForm()
 
   const [counter, setCounter] = useState(0)
+
   //increase counter
   const increase = () => {
     if (counter < PdfURL.length - 1) {
@@ -82,13 +74,12 @@ const InputScore = () => {
     }
   }
 
-  // //reset counter 
-  // const reset = () =>{
-  //     setCounter(0)
-  // }
-
   const onSubmit = (data) => {
-    dispatch(inputScore(data))
+    dispatch(inputScore(data)).then(({ payload: { status } }) => {
+      if (status === 200) {
+        navigate('/assistant/select-group')
+      }
+    })
   }
 
   return (
@@ -132,7 +123,7 @@ const InputScore = () => {
             {/* PDF */}
             <Row>
               {/* { counter &&  */}
-              <embed id="PdfContainer" src={PdfURL[counter].url} type="application/pdf"></embed>
+              <embed className='PdfContainer' src={PdfURL[counter].url} type="application/pdf"></embed>
               {/* } */}
             </Row>
           </Col>
@@ -144,10 +135,11 @@ const InputScore = () => {
               <Row className='row-input-score'>
                 {/* PILIH MODUL FIELD */}
                 <Col className='mb-1' md='4' sm='12'>
-                  <Label className='form-label'>Pilih Modul</Label>
+                  <Label className='form-label'>Select Module</Label>
                   <Controller
                     name='module'
                     control={control}
+                    defaultValue={moduleOptions[0]}
                     render={({ field }) => (
                       <Select
                         theme={selectThemeColors}
@@ -156,6 +148,7 @@ const InputScore = () => {
                         name='clear'
                         options={moduleOptions}
                         isClearable
+                        disabled={isLoading || isSubmitLoading}
                         {...field}
                       />
                     )}
@@ -164,147 +157,153 @@ const InputScore = () => {
                 {/* DATE PICKER FIELD */}
                 <Col className='mb-1' md='4' sm='12'>
                   <Label className='form-label' for='default-picker'>
-                    Default
+                    Date
                   </Label>
                   <Controller
                     name='date'
                     control={control}
+                    defaultValue={[new Date()]}
                     render={({ field }) => (
-                      <Flatpickr className='form-control'{...field} />
+                      <Flatpickr
+                        className='form-control'
+                        disabled={isLoading || isSubmitLoading}
+                        // options={{ dateFormat: 'Y-m-d', enableTime: false }}
+                        {...field} />
                     )}
                   />
-                  {/* <PickerDefault /> */}
-                </Col>
-                {/* FIND BUTTON */}
-                <Col className='mb-1' md='4' sm='12'>
-                  <Button.Ripple color='primary'>Find</Button.Ripple>
                 </Col>
               </Row>
 
-              {/* TABEL */}
-              {console.log(getValues())}
-              <Row>
-                <Table responsive>
-                  <thead>
-                    <tr>
-                      {/* <th>Group</th> */}
-                      <th>Name</th>
-                      <th>TA</th>
-                      <th>TP</th>
-                      <th>D</th>
-                      <th>I1</th>
-                      <th>I2</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {
-                      groupDetail.map((item, index) => {
-                        return (
-                          <tr key={index}>
-                            {/* {i === 0 && <td rowSpan={groupDetail.length} scope="row">32</td>} */}
-                            <td>
-                              {item.name}
-                              <Controller
-                                name={`scores[${index}].uid`}
-                                control={control}
-                                render={({ field }) => (
-                                  <Input type='hidden' {...field} />
-                                )}
-                              />
-                            </td>
-                            <td>
-                              <Controller
-                                name={`scores[${index}].ta`}
-                                control={control}
-                                render={({ field }) => (
-                                  <Input
-                                    type="number"
-                                    min="0"
-                                    max="100"
-                                    className="input-group-field-number text-center"
-                                    placeholder="..."
-                                    {...field} />
-                                )}
-                              />
-                            </td>
-                            <td>
-                              <Controller
-                                name={`scores[${index}].tp`}
-                                control={control}
-                                render={({ field }) => (
-                                  <Input
-                                    type="number"
-                                    min="0"
-                                    max="100"
-                                    className="input-group-field-number text-center"
-                                    placeholder="..."
-                                    {...field} />
-                                )}
-                              />
-                            </td>
-                            <td>
-                              <Controller
-                                name={`scores[${index}].d`}
-                                control={control}
-                                render={({ field }) => (
-                                  <Input
-                                    type="number"
-                                    min="0"
-                                    max="100"
-                                    className="input-group-field-number text-center"
-                                    placeholder="..."
-                                    {...field} />
-                                )}
-                              />
-                            </td>
-                            <td>
-                              <Controller
-                                name={`scores[${index}].i2`}
-                                control={control}
-                                render={({ field }) => (
-                                  <Input
-                                    type="number"
-                                    min="0"
-                                    max="100"
-                                    className="input-group-field-number text-center"
-                                    placeholder="..."
-                                    {...field} />
-                                )}
-                              />
-                            </td>
-                            <td>
-                              <Controller
-                                name={`scores[${index}].i1`}
-                                control={control}
-                                render={({ field }) => (
-                                  <Input
-                                    type="number"
-                                    min="0"
-                                    max="100"
-                                    className="input-group-field-number text-center"
-                                    placeholder="..."
-                                    {...field} />
-                                )}
-                              />
-                            </td>
-                          </tr>
-                        )
-                      })
-                    }
-                  </tbody>
-                </Table>
-              </Row>
+              {isLoading ? (
+                <div className='d-flex justify-content-center my-1'>
+                  <Spinner />
+                </div>
+              ) : (
+                <Row>
+                  <Table responsive>
+                    <thead>
+                      <tr>
+                        {/* <th>Group</th> */}
+                        <th>Name</th>
+                        <th>TA</th>
+                        <th>TP</th>
+                        <th>D</th>
+                        <th>I1</th>
+                        <th>I2</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {
+                        groupDetail.map((item, index) => {
+                          return (
+                            <tr key={index}>
+                              {/* {i === 0 && <td rowSpan={groupDetail.length} scope="row">32</td>} */}
+                              <td>
+                                {item.name}
+                                <Controller
+                                  name={`scores[${index}].uid`}
+                                  control={control}
+                                  defaultValue={item.uid}
+                                  render={({ field }) => (
+                                    <Input type='hidden' {...field} />
+                                  )}
+                                />
+                              </td>
+                              <td>
+                                <Controller
+                                  name={`scores[${index}].ta`}
+                                  control={control}
+                                  defaultValue={0}
+                                  render={({ field }) => (
+                                    <Input
+                                      type="number"
+                                      min="0" max="100"
+                                      className="input-group-field-number text-center"
+                                      placeholder="..."
+                                      disabled={isLoading || isSubmitLoading}
+                                      {...field} />
+                                  )}
+                                />
+                              </td>
+                              <td>
+                                <Controller
+                                  name={`scores[${index}].tp`}
+                                  control={control}
+                                  defaultValue={0}
+                                  render={({ field }) => (
+                                    <Input
+                                      type="number"
+                                      min="0" max="100"
+                                      className="input-group-field-number text-center"
+                                      placeholder="..."
+                                      disabled={isLoading || isSubmitLoading}
+                                      {...field} />
+                                  )}
+                                />
+                              </td>
+                              <td>
+                                <Controller
+                                  name={`scores[${index}].d`}
+                                  control={control}
+                                  defaultValue={0}
+                                  render={({ field }) => (
+                                    <Input
+                                      type="number"
+                                      min="0" max="100"
+                                      className="input-group-field-number text-center"
+                                      placeholder="..."
+                                      disabled={isLoading || isSubmitLoading}
+                                      {...field} />
+                                  )}
+                                />
+                              </td>
+                              <td>
+                                <Controller
+                                  name={`scores[${index}].i2`}
+                                  control={control}
+                                  defaultValue={0}
+                                  render={({ field }) => (
+                                    <Input
+                                      type="number"
+                                      min="0" max="100"
+                                      className="input-group-field-number text-center"
+                                      placeholder="..."
+                                      disabled={isLoading || isSubmitLoading}
+                                      {...field} />
+                                  )}
+                                />
+                              </td>
+                              <td>
+                                <Controller
+                                  name={`scores[${index}].i1`}
+                                  control={control}
+                                  defaultValue={0}
+                                  render={({ field }) => (
+                                    <Input
+                                      type="number"
+                                      min="0" max="100"
+                                      className="input-group-field-number text-center"
+                                      placeholder="..."
+                                      disabled={isLoading || isSubmitLoading}
+                                      {...field} />
+                                  )}
+                                />
+                              </td>
+                            </tr>
+                          )
+                        })
+                      }
+                    </tbody>
+                  </Table>
+                </Row>
+              )}
 
               {/* SUBMIT */}
               <Row className="mt-2 gapx-1">
-                {/* SUBMIT BUTTON*/}
-                {/* <div className='form-check form-check-inline'>
-                  <Input type='checkbox' id='basic-cb-checked' />
-                  <Label for='basic-cb-checked' className='form-check-label'>
-                    Data input sudah benar
-                  </Label>
-                </div> */}
-                <Button.Ripple color='primary' type='submit'>Submit</Button.Ripple>
+                <Button.Ripple color='primary' type='submit' disabled={isLoading || isSubmitLoading}>
+                  {isSubmitLoading && <Spinner color='light' size='sm' />}
+                  <span className='align-middle'> Submit</span>
+                </Button.Ripple>
               </Row>
             </Form>
           </Col>

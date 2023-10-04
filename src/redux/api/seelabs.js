@@ -12,30 +12,23 @@ export const getGroupList = createAsyncThunk('seelabs/getGroupList', async (para
   })
 })
 
-export const getGroupDetail = createAsyncThunk('seelabs/getGroupDetail', async (group, { getState }) => {
-  const data = {
-    ...getState().seelabs.currentDSG,
-    group
-  }
-  return await axios.post(`${endpoint}/group/detail`, data).then(res => {
+export const getGroupDetail = createAsyncThunk('seelabs/getGroupDetail', async (param) => {
+  return await axios.post(`${endpoint}/group/detail`, param).then(res => {
     return res.data.data
   })
 })
 
 export const inputScore = createAsyncThunk('seelabs/inputScore', async (param, { getState }) => {
-  console.log(getState().seelabs)
   const data = {
     ...getState().seelabs.currentDSG,
-    ...param,
+    date: param.date[0],
     module: param.module.value,
     scores: param.scores.map(item => ({
       ...item,
       status: item.d !== 0
     }))
   }
-  return await axios.post(`${endpoint}/score`, data).then(res => {
-    return res.data.data
-  })
+  return await axios.post(`${endpoint}/score`, data)
 })
 
 const initialGroups = () => {
@@ -60,6 +53,7 @@ export const moduleSlice = createSlice({
     groupDetail: initialGroupDetail(),
     currentDSG: initialCurrentDSG(),
     isLoading: false,
+    isSubmitLoading: false,
     dayOptions: [
       { value: 1, label: 'Senin' },
       { value: 2, label: 'Selasa' },
@@ -92,22 +86,24 @@ export const moduleSlice = createSlice({
         localStorage.setItem('seelabsCurrentDSG', JSON.stringify(action.meta.arg))
       })
       .addCase(getGroupDetail.fulfilled, (state, action) => {
-        const data = {
-          ...state.currentDSG,
-          group: action.meta.arg
-        }
         state.groupDetail = action.payload
+        state.currentDSG = action.meta.arg
         state.groups = {}
-        state.currentDSG = data
-        console.log(action)
         localStorage.setItem('seelabsGroupDetail', JSON.stringify(action.payload))
-        localStorage.setItem('seelabsCurrentDSG', JSON.stringify(data))
+        localStorage.setItem('seelabsCurrentDSG', JSON.stringify(action.meta.arg))
         localStorage.removeItem('seelabsGroups')
+      })
+      .addCase(inputScore.pending, (state) => {
+        state.isSubmitLoading = true
       })
       .addMatcher(isAnyOf(getGroupList.pending, getGroupDetail.pending), (state) => {
         state.isLoading = true
       })
-      .addMatcher(isAnyOf(getGroupList.rejected, getGroupDetail.rejected, getGroupList.fulfilled, getGroupDetail.fulfilled), (state) => {
+      .addMatcher(isAnyOf(
+        getGroupList.rejected, getGroupDetail.rejected, inputScore.rejected,
+        getGroupList.fulfilled, getGroupDetail.fulfilled, inputScore.fulfilled
+      ), (state) => {
+        state.isSubmitLoading = false
         state.isLoading = false
       })
   }

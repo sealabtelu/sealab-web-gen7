@@ -21,6 +21,7 @@ const SelectGroup = () => {
     groups,
     dayOptions,
     shiftOptions,
+    currentDSG,
     isLoading } = useSelector(state => state.seelabs)
 
   const defaultValues = {
@@ -45,7 +46,7 @@ const SelectGroup = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'>Pilih Group</CardTitle>
+        <CardTitle tag='h4'>Select Group</CardTitle>
       </CardHeader>
 
       <CardBody>
@@ -63,6 +64,7 @@ const SelectGroup = () => {
                     classNamePrefix='select'
                     options={dayOptions}
                     isClearable
+                    disabled={isLoading}
                     {...field}
                   />
                 )}
@@ -80,6 +82,7 @@ const SelectGroup = () => {
                     classNamePrefix='select'
                     options={shiftOptions}
                     isClearable
+                    disabled={isLoading}
                     {...field}
                   />
                 )}
@@ -109,8 +112,14 @@ const SelectGroup = () => {
                         <td>{name}</td>
                         {index === 0 &&
                           <td rowSpan={item.names.length} scope="row">
-                            <NavLink to="/assistant/pilih-group/input-nilai">
-                              <Button.Ripple color='primary' disabled={isLoading} onClick={() => dispatch(getGroupDetail(item.idGroup))}>Input</Button.Ripple>
+                            <NavLink to="/assistant/select-group/input-score">
+                              <Button.Ripple
+                                color='primary'
+                                disabled={isLoading}
+                                onClick={() => dispatch(getGroupDetail({ ...currentDSG, group: item.idGroup }))}
+                              >
+                                Input
+                              </Button.Ripple>
                             </NavLink>
                           </td>
                         }
