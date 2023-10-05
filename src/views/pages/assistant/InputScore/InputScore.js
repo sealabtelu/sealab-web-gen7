@@ -259,7 +259,7 @@ const InputScore = () => {
                               </td>
                               <td>
                                 <Controller
-                                  name={`scores[${index}].i2`}
+                                  name={`scores[${index}].i1`}
                                   control={control}
                                   defaultValue={0}
                                   render={({ field }) => (
@@ -275,7 +275,7 @@ const InputScore = () => {
                               </td>
                               <td>
                                 <Controller
-                                  name={`scores[${index}].i1`}
+                                  name={`scores[${index}].i2`}
                                   control={control}
                                   defaultValue={0}
                                   render={({ field }) => (
