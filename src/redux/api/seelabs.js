@@ -53,7 +53,7 @@ export const moduleSlice = createSlice({
     groups: initialGroups(),
     groupDetail: initialGroupDetail(),
     currentDSG: initialCurrentDSG(),
-    bap: {},
+    bap: [],
     isLoading: false,
     isSubmitLoading: false,
     dayOptions: [
@@ -96,7 +96,7 @@ export const moduleSlice = createSlice({
         localStorage.removeItem('seelabsGroups')
       })
       .addCase(getBAP.fulfilled, (state, action) => {
-        state.bap = action.payload ?? {}
+        state.bap = action.payload ?? []
       })
       .addCase(inputScore.pending, (state) => {
         state.isSubmitLoading = true
