@@ -5,7 +5,7 @@ import { Fragment, useEffect } from 'react'
 import Breadcrumbs from '@components/breadcrumbs'
 
 // ** Third Party Components
-import { Card, CardHeader, CardTitle, CardBody } from 'reactstrap'
+import { Card, CardHeader, CardTitle, CardBody, Spinner } from 'reactstrap'
 
 // ** Third Party Components
 import { ChevronDown } from 'react-feather'
@@ -18,7 +18,7 @@ import { getStudents } from '@store/api/user'
 
 const Tables = () => {
   const dispatch = useDispatch()
-  const { students } = useSelector(state => state.user)
+  const { students, isLoading } = useSelector(state => state.user)
 
   useEffect(() => {
     dispatch(getStudents())
@@ -76,9 +76,15 @@ const Tables = () => {
               pagination
               data={students}
               columns={basicColumns}
+              progressPending={isLoading}
               className='react-dataTable'
               sortIcon={<ChevronDown size={10} />}
               paginationRowsPerPageOptions={[10, 25, 50, 100]}
+              progressComponent={
+                <div className='d-flex justify-content-center my-1'>
+                  <Spinner color='primary' />
+                </div>
+              }
             />
           </div>
         </CardBody>
