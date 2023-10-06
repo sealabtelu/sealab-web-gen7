@@ -32,11 +32,6 @@ export const inputScore = createAsyncThunk('seelabs/inputScore', async (param, {
   return await axios.post(`${endpoint}/score`, data)
 })
 
-const initialGroups = () => {
-  const item = window.localStorage.getItem('seelabsGroups')
-  return item ? JSON.parse(item) : {}
-}
-
 const initialGroupDetail = () => {
   const item = window.localStorage.getItem('seelabsGroupDetail')
   return item ? JSON.parse(item) : {}
@@ -50,7 +45,7 @@ const initialCurrentDSG = () => {
 export const moduleSlice = createSlice({
   name: 'seelabs',
   initialState: {
-    groups: initialGroups(),
+    groups: [],
     groupDetail: initialGroupDetail(),
     currentDSG: initialCurrentDSG(),
     bap: [],
@@ -84,16 +79,14 @@ export const moduleSlice = createSlice({
       .addCase(getGroupList.fulfilled, (state, action) => {
         state.groups = action.payload
         state.currentDSG = action.meta.arg
-        localStorage.setItem('seelabsGroups', JSON.stringify(action.payload))
         localStorage.setItem('seelabsCurrentDSG', JSON.stringify(action.meta.arg))
       })
       .addCase(getGroupDetail.fulfilled, (state, action) => {
         state.groupDetail = action.payload
         state.currentDSG = action.meta.arg
-        state.groups = {}
+        state.groups = []
         localStorage.setItem('seelabsGroupDetail', JSON.stringify(action.payload))
         localStorage.setItem('seelabsCurrentDSG', JSON.stringify(action.meta.arg))
-        localStorage.removeItem('seelabsGroups')
       })
       .addCase(getBAP.fulfilled, (state, action) => {
         state.bap = action.payload ?? []

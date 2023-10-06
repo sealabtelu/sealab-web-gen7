@@ -14,7 +14,7 @@ import DataTable from 'react-data-table-component'
 import { formatUTCtoLocale } from '@utils'
 
 // ** Reactstrap Imports
-import { Card, CardHeader, CardTitle, CardBody, Form, Row, Col, Label, Button, Table, Spinner } from 'reactstrap'
+import { Card, CardHeader, CardTitle, CardBody, Form, Row, Col, Label, Button, Spinner } from 'reactstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { getBAP } from '@store/api/seelabs'
 
@@ -79,23 +79,23 @@ const BAP = () => {
           </Row>
         </Form>
         <Row>
-          {isLoading ? (
-            <div className='d-flex justify-content-center my-1'>
-              <Spinner />
-            </div>
-          ) : (
-            <div className='react-dataTable my-1'>
-              <DataTable
-                noHeader
-                pagination
-                data={bap}
-                columns={basicColumns}
-                className='react-dataTable'
-                sortIcon={<ChevronDown size={10} />}
-                paginationRowsPerPageOptions={[10, 25, 50, 100]}
-              />
-            </div>
-          )}
+          <div className='react-dataTable my-1'>
+            <DataTable
+              noHeader
+              data={bap}
+              columns={basicColumns}
+              progressPending={isLoading}
+              className='react-dataTable'
+              sortIcon={<ChevronDown size={10} />}
+              pagination
+              paginationRowsPerPageOptions={[10, 25, 50, 100]}
+              progressComponent={
+                <div className='d-flex justify-content-center my-1'>
+                  <Spinner color='primary' />
+                </div>
+              }
+            />
+          </div>
         </Row>
       </CardBody>
     </Card>
