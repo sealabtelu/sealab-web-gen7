@@ -8,9 +8,10 @@ import { useEffect } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { ChevronDown } from 'react-feather'
 import Flatpickr from 'react-flatpickr'
-import DataTable from 'react-data-table-component'
+import DataTable, { createTheme } from 'react-data-table-component'
 
 // ** Utils
+import { useSkin } from "@hooks/useSkin"
 import { formatUTCtoLocale } from '@utils'
 
 // ** Reactstrap Imports
@@ -18,8 +19,15 @@ import { Card, CardHeader, CardTitle, CardBody, Form, Row, Col, Label, Button, S
 import { useDispatch, useSelector } from 'react-redux'
 import { getBAP } from '@store/api/seelabs'
 
+createTheme('dark', {
+  background: {
+    default: 'transparent'
+  }
+})
+
 const BAP = () => {
   const dispatch = useDispatch()
+  const { skin } = useSkin()
   const { bap, isLoading } = useSelector(state => state.seelabs)
 
   const {
@@ -85,6 +93,7 @@ const BAP = () => {
               data={bap}
               columns={basicColumns}
               progressPending={isLoading}
+              theme={skin}
               className='react-dataTable'
               sortIcon={<ChevronDown size={10} />}
               pagination

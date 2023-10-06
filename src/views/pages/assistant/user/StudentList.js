@@ -9,15 +9,23 @@ import { Card, CardHeader, CardTitle, CardBody, Spinner } from 'reactstrap'
 
 // ** Third Party Components
 import { ChevronDown } from 'react-feather'
-import DataTable from 'react-data-table-component'
+import DataTable, { createTheme } from 'react-data-table-component'
 
 // ** Styles
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { getStudents } from '@store/api/user'
+import { useSkin } from "@hooks/useSkin"
+
+createTheme('dark', {
+  background: {
+    default: 'transparent'
+  }
+})
 
 const Tables = () => {
   const dispatch = useDispatch()
+  const { skin } = useSkin()
   const { students, isLoading } = useSelector(state => state.user)
 
   useEffect(() => {
@@ -77,6 +85,7 @@ const Tables = () => {
               data={students}
               columns={basicColumns}
               progressPending={isLoading}
+              theme={skin}
               className='react-dataTable'
               sortIcon={<ChevronDown size={10} />}
               paginationRowsPerPageOptions={[10, 25, 50, 100]}
