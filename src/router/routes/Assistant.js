@@ -75,12 +75,12 @@ export const AssistantMenu = [
         icon: <Edit3 size={20} />,
         navLink: "/assistant/pre-test"
     },
-    {
-        id: "journal",
-        title: "Journal",
-        icon: <PenTool size={20} />
-        // navLink: "/assistant/preliminary-assignment/question"
-    },
+    // {
+    //     id: "journal",
+    //     title: "Journal",
+    //     icon: <PenTool size={20} />
+    //     // navLink: "/assistant/preliminary-assignment/question"
+    // },
     {
         id: "inputScore",
         title: "Input Score",

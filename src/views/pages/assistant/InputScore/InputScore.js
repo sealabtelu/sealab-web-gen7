@@ -9,7 +9,7 @@ import Select from 'react-select'
 import Flatpickr from 'react-flatpickr'
 
 // ** Utils
-import { selectThemeColors } from '@utils'
+import { selectThemeColors, formatUTCtoLocale } from '@utils'
 import { useForm, Controller } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
@@ -74,8 +74,15 @@ const InputScore = () => {
     }
   }
 
-  const onSubmit = (data) => {
-    dispatch(inputScore(data)).then(({ payload: { status } }) => {
+  const onSubmit = ({ date, module, scores }) => {
+    dispatch(inputScore({
+      date: formatUTCtoLocale(date),
+      module: module.value,
+      scores: scores.map(item => ({
+        ...item,
+        status: item.d !== 0
+      }))
+    })).then(({ payload: { status } }) => {
       if (status === 200) {
         navigate('/assistant/select-group')
       }
