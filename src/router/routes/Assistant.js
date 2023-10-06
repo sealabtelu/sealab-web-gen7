@@ -11,6 +11,7 @@ const PRTQuestionList = lazy(() => import("../../views/pages/assistant/PreTest/P
 const PRTQuestion = lazy(() => import("../../views/pages/assistant/PreTest/PRTQuestion"))
 const SelectGroup = lazy(() => import("../../views/pages/assistant/InputScore/SelectGroup"))
 const InputScore = lazy(() => import("../../views/pages/assistant/InputScore/InputScore"))
+const BAP = lazy(() => import("../../views/pages/assistant/BAP/BAP"))
 
 const AssistantRoutes = [
     {
@@ -48,6 +49,10 @@ const AssistantRoutes = [
     {
         path: "/assistant/select-group/input-score",
         element: <InputScore />
+    },
+    {
+        path: "/assistant/BAP",
+        element: <BAP />
     }
 ]
 
@@ -85,8 +90,8 @@ export const AssistantMenu = [
     {
         id: "bap",
         title: "BAP",
-        icon: <Bookmark size={20} />
-        // navLink: "/assistant/journal"
+        icon: <Bookmark size={20} />,
+        navLink: "/assistant/BAP"
     }
 ]
 
