@@ -61,12 +61,6 @@ export const StudentMenu = [
         navLink: "https://drive.google.com/file/d/1ZbEN7-_Bd2Zv0Slb-aHuOabnwMjCgZ2w/view?usp=drive_link",
         externalLink: true,
         newTab: true
-    },
-    {
-        id: "profile",
-        title: "Profile",
-        icon: <Book size={20} />,
-        navLink: "student/profile"
     }
 ]
 
