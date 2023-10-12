@@ -6,6 +6,7 @@ import module from "./api/module"
 import homeAssignmentQuestion from "./api/homeAssignmentQuestion"
 import preTestQuestion from "./api/preTestQuestion"
 import seelabs from "./api/seelabs"
+import user from "./api/user"
 
 const rootReducer = {
     auth,
@@ -14,7 +15,8 @@ const rootReducer = {
     module,
     homeAssignmentQuestion,
     preTestQuestion,
-    seelabs
+    seelabs,
+    user
 }
 
 export default rootReducer

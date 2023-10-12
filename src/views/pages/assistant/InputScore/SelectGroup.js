@@ -1,21 +1,32 @@
 // ** Styles
 import '@src/assets/scss/pilih-group.scss'
+import '@styles/react/libs/tables/react-dataTable-component.scss'
 
 // ** Third Party Components
 import Select from 'react-select'
 import { NavLink } from 'react-router-dom'
 import { useForm, Controller } from 'react-hook-form'
+import { ChevronDown } from 'react-feather'
+import DataTable, { createTheme } from 'react-data-table-component'
 
 // ** Utils
-import { selectThemeColors, isObjEmpty } from '@utils'
+import { useSkin } from "@hooks/useSkin"
+import { selectThemeColors } from '@utils'
 
 // ** Reactstrap Imports
-import { Card, CardHeader, CardTitle, CardBody, Form, Row, Col, Label, Button, Table, Spinner } from 'reactstrap'
+import { Card, CardHeader, CardTitle, CardBody, Form, Row, Col, Label, Button, Table, Spinner, ListGroup, ListGroupItem } from 'reactstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { getGroupList, getGroupDetail } from '@store/api/seelabs'
 
+createTheme('dark', {
+  background: {
+    default: 'transparent'
+  }
+})
+
 const SelectGroup = () => {
   const dispatch = useDispatch()
+  const { skin } = useSkin()
 
   const {
     groups,
@@ -24,15 +35,10 @@ const SelectGroup = () => {
     currentDSG,
     isLoading } = useSelector(state => state.seelabs)
 
-  const defaultValues = {
-    day: dayOptions[0],
-    shift: shiftOptions[0]
-  }
-
   const {
     control,
     handleSubmit
-  } = useForm({ defaultValues })
+  } = useForm()
 
   const onSubmit = ({ day, shift }) => {
     dispatch(getGroupList(
@@ -42,13 +48,51 @@ const SelectGroup = () => {
       }
     ))
   }
+  const basicColumns = [
+    {
+      name: 'Group',
+      maxWidth: '150px',
+      center: true,
+      selector: row => row.idGroup
+    },
+    {
+      name: 'Names',
+      minWidth: '300px',
+      cell: row => (
+        <ListGroup flush style={{ width: '100%' }}>
+          {row.names.map((name, index) => (
+            <ListGroupItem
+              key={index}
+              style={{ backgroundColor: 'transparent', paddingLeft: '0px' }}>
+              {name}
+            </ListGroupItem>
+          ))}
+        </ListGroup>
+      )
+    },
+    {
+      name: 'Action',
+      button: true,
+      minWidth: '300px',
+      cell: row => (
+        <NavLink to="/assistant/select-group/input-score">
+          <Button.Ripple
+            color='primary'
+            disabled={isLoading}
+            onClick={() => dispatch(getGroupDetail({ ...currentDSG, group: row.idGroup }))}
+          >
+            Input
+          </Button.Ripple>
+        </NavLink>
+      )
+    }
+  ]
 
   return (
     <Card>
       <CardHeader>
         <CardTitle tag='h4'>Select Group</CardTitle>
       </CardHeader>
-
       <CardBody>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Row className='row-input-score'>
@@ -57,6 +101,7 @@ const SelectGroup = () => {
               <Controller
                 name='day'
                 control={control}
+                defaultValue={dayOptions[currentDSG.day - 1]}
                 render={({ field }) => (
                   <Select
                     theme={selectThemeColors}
@@ -75,6 +120,7 @@ const SelectGroup = () => {
               <Controller
                 name='shift'
                 control={control}
+                defaultValue={shiftOptions[currentDSG.shift - 1]}
                 render={({ field }) => (
                   <Select
                     theme={selectThemeColors}
@@ -94,48 +140,26 @@ const SelectGroup = () => {
           </Row>
         </Form>
         <Row>
-          <Table responsive>
-            <thead>
-              <tr>
-                <th>Group</th>
-                <th>Name</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {!isObjEmpty(groups) && !isLoading &&
-                groups.map((item) => {
-                  return item.names.map((name, index) => {
-                    return (
-                      <tr key={index}>
-                        {index === 0 && <td rowSpan={item.names.length} scope="row">{item.idGroup}</td>}
-                        <td>{name}</td>
-                        {index === 0 &&
-                          <td rowSpan={item.names.length} scope="row">
-                            <NavLink to="/assistant/select-group/input-score">
-                              <Button.Ripple
-                                color='primary'
-                                disabled={isLoading}
-                                onClick={() => dispatch(getGroupDetail({ ...currentDSG, group: item.idGroup }))}
-                              >
-                                Input
-                              </Button.Ripple>
-                            </NavLink>
-                          </td>
-                        }
-                      </tr>
-                    )
-                  })
-                })
+          <div className='react-dataTable my-1'>
+            <DataTable
+              responsive
+              striped
+              highlightOnHover
+              noHeader
+              progressPending={isLoading}
+              data={groups}
+              columns={basicColumns}
+              theme={skin}
+              className='react-dataTable'
+              sortIcon={<ChevronDown size={10} />}
+              progressComponent={
+                <div className='d-flex justify-content-center my-1'>
+                  <Spinner color='primary' />
+                </div>
               }
-            </tbody>
-          </Table>
-        </Row>
-        {isLoading && (
-          <div className='d-flex justify-content-center my-1'>
-            <Spinner />
+            />
           </div>
-        )}
+        </Row>
       </CardBody>
     </Card>
   )

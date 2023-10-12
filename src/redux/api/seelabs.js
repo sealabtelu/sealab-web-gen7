@@ -6,6 +6,12 @@ import { createSlice, createAsyncThunk, isAnyOf } from '@reduxjs/toolkit'
 
 const endpoint = '/seelabs'
 
+export const getBAP = createAsyncThunk('seelabs/getBAP', async (date) => {
+  return await axios.get(`${endpoint}/bap`, { params: { date } }).then(res => {
+    return res.data.data
+  })
+})
+
 export const getGroupList = createAsyncThunk('seelabs/getGroupList', async (param) => {
   return await axios.post(`${endpoint}/group/list`, param).then(res => {
     return res.data.data
@@ -21,20 +27,10 @@ export const getGroupDetail = createAsyncThunk('seelabs/getGroupDetail', async (
 export const inputScore = createAsyncThunk('seelabs/inputScore', async (param, { getState }) => {
   const data = {
     ...getState().seelabs.currentDSG,
-    date: new Date(param.date[0].getTime() - (param.date[0].getTimezoneOffset() * 60000)),
-    module: param.module.value,
-    scores: param.scores.map(item => ({
-      ...item,
-      status: item.d !== 0
-    }))
+    ...param
   }
   return await axios.post(`${endpoint}/score`, data)
 })
-
-const initialGroups = () => {
-  const item = window.localStorage.getItem('seelabsGroups')
-  return item ? JSON.parse(item) : {}
-}
 
 const initialGroupDetail = () => {
   const item = window.localStorage.getItem('seelabsGroupDetail')
@@ -49,9 +45,10 @@ const initialCurrentDSG = () => {
 export const moduleSlice = createSlice({
   name: 'seelabs',
   initialState: {
-    groups: initialGroups(),
+    groups: [],
     groupDetail: initialGroupDetail(),
     currentDSG: initialCurrentDSG(),
+    bap: [],
     isLoading: false,
     isSubmitLoading: false,
     dayOptions: [
@@ -82,26 +79,27 @@ export const moduleSlice = createSlice({
       .addCase(getGroupList.fulfilled, (state, action) => {
         state.groups = action.payload
         state.currentDSG = action.meta.arg
-        localStorage.setItem('seelabsGroups', JSON.stringify(action.payload))
         localStorage.setItem('seelabsCurrentDSG', JSON.stringify(action.meta.arg))
       })
       .addCase(getGroupDetail.fulfilled, (state, action) => {
         state.groupDetail = action.payload
         state.currentDSG = action.meta.arg
-        state.groups = {}
+        state.groups = []
         localStorage.setItem('seelabsGroupDetail', JSON.stringify(action.payload))
         localStorage.setItem('seelabsCurrentDSG', JSON.stringify(action.meta.arg))
-        localStorage.removeItem('seelabsGroups')
+      })
+      .addCase(getBAP.fulfilled, (state, action) => {
+        state.bap = action.payload ?? []
       })
       .addCase(inputScore.pending, (state) => {
         state.isSubmitLoading = true
       })
-      .addMatcher(isAnyOf(getGroupList.pending, getGroupDetail.pending), (state) => {
+      .addMatcher(isAnyOf(getGroupList.pending, getGroupDetail.pending, getBAP.pending), (state) => {
         state.isLoading = true
       })
       .addMatcher(isAnyOf(
-        getGroupList.rejected, getGroupDetail.rejected, inputScore.rejected,
-        getGroupList.fulfilled, getGroupDetail.fulfilled, inputScore.fulfilled
+        getGroupList.rejected, getGroupDetail.rejected, inputScore.rejected, getBAP.rejected,
+        getGroupList.fulfilled, getGroupDetail.fulfilled, inputScore.fulfilled, getBAP.fulfilled
       ), (state) => {
         state.isSubmitLoading = false
         state.isLoading = false

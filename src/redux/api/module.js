@@ -5,7 +5,7 @@ import axios from 'axios'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 export const getModules = createAsyncThunk('module/getModules', async () => {
-  return await axios.get('module/list').then(res => {
+  return await axios.get('/module/list').then(res => {
     return res.data.data
   })
 })

@@ -2,7 +2,6 @@ import { lazy } from 'react'
 
 import { Mail, Home, Clipboard, Bookmark, Edit3, PenTool, Book } from "react-feather"
 
-const HomeAssistant = lazy(() => import("../../views/pages/student/HomeAssignment/HomeAssignment"))
 const HAModuleList = lazy(() => import("../../views/pages/assistant/HomeAssignment/HAModuleList"))
 const HAQuestionList = lazy(() => import("../../views/pages/assistant/HomeAssignment/HAQuestionList"))
 const HAQuestion = lazy(() => import("../../views/pages/assistant/HomeAssignment/HAQuestion"))
@@ -15,11 +14,12 @@ const BAP = lazy(() => import("../../views/pages/assistant/BAP/BAP"))
 const HasilInput = lazy(() => import("../../views/pages/assistant/HasilInput/HasilInput"))
 const ViewNilai = lazy(() => import("../../views/pages/assistant/HasilInput/ViewNilai"))
 const UpdateScore = lazy(() => import("../../views/pages/assistant/HasilInput/UpdateScore"))
+const StudentList = lazy(() => import("../../views/pages/assistant/user/StudentList"))
 
 const AssistantRoutes = [
     {
         path: "/assistant/home",
-        element: <HomeAssistant />
+        element: <StudentList />
     },
     {
         path: "/assistant/preliminary-assignment",
@@ -90,12 +90,12 @@ export const AssistantMenu = [
         icon: <Edit3 size={20} />,
         navLink: "/assistant/pre-test"
     },
-    {
-        id: "journal",
-        title: "Journal",
-        icon: <PenTool size={20} />
-        // navLink: "/assistant/preliminary-assignment/question"
-    },
+    // {
+    //     id: "journal",
+    //     title: "Journal",
+    //     icon: <PenTool size={20} />,
+    //     // navLink: "/assistant/student"
+    // },
     {
         id: "inputScore",
         title: "Input Score",

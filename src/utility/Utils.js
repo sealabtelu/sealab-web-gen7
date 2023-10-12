@@ -52,6 +52,11 @@ export const formatDateToMonthShort = (value, toTimeForCurrentDay = true) => {
   return new Intl.DateTimeFormat("en-US", formatting).format(new Date(value))
 }
 
+export const formatUTCtoLocale = (date) => {
+  if (!date) return date
+  return new Date(date[0].getTime() - (date[0].getTimezoneOffset() * 60000))
+}
+
 /**
  ** Return if user is logged in
  ** This is completely up to you and how you want to store the token in your frontend application
