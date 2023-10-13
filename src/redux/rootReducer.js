@@ -1,22 +1,24 @@
 // ** Reducers Imports
-import layout from "./layout"
-import navbar from "./navbar"
-import auth from './authentication'
-import module from "./api/module"
-import homeAssignmentQuestion from "./api/homeAssignmentQuestion"
-import preTestQuestion from "./api/preTestQuestion"
-import seelabs from "./api/seelabs"
-import user from "./api/user"
+import layout from "./layout";
+import navbar from "./navbar";
+import auth from "./authentication";
+import module from "./api/module";
+import homeAssignmentQuestion from "./api/homeAssignmentQuestion";
+import homeAssignmentAnswer from "./api/homeAssignmentAnswer";
+import preTestQuestion from "./api/preTestQuestion";
+import seelabs from "./api/seelabs";
+import user from "./api/user";
 
 const rootReducer = {
-    auth,
-    navbar,
-    layout,
-    module,
-    homeAssignmentQuestion,
-    preTestQuestion,
-    seelabs,
-    user
-}
+	auth,
+	navbar,
+	layout,
+	module,
+	homeAssignmentQuestion,
+	homeAssignmentAnswer,
+	preTestQuestion,
+	seelabs,
+	user,
+};
 
-export default rootReducer
+export default rootReducer;
