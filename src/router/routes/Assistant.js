@@ -11,6 +11,9 @@ const PRTQuestion = lazy(() => import("../../views/pages/assistant/PreTest/PRTQu
 const SelectGroup = lazy(() => import("../../views/pages/assistant/InputScore/SelectGroup"))
 const InputScore = lazy(() => import("../../views/pages/assistant/InputScore/InputScore"))
 const BAP = lazy(() => import("../../views/pages/assistant/BAP/BAP"))
+const HasilInput = lazy(() => import("../../views/pages/assistant/HasilInput/HasilInput"))
+const ViewNilai = lazy(() => import("../../views/pages/assistant/HasilInput/ViewNilai"))
+const UpdateScore = lazy(() => import("../../views/pages/assistant/HasilInput/UpdateScore"))
 const StudentList = lazy(() => import("../../views/pages/assistant/user/StudentList"))
 
 const AssistantRoutes = [
@@ -53,6 +56,18 @@ const AssistantRoutes = [
     {
         path: "/assistant/BAP",
         element: <BAP />
+    },
+    {
+        path: "/assistant/hasil-input",
+        element: <HasilInput />
+    },
+    {
+        path: "/assistant/hasil-input/view-nilai",
+        element: <ViewNilai />
+    },
+    {
+        path: "/assistant/hasil-input/update-score",
+        element: <UpdateScore />
     }
 ]
 
@@ -92,6 +107,12 @@ export const AssistantMenu = [
         title: "BAP",
         icon: <Bookmark size={20} />,
         navLink: "/assistant/BAP"
+    },
+    {
+        id: "hasilInput",
+        title: "Hasil Input",
+        icon: <Bookmark size={20} />,
+        navLink: "/assistant/hasil-input"
     }
 ]
 
