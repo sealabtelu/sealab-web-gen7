@@ -4,7 +4,6 @@ import OverlayHA from "./HAOverlay";
 import { useDispatch, useSelector } from "react-redux";
 import { getModules } from "@store/api/module";
 import { Lock } from "react-feather";
-import styled from "styled-components";
 
 export default function HomeAssigment() {
 	const [isOpenClicked, setIsOpenClicked] = useState(null);

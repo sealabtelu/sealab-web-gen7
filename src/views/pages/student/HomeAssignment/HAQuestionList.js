@@ -21,6 +21,7 @@ import {
 	Col,
 	ListGroup,
 	ListGroupItem,
+	Spinner,
 } from "reactstrap";
 
 // ** Styles
@@ -28,12 +29,17 @@ import "@src/assets/scss/question-list.scss";
 
 // ** Third Party Imports File Uploader
 import { useDropzone } from "react-dropzone";
+import { useNavigate } from "react-router-dom";
 import { FileText, X, DownloadCloud } from "react-feather";
+import { addAnswer } from "@store/api/homeAssignmentAnswer";
 
 const HAQuestionList = () => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
 	const module = useSelector((state) => state.module);
 	const homeAssignment = useSelector((state) => state.homeAssignmentQuestion);
+	const { isLoading } = useSelector((state) => state.homeAssignmentAnswer);
 
 	useEffect(() => {
 		dispatch(getListQuestion());
@@ -48,6 +54,14 @@ const HAQuestionList = () => {
 			setFiles([...files, ...acceptedFiles.map((file) => Object.assign(file))]);
 		},
 	});
+
+	const handleSubmit = () => {
+		dispatch(addAnswer({ file: files[0] })).then(({ payload: { status } }) => {
+			if (status === 200) {
+				navigate("/student/home-assignment");
+			}
+		});
+	};
 
 	const renderFilePreview = (file) => {
 		if (file.type.startsWith("image")) {
@@ -185,7 +199,14 @@ const HAQuestionList = () => {
 									>
 										Remove All
 									</Button>
-									<Button color="relief-primary">Upload Files</Button>
+									<Button
+										color="primary"
+										disabled={isLoading}
+										onClick={() => handleSubmit()}
+									>
+										{isLoading && <Spinner color="light" size="sm" />}
+										<span className="ms-50">Upload Files</span>
+									</Button>
 								</div>
 							</Fragment>
 						) : null}
