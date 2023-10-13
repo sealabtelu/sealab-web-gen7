@@ -6,6 +6,7 @@ const PRTQuestionList = lazy(() => import('../../views/pages/student/PreTest/PRT
 const HomeAssigment = lazy(() => import("../../views/pages/student/HomeAssignment/HomeAssignment"))
 const PreTest = lazy(() => import("../../views/pages/student/PreTest/PreTest"))
 const Journal = lazy(() => import("../../views/pages/student/Journal/Journal"))
+const Profile = lazy(() => import("../../views/pages/student/Profile/AccountTabContent"))
 
 const StudentRoutes = [
     {
@@ -27,6 +28,10 @@ const StudentRoutes = [
     {
         path: "/student/journal",
         element: <Journal />
+    },
+    {
+        path: "/student/profile",
+        element: <Profile />
     }
 ]
 
