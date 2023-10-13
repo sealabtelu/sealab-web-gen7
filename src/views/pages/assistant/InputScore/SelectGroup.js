@@ -101,7 +101,7 @@ const SelectGroup = () => {
               <Controller
                 name='day'
                 control={control}
-                defaultValue={dayOptions[currentDSG.day - 1]}
+                defaultValue={dayOptions[currentDSG.day ?? 1 - 1]}
                 render={({ field }) => (
                   <Select
                     theme={selectThemeColors}
@@ -120,7 +120,7 @@ const SelectGroup = () => {
               <Controller
                 name='shift'
                 control={control}
-                defaultValue={shiftOptions[currentDSG.shift - 1]}
+                defaultValue={shiftOptions[currentDSG.shift ?? 1 - 1]}
                 render={({ field }) => (
                   <Select
                     theme={selectThemeColors}
