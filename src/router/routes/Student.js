@@ -58,7 +58,7 @@ export const StudentMenu = [
         id: "labworkModule",
         title: "Labwork Module",
         icon: <Book size={20} />,
-        navLink: "https://drive.google.com/file/d/1ZbEN7-_Bd2Zv0Slb-aHuOabnwMjCgZ2w/view?usp=drive_link",
+        navLink: "https://bit.ly/ModulIsmile2023",
         externalLink: true,
         newTab: true
     }

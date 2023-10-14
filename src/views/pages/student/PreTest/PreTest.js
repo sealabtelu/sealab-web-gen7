@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from "react"; // Import React
-import { Card, CardHeader, CardTitle, Button } from "reactstrap";
-import PreTestOverlay from "./PreTestOverlay";
-import { useDispatch, useSelector } from "react-redux";
-import { getModules } from "@store/api/module";
+import React, { useState, useEffect } from "react" // Import React
+import { Card, CardHeader, CardTitle, Button } from "reactstrap"
+import PreTestOverlay from "./PreTestOverlay"
+import { useDispatch, useSelector } from "react-redux"
+import { getModules } from "@store/api/module"
 
 export default function PreTest() {
-  const [isOpenClicked, setIsOpenClicked] = useState(null);
+  const [isOpenClicked, setIsOpenClicked] = useState(null)
   const handleOpenClick = (moduleId) => {
-    setIsOpenClicked(moduleId);
-  };
+    setIsOpenClicked(moduleId)
+  }
 
-  const dispatch = useDispatch();
-  const module = useSelector((state) => state.module);
+  const dispatch = useDispatch()
+  const module = useSelector((state) => state.module)
 
   useEffect(() => {
-    dispatch(getModules());
-  }, []);
+    dispatch(getModules())
+  }, [])
 
   return (
     <div>
@@ -96,5 +96,5 @@ export default function PreTest() {
         </div>
       ))}
     </div>
-  );
+  )
 }

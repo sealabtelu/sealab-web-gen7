@@ -1,13 +1,13 @@
-import { useEffect, Fragment } from "react";
+import { useEffect, Fragment } from "react"
 // ** Store & Actions
-import { useDispatch, useSelector } from "react-redux";
-import { getListQuestion } from "@store/api/preTestQuestion";
+import { useDispatch, useSelector } from "react-redux"
+import { getListQuestion } from "@store/api/preTestQuestion"
 
 // ** Custom Components
-import Avatar from "@components/avatar";
+import Avatar from "@components/avatar"
 
 // ** Icons Imports
-import { HelpCircle, Upload } from "react-feather";
+import { HelpCircle, Upload } from "react-feather"
 
 // ** Reactstrap Imports
 import {
@@ -18,23 +18,23 @@ import {
   Button,
   Row,
   Col,
-  Input,
-} from "reactstrap";
+  Input
+} from "reactstrap"
 
-import "@src/assets/scss/question-list.scss";
+import "@src/assets/scss/question-list.scss"
 
 const PRTQuestionList = () => {
-  const dispatch = useDispatch();
-  const module = useSelector((state) => state.module);
-  const preTest = useSelector((state) => state.preTestQuestion);
+  const dispatch = useDispatch()
+  const module = useSelector((state) => state.module)
+  const preTest = useSelector((state) => state.preTestQuestion)
 
   useEffect(() => {
-    dispatch(getListQuestion());
-  }, []);
+    dispatch(getListQuestion())
+  }, [])
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+    e.preventDefault()
+  }
 
   const renderListQuestion = () => {
     if (preTest.questions?.length > 0) {
@@ -74,12 +74,12 @@ const PRTQuestionList = () => {
               </div>
             </CardBody>
           </Card>
-        );
-      });
+        )
+      })
     } else {
-      return <div>Tidak ada data yang tersedia.</div>;
+      return <div>Tidak ada data yang tersedia.</div>
     }
-  };
+  }
 
   return (
     <Fragment>
@@ -105,7 +105,7 @@ const PRTQuestionList = () => {
         <Upload size={12} style={{ marginLeft: "5px", color: "black" }} />
       </Button>
     </Fragment>
-  );
-};
+  )
+}
 
-export default PRTQuestionList;
+export default PRTQuestionList

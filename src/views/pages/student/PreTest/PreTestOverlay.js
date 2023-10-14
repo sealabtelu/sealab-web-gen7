@@ -1,12 +1,11 @@
-/* eslint-disable react/prop-types */
-import React from "react";
-import { Card, Button, Row, Col, Container } from "reactstrap";
-import { Link } from "react-router-dom";
-import { selectModule } from "@store/api/module";
-import { useDispatch } from "react-redux";
+import React from "react"
+import { Card, Button, Row, Col, Container } from "reactstrap"
+import { Link } from "react-router-dom"
+import { selectModule } from "@store/api/module"
+import { useDispatch } from "react-redux"
 
 export default function PreTestOverlay({ moduleTitle, moduleNumber, item }) {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   return (
     <Card className="card-overlay-jurnal">
       {/* SUBMIT */}
@@ -44,5 +43,5 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber, item }) {
         </Row>
       </Container>
     </Card>
-  );
+  )
 }
