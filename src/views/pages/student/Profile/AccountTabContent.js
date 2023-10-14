@@ -53,6 +53,9 @@ const AccountTabs = () => {
     )
       .then(({ payload: { status } }) => {
         if (status === 200) {
+          toast('Please relog to apply changes!', {
+            icon: '📣'
+          })
           toast.success("Update Successfully!")
         } else {
           // console.log(status);
@@ -212,7 +215,7 @@ const AccountTabs = () => {
                   Number
                 </Label>
                 <Controller
-                  name="phoneNumber"
+                  name="phone"
                   control={control}
                   render={({ field }) => (
                     <Input
