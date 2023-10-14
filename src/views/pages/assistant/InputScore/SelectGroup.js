@@ -53,7 +53,7 @@ const SelectGroup = () => {
       name: 'Group',
       maxWidth: '150px',
       center: true,
-      selector: row => row.idGroup
+      selector: row => row.group
     },
     {
       name: 'Names',
@@ -79,7 +79,7 @@ const SelectGroup = () => {
           <Button.Ripple
             color='primary'
             disabled={isLoading}
-            onClick={() => dispatch(getGroupDetail({ ...currentDSG, group: row.idGroup }))}
+            onClick={() => dispatch(getGroupDetail({ ...currentDSG, group: row.group }))}
           >
             Input
           </Button.Ripple>
