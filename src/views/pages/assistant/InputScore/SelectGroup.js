@@ -14,7 +14,7 @@ import { useSkin } from "@hooks/useSkin"
 import { selectThemeColors } from '@utils'
 
 // ** Reactstrap Imports
-import { Card, CardHeader, CardTitle, CardBody, Form, Row, Col, Label, Button, Table, Spinner, ListGroup, ListGroupItem } from 'reactstrap'
+import { Card, CardHeader, CardTitle, CardBody, Form, Row, Col, Label, Button, Spinner, ListGroup, ListGroupItem } from 'reactstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { getGroupList, getGroupDetail } from '@store/api/seelabs'
 
@@ -101,7 +101,7 @@ const SelectGroup = () => {
               <Controller
                 name='day'
                 control={control}
-                defaultValue={dayOptions[currentDSG.day ?? 1 - 1]}
+                defaultValue={dayOptions[currentDSG.day - 1 ?? 0]}
                 render={({ field }) => (
                   <Select
                     theme={selectThemeColors}
@@ -120,7 +120,7 @@ const SelectGroup = () => {
               <Controller
                 name='shift'
                 control={control}
-                defaultValue={shiftOptions[currentDSG.shift ?? 1 - 1]}
+                defaultValue={shiftOptions[currentDSG.shift - 1 ?? 0]}
                 render={({ field }) => (
                   <Select
                     theme={selectThemeColors}
