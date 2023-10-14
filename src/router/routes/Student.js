@@ -42,18 +42,18 @@ export const StudentMenu = [
         icon: <BookOpen size={20} />,
         navLink: "/student/home-assignment"
     },
-    {
-        id: "preTest",
-        title: "Pre Test",
-        icon: <Clipboard size={20} />,
-        navLink: "student/pre-test"
-    },
-    {
-        id: "journal",
-        title: "Journal",
-        icon: <FileText size={20} />,
-        navLink: "student/journal"
-    },
+    // {
+    //     id: "preTest",
+    //     title: "Pre Test",
+    //     icon: <Clipboard size={20} />,
+    //     navLink: "student/pre-test"
+    // },
+    // {
+    //     id: "journal",
+    //     title: "Journal",
+    //     icon: <FileText size={20} />,
+    //     navLink: "student/journal"
+    // },
     {
         id: "labworkModule",
         title: "Labwork Module",

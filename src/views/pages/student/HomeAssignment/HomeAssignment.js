@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react" // Import React
 import { Card, CardHeader, CardTitle, Button } from "reactstrap"
 import OverlayHA from "./HAOverlay"
 import { useDispatch, useSelector } from "react-redux"
-import { getModules } from "@store/api/module"
+import { getPASubmissions } from "@store/api/module"
 import { Lock } from "react-feather"
 
-export default function HomeAssigment() {
+const HomeAssigment = () => {
   const [isOpenClicked, setIsOpenClicked] = useState(null)
 
   const handleOpenClick = (moduleId) => {
@@ -16,10 +16,8 @@ export default function HomeAssigment() {
   const module = useSelector((state) => state.module)
 
   useEffect(() => {
-    dispatch(getModules())
+    dispatch(getPASubmissions())
   }, [])
-
-  const status = [true, false, true, true, false, true]
 
   return (
     <div>
@@ -92,7 +90,7 @@ export default function HomeAssigment() {
                 <CardTitle>
                   Modul {index + 1} - {item.name}
                 </CardTitle>
-                {status[index] === true ? (
+                {item.isOpen && !item.isSubmitted ? (
                   <Button
                     color="relief-primary"
                     onClick={() => handleOpenClick(item.id)}
@@ -105,7 +103,7 @@ export default function HomeAssigment() {
                     disabled={true}
                     style={{ display: "flex", alignItems: "center" }}
                   >
-                    <Lock size={13} style={{ marginRight: "5px" }} /> Closed
+                    <Lock size={13} style={{ marginRight: "5px" }} /> {item.isSubmitted ? "Submitted" : "Closed"}
                   </Button>
                 )}
               </CardHeader>
@@ -116,3 +114,5 @@ export default function HomeAssigment() {
     </div>
   )
 }
+
+export default HomeAssigment

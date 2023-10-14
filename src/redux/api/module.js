@@ -4,8 +4,16 @@ import axios from 'axios'
 // ** Redux Imports
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
+const endpoint = "/module"
+
 export const getModules = createAsyncThunk('module/getModules', async () => {
-  return await axios.get('/module/list').then(res => {
+  return await axios.get(`${endpoint}/list`).then(res => {
+    return res.data.data
+  })
+})
+
+export const getPASubmissions = createAsyncThunk('question/getPASubmissions', async (_, { getState }) => {
+  return await axios.get(`${endpoint}/submission/pa/${getState().auth.userData.idStudent}`).then(res => {
     return res.data.data
   })
 })
@@ -29,7 +37,11 @@ export const moduleSlice = createSlice({
     }
   },
   extraReducers: builder => {
-    builder.addCase(getModules.fulfilled, (state, action) => {
+    builder
+    .addCase(getModules.fulfilled, (state, action) => {
+      state.modules = action.payload
+    })
+    .addCase(getPASubmissions.fulfilled, (state, action) => {
       state.modules = action.payload
     })
   }

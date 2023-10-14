@@ -1,11 +1,45 @@
-import React from "react" // Import React
+import { useState, useEffect } from "react" // Import React
 import { Card, Button, Row, Col, Container } from "reactstrap"
 import { Link } from "react-router-dom"
 import { selectModule } from "@store/api/module"
 import { useDispatch } from "react-redux"
 
-export default function OverlayHA({ moduleTitle, moduleNumber, item }) {
+const OverlayHA = ({ moduleTitle, moduleNumber, item }) => {
   const dispatch = useDispatch()
+  const [timeRemaining, setTimeRemaining] = useState(0)
+  useEffect(() => {
+    const now = new Date()
+    const midnight = new Date()
+    midnight.setHours(23, 59, 0, 0)
+
+    const timeDiff = midnight - now
+    if (timeDiff > 0) {
+      setTimeRemaining(Math.floor(timeDiff / 1000))
+    } else {
+      setTimeRemaining(0)
+    }
+
+    const interval = setInterval(() => {
+      if (timeRemaining > 0) {
+        setTimeRemaining(timeRemaining - 1)
+      } else {
+        clearInterval(interval)
+      }
+    }, 1000)
+
+    // Membersihkan interval saat komponen tidak lagi digunakan
+    return () => {
+      clearInterval(interval)
+    }
+  }, [timeRemaining])
+
+  const formatTime = (seconds) => {
+    const hour = Math.floor(seconds / 3600)
+    const minutes = Math.floor((seconds % 3600) / 60)
+    const remainingSeconds = seconds % 60
+    return `${hour}:${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`
+  }
+
   return (
     <Card className="card-overlay-jurnal">
       {/* SUBMIT */}
@@ -19,14 +53,14 @@ export default function OverlayHA({ moduleTitle, moduleNumber, item }) {
               </b>
             </h3>
             <p>
-              <b>Due Date: </b> &nbsp;{" "}
+              <b>Due Date: </b> {"Today: 23:59"}
             </p>
             <p>
-              <b>Time Remaining:</b> &nbsp; 1 Hour 23 Min
+              <b>Time Remaining: </b>{formatTime(timeRemaining)}
             </p>
-            <p>
+            {/* <p>
               <b>Time Submitted:</b> &nbsp;{" "}
-            </p>
+            </p> */}
           </Col>
           <Col xs="12" sm="6">
             <div className="button-container">
@@ -45,3 +79,5 @@ export default function OverlayHA({ moduleTitle, moduleNumber, item }) {
     </Card>
   )
 }
+
+export default OverlayHA
