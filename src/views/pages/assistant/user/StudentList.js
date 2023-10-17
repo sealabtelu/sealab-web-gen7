@@ -45,12 +45,6 @@ const Tables = () => {
       selector: row => row.name
     },
     {
-      name: 'Group',
-      sortable: true,
-      minWidth: '175px',
-      selector: row => `Kelompok ${row.group}`
-    },
-    {
       name: 'Day',
       sortable: true,
       selector: row => {
@@ -64,8 +58,20 @@ const Tables = () => {
       selector: row => `Shift ${row.shift}`
     },
     {
+      name: 'Group',
+      sortable: true,
+      minWidth: '150px',
+      selector: row => `Kelompok ${row.group}`
+    },
+    {
+      name: 'Class',
+      sortable: true,
+      selector: row => row.classroom
+    },
+    {
       name: 'Phone',
       sortable: true,
+      minWidth: '150px',
       selector: row => row.phone
     }
   ]
