@@ -46,15 +46,6 @@ const HomeAssigment = () => {
             Jawaban.
           </li>
           <li>
-            Format penamaan file Tugas Pendahuluan sebagai berikut:
-            <br />
-            <b>TP_NAMA_NIM_MODUL_HARI_SHIFT&shy;_KELOMPOK</b>
-            <br />
-            <b>
-              Contoh: TP_MUHAMMAD HILMY AZIZ_1103190001_MODUL 1_RABU_SHIFT 2_13
-            </b>
-          </li>
-          <li>
             Soal TP akan diunggah setiap hari<b> Kamis sore</b>, pastikan untuk
             membaca pengumuman TP setiap hari Kamis di OA Line Lab I-Smile
             (@qup6728v).
