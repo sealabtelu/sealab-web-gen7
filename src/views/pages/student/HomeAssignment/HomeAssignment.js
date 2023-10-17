@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react" // Import React
+import { useState, useEffect } from "react" // Import React
 import { Card, CardHeader, CardTitle, Button } from "reactstrap"
-import OverlayHA from "./HAOverlay"
 import { useDispatch, useSelector } from "react-redux"
 import { getPASubmissions } from "@store/api/module"
 import { Lock } from "react-feather"
+import OverlayHA from "./HAOverlay"
 
 const HomeAssigment = () => {
   const [isOpenClicked, setIsOpenClicked] = useState(null)
