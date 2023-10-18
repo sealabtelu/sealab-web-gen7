@@ -2,15 +2,11 @@ import { useState, useEffect, Fragment } from "react" // Import React
 import { Card, CardHeader, CardTitle, Button } from "reactstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { Lock } from "react-feather"
-import { getJSubmissions } from "@store/api/module"
+import { getJSubmissions, selectModule } from "@store/api/module"
 import OverlayJurnal from "./JournalOverlay"
 
 export default function Journal() {
   const [isOpenClicked, setIsOpenClicked] = useState(null)
-
-  const handleOpenClick = (moduleId) => {
-    setIsOpenClicked(moduleId)
-  }
 
   const dispatch = useDispatch()
   const module = useSelector((state) => state.module)
@@ -18,6 +14,11 @@ export default function Journal() {
   useEffect(() => {
     dispatch(getJSubmissions())
   }, [])
+
+  const handleOpenClick = (module) => {
+    dispatch(selectModule(module))
+    setIsOpenClicked(module.id)
+  }
 
   return (
     <Fragment>
@@ -52,7 +53,7 @@ export default function Journal() {
                 {item.isOpen && !item.isSubmitted ? (
                   <Button
                     color="relief-primary"
-                    onClick={() => handleOpenClick(item.id)}
+                    onClick={() => handleOpenClick(item)}
                   >
                     Open
                   </Button>
