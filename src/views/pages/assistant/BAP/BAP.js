@@ -100,24 +100,22 @@ const BAP = () => {
           </Row>
         </Form>
         <Row>
-          <div className="react-dataTable my-1">
-            <DataTable
-              noHeader
-              data={bap}
-              columns={basicColumns}
-              progressPending={isLoading}
-              theme={skin}
-              className="react-dataTable"
-              sortIcon={<ChevronDown size={10} />}
-              pagination
-              paginationRowsPerPageOptions={[10, 25, 50, 100]}
-              progressComponent={
-                <div className="d-flex justify-content-center my-1">
-                  <Spinner color="primary" />
-                </div>
-              }
-            />
-          </div>
+          <DataTable
+            noHeader
+            data={bap}
+            columns={basicColumns}
+            progressPending={isLoading}
+            theme={skin}
+            className="react-dataTable my-1"
+            sortIcon={<ChevronDown size={10} />}
+            pagination
+            paginationRowsPerPageOptions={[10, 25, 50, 100]}
+            progressComponent={
+              <div className="d-flex justify-content-center my-1">
+                <Spinner color="primary" />
+              </div>
+            }
+          />
         </Row>
       </CardBody>
     </Card>
