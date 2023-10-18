@@ -16,7 +16,7 @@ import {
 import { Upload } from "react-feather"
 
 import { Link, useNavigate } from "react-router-dom"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 import { addAnswer } from "@store/api/journalAnswer"
 
@@ -28,6 +28,7 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
   //collase
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { isLoading } = useSelector((state) => state.journalAnswer)
 
   const [isOpen, setIsOpen] = useState(false)
   const toggle = () => setIsOpen(!isOpen)
@@ -98,6 +99,7 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
               render={({ field }) => (
                 <Input
                   type="textarea"
+                  disabled={isLoading}
                   invalid={errors.assistantFeedback && true}
                   {...field}
                 />
@@ -118,6 +120,7 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
               render={({ field }) => (
                 <Input
                   type="textarea"
+                  disabled={isLoading}
                   invalid={errors.sessionfeedback && true}
                   {...field}
                 />
@@ -139,6 +142,7 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
                 <Input
                   type="textarea"
                   invalid={errors.laboratoryfeedback && true}
+                  disabled={isLoading}
                   {...field}
                 />
               )}
@@ -155,7 +159,7 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
               defaultValue={[]}
               render={({ field: { onChange, value } }) => (
                 <Dropzone
-                  loading={false}
+                  loading={isLoading}
                   onChange={onChange}
                   value={value}
                 />
