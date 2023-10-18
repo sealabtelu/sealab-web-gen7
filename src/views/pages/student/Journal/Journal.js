@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react" // Import React
+import { useState, useEffect, Fragment } from "react" // Import React
 import { Card, CardHeader, CardTitle, Button } from "reactstrap"
-import OverlayJurnal from "./JournalOverlay"
 import { useDispatch, useSelector } from "react-redux"
-import { getModules } from "@store/api/module"
+import { Lock } from "react-feather"
+import { getJSubmissions } from "@store/api/module"
+import OverlayJurnal from "./JournalOverlay"
 
 export default function Journal() {
   const [isOpenClicked, setIsOpenClicked] = useState(null)
@@ -15,11 +16,11 @@ export default function Journal() {
   const module = useSelector((state) => state.module)
 
   useEffect(() => {
-    dispatch(getModules())
+    dispatch(getJSubmissions())
   }, [])
 
   return (
-    <div>
+    <Fragment>
       <Card className="card-overlay-jurnal">
         {/* INFO */}
         <h1>Jurnal</h1>
@@ -35,32 +36,40 @@ export default function Journal() {
         </ol>
       </Card>
       {module.modules.map((item, index) => (
-        <div key={item.id}>
-          {isOpenClicked === item.id && (
+        <Fragment key={item.id}>
+          {isOpenClicked === item.id ? (
             <OverlayJurnal
               moduleTitle={item.name}
               moduleNumber={index + 1}
             // linkSoal={module.links.soal}
             />
-          )}
-
-          {isOpenClicked !== item.id && (
+          ) : (
             <Card className="card-student">
               <CardHeader>
                 <CardTitle>
                   Modul {index + 1} - {item.name}
                 </CardTitle>
-                <Button
-                  color="relief-primary"
-                  onClick={() => handleOpenClick(item.id)}
-                >
-                  Open
-                </Button>
+                {item.isOpen && !item.isSubmitted ? (
+                  <Button
+                    color="relief-primary"
+                    onClick={() => handleOpenClick(item.id)}
+                  >
+                    Open
+                  </Button>
+                ) : (
+                  <Button
+                    color="flat-dark"
+                    disabled={true}
+                    style={{ display: "flex", alignItems: "center" }}
+                  >
+                    <Lock size={13} style={{ marginRight: "5px" }} /> {item.isSubmitted ? "Submitted" : "Closed"}
+                  </Button>
+                )}
               </CardHeader>
             </Card>
           )}
-        </div>
+        </Fragment>
       ))}
-    </div>
+    </Fragment>
   )
 }

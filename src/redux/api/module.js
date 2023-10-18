@@ -18,6 +18,12 @@ export const getPASubmissions = createAsyncThunk('question/getPASubmissions', as
   })
 })
 
+export const getJSubmissions = createAsyncThunk('question/getJSubmissions', async (_, { getState }) => {
+  return await axios.get(`${endpoint}/submission/j/${getState().auth.userData.idStudent}`).then(res => {
+    return res.data.data
+  })
+})
+
 const initialSelectedModule = () => {
   const item = window.localStorage.getItem('selectedModule')
   return item ? JSON.parse(item) : {}
@@ -42,6 +48,9 @@ export const moduleSlice = createSlice({
       state.modules = action.payload
     })
     .addCase(getPASubmissions.fulfilled, (state, action) => {
+      state.modules = action.payload
+    })
+    .addCase(getJSubmissions.fulfilled, (state, action) => {
       state.modules = action.payload
     })
   }
