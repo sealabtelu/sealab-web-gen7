@@ -1,8 +1,10 @@
 import { useEffect, Fragment } from "react"
 
 // ** Store & Actions
+import { useNavigate } from "react-router-dom"
 import { useForm, Controller } from "react-hook-form"
 import { useDispatch, useSelector } from "react-redux"
+import { addAnswer } from "@store/api/homeAssignmentAnswer"
 import { getListQuestion } from "@store/api/homeAssignmentQuestion"
 
 // ** Custom Components
@@ -25,10 +27,6 @@ import {
 
 // ** Styles
 import "@src/assets/scss/question-list.scss"
-
-// ** Third Party Imports File Uploader
-import { useNavigate } from "react-router-dom"
-import { addAnswer } from "@store/api/homeAssignmentAnswer"
 
 const HAQuestionList = () => {
   const dispatch = useDispatch()

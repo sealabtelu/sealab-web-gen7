@@ -2,7 +2,7 @@
 import axios from "axios"
 
 // ** Redux Imports
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
+import { createSlice, createAsyncThunk, isAnyOf } from "@reduxjs/toolkit"
 
 const endpoint = "/preliminary-assignment-answer"
 
@@ -21,21 +21,16 @@ export const addAnswer = createAsyncThunk(
 export const homeAssignmentAnswerSlice = createSlice({
   name: "answer",
   initialState: {
-    answer: [],
     isLoading: false
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(addAnswer.fulfilled, (state, action) => {
-        state.answer = action.payload
-        state.isLoading = false
-      })
-      .addCase(addAnswer.rejected, (state) => {
-        state.isLoading = false
-      })
       .addCase(addAnswer.pending, (state) => {
         state.isLoading = true
+      })
+      .addMatcher(isAnyOf(addAnswer.fulfilled, addAnswer.rejected), (state) => {
+        state.isLoading = false
       })
   }
 })
