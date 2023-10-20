@@ -12,6 +12,12 @@ export const getBAP = createAsyncThunk('seelabs/getBAP', async (date) => {
   })
 })
 
+export const getStudentScore = createAsyncThunk('seelabs/getStudentScore', async () => {
+  return await axios.get(`${endpoint}/score/student`).then(res => {
+    return res.data.data
+  })
+})
+
 export const getGroupList = createAsyncThunk('seelabs/getGroupList', async (param) => {
   return await axios.post(`${endpoint}/group/list`, param).then(res => {
     return res.data.data
@@ -49,6 +55,7 @@ export const moduleSlice = createSlice({
     groupDetail: initialGroupDetail(),
     currentDSG: initialCurrentDSG(),
     bap: [],
+    score: [],
     isLoading: false,
     isSubmitLoading: false,
     dayOptions: [
@@ -91,15 +98,24 @@ export const moduleSlice = createSlice({
       .addCase(getBAP.fulfilled, (state, action) => {
         state.bap = action.payload ?? []
       })
+      .addCase(getStudentScore.fulfilled, (state, action) => {
+        state.score = action.payload ?? []
+      })
+      .addCase(getStudentScore.rejected, (state) => {
+        state.score = []
+      })
       .addCase(inputScore.pending, (state) => {
         state.isSubmitLoading = true
       })
-      .addMatcher(isAnyOf(getGroupList.pending, getGroupDetail.pending, getBAP.pending), (state) => {
+      .addMatcher(isAnyOf(getGroupList.pending, getGroupDetail.pending, getBAP.pending, getStudentScore.pending), (state) => {
         state.isLoading = true
       })
       .addMatcher(isAnyOf(
-        getGroupList.rejected, getGroupDetail.rejected, inputScore.rejected, getBAP.rejected,
-        getGroupList.fulfilled, getGroupDetail.fulfilled, inputScore.fulfilled, getBAP.fulfilled
+        getGroupList.rejected, getGroupList.fulfilled,
+        getGroupDetail.rejected, getGroupDetail.fulfilled,
+        inputScore.rejected, inputScore.fulfilled,
+        getBAP.rejected, getBAP.fulfilled,
+        getStudentScore.rejected, getStudentScore.fulfilled
       ), (state) => {
         state.isSubmitLoading = false
         state.isLoading = false

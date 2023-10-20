@@ -85,7 +85,7 @@ export const getUserData = (useDummy = false) => {
  */
 export const getHomeRouteForLoggedInUser = (userRole) => {
   if (userRole === "Assistant") return "/assistant/home"
-  if (userRole === "Student") return "/student/home-assignment"
+  if (userRole === "Student") return "/student/score"
   return "/login"
 }
 

@@ -1,18 +1,20 @@
 import { lazy } from "react"
-import { Book, Clipboard, BookOpen, FileText } from "react-feather"
+import { Book, Clipboard, BookOpen, FileText, Bookmark } from "react-feather"
 
-const HAQuestionList = lazy(() => import("../../views/pages/student/HomeAssignment/HAQuestionList")
-)
-const PRTQuestionList = lazy(() => import("../../views/pages/student/PreTest/PRTQuestionList")
-)
-const HomeAssigment = lazy(() => import("../../views/pages/student/HomeAssignment/HomeAssignment")
-)
+const Score = lazy(() => import("../../views/pages/student/Score/Score"))
+const HAQuestionList = lazy(() => import("../../views/pages/student/HomeAssignment/HAQuestionList"))
+const PRTQuestionList = lazy(() => import("../../views/pages/student/PreTest/PRTQuestionList"))
+const HomeAssigment = lazy(() => import("../../views/pages/student/HomeAssignment/HomeAssignment"))
 const PreTest = lazy(() => import("../../views/pages/student/PreTest/PreTest"))
 const Journal = lazy(() => import("../../views/pages/student/Journal/Journal"))
 const Profile = lazy(() => import("../../views/pages/student/Profile/AccountTabContent")
 )
 
 const StudentRoutes = [
+  {
+    path: "/student/score",
+    element: <Score />
+  },
   {
     path: "/student/home-assignment",
     element: <HomeAssigment />
@@ -40,6 +42,12 @@ const StudentRoutes = [
 ]
 
 export const StudentMenu = [
+  {
+    id: "studentScore",
+    title: "Score",
+    icon: <Bookmark size={20} />,
+    navLink: "/student/score"
+  },
   {
     id: "homeAssignment",
     title: "Home Assignment",
