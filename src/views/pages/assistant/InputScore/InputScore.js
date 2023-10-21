@@ -251,7 +251,7 @@ const InputScore = () => {
                   render={({ field }) => (
                     <Select
                       theme={selectThemeColors}
-                      className={`react-select ${errors.module ? "is-invalid" : ""}`}
+                      className={`react-select ${errors.module && "is-invalid"}`}
                       classNamePrefix='select'
                       name='clear'
                       options={moduleOptions}

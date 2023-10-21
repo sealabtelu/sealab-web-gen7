@@ -10,13 +10,21 @@ export const getStudents = createAsyncThunk("user/getStudents", async () => {
   })
 })
 
-export const editStudent = createAsyncThunk(
-  "user/editStudent",
-  async (param) => {
-    console.log(param)
-    return await axios.put("/student", param)
+export const editStudent = createAsyncThunk("user/editStudent", async (param) => {
+  return await axios.put("/student", param)
+})
+
+export const changePassword = createAsyncThunk("user/changePassword", async (param, { getState, rejectWithValue }) => {
+  const data = {
+    ...param,
+    idUser: getState().auth.userData.idUser
   }
-)
+  try {
+    return await axios.post("/user/change-password", data)
+  } catch (err) {
+    return rejectWithValue(err.response.data)
+  }
+})
 
 export const userSlice = createSlice({
   name: "user",
@@ -34,19 +42,26 @@ export const userSlice = createSlice({
         state.students = action.payload
         state.isLoading = false
       })
+      .addCase(editStudent.fulfilled, (state, action) => {
+        const userData = JSON.parse(window.localStorage.getItem('userData'))
+        localStorage.setItem('userData', JSON.stringify({
+          ...userData,
+          ...action.meta.arg,
+          id: undefined
+        }))
+      })
       .addMatcher(
         isAnyOf(
-          getStudents.fulfilled,
-          editStudent.fulfilled,
-          getStudents.rejected,
-          editStudent.rejected
+          getStudents.fulfilled, getStudents.rejected,
+          editStudent.fulfilled, editStudent.rejected,
+          changePassword.fulfilled, changePassword.rejected
         ),
         (state) => {
           state.isLoading = false
         }
       )
       .addMatcher(
-        isAnyOf(getStudents.pending, editStudent.pending),
+        isAnyOf(getStudents.pending, editStudent.pending, changePassword.pending),
         (state) => {
           state.isLoading = true
         }

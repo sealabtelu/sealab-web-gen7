@@ -115,7 +115,7 @@ const Score = () => {
           <div className='alert-body'>
             <AlertCircle size={15} />
             <span className='ms-1'>
-              Seelabs status is <strong>invalid</strong>. Please ensure that your <strong>Seelabs</strong> password same as your <strong>I-Smile</strong> account
+              Seelabs status is <strong>invalid</strong>. Please ensure that your <strong>Seelabs</strong> password is the same as your <strong>I-Smile</strong> account
             </span>
           </div>
         </Alert>

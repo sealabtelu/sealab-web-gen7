@@ -8,15 +8,14 @@ import { Row, Col, Card, Form, Button, CardBody, CardTitle, CardHeader, FormFeed
 import * as yup from 'yup'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import { changePassword } from "@store/api/user"
+import { handleLogout } from '@store/authentication'
 
 // ** Custom Components
 import InputPasswordToggle from '@components/input-password-toggle'
-
-// ** Demo Components
-// import ApiKeysList from './ApiKeysList'
-// import CreateApiKey from './CreateApikey'
-// import TwoFactorAuth from './TwoFactorAuth'
-// import RecentDevices from './RecentDevices'
+import toast from 'react-hot-toast'
 
 const showErrors = (field, valueLen, min) => {
   if (valueLen === 0) {
@@ -30,15 +29,18 @@ const showErrors = (field, valueLen, min) => {
 
 const defaultValues = {
   newPassword: '',
-  currentPassword: '',
+  oldPassword: '',
   retypeNewPassword: ''
 }
 
-const SecurityTabContent = () => {
+const SecurityTabContent = ({loading}) => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
   const SignupSchema = yup.object().shape({
-    currentPassword: yup
+    oldPassword: yup
       .string()
-      .min(8, obj => showErrors('Current Password', obj.value.length, obj.min))
+      .min(8, obj => showErrors('Old Password', obj.value.length, obj.min))
       .required(),
     newPassword: yup
       .string()
@@ -60,9 +62,21 @@ const SecurityTabContent = () => {
     resolver: yupResolver(SignupSchema)
   })
 
-  const onSubmit = data => {
+  const onSubmit = async data => {
     if (Object.values(data).every(field => field.length > 0)) {
-      return null
+      dispatch(changePassword(data)).unwrap()
+        .then(({ status }) => {
+          if (status === 200) {
+            dispatch(handleLogout())
+            navigate('/login')
+            toast.success("Password Changed!")
+          } else {
+            toast.error("Update failed!")
+          }
+        })
+        .catch(({ message }) => {
+          toast.error(message)
+        })
     } else {
       for (const key in data) {
         if (data[key].length === 0) {
@@ -86,20 +100,21 @@ const SecurityTabContent = () => {
               <Col sm='6' className='mb-1'>
                 <Controller
                   control={control}
-                  id='currentPassword'
-                  name='currentPassword'
+                  id='oldPassword'
+                  name='oldPassword'
                   render={({ field }) => (
                     <InputPasswordToggle
-                      label='Current Password'
-                      htmlFor='currentPassword'
+                      label='old Password'
+                      htmlFor='oldPassword'
                       className='input-group-merge'
-                      invalid={errors.currentPassword && true}
+                      disabled={loading}
+                      invalid={errors.oldPassword && true}
                       {...field}
                     />
                   )}
                 />
-                {errors.currentPassword && (
-                  <FormFeedback className='d-block'>{errors.currentPassword.message}</FormFeedback>
+                {errors.oldPassword && (
+                  <FormFeedback className='d-block'>{errors.oldPassword.message}</FormFeedback>
                 )}
               </Col>
             </Row>
@@ -114,6 +129,7 @@ const SecurityTabContent = () => {
                       label='New Password'
                       htmlFor='newPassword'
                       className='input-group-merge'
+                      disabled={loading}
                       invalid={errors.newPassword && true}
                       {...field}
                     />
@@ -131,6 +147,7 @@ const SecurityTabContent = () => {
                       label='Retype New Password'
                       htmlFor='retypeNewPassword'
                       className='input-group-merge'
+                      disabled={loading}
                       invalid={errors.newPassword && true}
                       {...field}
                     />
@@ -145,15 +162,11 @@ const SecurityTabContent = () => {
                 <ul className='ps-1 ms-25'>
                   <li className='mb-50'>Minimum 8 characters long - the more, the better</li>
                   <li className='mb-50'>At least one lowercase character</li>
-                  <li>At least one number, symbol, or whitespace character</li>
                 </ul>
               </Col>
               <Col className='mt-1' sm='12'>
-                <Button type='submit' className='me-1' color='primary'>
+                <Button type='submit' disabled={loading} loading={loading} className='me-1' color='primary'>
                   Save changes
-                </Button>
-                <Button color='secondary' outline>
-                  Cancel
                 </Button>
               </Col>
             </Row>
