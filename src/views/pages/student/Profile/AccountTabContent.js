@@ -52,7 +52,7 @@ const AccountTabContent = ({ loading }) => {
       ...data,
       day: data.day.value,
       shift: data.shift.value
-    }))
+    })).unwrap()
       .then(({ status }) => {
         if (status === 200) {
           toast.success("Update Successfully!")
