@@ -48,21 +48,19 @@ const AccountTabContent = ({ loading }) => {
   } = useForm({ defaultValues })
 
   const onSubmit = (data) => {
-    dispatch(
-      editStudent({
-        ...data,
-        day: data.day.value,
-        shift: data.shift.value
-      })
-    )
-      .then(({ payload: { status } }) => {
+    dispatch(editStudent({
+      ...data,
+      day: data.day.value,
+      shift: data.shift.value
+    }))
+      .then(({ status }) => {
         if (status === 200) {
           toast.success("Update Successfully!")
         } else {
           toast.error("Update failed!")
         }
       })
-      .catch(() => toast.error("Unexpected Error!"))
+      .catch(({ message }) => toast.error(message))
   }
 
   return (

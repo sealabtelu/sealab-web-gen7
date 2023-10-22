@@ -10,8 +10,12 @@ export const getStudents = createAsyncThunk("user/getStudents", async () => {
   })
 })
 
-export const editStudent = createAsyncThunk("user/editStudent", async (param) => {
-  return await axios.put("/student", param)
+export const editStudent = createAsyncThunk("user/editStudent", async (param, { rejectWithValue }) => {
+  try {
+    return await axios.put("/student", param)
+  } catch (err) {
+    return rejectWithValue(err.response.data)
+  }
 })
 
 export const changePassword = createAsyncThunk("user/changePassword", async (param, { getState, rejectWithValue }) => {

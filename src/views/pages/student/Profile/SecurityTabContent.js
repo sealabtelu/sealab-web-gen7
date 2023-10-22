@@ -33,7 +33,7 @@ const defaultValues = {
   retypeNewPassword: ''
 }
 
-const SecurityTabContent = ({loading}) => {
+const SecurityTabContent = ({ loading }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -74,9 +74,7 @@ const SecurityTabContent = ({loading}) => {
             toast.error("Update failed!")
           }
         })
-        .catch(({ message }) => {
-          toast.error(message)
-        })
+        .catch(({ message }) => toast.error(message))
     } else {
       for (const key in data) {
         if (data[key].length === 0) {
