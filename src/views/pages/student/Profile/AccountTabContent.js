@@ -60,7 +60,7 @@ const AccountTabContent = ({ loading }) => {
           toast.error("Update failed!")
         }
       })
-      .catch(({ message }) => toast.error(message))
+      .catch(({ errors }) => toast.error(errors.username[0] ?? errors.phone[0]))
   }
 
   return (
