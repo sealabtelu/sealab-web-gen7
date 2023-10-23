@@ -405,10 +405,11 @@ const InputScore = () => {
                   </iframe> */}
                   <embed
                     className='PdfContainer'
-                    // onLoadStart={(e) => console.log(e)}
+                    // onLoad={(e) => console.log(e)}
                     key={submissions[counter][selectedFileOption]}
-                    data={submissions[counter][selectedFileOption]}
-                    type='application/pdf'/>
+                    src={submissions[counter][selectedFileOption]}
+                    type='application/pdf'
+                  />
                 </Row>
               </Col>
             </Row>
