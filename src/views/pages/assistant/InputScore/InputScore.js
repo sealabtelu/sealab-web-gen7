@@ -403,7 +403,7 @@ const InputScore = () => {
                     key={submissions[counter][selectedFileOption]}
                     src={`https://docs.google.com/viewer?url=${submissions[counter][selectedFileOption]}&embedded=true`}>
                   </iframe> */}
-                  <object
+                  <embed
                     className='PdfContainer'
                     // onLoadStart={(e) => console.log(e)}
                     key={submissions[counter][selectedFileOption]}
