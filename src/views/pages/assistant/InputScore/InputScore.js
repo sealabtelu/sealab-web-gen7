@@ -27,8 +27,8 @@ import { inputScore } from '@store/api/seelabs'
 import { getAllSubmissions, clearSubmissions } from '@store/api/module'
 
 const fileOptions = [
-  { value: 'jurnal', label: 'Jurnal' },
-  { value: 'tp', label: 'Tugas Pendahuluan' }
+  { value: 'paFilePath', label: 'Home Assignment' },
+  { value: 'jFilePath', label: 'Journal' }
 ]
 
 createTheme("dark", {
@@ -60,6 +60,7 @@ const InputScore = () => {
   } = useForm()
 
   const [counter, setCounter] = useState(0)
+  const [selectedFileOption, setSelectedFileOption] = useState(fileOptions[0].value)
 
   useEffect(() => {
     dispatch(clearSubmissions())
@@ -67,7 +68,7 @@ const InputScore = () => {
 
   //increase counter
   const increase = () => {
-    const pdfCount = submissions.filter(item => item.paFilePath !== null).length - 1
+    const pdfCount = submissions.filter(item => item[selectedFileOption] !== null).length - 1
     if (counter < pdfCount) setCounter(count => count + 1)
   }
 
@@ -350,62 +351,63 @@ const InputScore = () => {
       </Card>
 
       {/* PDF SIDE */}
-      <Card>
-        <CardHeader>
-          <CardTitle tag='h4'>PDF View</CardTitle>
-        </CardHeader>
+      {submissions.length > 0 &&
+        <Card>
+          <CardHeader>
+            <CardTitle tag='h4'>PDF View</CardTitle>
+          </CardHeader>
 
-        <CardBody>
-          <Row className="gapy-4">
-            {/* PDF SIDE */}
-            <Col className="gapx-1" md='12' sm='12'>
-              {/* TP/JURNAL */}
-              <Row className="row-input-score">
-                <Col md='8'>
-                  <Label className='form-label'>Pilih File</Label>
-                  <Select
-                    theme={selectThemeColors}
-                    className='react-select'
-                    classNamePrefix='select'
-                    defaultValue={fileOptions[1]}
-                    name='clear'
-                    options={fileOptions}
-                    isClearable
+          <CardBody>
+            <Row className="gapy-4">
+              {/* PDF SIDE */}
+              <Col className="gapx-1" md='12' sm='12'>
+                {/* TP/JURNAL */}
+                <Row className="row-input-score">
+                  <Col md='8'>
+                    <Label className='form-label'>Pilih File</Label>
+                    <Select
+                      theme={selectThemeColors}
+                      className='react-select'
+                      classNamePrefix='select'
+                      defaultValue={fileOptions[0]}
+                      name='clear'
+                      options={fileOptions}
+                      isClearable
+                      onChange={(e) => {
+                        setCounter(0)
+                        setSelectedFileOption(e.value)
+                      }}
+                    />
+                  </Col>
+                  {/* FIND BUTTON */}
+                  <Col>
+                    <Button.Ripple color='primary'>Find</Button.Ripple>
+                  </Col>
+                </Row>
+
+                {/* NEXT STATE */}
+                <Row>
+                  <Col className="next-state">
+                    <Button.Ripple className='next-state-button' color='primary' onClick={decrease}>Prev</Button.Ripple>
+                    <Button.Ripple className='next-state-button' color='primary' onClick={increase}>Next</Button.Ripple>
+                  </Col>
+                </Row>
+
+                {/* PDF */}
+                <Row>
+                  <embed
+                    className='PdfContainer'
+                    // onLoad={(e) => console.log(e)}
+                    key={submissions[counter][selectedFileOption]}
+                    src={submissions[counter][selectedFileOption]}
+                    type='application/pdf'
                   />
-                </Col>
-                {/* FIND BUTTON */}
-                <Col>
-                  <Button.Ripple color='primary'>Find</Button.Ripple>
-                </Col>
-              </Row>
-
-              {/* NEXT STATE */}
-              <Row>
-                <Col className="next-state">
-                  <Button.Ripple className='next-state-button' color='primary' onClick={decrease}>Prev</Button.Ripple>
-                  <Button.Ripple className='next-state-button' color='primary' onClick={increase}>Next</Button.Ripple>
-                </Col>
-              </Row>
-
-              {/* PDF */}
-              <Row>
-                {submissions.length > 0 &&
-                  submissions.map((item, index) => {
-                    return (
-                      <embed
-                        key={index}
-                        hidden={index !== counter}
-                        className='PdfContainer'
-                        src={item.paFilePath}
-                        type="application/pdf">
-                      </embed>)
-                  })
-                }
-              </Row>
-            </Col>
-          </Row>
-        </CardBody>
-      </Card>
+                </Row>
+              </Col>
+            </Row>
+          </CardBody>
+        </Card>
+      }
     </>
   )
 }
