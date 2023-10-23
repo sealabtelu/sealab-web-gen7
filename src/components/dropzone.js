@@ -13,6 +13,9 @@ const Dropzone = ({ value, onChange, loading }) => {
 
   const { getRootProps, getInputProps } = useDropzone({
     multiple: false,
+    accept: {
+      'application/pdf': ['.pdf']
+    },
     onDrop: acceptedFiles => {
       onChange([...value, ...acceptedFiles.map(file => Object.assign(file))])
     }
@@ -78,7 +81,7 @@ const Dropzone = ({ value, onChange, loading }) => {
               <a href='/' onClick={e => e.preventDefault()}>
                 browse
               </a>{' '}
-              thorough your machine
+              (PDF only)
             </p>
           </div>
         </div>
