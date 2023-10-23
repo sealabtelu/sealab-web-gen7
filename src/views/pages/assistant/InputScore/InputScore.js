@@ -395,13 +395,20 @@ const InputScore = () => {
 
                 {/* PDF */}
                 <Row>
-                  <embed
-                    className='PdfContainer'
-                    // onLoad={(e) => console.log(e)}
+                  {/* <iframe
+                    // key={submissions[counter][selectedFileOption]}
+                    // className='PdfContainer'
+                    loading='eager'
+                    height='700'
                     key={submissions[counter][selectedFileOption]}
-                    src={submissions[counter][selectedFileOption]}
-                    type='application/pdf'
-                  />
+                    src={`https://docs.google.com/viewer?url=${submissions[counter][selectedFileOption]}&embedded=true`}>
+                  </iframe> */}
+                  <object
+                    className='PdfContainer'
+                    // onLoadStart={(e) => console.log(e)}
+                    key={submissions[counter][selectedFileOption]}
+                    data={submissions[counter][selectedFileOption]}
+                    type='application/pdf'/>
                 </Row>
               </Col>
             </Row>
