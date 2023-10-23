@@ -109,7 +109,7 @@ const SelectGroup = () => {
                     classNamePrefix='select'
                     options={dayOptions}
                     isClearable
-                    disabled={isLoading}
+                    isDisabled={isLoading}
                     {...field}
                   />
                 )}
@@ -128,7 +128,7 @@ const SelectGroup = () => {
                     classNamePrefix='select'
                     options={shiftOptions}
                     isClearable
-                    disabled={isLoading}
+                    isDisabled={isLoading}
                     {...field}
                   />
                 )}

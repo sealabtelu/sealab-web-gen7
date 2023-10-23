@@ -257,7 +257,7 @@ const InputScore = () => {
                       name='clear'
                       options={moduleOptions}
                       isClearable
-                      disabled={isLoading || isSubmitLoading}
+                      isDisabled={isLoading || isSubmitLoading}
                       {...field}
                       onChange={(selectedOption) => {
                         if (selectedOption) {
