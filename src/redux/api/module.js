@@ -34,11 +34,16 @@ export const getJSubmissions = createAsyncThunk('question/getJSubmissions', asyn
   })
 })
 
+export const setPAStatus = createAsyncThunk('module/setPAStatus', async (param) => {
+  return await axios.post(`${endpoint}/set-pa-status`, param).then(res => {
+    return res.data.data
+  })
+})
+
 const initialSelectedModule = () => {
   const item = window.localStorage.getItem('selectedModule')
   return item ? JSON.parse(item) : {}
 }
-
 
 export const moduleSlice = createSlice({
   name: 'module',
@@ -72,21 +77,26 @@ export const moduleSlice = createSlice({
       .addMatcher(isAnyOf(
         getModules.fulfilled,
         getPASubmissions.fulfilled,
-        getJSubmissions.fulfilled
+        getJSubmissions.fulfilled,
+        setPAStatus.fulfilled
       ), (state, action) => {
         state.modules = action.payload
       })
       .addMatcher(isAnyOf(
+        getModules.pending,
         getPASubmissions.pending,
         getJSubmissions.pending,
-        getAllSubmissions.pending
+        getAllSubmissions.pending,
+        setPAStatus.pending
       ), (state) => {
         state.isLoading = true
       })
       .addMatcher(isAnyOf(
+        getModules.fulfilled, getModules.rejected,
         getPASubmissions.fulfilled, getPASubmissions.rejected,
         getJSubmissions.fulfilled, getJSubmissions.rejected,
-        getAllSubmissions.fulfilled, getAllSubmissions.rejected
+        getAllSubmissions.fulfilled, getAllSubmissions.rejected,
+        setPAStatus.fulfilled, setPAStatus.rejected
       ), (state) => {
         state.isLoading = false
       })
