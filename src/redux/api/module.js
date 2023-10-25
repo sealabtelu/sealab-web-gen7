@@ -40,6 +40,12 @@ export const setPAStatus = createAsyncThunk('module/setPAStatus', async (param) 
   })
 })
 
+export const setPRTStatus = createAsyncThunk('module/setPRTStatus', async (param) => {
+  return await axios.post(`${endpoint}/set-prt-status`, param).then(res => {
+    return res.data.data
+  })
+})
+
 const initialSelectedModule = () => {
   const item = window.localStorage.getItem('selectedModule')
   return item ? JSON.parse(item) : {}
@@ -78,7 +84,8 @@ export const moduleSlice = createSlice({
         getModules.fulfilled,
         getPASubmissions.fulfilled,
         getJSubmissions.fulfilled,
-        setPAStatus.fulfilled
+        setPAStatus.fulfilled,
+        setPRTStatus.fulfilled
       ), (state, action) => {
         state.modules = action.payload
       })
@@ -87,7 +94,8 @@ export const moduleSlice = createSlice({
         getPASubmissions.pending,
         getJSubmissions.pending,
         getAllSubmissions.pending,
-        setPAStatus.pending
+        setPAStatus.pending,
+        setPRTStatus.pending
       ), (state) => {
         state.isLoading = true
       })
@@ -96,7 +104,8 @@ export const moduleSlice = createSlice({
         getPASubmissions.fulfilled, getPASubmissions.rejected,
         getJSubmissions.fulfilled, getJSubmissions.rejected,
         getAllSubmissions.fulfilled, getAllSubmissions.rejected,
-        setPAStatus.fulfilled, setPAStatus.rejected
+        setPAStatus.fulfilled, setPAStatus.rejected,
+        setPRTStatus.fulfilled, setPRTStatus.rejected
       ), (state) => {
         state.isLoading = false
       })

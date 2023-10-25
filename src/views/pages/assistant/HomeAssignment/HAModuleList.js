@@ -36,7 +36,7 @@ const HAModuleList = () => {
               <Avatar className='rounded' color='light-info' content={(index + 1).toString()} />
               <div>
                 <h6 className='module-title'>Module {index + 1} : {item.name}</h6>
-                <small>Total Question: 0</small>
+                <small>Total Question: {item.paCount}</small>
               </div>
             </div>
             <div style={{ display: "flex", flexDirection: "row", alignItems: 'center' }}>
@@ -50,9 +50,7 @@ const HAModuleList = () => {
                   type='switch'
                   checked={item.isPAOpen}
                   disabled={isLoading}
-                  onChange={async ({ target: { checked } }) => {
-                    await dispatch(setPAStatus({ id: item.id, isOpen: checked }))
-                  }} />
+                  onChange={({ target: { checked } }) => dispatch(setPAStatus({ id: item.id, isOpen: checked }))} />
               </div>
 
               <Button color='relief-primary' disabled={isLoading} tag={Link} to='/assistant/preliminary-assignment/question-list' onClick={() => dispatch(selectModule(item))}>View</Button>
