@@ -25,26 +25,13 @@ import { addQuestion, editQuestion, clearSelected } from '@store/api/preTestQues
 import { capitalize, isObjEmpty } from "@utils"
 
 // ** Reactstrap Imports
-import { Card, CardHeader, CardTitle, CardBody, Button, Label, Form, Row, Col, Input, Spinner } from 'reactstrap'
+import { Card, CardHeader, CardTitle, CardBody, Button, Label, Form, Row, Col, Input, Spinner, InputGroup, InputGroupText } from 'reactstrap'
 import { useEffect } from 'react'
 
 const defaultValues = {
   isTrue: undefined,
   question: EditorState.createEmpty(),
-  options: [
-    {
-      option: ''
-    },
-    {
-      option: ''
-    },
-    {
-      option: ''
-    },
-    {
-      option: ''
-    }
-  ]
+  options: Array(4).fill({ option: '' })
 }
 
 const PRTQuestion = () => {
@@ -137,24 +124,28 @@ const PRTQuestion = () => {
             <Row>
               {getValues().options.map((item, index) => (
                 <Col md='6' sx='12' className='mb-2' key={index}>
-                  <div className='form-check'>
-                    <Controller
-                      name='isTrue'
-                      control={control}
-                      rules={{ required: 'Choose the goddamn right choice dude!' }}
-                      render={({ field }) => (
-                        <Input type='radio' {...field} value={index} checked={field.value === index.toString()} />
-                      )}
-                    />
-                    {item.id && (
-                      <Controller
-                        name={`options[${index}].id`}
-                        control={control}
-                        render={({ field }) => (
-                          <Input type='hidden' {...field} />
+                  <InputGroup>
+                    <InputGroupText>
+                      <div className='form-check'>
+                        <Controller
+                          name='isTrue'
+                          control={control}
+                          rules={{ required: 'Choose the goddamn right choice dude!' }}
+                          render={({ field }) => (
+                            <Input type='radio' {...field} value={index} checked={field.value === index.toString()} />
+                          )}
+                        />
+                        {item.id && (
+                          <Controller
+                            name={`options[${index}].id`}
+                            control={control}
+                            render={({ field }) => (
+                              <Input type='hidden' {...field} />
+                            )}
+                          />
                         )}
-                      />
-                    )}
+                      </div>
+                    </InputGroupText>
                     <Controller
                       name={`options[${index}].option`}
                       control={control}
@@ -162,7 +153,7 @@ const PRTQuestion = () => {
                         <Input type='textarea' rows='2' placeholder={`Option ${index + 1}`} {...field} />
                       )}
                     />
-                  </div>
+                  </InputGroup>
                 </Col>
               ))}
               {errors.isTrue && <p>{errors.isTrue.message}</p>}

@@ -89,31 +89,3 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 	border-color: #4dd7be;
 	border-radius: 0.357rem;
 }
-
-.option-list-wrapper {
-	display: flex;
-	flex-direction: column;
-	gap: 8px;
-
-	.option-list {
-		display: flex;
-		gap: 4px;
-		padding: 0.5rem 1rem;
-		font-weight: 5000;
-		border-radius: 8px;
-		border: solid 1px #e7e7e7;
-		color: black;
-
-		.flower {
-			font-size: large;
-		}
-	}
-
-	.true-answer {
-		display: flex;
-		background-color: rgb(177, 255, 177);
-		color: #4d4b57;
-		font-weight: 500;
-		border-color: rgb(125, 231, 125);
-	}
-}

@@ -26,3 +26,27 @@
     }
   }
 }
+
+.option-list-wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+
+	.option-list {
+		display: flex;
+		gap: 4px;
+		padding: 0.5rem 1rem;
+		font-weight: 400;
+		border-radius: 8px;
+		border: solid 1px #e7e7e7;
+		color: black;
+	}
+
+	.true-answer {
+		display: flex;
+		background-color: rgb(177, 255, 177);
+		color: #4d4b57;
+		font-weight: 500;
+		border-color: rgb(125, 231, 125);
+	}
+}

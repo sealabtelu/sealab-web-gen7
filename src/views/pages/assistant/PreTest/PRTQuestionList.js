@@ -13,7 +13,7 @@ import Avatar from '@components/avatar'
 import { Edit, Delete, HelpCircle, PlusSquare } from 'react-feather'
 
 // ** Reactstrap Imports
-import { Card, CardHeader, CardTitle, CardBody, Button } from 'reactstrap'
+import { Card, CardHeader, CardTitle, CardBody, Button, ListGroup, ListGroupItem, Badge } from 'reactstrap'
 
 // ** Third Party Components
 import Swal from 'sweetalert2'
@@ -94,24 +94,22 @@ const PRTQuestionList = () => {
           </div>
         </CardHeader>
         <CardBody>
-          <div>
-            <div dangerouslySetInnerHTML={{ __html: item.question }}></div>
-            <div className="divider my-2">
-              <div className="divider-text">Answer Key</div>
-            </div>
-            <div className='option-list-wrapper'>
-              {item.options?.map((answerKey, index) => (
-                <div
-                  key={index}
-                  className={`option-list ${answerKey.isTrue ? "true-answer" : ""}`}
-                >
-                  {String.fromCharCode(65 + index)}. {answerKey.option}
-                </div>
-              ))}
-            </div>
+          <div dangerouslySetInnerHTML={{ __html: item.question }}></div>
+          <div className="divider my-2">
+            <div className="divider-text">Answer Key</div>
           </div>
-        </CardBody>
-      </Card>
+          <ListGroup>
+            {item.options?.map((answerKey, index) => (
+              <ListGroupItem key={index} color={answerKey.isTrue ? 'primary' : ''} className='d-flex align-items-center'>
+                <Badge color='primary' pill className='me-1'>
+                  {String.fromCharCode(65 + index)}
+                </Badge>
+                <span>{answerKey.option}</span>
+              </ListGroupItem>
+            ))}
+          </ListGroup>
+        </CardBody >
+      </Card >
     ))
   }
 
