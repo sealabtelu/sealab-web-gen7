@@ -22,7 +22,8 @@ import {
   CardBody,
   Form,
   Row,
-  Col
+  Col,
+  Spinner
 } from "reactstrap"
 
 // ** Styles
@@ -34,8 +35,8 @@ const HAQuestionList = () => {
   const { control, handleSubmit } = useForm()
 
   const module = useSelector((state) => state.module)
-  const homeAssignment = useSelector((state) => state.homeAssignmentQuestion)
-  const { isLoading } = useSelector((state) => state.homeAssignmentAnswer)
+  const { questions, isLoading } = useSelector((state) => state.homeAssignmentQuestion)
+  const { isLoading: submissionsLoading } = useSelector((state) => state.homeAssignmentAnswer)
 
   useEffect(() => {
     dispatch(getListQuestion())
@@ -50,8 +51,8 @@ const HAQuestionList = () => {
   }
 
   const renderListQuestion = () => {
-    if (homeAssignment.questions?.length > 0) {
-      return homeAssignment.questions.map((item, index) => {
+    if (questions?.length > 0) {
+      return questions.map((item, index) => {
         return (
           <Card className="question-item" key={item.id}>
             <CardHeader className="question-title">
@@ -92,30 +93,36 @@ const HAQuestionList = () => {
           </Col>
           <Col>
             <CardBody className="question-header">
-              {`Total Question: ${homeAssignment.questions.length}`}
+              {`Total Question: ${questions.length}`}
             </CardBody>
           </Col>
         </Row>
       </Card>
-      {renderListQuestion()}
-      <Card>
-        <CardBody>
-          <Form onSubmit={handleSubmit(onSubmit)}>
-            <Controller
-              name="file"
-              control={control}
-              defaultValue={[]}
-              render={({ field: { onChange, value } }) => (
-                <Dropzone
-                  loading={isLoading}
-                  onChange={onChange}
-                  value={value}
+      {
+        isLoading ? <div className='d-flex justify-content-center my-3'>
+          <Spinner color='primary' />
+        </div> : <Fragment>
+          {renderListQuestion()}
+          <Card>
+            <CardBody>
+              <Form onSubmit={handleSubmit(onSubmit)}>
+                <Controller
+                  name="file"
+                  control={control}
+                  defaultValue={[]}
+                  render={({ field: { onChange, value } }) => (
+                    <Dropzone
+                      loading={submissionsLoading}
+                      onChange={onChange}
+                      value={value}
+                    />
+                  )}
                 />
-              )}
-            />
-          </Form>
-        </CardBody>
-      </Card>
+              </Form>
+            </CardBody>
+          </Card>
+        </Fragment>
+      }
     </Fragment>
   )
 }

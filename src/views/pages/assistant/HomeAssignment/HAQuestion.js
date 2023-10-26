@@ -38,7 +38,7 @@ const HAQuestion = () => {
   const navigate = useNavigate()
   const { action } = useParams()
   const {
-    loading,
+    isLoading,
     selectedQuestion
   } = useSelector(state => state.homeAssignmentQuestion)
 
@@ -86,8 +86,8 @@ const HAQuestion = () => {
             </div>
           </div>
           <div>
-            <Button color='relief-success' type='submit' disabled={loading} >
-            {loading ? <Spinner color='primary' type='grow' size='sm' /> : action === 'edit' ? <Edit size={14} /> : <PlusSquare size={14} />}
+            <Button color='relief-success' type='submit' disabled={isLoading} >
+            {isLoading ? <Spinner color='primary' type='grow' size='sm' /> : action === 'edit' ? <Edit size={14} /> : <PlusSquare size={14} />}
               <span className='align-middle'> {capitalize(action)}</span>
             </Button>
           </div>

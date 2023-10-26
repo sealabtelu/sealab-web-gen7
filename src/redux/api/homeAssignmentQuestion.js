@@ -42,7 +42,7 @@ export const homeAssignmentQuestionSlice = createSlice({
   name: 'question',
   initialState: {
     questions: [],
-    loading: false,
+    isLoading: false,
     selectedQuestion: initialSelectedQuestion()
   },
   reducers: {
@@ -59,13 +59,20 @@ export const homeAssignmentQuestionSlice = createSlice({
     builder
       .addCase(getListQuestion.fulfilled, (state, action) => {
         state.questions = action.payload
-        state.loading = false
       })
-      .addMatcher(isAnyOf(addQuestion.fulfilled, editQuestion.fulfilled, addQuestion.rejected, editQuestion.rejected), (state) => {
-        state.loading = false
+      .addMatcher(isAnyOf(
+        addQuestion.fulfilled, addQuestion.rejected,
+        editQuestion.fulfilled, editQuestion.rejected,
+        getListQuestion.fulfilled, getListQuestion.rejected
+      ), (state) => {
+        state.isLoading = false
       })
-      .addMatcher(isAnyOf(addQuestion.pending, editQuestion.pending), (state) => {
-        state.loading = true
+      .addMatcher(isAnyOf(
+        addQuestion.pending,
+        editQuestion.pending,
+        getListQuestion.pending
+      ), (state) => {
+        state.isLoading = true
       })
   }
 })
