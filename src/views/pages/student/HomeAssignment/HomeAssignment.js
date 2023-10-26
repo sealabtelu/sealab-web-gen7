@@ -34,7 +34,7 @@ const HomeAssigment = () => {
           </li>
           <li>
             Tugas Pendahuluan dikerjakan menggunakan Template Tugas Pendahuluan
-            di word dan dikumpulkan dalam format PDF
+            yang dapat di akses <a target="_blank" href="https://telkomuniversityofficial-my.sharepoint.com/:w:/g/personal/ismilelab_365_telkomuniversity_ac_id/EQ38JdnZGVhLlAR_65esJYsBlf9nGGY-VwxA_dPwdTom5w?e=ZPgayf">di sini</a>.
           </li>
           <li>
             Jika terdapat soal yang memerlukan jawaban untuk ditulis manual maka
