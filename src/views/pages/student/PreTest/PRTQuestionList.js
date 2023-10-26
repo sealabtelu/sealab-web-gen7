@@ -1,13 +1,16 @@
 import { useEffect, Fragment } from "react"
 // ** Store & Actions
+import { useForm, Controller } from 'react-hook-form'
+import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import { getListQuestion } from "@store/api/preTestQuestion"
+import { getListQuestionStudent, clearQuestions } from "@store/api/preTestQuestion"
+import { addAnswer } from "@store/api/preTestAnswer"
 
 // ** Custom Components
 import Avatar from "@components/avatar"
 
 // ** Icons Imports
-import { HelpCircle, Upload } from "react-feather"
+import { AlertCircle, HelpCircle } from "react-feather"
 
 // ** Reactstrap Imports
 import {
@@ -18,27 +21,50 @@ import {
   Button,
   Row,
   Col,
-  Input
+  Input,
+  Label,
+  Form,
+  Alert,
+  Spinner
 } from "reactstrap"
 
 import "@src/assets/scss/question-list.scss"
 
 const PRTQuestionList = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const module = useSelector((state) => state.module)
-  const preTest = useSelector((state) => state.preTestQuestion)
+  const { questions, isLoading } = useSelector((state) => state.preTestQuestion)
+  const { isLoading: submissionsLoading } = useSelector((state) => state.preTestAnswer)
+  const {
+    control,
+    handleSubmit,
+    formState: { errors }
+  } = useForm({
+    shouldFocusError: true
+  })
 
   useEffect(() => {
-    dispatch(getListQuestion())
+    dispatch(getListQuestionStudent()).then(({ payload: { status } }) => {
+      if (status === 400) {
+        dispatch(clearQuestions())
+        navigate("/student/pre-test")
+      }
+    })
   }, [])
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const onSubmit = ({ idAnswers }) => {
+    dispatch(addAnswer({ idAnswers })).then(({ payload: { status } }) => {
+      if (status === 200) {
+        dispatch(clearQuestions())
+        navigate("/student/pre-test")
+      }
+    })
   }
 
   const renderListQuestion = () => {
-    if (preTest.questions?.length > 0) {
-      return preTest.questions.map((item, index) => {
+    if (questions?.length > 0) {
+      return questions.map((item, index) => {
         return (
           <Card className="question-item" key={item.id}>
             <CardHeader className="question-title">
@@ -60,16 +86,38 @@ const PRTQuestionList = () => {
                   <div className="divider-text">Answer Key</div>
                 </div> */}
                 <div className="option-list-wrapper">
-                  {item.options.map((answerKey, index) => (
-                    <label key={index} className="option-list">
-                      <input
-                        type="radio"
-                        name={`answer${item.id}`} // Use a unique name for each group of radio buttons
-                        value={answerKey.option} // Set the value to "A", "B", etc.
-                      />
-                      {String.fromCharCode(65 + index)}. {answerKey.option}
-                    </label>
+                  {item.options.map((answerKey, i) => (
+                    <Label className='form-check-label option-list' key={i} for={answerKey.id}>
+                      <div className='form-check'>
+                        <Controller
+                          name={`idAnswers[${index}]`}
+                          control={control}
+                          defaultValue={''}
+                          render={({ field }) => (
+                            <Input
+                              type='radio'
+                              id={answerKey.id}
+                              disabled={submissionsLoading}
+                              {...field}
+                              invalid={errors.idAnswers?.[index] && true}
+                              value={answerKey.id}
+                            />
+                          )}
+                          rules={{ required: 'Choose the goddamn right choice dude!' }}
+                        />
+                        {answerKey.option}
+                      </div>
+                    </Label>
                   ))}
+                  {errors.idAnswers?.[index] && <Alert color='danger'>
+                    <div className='alert-body'>
+                      <AlertCircle size={15} />
+                      <span className='ms-1'>
+                        {errors.idAnswers[index].message}
+                      </span>
+                    </div>
+                  </Alert>
+                  }
                 </div>
               </div>
             </CardBody>
@@ -94,16 +142,22 @@ const PRTQuestionList = () => {
           </Col>
           <Col>
             <CardBody className="question-header">
-              {`Total Question: ${preTest.questions.length}`}
+              {`Total Question: ${questions.length}`}
             </CardBody>
           </Col>
         </Row>
       </Card>
-      {renderListQuestion()}
-      <Button color="flat-dark" className="submit-button">
-        Submit File{" "}
-        <Upload size={12} style={{ marginLeft: "5px", color: "black" }} />
-      </Button>
+      {
+        isLoading ? <div className='d-flex justify-content-center my-3'>
+          <Spinner color='primary' />
+        </div> : <Form onSubmit={handleSubmit(onSubmit)}>
+          {renderListQuestion()}
+          <Button type="submit" color="primary" disabled={submissionsLoading}>
+            Submit
+          </Button>
+        </Form>
+      }
+
     </Fragment>
   )
 }

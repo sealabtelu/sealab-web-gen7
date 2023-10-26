@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react" // Import React
-import { Card, CardHeader, CardTitle, Button } from "reactstrap"
+import { Card, CardHeader, CardTitle, Button, Spinner } from "reactstrap"
 import PreTestOverlay from "./PreTestOverlay"
 import { useDispatch, useSelector } from "react-redux"
-import { getModules } from "@store/api/module"
+import { getPRTSubmissions } from "@store/api/module"
+import { Lock } from "react-feather"
 
 export default function PreTest() {
   const [isOpenClicked, setIsOpenClicked] = useState(null)
@@ -11,10 +12,10 @@ export default function PreTest() {
   }
 
   const dispatch = useDispatch()
-  const module = useSelector((state) => state.module)
+  const {isLoading, modules} = useSelector((state) => state.module)
 
   useEffect(() => {
-    dispatch(getModules())
+    dispatch(getPRTSubmissions())
   }, [])
 
   return (
@@ -68,33 +69,46 @@ export default function PreTest() {
           </li>
         </ol>
       </Card>
-      {module.modules.map((item, index) => (
-        <div key={item.id}>
-          {isOpenClicked === item.id && (
-            <PreTestOverlay
-              moduleTitle={item.name}
-              moduleNumber={index + 1}
-              item={item}
-            />
-          )}
+      {
+        isLoading ? <div className='d-flex justify-content-center my-3'>
+          <Spinner color='primary' />
+        </div> : modules.map((item, index) => (
+          <div key={item.id}>
+            {isOpenClicked === item.id && (
+              <PreTestOverlay
+                moduleTitle={item.name}
+                moduleNumber={index + 1}
+                item={item}
+              />
+            )}
 
-          {isOpenClicked !== item.id && (
-            <Card className="card-student">
-              <CardHeader>
-                <CardTitle>
-                  Modul {index + 1} - {item.name}
-                </CardTitle>
-                <Button
-                  color="relief-primary"
-                  onClick={() => handleOpenClick(item.id)}
-                >
-                  Open
-                </Button>
-              </CardHeader>
-            </Card>
-          )}
-        </div>
-      ))}
+            {isOpenClicked !== item.id && (
+              <Card className="card-student">
+                <CardHeader>
+                  <CardTitle>
+                    Modul {index + 1} - {item.name}
+                  </CardTitle>
+                  {item.isOpen && !item.isSubmitted ? (
+                    <Button
+                      color="relief-primary"
+                      onClick={() => handleOpenClick(item.id)}
+                    >
+                      Open
+                    </Button>
+                  ) : (
+                    <Button
+                      color="flat-dark"
+                      disabled={true}
+                      style={{ display: "flex", alignItems: "center" }}
+                    >
+                      <Lock size={13} style={{ marginRight: "5px" }} />  {item.isSubmitted ? "Submitted" : "Closed"}
+                    </Button>
+                  )}
+                </CardHeader>
+              </Card>
+            )}
+          </div>
+        ))}
     </div>
   )
 }

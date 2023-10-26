@@ -12,6 +12,19 @@ export const getListQuestion = createAsyncThunk('question/getListQuestion', asyn
   })
 })
 
+export const getListQuestionStudent = createAsyncThunk('question/getListQuestionStudent', async (_, { getState, rejectWithValue }) => {
+  try {
+    return await axios.post(`${endpoint}/student`, {
+      idModule: getState().module.selectedModule.id,
+      idStudent: getState().auth.userData.idStudent
+    }).then(res => {
+      return res.data.data
+    })
+  } catch (err) {
+    return rejectWithValue(err.response.data)
+  }
+})
+
 export const addQuestion = createAsyncThunk('question/addQuestion', async (param, { getState }) => {
   const data = {
     ...param,
@@ -54,30 +67,38 @@ export const preTestQuestionSlice = createSlice({
     clearSelected: (state) => {
       state.selectedQuestion = {}
       localStorage.removeItem('selectedPRTQ')
+    },
+    clearQuestions: (state) => {
+      state.questions = []
     }
   },
   extraReducers: builder => {
     builder
-      .addCase(getListQuestion.fulfilled, (state, action) => {
+      .addMatcher(isAnyOf(
+        getListQuestion.fulfilled,
+        getListQuestionStudent.fulfilled
+      ), (state, action) => {
         state.questions = action.payload
-        state.isLoading = false
       })
       .addMatcher(isAnyOf(
         addQuestion.fulfilled, addQuestion.rejected,
-        editQuestion.fulfilled, editQuestion.rejected
+        editQuestion.fulfilled, editQuestion.rejected,
+        getListQuestion.fulfilled, getListQuestion.rejected,
+        getListQuestionStudent.fulfilled, getListQuestionStudent.rejected
       ), (state) => {
         state.isLoading = false
       })
       .addMatcher(isAnyOf(
         addQuestion.pending,
         editQuestion.pending,
-        getListQuestion.pending
+        getListQuestion.pending,
+        getListQuestionStudent.pending
       ), (state) => {
         state.isLoading = true
       })
   }
 })
 
-export const { selectQuestion, clearSelected } = preTestQuestionSlice.actions
+export const { selectQuestion, clearSelected, clearQuestions } = preTestQuestionSlice.actions
 
 export default preTestQuestionSlice.reducer

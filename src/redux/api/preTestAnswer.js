@@ -2,7 +2,7 @@
 import axios from 'axios'
 
 // ** Redux Imports
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk, isAnyOf } from '@reduxjs/toolkit'
 
 const endpoint = '/pre-test-answer'
 
@@ -27,7 +27,9 @@ export const preTestAnswerSlice = createSlice({
       .addCase(addAnswer.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(addAnswer.fulfilled, (state) => {
+      .addMatcher(isAnyOf(
+        addAnswer.fulfilled, addAnswer.rejected
+      ), (state) => {
         state.isLoading = false
       })
   }
