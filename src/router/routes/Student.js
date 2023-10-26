@@ -1,5 +1,5 @@
 import { lazy } from "react"
-import { Book, Clipboard, BookOpen, FileText, Bookmark } from "react-feather"
+import { Book, BookOpen, Bookmark, Edit3, PenTool } from "react-feather"
 
 const Score = lazy(() => import("../../views/pages/student/Score/Score"))
 const HAQuestionList = lazy(() => import("../../views/pages/student/HomeAssignment/HAQuestionList"))
@@ -57,13 +57,13 @@ export const StudentMenu = [
   {
     id: "preTest",
     title: "Pre Test",
-    icon: <Clipboard size={20} />,
+    icon: <Edit3 size={20} />,
     navLink: "student/pre-test"
   },
   {
     id: "journal",
     title: "Journal",
-    icon: <FileText size={20} />,
+    icon: <PenTool size={20} />,
     navLink: "student/journal"
   },
   {

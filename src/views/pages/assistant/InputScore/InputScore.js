@@ -20,7 +20,7 @@ import { useForm, Controller } from 'react-hook-form'
 import { useSkin } from "@hooks/useSkin"
 
 // ** Reactstrap Imports
-import { Card, CardHeader, CardTitle, CardBody, Row, Col, Spinner, Label, Button, Form, FormFeedback, Input } from 'reactstrap'
+import { Card, CardHeader, CardTitle, CardBody, Row, Col, Spinner, Label, Button, Form, FormFeedback, Input, ListGroup, ListGroupItem, Badge } from 'reactstrap'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { inputScore } from '@store/api/seelabs'
@@ -55,6 +55,7 @@ const InputScore = () => {
 
   const {
     control,
+    setValue,
     formState: { errors },
     handleSubmit
   } = useForm()
@@ -113,6 +114,7 @@ const InputScore = () => {
     {
       name: "NIM",
       grow: 1,
+      minWidth: "9rem",
       selector: (row) => row.nim
     },
     {
@@ -122,8 +124,15 @@ const InputScore = () => {
       selector: (row) => row.name
     },
     {
+      name: "TA",
+      grow: 1,
+      center: true,
+      selector: (row) => row.prtScore
+    },
+    {
       name: "TP Submit Time",
       grow: 2,
+      wrap: true,
       selector: (row) => row.paSubmitTime,
       format: (row) => moment(row.paSubmitTime).utc().format("ddd DD MMM YYYY h:mm A")
     },
@@ -261,7 +270,9 @@ const InputScore = () => {
                       {...field}
                       onChange={(selectedOption) => {
                         if (selectedOption) {
-                          dispatch(getAllSubmissions(selectedOption.value))
+                          dispatch(getAllSubmissions(selectedOption.value)).then(({ payload }) => {
+                            groupDetail.map((item, index) => setValue(`scores[${index}].ta`, payload.find(x => x.name === item.name).prtScore))
+                          })
                         } else {
                           dispatch(clearSubmissions())
                         }
@@ -297,6 +308,7 @@ const InputScore = () => {
               <DataTable
                 responsive
                 striped
+                expandableRows
                 highlightOnHover
                 noHeader
                 progressPending={isLoading || submissionsLoading}
@@ -306,6 +318,48 @@ const InputScore = () => {
                 theme={skin}
                 className='react-dataTable my-1'
                 sortIcon={<ChevronDown size={10} />}
+                expandableRowsComponent={({ data }) => {
+                  console.log(data)
+                  return (
+                    <div className='expandable-content p-2'>
+                      {
+                        !data.feedback && data.prtDetail.length === 0 &&
+                        <div>No data available</div>
+                      }
+                      {
+                        data.feedback && <ListGroup className='list-group-horizontal-sm justify-content-center mb-2'>
+                          <ListGroupItem><p className="fw-bold">Assistant</p>{data.feedback.assistant}</ListGroupItem>
+                          <ListGroupItem><p className="fw-bold">Session</p>{data.feedback.session}</ListGroupItem>
+                          <ListGroupItem><p className="fw-bold">Laboratory</p>{data.feedback.laboratory}</ListGroupItem>
+                        </ListGroup>
+                      }
+                      <ListGroup>
+                        {
+                          data.prtDetail?.map((item, index) => {
+                            return <ListGroupItem key={index} >
+                              <div className="d-flex">
+                                <div>
+                                  <Badge color='primary' pill className='me-1'>
+                                    {index + 1}
+                                  </Badge>
+                                </div>
+                                <span dangerouslySetInnerHTML={{ __html: item.question }}></span>
+                              </div>
+                              <div className='d-flex justify-content-between w-100'>
+                                <h5><strong>Jawab: </strong> {item.answer}</h5>
+                                <div>
+                                  <Badge color={item.verdict === "Correct" ? "success" : "danger"} pill>
+                                    {item.verdict}
+                                  </Badge>
+                                </div>
+                              </div>
+                            </ListGroupItem>
+                          })
+                        }
+                      </ListGroup>
+                    </div>
+                  )
+                }}
                 progressComponent={
                   <div className='d-flex justify-content-center my-1'>
                     <Spinner color='primary' />
@@ -313,7 +367,6 @@ const InputScore = () => {
                 }
               />
             </Row>
-
             {!isLoading && (
               <Row>
                 <DataTable
@@ -378,10 +431,6 @@ const InputScore = () => {
                         setSelectedFileOption(e.value)
                       }}
                     />
-                  </Col>
-                  {/* FIND BUTTON */}
-                  <Col>
-                    <Button.Ripple color='primary'>Find</Button.Ripple>
                   </Col>
                 </Row>
 
