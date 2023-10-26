@@ -54,12 +54,12 @@ export const StudentMenu = [
     icon: <BookOpen size={20} />,
     navLink: "/student/home-assignment"
   },
-  // {
-  // 	id: "preTest",
-  // 	title: "Pre Test",
-  // 	icon: <Clipboard size={20} />,
-  // 	navLink: "student/pre-test",
-  // },
+  {
+    id: "preTest",
+    title: "Pre Test",
+    icon: <Clipboard size={20} />,
+    navLink: "student/pre-test"
+  },
   {
     id: "journal",
     title: "Journal",

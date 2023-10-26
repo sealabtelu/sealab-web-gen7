@@ -28,6 +28,12 @@ export const getPASubmissions = createAsyncThunk('question/getPASubmissions', as
   })
 })
 
+export const getPRTSubmissions = createAsyncThunk('question/getPRTSubmissions', async (_, { getState }) => {
+  return await axios.get(`${endpoint}/submission/prt/${getState().auth.userData.idStudent}`).then(res => {
+    return res.data.data
+  })
+})
+
 export const getJSubmissions = createAsyncThunk('question/getJSubmissions', async (_, { getState }) => {
   return await axios.get(`${endpoint}/submission/j/${getState().auth.userData.idStudent}`).then(res => {
     return res.data.data
@@ -83,6 +89,7 @@ export const moduleSlice = createSlice({
       .addMatcher(isAnyOf(
         getModules.fulfilled,
         getPASubmissions.fulfilled,
+        getPRTSubmissions.fulfilled,
         getJSubmissions.fulfilled,
         setPAStatus.fulfilled,
         setPRTStatus.fulfilled
@@ -92,6 +99,7 @@ export const moduleSlice = createSlice({
       .addMatcher(isAnyOf(
         getModules.pending,
         getPASubmissions.pending,
+        getPRTSubmissions.pending,
         getJSubmissions.pending,
         getAllSubmissions.pending,
         setPAStatus.pending,
@@ -102,6 +110,7 @@ export const moduleSlice = createSlice({
       .addMatcher(isAnyOf(
         getModules.fulfilled, getModules.rejected,
         getPASubmissions.fulfilled, getPASubmissions.rejected,
+        getPRTSubmissions.fulfilled, getPRTSubmissions.rejected,
         getJSubmissions.fulfilled, getJSubmissions.rejected,
         getAllSubmissions.fulfilled, getAllSubmissions.rejected,
         setPAStatus.fulfilled, setPAStatus.rejected,
