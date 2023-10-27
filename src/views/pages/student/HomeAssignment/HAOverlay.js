@@ -3,14 +3,17 @@ import { Card, Button, Row, Col, Container } from "reactstrap";
 import { Link } from "react-router-dom";
 import { selectModule } from "@store/api/module";
 import { useDispatch } from "react-redux";
+import moment from "moment/moment";
 
 const OverlayHA = ({ moduleTitle, moduleNumber, item }) => {
 	const dispatch = useDispatch();
 	const [timeRemaining, setTimeRemaining] = useState(0);
+	const [deadline, setDeadline] = useState("");
 	useEffect(() => {
 		const now = new Date();
-		const midnight = new Date();
-		midnight.setHours(23, 59, 0, 0);
+		const midnight = new Date("2023-10-29T12:00:00");
+		setDeadline(midnight);
+		// midnight.setHours(12, 0, 0, 0);
 
 		const timeDiff = midnight - now;
 		if (timeDiff > 0) {
@@ -55,7 +58,8 @@ const OverlayHA = ({ moduleTitle, moduleNumber, item }) => {
 							</b>
 						</h3>
 						<p>
-							<b>Due Date: </b> {"Today: 23:59"}
+							<b>Due Date: </b>{" "}
+							{moment(deadline).format("ddd DD MMM YYYY h:mm A")}
 						</p>
 						<p>
 							<b>Time Remaining: </b>
