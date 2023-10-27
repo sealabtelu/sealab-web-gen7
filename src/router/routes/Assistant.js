@@ -8,7 +8,8 @@ import {
   Edit3,
   PenTool,
   Book,
-  AlertTriangle
+  AlertTriangle,
+  User
 } from "react-feather"
 
 const HAModuleList = lazy(() => import("../../views/pages/assistant/HomeAssignment/HAModuleList")
@@ -38,10 +39,16 @@ const UpdateScore = lazy(() => import("../../views/pages/assistant/HasilInput/Up
 )
 const StudentList = lazy(() => import("../../views/pages/assistant/user/StudentList")
 )
+const HomeDashboard = lazy(() => import("../../views/pages/assistant/user/Home")
+)
 
 const AssistantRoutes = [
   {
     path: "/assistant/home",
+    element: <HomeDashboard />
+  },
+  {
+    path: "/assistant/student-info",
     element: <StudentList />
   },
   {
@@ -100,10 +107,16 @@ const AssistantRoutes = [
 
 export const AssistantMenu = [
   {
-    id: "home",
+    id: "Home",
     title: "Home",
     icon: <Home size={20} />,
     navLink: "/assistant/home"
+  },
+  {
+    id: "StudentInfo",
+    title: "Student Info",
+    icon: <User size={20} />,
+    navLink: "/assistant/student-info"
   },
   {
     id: "homeAssignment",

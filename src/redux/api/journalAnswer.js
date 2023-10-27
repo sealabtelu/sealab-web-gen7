@@ -18,20 +18,42 @@ export const addAnswer = createAsyncThunk(
   }
 )
 
+export const getFeedback = createAsyncThunk("journal/getJournal", async () => {
+  return await axios.get("/journal-answer/list").then((res) => {
+    return res.data.data
+  })
+})
+
 export const homeAssignmentAnswerSlice = createSlice({
   name: "answer",
   initialState: {
+    feedback: [],
     isLoading: false
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(addAnswer.pending, (state) => {
+      .addCase(getFeedback.pending, (state) => {
         state.isLoading = true
       })
-      .addMatcher(isAnyOf(addAnswer.fulfilled, addAnswer.rejected), (state) => {
+      .addCase(getFeedback.fulfilled, (state, action) => {
+        state.feedback = action.payload
         state.isLoading = false
       })
+      .addMatcher(isAnyOf(addAnswer.pending, getFeedback.pending), (state) => {
+        state.isLoading = false
+      })
+      .addMatcher(
+        isAnyOf(
+          addAnswer.fulfilled,
+          addAnswer.rejected,
+          getFeedback.fulfilled,
+          getFeedback.rejected
+        ),
+        (state) => {
+          state.isLoading = false
+        }
+      )
   }
 })
 
