@@ -1,14 +1,29 @@
 // ** React Imports
-import { Fragment, useEffect } from 'react'
+import { Fragment, useEffect, useState } from 'react'
+
+// ** Add New Modal Component
+import AddNewModal from './AddNewModal'
+
 
 // ** Custom Components
 import Breadcrumbs from '@components/breadcrumbs'
 
 // ** Third Party Components
-import { Card, CardHeader, CardTitle, CardBody, Spinner } from 'reactstrap'
+import { 
+  Card, 
+  CardHeader, 
+  CardTitle, 
+  CardBody, 
+  Spinner, 
+  Button,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  UncontrolledDropdown
+} from "reactstrap"
 
 // ** Third Party Components
-import { ChevronDown } from 'react-feather'
+import { ChevronDown, Plus, MoreVertical, FileText, Archive, Trash, Edit } from 'react-feather'
 import DataTable, { createTheme } from 'react-data-table-component'
 
 // ** Styles
@@ -24,6 +39,12 @@ createTheme('dark', {
 })
 
 const Tables = () => {
+  // ** state
+  const [modal, setModal] = useState(false)
+
+  // ** Function to handle Modal toggle
+  const handleModal = () => setModal(!modal)
+
   const dispatch = useDispatch()
   const { skin } = useSkin()
   const { students, isLoading } = useSelector(state => state.user)
@@ -73,6 +94,36 @@ const Tables = () => {
       sortable: true,
       minWidth: '150px',
       selector: row => row.phone
+    },
+    {
+      name: 'Actions',
+      allowOverflow: true,
+      cell: () => {
+        return (
+          <div className='d-flex'>
+            <UncontrolledDropdown>
+              <DropdownToggle className='pe-1' tag='span'>
+                <MoreVertical size={15} />
+              </DropdownToggle>
+              <DropdownMenu end>
+                <DropdownItem tag='a' href='/' className='w-100' onClick={e => e.preventDefault()}>
+                  <FileText size={15} />
+                  <span className='align-middle ms-50'>Details</span>
+                </DropdownItem>
+                <DropdownItem tag='a' href='/' className='w-100' onClick={e => e.preventDefault()}>
+                  <Archive size={15} />
+                  <span className='align-middle ms-50'>Archive</span>
+                </DropdownItem>
+                <DropdownItem tag='a' href='/' className='w-100' onClick={e => e.preventDefault()}>
+                  <Trash size={15} />
+                  <span className='align-middle ms-50'>Delete</span>
+                </DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
+            <Edit size={15} />
+          </div>
+        )
+      }
     }
   ]
 
@@ -82,6 +133,12 @@ const Tables = () => {
       <Card className='overflow-hidden'>
         <CardHeader>
           <CardTitle tag='h4'>Student List</CardTitle>
+          <div className='d-flex mt-md-0 mt-1'>
+            <Button className='ms-2' color='primary' onClick={handleModal}>
+              <Plus size={15} />
+              <span className='align-middle ms-50'>Add Record</span>
+            </Button>
+          </div>
         </CardHeader>
         <CardBody>
           <div className='react-dataTable'>
@@ -104,6 +161,7 @@ const Tables = () => {
           </div>
         </CardBody>
       </Card>
+      <AddNewModal open={modal} handleModal={handleModal} />
     </Fragment>
   )
 }
