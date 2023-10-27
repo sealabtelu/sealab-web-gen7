@@ -47,7 +47,7 @@ const PRTModuleList = () => {
                   disabled={isLoading}
                   onChange={({ target: { checked } }) => dispatch(setPRTStatus({ id: item.id, isOpen: checked }))} />
               </div>
-              <Button color='relief-primary' tag={Link} to='/assistant/pre-test/question-list' onClick={() => dispatch(selectModule(item))}>View</Button>
+              <Button color='relief-primary' disabled={isLoading} tag={Link} to='/assistant/pre-test/question-list' onClick={() => dispatch(selectModule(item))}>View</Button>
             </div>
           </div>
         )
