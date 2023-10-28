@@ -38,7 +38,7 @@ createTheme('dark', {
   }
 })
 
-const Tables = () => {
+const StudentList = () => {
   // ** state
   const [modal, setModal] = useState(false)
 
@@ -166,4 +166,4 @@ const Tables = () => {
   )
 }
 
-export default Tables
+export default StudentList

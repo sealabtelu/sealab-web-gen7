@@ -43,7 +43,7 @@ const AddNewModal = ({ open, handleModal }) => {
         </div>
         {/* PASSWORD */}
         <div className='mb-1'>
-          <InputPasswordToggle className='mb-1' label='Password' htmlFor='basic-default-password' />  
+          <InputPasswordToggle className='mb-1' label='Password' htmlFor='basic-default-password' />
         </div>
         {/* NIM */}
         <div className='mb-1'>
@@ -68,7 +68,7 @@ const AddNewModal = ({ open, handleModal }) => {
             </InputGroupText>
             <Input id='name' placeholder='Harpun yang lebih Jelek' />
           </InputGroup>
-        </div>        
+        </div>
         {/* PHONE */}
         <div className='mb-1'>
           <Label className='form-label' for='phone-number'>
@@ -85,7 +85,7 @@ const AddNewModal = ({ open, handleModal }) => {
               className="form-control"
               placeholder='0812 3456 8900'
               options={{ phone: true, phoneRegionCode: 'ID' }}
-              // {...field}
+            // {...field}
             />
           </InputGroup>
         </div>

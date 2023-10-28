@@ -79,6 +79,10 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 	}
 }
 
+.rdt_TableCell {
+    height: auto !important;
+}
+
 .dropzone {
 	display: flex;
 	cursor: pointer;
