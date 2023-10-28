@@ -9,12 +9,14 @@ import {
   PenTool,
   Book,
   AlertTriangle,
-  User
+  User,
+  Circle
 } from "react-feather"
 
 const HAModuleList = lazy(() => import("../../views/pages/assistant/HomeAssignment/HAModuleList"))
 const HAQuestionList = lazy(() => import("../../views/pages/assistant/HomeAssignment/HAQuestionList"))
 const HAQuestion = lazy(() => import("../../views/pages/assistant/HomeAssignment/HAQuestion"))
+const HASubmissionList = lazy(() => import("../../views/pages/assistant/HomeAssignment/HASubmissionList"))
 const PRTModuleList = lazy(() => import("../../views/pages/assistant/PreTest/PRTModuleList"))
 const PRTQuestionList = lazy(() => import("../../views/pages/assistant/PreTest/PRTQuestionList.js"))
 const PRTQuestion = lazy(() => import("../../views/pages/assistant/PreTest/PRTQuestion"))
@@ -38,8 +40,12 @@ const AssistantRoutes = [
     element: <StudentList />
   },
   {
-    path: "/assistant/preliminary-assignment",
+    path: "/assistant/preliminary-assignment/master-control",
     element: <HAModuleList />
+  },
+  {
+    path: "/assistant/preliminary-assignment/submission",
+    element: <HASubmissionList />
   },
   {
     path: "/assistant/preliminary-assignment/question-list",
@@ -108,7 +114,20 @@ export const AssistantMenu = [
     id: "homeAssignment",
     title: "Home Assignment",
     icon: <Clipboard size={20} />,
-    navLink: "/assistant/preliminary-assignment"
+    children: [
+      {
+        id: 'homeAssignmentAdmin',
+        title: 'Master Control',
+        icon: <Circle />,
+        navLink: "/assistant/preliminary-assignment/master-control"
+      },
+      {
+        id: 'homeAssignmentSubmission',
+        title: 'Submission',
+        icon: <Circle />,
+        navLink: "/assistant/preliminary-assignment/submission"
+      }
+    ]
   },
   {
     id: "preTest",
