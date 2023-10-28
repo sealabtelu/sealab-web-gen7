@@ -11,7 +11,9 @@ import {
   CardTitle,
   CardBody,
   Spinner,
-  Button
+  Button,
+  ListGroup,
+  ListGroupItem
 } from "reactstrap"
 
 // ** Third Party Components
@@ -22,7 +24,7 @@ import moment from 'moment/moment'
 // ** Styles
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAnswerList } from '@store/api/homeAssignmentAnswer'
+import { getAnswerList } from '@store/api/journalAnswer'
 import { useSkin } from "@hooks/useSkin"
 import { NavLink } from 'react-router-dom'
 
@@ -32,11 +34,11 @@ createTheme('dark', {
   }
 })
 
-const HASubmissionList = () => {
+const JSubmissionList = () => {
   // ** state
   const dispatch = useDispatch()
   const { skin } = useSkin()
-  const { answers, isLoading } = useSelector(state => state.homeAssignmentAnswer)
+  const { answers, isLoading } = useSelector(state => state.journalAnswer)
 
   useEffect(() => {
     dispatch(getAnswerList())
@@ -109,16 +111,17 @@ const HASubmissionList = () => {
 
   return (
     <Fragment>
-      <Breadcrumbs title='Home Assignment' data={[{ title: 'Home Assignment' }, { title: 'Submission' }]} />
+      <Breadcrumbs title='Journal' data={[{ title: 'Journal' }, { title: 'Submission' }]} />
       <Card className='overflow-hidden'>
         <CardHeader>
-          <CardTitle tag='h4'>Home Assignment Submission</CardTitle>
+          <CardTitle tag='h4'>Journal Submission</CardTitle>
         </CardHeader>
         <CardBody>
           <div className='react-dataTable'>
             <DataTable
               noHeader
               pagination
+              expandableRows
               data={answers}
               columns={basicColumns}
               progressPending={isLoading}
@@ -126,6 +129,19 @@ const HASubmissionList = () => {
               className='react-dataTable'
               sortIcon={<ChevronDown size={10} />}
               paginationRowsPerPageOptions={[10, 25, 50, 100]}
+              expandableRowsComponent={({ data: { feedback } }) => {
+                return (
+                  <div className='expandable-content p-2'>
+                    {
+                      feedback && <ListGroup className='list-group-horizontal-sm justify-content-center mb-2'>
+                        <ListGroupItem><p className="fw-bold">Assistant</p>{feedback.assistant}</ListGroupItem>
+                        <ListGroupItem><p className="fw-bold">Session</p>{feedback.session}</ListGroupItem>
+                        <ListGroupItem><p className="fw-bold">Laboratory</p>{feedback.laboratory}</ListGroupItem>
+                      </ListGroup>
+                    }
+                  </div>
+                )
+              }}
               progressComponent={
                 <div className='d-flex justify-content-center my-1'>
                   <Spinner color='primary' />
@@ -139,4 +155,4 @@ const HASubmissionList = () => {
   )
 }
 
-export default HASubmissionList
+export default JSubmissionList

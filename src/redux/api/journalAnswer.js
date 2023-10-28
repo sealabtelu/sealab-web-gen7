@@ -18,34 +18,37 @@ export const addAnswer = createAsyncThunk(
   }
 )
 
-export const getFeedback = createAsyncThunk("journal/getJournal", async () => {
-  return await axios.get("/journal-answer/list").then((res) => {
+export const getAnswerList = createAsyncThunk("answer/getAnswerList", async () => {
+  return await axios.get(`${endpoint}/list`).then((res) => {
     return res.data.data
   })
 })
 
-export const homeAssignmentAnswerSlice = createSlice({
+export const journalAnswerSlice = createSlice({
   name: "answer",
   initialState: {
-    feedback: [],
+    answers: [],
     isLoading: false
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getFeedback.fulfilled, (state, action) => {
-        state.feedback = action.payload
-        state.isLoading = false
+      .addCase(getAnswerList.fulfilled, (state, action) => {
+        const baseURL = `${import.meta.env.VITE_API_BASE_URL}upload/`
+        state.answers = action.payload.map((item) => ({
+          ...item,
+          filePath: `${baseURL}${item.filePath}`
+        }))
       })
-      .addMatcher(isAnyOf(addAnswer.pending, getFeedback.pending), (state) => {
+      .addMatcher(isAnyOf(addAnswer.pending, getAnswerList.pending), (state) => {
         state.isLoading = true
       })
       .addMatcher(
         isAnyOf(
           addAnswer.fulfilled,
           addAnswer.rejected,
-          getFeedback.fulfilled,
-          getFeedback.rejected
+          getAnswerList.fulfilled,
+          getAnswerList.rejected
         ),
         (state) => {
           state.isLoading = false
@@ -54,6 +57,6 @@ export const homeAssignmentAnswerSlice = createSlice({
   }
 })
 
-export const { } = homeAssignmentAnswerSlice.actions
+export const { } = journalAnswerSlice.actions
 
-export default homeAssignmentAnswerSlice.reducer
+export default journalAnswerSlice.reducer

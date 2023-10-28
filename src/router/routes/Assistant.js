@@ -20,7 +20,8 @@ const HASubmissionList = lazy(() => import("../../views/pages/assistant/HomeAssi
 const PRTModuleList = lazy(() => import("../../views/pages/assistant/PreTest/PRTModuleList"))
 const PRTQuestionList = lazy(() => import("../../views/pages/assistant/PreTest/PRTQuestionList.js"))
 const PRTQuestion = lazy(() => import("../../views/pages/assistant/PreTest/PRTQuestion"))
-const Journal = lazy(() => import("../../views/pages/assistant/Jurnal/JournalModuleList"))
+const JModuleList = lazy(() => import("../../views/pages/assistant/Jurnal/JModuleList"))
+const JSubmissionList = lazy(() => import("../../views/pages/assistant/Jurnal/JSubmissionList"))
 const SelectGroup = lazy(() => import("../../views/pages/assistant/InputScore/SelectGroup"))
 const InputScore = lazy(() => import("../../views/pages/assistant/InputScore/InputScore"))
 const BAP = lazy(() => import("../../views/pages/assistant/BAP/BAP"))
@@ -68,8 +69,12 @@ const AssistantRoutes = [
     element: <PRTQuestion />
   },
   {
-    path: "/assistant/journal",
-    element: <Journal />
+    path: "/assistant/journal/master-control",
+    element: <JModuleList />
+  },
+  {
+    path: "/assistant/journal/submission",
+    element: <JSubmissionList />
   },
   {
     path: "/assistant/select-group",
@@ -139,7 +144,20 @@ export const AssistantMenu = [
     id: "journal",
     title: "Journal",
     icon: <PenTool size={20} />,
-    navLink: "/assistant/journal"
+    children: [
+      {
+        id: 'journalAdmin',
+        title: 'Master Control',
+        icon: <Circle />,
+        navLink: "/assistant/journal/master-control"
+      },
+      {
+        id: 'journalSubmission',
+        title: 'Submission',
+        icon: <Circle />,
+        navLink: "/assistant/journal/submission"
+      }
+    ]
   },
   {
     id: "inputScore",

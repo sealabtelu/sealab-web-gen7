@@ -14,7 +14,7 @@ import DataTable, { createTheme } from "react-data-table-component"
 // ** Styles
 import "@styles/react/libs/tables/react-dataTable-component.scss"
 import { useDispatch, useSelector } from "react-redux"
-import { getFeedback } from "@store/api/journalAnswer"
+import { getAnswerList } from "@store/api/journalAnswer"
 import { useSkin } from "@hooks/useSkin"
 
 createTheme("dark", {
@@ -26,10 +26,10 @@ createTheme("dark", {
 const FeedbackList = () => {
   const dispatch = useDispatch()
   const { skin } = useSkin()
-  const { feedback, isLoading } = useSelector((state) => state.journalAnswer)
+  const { answers, isLoading } = useSelector((state) => state.journalAnswer)
 
   useEffect(() => {
-    dispatch(getFeedback())
+    dispatch(getAnswerList())
   }, [])
 
   const basicColumns = [
@@ -55,19 +55,19 @@ const FeedbackList = () => {
       name: "Feedback untuk asisten",
       wrap: true,
       width: "400px",
-      selector: (row) => row.assistantFeedback
+      selector: ({ feedback: row }) => row.assistant
     },
     {
       name: "Feedback untuk praktikum",
       wrap: true,
       width: "400px",
-      selector: (row) => row.sessionFeedback
+      selector: ({ feedback: row }) => row.session
     },
     {
       name: "Feedback untuk Laboratorium",
       width: "400px",
       // wrap: true,
-      selector: (row) => row.laboratoryFeedback
+      selector: ({ feedback: row }) => row.laboratory
     }
   ]
 
@@ -86,7 +86,7 @@ const FeedbackList = () => {
             <DataTable
               noHeader
               pagination
-              data={feedback}
+              data={answers}
               columns={basicColumns}
               progressPending={isLoading}
               theme={skin}

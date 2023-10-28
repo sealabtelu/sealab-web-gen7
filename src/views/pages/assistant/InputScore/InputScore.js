@@ -319,7 +319,6 @@ const InputScore = () => {
                 className='react-dataTable my-1'
                 sortIcon={<ChevronDown size={10} />}
                 expandableRowsComponent={({ data }) => {
-                  console.log(data)
                   return (
                     <div className='expandable-content p-2'>
                       {

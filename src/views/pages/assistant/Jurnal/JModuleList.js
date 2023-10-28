@@ -24,7 +24,7 @@ import { getModules, setJStatus } from "@store/api/module"
 // ** Styles
 import "@src/assets/scss/module-list.scss"
 
-const PRTModuleList = () => {
+const JModuleList = () => {
   // ** Store Vars
   const dispatch = useDispatch()
   const { modules, isLoading } = useSelector((state) => state.module)
@@ -86,4 +86,4 @@ const PRTModuleList = () => {
   )
 }
 
-export default PRTModuleList
+export default JModuleList
