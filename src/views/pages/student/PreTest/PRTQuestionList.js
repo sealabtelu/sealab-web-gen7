@@ -8,6 +8,7 @@ import { addAnswer } from "@store/api/preTestAnswer"
 
 // ** Custom Components
 import Avatar from "@components/avatar"
+import toast from "react-hot-toast"
 
 // ** Icons Imports
 import { AlertCircle, HelpCircle } from "react-feather"
@@ -45,18 +46,25 @@ const PRTQuestionList = () => {
   })
 
   useEffect(() => {
-    dispatch(getListQuestionStudent()).then(({ payload: { status } }) => {
-      if (status === 400) {
-        dispatch(clearQuestions())
-        navigate("/student/pre-test")
-      }
-    })
+    dispatch(getListQuestionStudent()).unwrap()
+      .catch(({ status }) => {
+        if (status === 400) {
+          dispatch(clearQuestions())
+          toast.error("You already did it dude...")
+          navigate("/student/pre-test")
+        } else if (status === 403) {
+          toast.error("You are not in session!")
+          dispatch(clearQuestions())
+          navigate("/student/pre-test")
+        }
+      })
   }, [])
 
   const onSubmit = ({ idAnswers }) => {
     dispatch(addAnswer({ idAnswers })).then(({ payload: { status } }) => {
       if (status === 200) {
         dispatch(clearQuestions())
+        toast.success("Congrats you did it 🎉")
         navigate("/student/pre-test")
       }
     })

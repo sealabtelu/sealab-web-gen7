@@ -21,7 +21,7 @@ export const getListQuestionStudent = createAsyncThunk('question/getListQuestion
       return res.data.data
     })
   } catch (err) {
-    return rejectWithValue(err.response.data)
+    return rejectWithValue(err.response)
   }
 })
 
