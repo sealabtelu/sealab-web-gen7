@@ -95,7 +95,11 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
               name="assistantFeedback"
               control={control}
               defaultValue=''
-              rules={{ required: "Please fill feedback!" }}
+              rules={{
+                required: "Please fill feedback!",
+                minLength: { value: 30, message: "Minimum 30 characters" },
+                pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b)(?!.*(\w)\2{3,}).*$/, message: "Don't copy paste same thing :D" }
+              }}
               render={({ field }) => (
                 <Input
                   type="textarea"
@@ -105,6 +109,7 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
                 />
               )}
             />
+            {console.log(errors)}
             {errors && errors.assistantFeedback && (
               <FormFeedback>{errors.assistantFeedback.message}</FormFeedback>
             )}
@@ -116,7 +121,11 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
               name="sessionfeedback"
               control={control}
               defaultValue=''
-              rules={{ required: "Please fill feedback!" }}
+              rules={{
+                required: "Please fill feedback!",
+                minLength: { value: 30, message: "Minimum 30 characters" },
+                pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b)(?!.*(\w)\2{3,}).*$/, message: "Don't copy paste same thing :D" }
+              }}
               render={({ field }) => (
                 <Input
                   type="textarea"
@@ -137,7 +146,11 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
               name="laboratoryfeedback"
               control={control}
               defaultValue=''
-              rules={{ required: "Please fill feedback!" }}
+              rules={{
+                required: "Please fill feedback!",
+                minLength: { value: 30, message: "Minimum 30 characters" },
+                pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b)(?!.*(\w)\2{3,}).*$/, message: "Don't copy paste same thing :D" }
+              }}
               render={({ field }) => (
                 <Input
                   type="textarea"
