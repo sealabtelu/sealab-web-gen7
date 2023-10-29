@@ -4,7 +4,7 @@ import '@src/assets/scss/landing.scss'
 import { Button } from 'reactstrap'
 import { NavLink } from 'react-router-dom'
 
-import logo from '@src/assets/images/landing/logo-vertical.jpg'
+import logo from '@src/assets/images/landing/logo-vertical-resize.png'
 import ismileCard from '@src/assets/images/landing/ismile-card-landingpage.png'
 import templateFrame from '@src/assets/images/landing/template-frame.png'
 import eyes3D from '@src/assets/images/landing/eyes_3d.png'
@@ -12,22 +12,27 @@ import eyes3D from '@src/assets/images/landing/eyes_3d.png'
 const Landing = () => {
   return (
     <>
+      {/* NAVBAR */}
+      <section className='navbarx'>
+        <div className='logo-wrapperx'>
+          <a href='#'><img src={logo} height={'100%'} className='logox' alt='iSmile Logo' /></a>
+        </div>
+        <div className='contentx'>
+          <div className='buttonx aboutx' href='#about-lab'>
+            <a href='#about-lab'>
+              About Lab
+            </a>
+          </div>
+          <NavLink to='/login'>
+            <div className='buttonx loginx'>
+              Login
+            </div>
+          </NavLink>
+        </div>
+      </section>
+
       {/* BACKGROUND-IMAGE */}
       <div className='bg-image-wrapper'></div>
-
-      {/* HEADER */}
-      <div className='header-wrapper'>
-        {/* iSmile Logo */}
-        <a href='#' >
-          <img src={logo} className='ismile-logo' alt='iSmile Logo' />
-        </a>
-
-        {/* RIGHT ITEM */}
-        <div className='right-wrapper'>
-          <Button.Ripple href='#about-lab' className='right-text' color='flat-secondary'>About Lab</Button.Ripple>
-          <NavLink to='/login'><Button.Ripple className='nav-button'>LOGIN</Button.Ripple></NavLink>
-        </div>
-      </div>
 
       {/* MAIN */}
       <div className='main-wrapper'>
