@@ -5,6 +5,7 @@ import { Button } from 'reactstrap'
 import { NavLink } from 'react-router-dom'
 
 import logo from '@src/assets/images/landing/logo-vertical-resize.png'
+import gradientVector from '@src/assets/images/landing/gradient-landingpage.png'
 import ismileCard from '@src/assets/images/landing/ismile-card-landingpage.png'
 import templateFrame from '@src/assets/images/landing/template-frame.png'
 import eyes3D from '@src/assets/images/landing/eyes_3d.png'
@@ -31,9 +32,6 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* BACKGROUND-IMAGE */}
-      <div className='bg-image-wrapper'></div>
-
       {/* MAIN */}
       <div className='main-wrapper'>
         {/* INFO */}
@@ -56,6 +54,13 @@ const Landing = () => {
           <img src={ismileCard} alt='' />
         </div>
       </div>
+
+      {/* BACKGROUND GRADIENT */}
+      <img src={gradientVector} height={'100%'} className='background-gradientx' alt='Gredient Element' />
+
+      {/* BACKGROUND-IMAGE */}
+      {/* <div className='bg-image-wrapper'></div> */}
+
 
       {/* ABOUT US */}
       <div className='about' id='about-lab'>

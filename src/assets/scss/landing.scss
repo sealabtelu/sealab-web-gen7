@@ -22,17 +22,12 @@ $color-primary: #2feaa8;
 }
 
 
-// SECTION
-section {
-  background-color: white;
-}
-
-
 // NAVBAR
 .navbarx {
   padding: 2rem 3rem;
   display: flex;
   flex-direction: row;
+  background-color: transparent;
 
   .logo-wrapperx {
     height: 64px;
@@ -74,23 +69,6 @@ section {
         background-color: #2bd69a;
       }
     }
-  }
-}
-
-// BACKGROUND IMAGE
-.bg-image-wrapper {
-  background-color: white;
-  background-image: url("../images/landing/jumbotron-img-background.png");
-  background-position: right top;
-  background-size: contain;
-  background-repeat: no-repeat;
-  position: absolute !important;
-  width: 100% !important;
-  height: 100vh !important;
-  z-index: -1;
-  
-  @media (max-width: 640px) {
-    background-size: 150%;
   }
 }
 
@@ -212,6 +190,17 @@ section {
     }
   }
 }
+
+// BACKGROUND GRADIENT
+.background-gradientx {
+  position: absolute;
+  top: -50px;
+  right: -500px;
+  z-index: -1;
+  height: 1000px;
+  width: auto;
+}
+
 
 // ABOUT US
 .about {
@@ -346,8 +335,22 @@ section {
   }
 }
 
-// MOBILE SCREEN
+// **TABLET SCREEN
+@media (max-width: 1024px) {
+  // BACKGROUND GRADIENT
+  .background-gradientx {
+    position: absolute;
+    top: -50px; //changes
+    right: -500px; //changes
+    z-index: -1;
+    height: 800px; //changesd
+    width: auto;
+  }
+}
+
+// **MOBILE SCREEN
 @media (max-width: 640px) {
+  // NAVBAR
   .navbarx {
     padding: 1rem 1rem; //changes
   
@@ -363,5 +366,15 @@ section {
         border-radius: 0.5rem; //changes
       }
     }
+  }
+
+  // BACKGROUND GRADIENT
+  .background-gradientx {
+    position: absolute;
+    top: -100px; //changes
+    right: -500px; //changes
+    z-index: -1;
+    height: 700px; //changesd
+    width: auto;
   }
 }
