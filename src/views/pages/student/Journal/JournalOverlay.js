@@ -109,7 +109,6 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
                 />
               )}
             />
-            {console.log(errors)}
             {errors && errors.assistantFeedback && (
               <FormFeedback>{errors.assistantFeedback.message}</FormFeedback>
             )}
