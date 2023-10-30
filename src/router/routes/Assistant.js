@@ -20,6 +20,7 @@ const HASubmissionList = lazy(() => import("../../views/pages/assistant/HomeAssi
 const PRTModuleList = lazy(() => import("../../views/pages/assistant/PreTest/PRTModuleList"))
 const PRTQuestionList = lazy(() => import("../../views/pages/assistant/PreTest/PRTQuestionList.js"))
 const PRTQuestion = lazy(() => import("../../views/pages/assistant/PreTest/PRTQuestion"))
+const PRTSubmissionList = lazy(() => import("../../views/pages/assistant/PreTest/PRTSubmissionList"))
 const JModuleList = lazy(() => import("../../views/pages/assistant/Jurnal/JModuleList"))
 const JSubmissionList = lazy(() => import("../../views/pages/assistant/Jurnal/JSubmissionList"))
 const SelectGroup = lazy(() => import("../../views/pages/assistant/InputScore/SelectGroup"))
@@ -57,8 +58,12 @@ const AssistantRoutes = [
     element: <HAQuestion />
   },
   {
-    path: "/assistant/pre-test",
+    path: "/assistant/pre-test/master-control",
     element: <PRTModuleList />
+  },
+  {
+    path: "/assistant/pre-test/submission",
+    element: <PRTSubmissionList />
   },
   {
     path: "/assistant/pre-test/question-list",
@@ -138,7 +143,20 @@ export const AssistantMenu = [
     id: "preTest",
     title: "Pre Test",
     icon: <Edit3 size={20} />,
-    navLink: "/assistant/pre-test"
+    children: [
+      {
+        id: 'preTestAdmin',
+        title: 'Master Control',
+        icon: <Circle />,
+        navLink: "/assistant/pre-test/master-control"
+      },
+      {
+        id: 'preTestSubmission',
+        title: 'Submission',
+        icon: <Circle />,
+        navLink: "/assistant/pre-test/submission"
+      }
+    ]
   },
   {
     id: "journal",
