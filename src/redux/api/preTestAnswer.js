@@ -38,7 +38,7 @@ export const preTestAnswerSlice = createSlice({
         addAnswer.pending,
         getAnswerList.pending
       ), (state) => {
-        state.isLoading = false
+        state.isLoading = true
       })
       .addMatcher(isAnyOf(
         addAnswer.fulfilled, addAnswer.rejected,
