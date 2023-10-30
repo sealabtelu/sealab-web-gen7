@@ -38,6 +38,12 @@ export const inputScore = createAsyncThunk('seelabs/inputScore', async (param, {
   return await axios.post(`${endpoint}/score`, data)
 })
 
+export const getInputResult = createAsyncThunk('seelabs/inputResult', async (param) => {
+  return await axios.get(`${endpoint}/score`, { params: { ...param } }).then(res => {
+    return res.data.data
+  })
+})
+
 const initialGroupDetail = () => {
   const item = window.localStorage.getItem('seelabsGroupDetail')
   return item ? JSON.parse(item) : {}
@@ -48,7 +54,7 @@ const initialCurrentDSG = () => {
   return item ? JSON.parse(item) : {}
 }
 
-export const moduleSlice = createSlice({
+export const seelabsSlice = createSlice({
   name: 'seelabs',
   initialState: {
     groups: [],
@@ -98,6 +104,9 @@ export const moduleSlice = createSlice({
       .addCase(getBAP.fulfilled, (state, action) => {
         state.bap = action.payload ?? []
       })
+      .addCase(getInputResult.fulfilled, (state, action) => {
+        state.groups = action.payload ?? []
+      })
       .addCase(getStudentScore.fulfilled, (state, action) => {
         state.score = action.payload ?? []
       })
@@ -107,7 +116,13 @@ export const moduleSlice = createSlice({
       .addCase(inputScore.pending, (state) => {
         state.isSubmitLoading = true
       })
-      .addMatcher(isAnyOf(getGroupList.pending, getGroupDetail.pending, getBAP.pending, getStudentScore.pending), (state) => {
+      .addMatcher(isAnyOf(
+        getGroupList.pending,
+        getGroupDetail.pending,
+        getBAP.pending,
+        getStudentScore.pending,
+        getInputResult.pending
+      ), (state) => {
         state.isLoading = true
       })
       .addMatcher(isAnyOf(
@@ -115,7 +130,8 @@ export const moduleSlice = createSlice({
         getGroupDetail.rejected, getGroupDetail.fulfilled,
         inputScore.rejected, inputScore.fulfilled,
         getBAP.rejected, getBAP.fulfilled,
-        getStudentScore.rejected, getStudentScore.fulfilled
+        getStudentScore.rejected, getStudentScore.fulfilled,
+        getInputResult.rejected, getInputResult.fulfilled
       ), (state) => {
         state.isSubmitLoading = false
         state.isLoading = false
@@ -123,6 +139,6 @@ export const moduleSlice = createSlice({
   }
 })
 
-export const { } = moduleSlice.actions
+export const { } = seelabsSlice.actions
 
-export default moduleSlice.reducer
+export default seelabsSlice.reducer

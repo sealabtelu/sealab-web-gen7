@@ -23,12 +23,12 @@ const PRTQuestion = lazy(() => import("../../views/pages/assistant/PreTest/PRTQu
 const PRTSubmissionList = lazy(() => import("../../views/pages/assistant/PreTest/PRTSubmissionList"))
 const JModuleList = lazy(() => import("../../views/pages/assistant/Jurnal/JModuleList"))
 const JSubmissionList = lazy(() => import("../../views/pages/assistant/Jurnal/JSubmissionList"))
-const SelectGroup = lazy(() => import("../../views/pages/assistant/InputScore/SelectGroup"))
-const InputScore = lazy(() => import("../../views/pages/assistant/InputScore/InputScore"))
-const BAP = lazy(() => import("../../views/pages/assistant/BAP/BAP"))
-const HasilInput = lazy(() => import("../../views/pages/assistant/HasilInput/HasilInput"))
+const SelectGroup = lazy(() => import("../../views/pages/assistant/Score/SelectGroup"))
+const InputScore = lazy(() => import("../../views/pages/assistant/Score/InputScore"))
+const InputResult = lazy(() => import("../../views/pages/assistant/Score/InputResult"))
 const ViewNilai = lazy(() => import("../../views/pages/assistant/HasilInput/ViewNilai"))
 const UpdateScore = lazy(() => import("../../views/pages/assistant/HasilInput/UpdateScore"))
+const BAP = lazy(() => import("../../views/pages/assistant/BAP/BAP"))
 const StudentList = lazy(() => import("../../views/pages/assistant/user/StudentList"))
 const HomeDashboard = lazy(() => import("../../views/pages/assistant/user/Home"))
 
@@ -94,8 +94,8 @@ const AssistantRoutes = [
     element: <BAP />
   },
   {
-    path: "/assistant/hasil-input",
-    element: <HasilInput />
+    path: "/assistant/input-result",
+    element: <InputResult />
   },
   {
     path: "/assistant/hasil-input/view-nilai",
@@ -190,10 +190,10 @@ export const AssistantMenu = [
     navLink: "/assistant/BAP"
   },
   {
-    id: "hasilInput",
-    title: "Hasil Input",
+    id: "inputResult",
+    title: "Input Result",
     icon: <Bookmark size={20} />,
-    navLink: "/assistant/hasil-input"
+    navLink: "/assistant/input-result"
   },
   {
     id: "sanksiBermasalah",
