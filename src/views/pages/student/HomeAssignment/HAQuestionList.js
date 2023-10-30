@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 import { useForm, Controller } from "react-hook-form"
 import { useDispatch, useSelector } from "react-redux"
 import { addAnswer } from "@store/api/homeAssignmentAnswer"
-import { getListQuestion } from "@store/api/homeAssignmentQuestion"
+import { getListQuestionStudent } from "@store/api/homeAssignmentQuestion"
 
 // ** Custom Components
 import Avatar from "@components/avatar"
@@ -39,7 +39,7 @@ const HAQuestionList = () => {
   const { isLoading: submissionsLoading } = useSelector((state) => state.homeAssignmentAnswer)
 
   useEffect(() => {
-    dispatch(getListQuestion())
+    dispatch(getListQuestionStudent())
   }, [])
 
   const onSubmit = ({ file }) => {

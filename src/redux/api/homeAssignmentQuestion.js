@@ -12,6 +12,12 @@ export const getListQuestion = createAsyncThunk('question/getListQuestion', asyn
   })
 })
 
+export const getListQuestionStudent = createAsyncThunk('question/getListQuestionStudent', async (_, { getState }) => {
+  return await axios.get(`${endpoint}/student/${getState().module.selectedModule.id}`).then(res => {
+    return res.data.data
+  })
+})
+
 export const addQuestion = createAsyncThunk('question/addQuestion', async (param, { getState }) => {
   const data = {
     ...param,
@@ -57,20 +63,25 @@ export const homeAssignmentQuestionSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(getListQuestion.fulfilled, (state, action) => {
+      .addMatcher(isAnyOf(
+        getListQuestion.fulfilled,
+        getListQuestionStudent.fulfilled
+      ), (state, action) => {
         state.questions = action.payload
       })
       .addMatcher(isAnyOf(
         addQuestion.fulfilled, addQuestion.rejected,
         editQuestion.fulfilled, editQuestion.rejected,
-        getListQuestion.fulfilled, getListQuestion.rejected
+        getListQuestion.fulfilled, getListQuestion.rejected,
+        getListQuestionStudent.fulfilled, getListQuestionStudent.rejected
       ), (state) => {
         state.isLoading = false
       })
       .addMatcher(isAnyOf(
         addQuestion.pending,
         editQuestion.pending,
-        getListQuestion.pending
+        getListQuestion.pending,
+        getListQuestionStudent.pending
       ), (state) => {
         state.isLoading = true
       })
