@@ -5,7 +5,6 @@ import "@styles/react/libs/tables/react-dataTable-component.scss"
 
 // ** Third Party Components
 import { useEffect } from "react"
-import { useForm, Controller } from "react-hook-form"
 import { ChevronDown } from "react-feather"
 import Flatpickr from "react-flatpickr"
 import DataTable, { createTheme } from "react-data-table-component"
@@ -41,15 +40,9 @@ const BAP = () => {
   const { skin } = useSkin()
   const { bap, isLoading } = useSelector((state) => state.seelabs)
 
-  const { control, handleSubmit } = useForm()
-
   useEffect(() => {
     dispatch(getBAP())
   }, [])
-
-  const onSubmit = ({ date }) => {
-    dispatch(getBAP(formatUTCtoLocale(date)))
-  }
 
   const basicColumns = [
     {
@@ -73,32 +66,21 @@ const BAP = () => {
       </CardHeader>
 
       <CardBody>
-        <Form onSubmit={handleSubmit(onSubmit)}>
-          <Row className="row-input-score">
-            <Col className="mb-1" md="4" sm="12">
-              <Label className="form-label" for="default-picker">
-                Pilih tanggal awal jaga
-              </Label>
-              <Controller
-                name="date"
-                control={control}
-                defaultValue={[new Date()]}
-                render={({ field }) => (
-                  <Flatpickr
-                    className="form-control"
-                    disabled={isLoading}
-                    {...field}
-                  />
-                )}
-              />
-            </Col>
-            <Col className="mb-1" md="4" sm="12">
-              <Button.Ripple color="primary" type="submit" disabled={isLoading}>
-                Find
-              </Button.Ripple>
-            </Col>
-          </Row>
-        </Form>
+        <Row className="row-input-score">
+          <Col className="mb-1" md="4" sm="12">
+            <Label className="form-label" for="default-picker">
+              Pilih tanggal awal jaga
+            </Label>
+            <Flatpickr
+              className="form-control"
+              disabled={isLoading}
+              options={{ defaultDate: new Date() }}
+              onChange={(date) => {
+                dispatch(getBAP(formatUTCtoLocale(date)))
+              }}
+            />
+          </Col>
+        </Row>
         <Row>
           <DataTable
             noHeader
