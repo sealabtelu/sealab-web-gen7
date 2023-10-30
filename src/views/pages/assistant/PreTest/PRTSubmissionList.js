@@ -94,7 +94,7 @@ const PRTSubmissionList = () => {
 
   return (
     <Fragment>
-      <Breadcrumbs title='Pre Test' data={[{ title: 'Pre Test' }, { title: 'Submission' }]} />
+      <Breadcrumbs title='Pre Test' data={[{ title: 'Submission' }]} />
       <Card className='overflow-hidden'>
         <CardHeader>
           <CardTitle tag='h4'>Pre Test Submission</CardTitle>

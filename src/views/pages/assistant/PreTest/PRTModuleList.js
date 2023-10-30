@@ -1,8 +1,9 @@
-import { useEffect } from 'react'
+import { Fragment, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 // ** Custom Components
 import Avatar from '@components/avatar'
+import Breadcrumbs from '@components/breadcrumbs'
 
 // ** Icons Imports
 import * as Icon from 'react-feather'
@@ -47,7 +48,7 @@ const PRTModuleList = () => {
                   disabled={isLoading}
                   onChange={({ target: { checked } }) => dispatch(setPRTStatus({ id: item.id, isOpen: checked }))} />
               </div>
-              <Button color='relief-primary' disabled={isLoading} tag={Link} to='/assistant/pre-test/question-list' onClick={() => dispatch(selectModule(item))}>View</Button>
+              <Button color='relief-primary' disabled={isLoading} tag={Link} to='/assistant/pre-test/master-control/question-list' onClick={() => dispatch(selectModule(item))}>View</Button>
             </div>
           </div>
         )
@@ -60,13 +61,16 @@ const PRTModuleList = () => {
   }
 
   return (
-    <Card className='card-module'>
-      <CardHeader>
-        <CardTitle tag='h4'>Pre Test</CardTitle>
-        <Icon.MoreVertical size={18} className='cursor-pointer' />
-      </CardHeader>
-      <CardBody>{renderListModule()}</CardBody>
-    </Card>
+    <Fragment>
+      <Breadcrumbs title='Pre Test' data={[{ title: 'Master Control' }]} />
+      <Card className='card-module'>
+        <CardHeader>
+          <CardTitle tag='h4'>Pre Test</CardTitle>
+          <Icon.MoreVertical size={18} className='cursor-pointer' />
+        </CardHeader>
+        <CardBody>{renderListModule()}</CardBody>
+      </Card>
+    </Fragment>
   )
 }
 

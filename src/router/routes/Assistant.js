@@ -46,32 +46,32 @@ const AssistantRoutes = [
     element: <HAModuleList />
   },
   {
-    path: "/assistant/preliminary-assignment/submission",
-    element: <HASubmissionList />
-  },
-  {
-    path: "/assistant/preliminary-assignment/question-list",
+    path: "/assistant/preliminary-assignment/master-control/question-list",
     element: <HAQuestionList />
   },
   {
-    path: "/assistant/preliminary-assignment/question/:action",
+    path: "/assistant/preliminary-assignment/master-control/question/:action",
     element: <HAQuestion />
+  },
+  {
+    path: "/assistant/preliminary-assignment/submission",
+    element: <HASubmissionList />
   },
   {
     path: "/assistant/pre-test/master-control",
     element: <PRTModuleList />
   },
   {
-    path: "/assistant/pre-test/submission",
-    element: <PRTSubmissionList />
-  },
-  {
-    path: "/assistant/pre-test/question-list",
+    path: "/assistant/pre-test/master-control/question-list",
     element: <PRTQuestionList />
   },
   {
-    path: "/assistant/pre-test/question/:action",
+    path: "/assistant/pre-test/master-control/question/:action",
     element: <PRTQuestion />
+  },
+  {
+    path: "/assistant/pre-test/submission",
+    element: <PRTSubmissionList />
   },
   {
     path: "/assistant/journal/master-control",

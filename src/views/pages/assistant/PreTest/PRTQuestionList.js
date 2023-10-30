@@ -8,6 +8,7 @@ import { getListQuestion, deleteQuestion, selectQuestion } from '@store/api/preT
 
 // ** Custom Components
 import Avatar from '@components/avatar'
+import Breadcrumbs from '@components/breadcrumbs'
 
 // ** Icons Imports
 import { Edit, Delete, HelpCircle, PlusSquare } from 'react-feather'
@@ -84,7 +85,7 @@ const PRTQuestionList = () => {
             </div>
           </div>
           <div>
-            <Button color='relief-primary' tag={Link} to='/assistant/pre-test/question/edit' onClick={() => { dispatch(selectQuestion(item)) }}>
+            <Button color='relief-primary' tag={Link} to='/assistant/pre-test/master-control/question/edit' onClick={() => { dispatch(selectQuestion(item)) }}>
               <Edit size={14} />
               <span className='align-middle ms-25'>Edit</span>
             </Button>
@@ -115,13 +116,14 @@ const PRTQuestionList = () => {
 
   return (
     <Fragment>
+      <Breadcrumbs title='Pre Test' data={[{ title: 'Master Control', link: '/assistant/pre-test/master-control' }, { title: 'Questions' }]} />
       <Card>
         <CardHeader>
           <CardTitle tag='h4'>{`Module ${module.selectedModule.seelabsId}: ${module.selectedModule.name}`}</CardTitle>
         </CardHeader>
         <CardBody className='question-header'>
           <h6>{`Total Question: ${questions.length}`}</h6>
-          <Button color='relief-success' tag={Link} to='/assistant/pre-test/question/add'>
+          <Button color='relief-success' tag={Link} to='/assistant/pre-test/master-control/question/add'>
             <PlusSquare size={14} />
             <span className='align-middle ms-25'>Add</span>
           </Button>
