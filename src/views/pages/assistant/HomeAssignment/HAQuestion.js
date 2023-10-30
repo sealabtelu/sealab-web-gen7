@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, Fragment } from 'react'
 
 import { useNavigate, useParams } from 'react-router-dom'
 
@@ -8,6 +8,7 @@ import '@src/assets/scss/question-list.scss'
 
 // ** Custom Components
 import Avatar from '@components/avatar'
+import Breadcrumbs from '@components/breadcrumbs'
 
 // ** Icons Imports
 import { Edit, HelpCircle, PlusSquare } from 'react-feather'
@@ -28,6 +29,7 @@ import { capitalize, isObjEmpty } from "@utils"
 
 // ** Reactstrap Imports
 import { Card, CardHeader, CardTitle, CardBody, Button, Label, Form, Spinner } from 'reactstrap'
+
 const defaultValues = {
   question: EditorState.createEmpty(),
   answerKey: EditorState.createEmpty()
@@ -70,66 +72,69 @@ const HAQuestion = () => {
     }
     dispatch(isEdit ? editQuestion(data) : addQuestion(data)).then(({ payload: { status } }) => {
       if (status === 200) {
-        navigate('/assistant/preliminary-assignment/question-list')
+        navigate('/assistant/preliminary-assignment/master-control/question-list')
       }
     })
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
-      <Card className='question-item'>
-        <CardHeader className='question-title'>
-          <div className='d-flex'>
-            <Avatar className='rounded' color='light-info' icon={<HelpCircle size={20} />} />
-            <div className='title'>
-              <h4>Module 1</h4>
+    <Fragment>
+      <Breadcrumbs title='Home Assignment' data={[{ title: 'Master Control', link: '/assistant/preliminary-assignment/master-control' }, { title: 'Questions', link: '/assistant/preliminary-assignment/master-control/question-list' }, { title: 'Action' }]} />
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <Card className='question-item'>
+          <CardHeader className='question-title'>
+            <div className='d-flex'>
+              <Avatar className='rounded' color='light-info' icon={<HelpCircle size={20} />} />
+              <div className='title'>
+                <h4>Module 1</h4>
+              </div>
             </div>
-          </div>
-          <div>
-            <Button color='relief-success' type='submit' disabled={isLoading} >
-            {isLoading ? <Spinner color='primary' type='grow' size='sm' /> : action === 'edit' ? <Edit size={14} /> : <PlusSquare size={14} />}
-              <span className='align-middle'> {capitalize(action)}</span>
-            </Button>
-          </div>
-        </CardHeader>
-        <CardBody>
-          <div className="mb-1">
-            <Label className="form-label" for="field-question">
-              <h5>Question</h5>
-            </Label>
-            <Controller
-              name='question'
-              control={control}
-              render={({ field }) => (
-                <Editor
-                  id='field-question'
-                  placeholder='Enter the question here...'
-                  editorState={field.value}
-                  onEditorStateChange={field.onChange}
-                />
-              )}
-            />
-          </div>
-          <div className="mb-1">
-            <Label className="form-label" for="field-answer">
-              <h5>Answer Key</h5>
-            </Label>
-            <Controller
-              name='answerKey'
-              control={control}
-              render={({ field }) => (
-                <Editor
-                  id='field-answer'
-                  placeholder='Enter the answer key here...'
-                  editorState={field.value}
-                  onEditorStateChange={field.onChange}
-                />
-              )}
-            />
-          </div>
-        </CardBody>
-      </Card>
-    </Form>
+            <div>
+              <Button color='relief-success' type='submit' disabled={isLoading} >
+                {isLoading ? <Spinner color='primary' type='grow' size='sm' /> : action === 'edit' ? <Edit size={14} /> : <PlusSquare size={14} />}
+                <span className='align-middle'> {capitalize(action)}</span>
+              </Button>
+            </div>
+          </CardHeader>
+          <CardBody>
+            <div className="mb-1">
+              <Label className="form-label" for="field-question">
+                <h5>Question</h5>
+              </Label>
+              <Controller
+                name='question'
+                control={control}
+                render={({ field }) => (
+                  <Editor
+                    id='field-question'
+                    placeholder='Enter the question here...'
+                    editorState={field.value}
+                    onEditorStateChange={field.onChange}
+                  />
+                )}
+              />
+            </div>
+            <div className="mb-1">
+              <Label className="form-label" for="field-answer">
+                <h5>Answer Key</h5>
+              </Label>
+              <Controller
+                name='answerKey'
+                control={control}
+                render={({ field }) => (
+                  <Editor
+                    id='field-answer'
+                    placeholder='Enter the answer key here...'
+                    editorState={field.value}
+                    onEditorStateChange={field.onChange}
+                  />
+                )}
+              />
+            </div>
+          </CardBody>
+        </Card>
+      </Form>
+    </Fragment>
   )
 }
 

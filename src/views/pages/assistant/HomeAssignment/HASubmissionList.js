@@ -109,7 +109,7 @@ const HASubmissionList = () => {
 
   return (
     <Fragment>
-      <Breadcrumbs title='Home Assignment' data={[{ title: 'Home Assignment' }, { title: 'Submission' }]} />
+      <Breadcrumbs title='Home Assignment' data={[{ title: 'Submission' }]} />
       <Card className='overflow-hidden'>
         <CardHeader>
           <CardTitle tag='h4'>Home Assignment Submission</CardTitle>

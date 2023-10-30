@@ -1,8 +1,9 @@
-import { useEffect } from 'react'
+import { Fragment, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 // ** Custom Components
 import Avatar from '@components/avatar'
+import Breadcrumbs from '@components/breadcrumbs'
 
 // ** Icons Imports
 import { MoreVertical } from 'react-feather'
@@ -53,7 +54,7 @@ const HAModuleList = () => {
                   onChange={({ target: { checked } }) => dispatch(setPAStatus({ id: item.id, isOpen: checked }))} />
               </div>
 
-              <Button color='relief-primary' disabled={isLoading} tag={Link} to='/assistant/preliminary-assignment/question-list' onClick={() => dispatch(selectModule(item))}>View</Button>
+              <Button color='relief-primary' disabled={isLoading} tag={Link} to='/assistant/preliminary-assignment/master-control/question-list' onClick={() => dispatch(selectModule(item))}>View</Button>
             </div>
           </div>
         )
@@ -66,13 +67,16 @@ const HAModuleList = () => {
   }
 
   return (
-    <Card className='card-module'>
-      <CardHeader>
-        <CardTitle tag='h4'>Home Assignment</CardTitle>
-        <MoreVertical size={18} className='cursor-pointer' />
-      </CardHeader>
-      <CardBody>{renderListModule()}</CardBody>
-    </Card>
+    <Fragment>
+      <Breadcrumbs title='Home Assignment' data={[{ title: 'Master Control' }]} />
+      <Card className='card-module'>
+        <CardHeader>
+          <CardTitle tag='h4'>Home Assignment</CardTitle>
+          <MoreVertical size={18} className='cursor-pointer' />
+        </CardHeader>
+        <CardBody>{renderListModule()}</CardBody>
+      </Card>
+    </Fragment>
   )
 }
 

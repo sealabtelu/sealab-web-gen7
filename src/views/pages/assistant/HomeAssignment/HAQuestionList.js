@@ -8,6 +8,7 @@ import { getListQuestion, deleteQuestion, selectQuestion } from '@store/api/home
 
 // ** Custom Components
 import Avatar from '@components/avatar'
+import Breadcrumbs from '@components/breadcrumbs'
 
 // ** Icons Imports
 import { Edit, Delete, HelpCircle, PlusSquare } from 'react-feather'
@@ -84,7 +85,7 @@ const HAQuestionList = () => {
             </div>
           </div>
           <div>
-            <Button color='relief-primary' tag={Link} to='/assistant/preliminary-assignment/question/edit' onClick={() => { dispatch(selectQuestion(item)) }}>
+            <Button color='relief-primary' tag={Link} to='/assistant/preliminary-assignment/master-control/question/edit' onClick={() => { dispatch(selectQuestion(item)) }}>
               <Edit size={14} />
               <span className='align-middle ms-25'>Edit</span>
             </Button>
@@ -108,13 +109,14 @@ const HAQuestionList = () => {
 
   return (
     <Fragment>
+      <Breadcrumbs title='Home Assignment' data={[{ title: 'Master Control', link: '/assistant/preliminary-assignment/master-control' }, { title: 'Questions' }]} />
       <Card>
         <CardHeader>
           <CardTitle tag='h4'>{`Module ${module.selectedModule.seelabsId}: ${module.selectedModule.name}`}</CardTitle>
         </CardHeader>
         <CardBody className='question-header'>
           <h6>{`Total Question: ${questions?.length}`}</h6>
-          <Button color='relief-success' tag={Link} to='/assistant/preliminary-assignment/question/add'>
+          <Button color='relief-success' tag={Link} to='/assistant/preliminary-assignment/master-control/question/add'>
             <PlusSquare size={14} />
             <span className='align-middle ms-25'>Add</span>
           </Button>
