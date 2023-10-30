@@ -1,39 +1,68 @@
-import { useEffect, Fragment } from 'react'
-import { Upload } from "react-feather";
-
-import { Link } from 'react-router-dom'
+import { useEffect, Fragment } from "react"
 
 // ** Store & Actions
-import { useDispatch, useSelector } from 'react-redux'
-import { getListQuestion } from '@store/api/homeAssignmentQuestion'
+import { useNavigate } from "react-router-dom"
+import { useForm, Controller } from "react-hook-form"
+import { useDispatch, useSelector } from "react-redux"
+import { addAnswer } from "@store/api/homeAssignmentAnswer"
+import { getListQuestion } from "@store/api/homeAssignmentQuestion"
 
 // ** Custom Components
-import Avatar from '@components/avatar'
+import Avatar from "@components/avatar"
+import Dropzone from "@custom-components/dropzone"
 
 // ** Icons Imports
-import { Edit, Delete, HelpCircle, PlusSquare } from 'react-feather'
+import { HelpCircle } from "react-feather"
 
 // ** Reactstrap Imports
-import { Card, CardHeader, CardTitle, CardBody, Button, Row, Col } from 'reactstrap'
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardBody,
+  Form,
+  Row,
+  Col,
+  Spinner
+} from "reactstrap"
+
+// ** Styles
+import "@src/assets/scss/question-list.scss"
 
 const HAQuestionList = () => {
   const dispatch = useDispatch()
-  const module = useSelector(state => state.module)
-  const homeAssignment = useSelector(state => state.homeAssignmentQuestion)
+  const navigate = useNavigate()
+  const { control, handleSubmit } = useForm()
+
+  const module = useSelector((state) => state.module)
+  const { questions, isLoading } = useSelector((state) => state.homeAssignmentQuestion)
+  const { isLoading: submissionsLoading } = useSelector((state) => state.homeAssignmentAnswer)
 
   useEffect(() => {
     dispatch(getListQuestion())
   }, [])
 
+  const onSubmit = ({ file }) => {
+    dispatch(addAnswer({ file: file[0] })).then(({ payload: { status } }) => {
+      if (status === 200) {
+        navigate("/student/home-assignment")
+      }
+    })
+  }
+
   const renderListQuestion = () => {
-    if (homeAssignment.questions?.length > 0) {
-      return homeAssignment.questions.map((item, index) => {
+    if (questions?.length > 0) {
+      return questions.map((item, index) => {
         return (
-          <Card className='question-item' key={item.id}>
-            <CardHeader className='question-title'>
-              <div className='d-flex'>
-                <Avatar className='rounded' color='light-info' icon={<HelpCircle size={20} />} />
-                <div className='title'>
+          <Card className="question-item" key={item.id}>
+            <CardHeader className="question-title">
+              <div className="d-flex">
+                <Avatar
+                  className="rounded"
+                  color="light-info"
+                  icon={<HelpCircle size={20} />}
+                />
+                <div className="title">
                   <h4>{`Question ${index + 1}`}</h4>
                 </div>
               </div>
@@ -47,9 +76,7 @@ const HAQuestionList = () => {
         )
       })
     } else {
-      return (
-        <div>Tidak ada data yang tersedia.</div>
-      )
+      return <div>Tidak ada data yang tersedia.</div>
     }
   }
 
@@ -65,16 +92,37 @@ const HAQuestionList = () => {
             </CardHeader>
           </Col>
           <Col>
-            <CardBody className='question-header'>
-              {`Total Question: ${homeAssignment.questions.length}`}
+            <CardBody className="question-header">
+              {`Total Question: ${questions.length}`}
             </CardBody>
           </Col>
         </Row>
       </Card>
-      {renderListQuestion()}
-      <Button color="relief-primary" className='submit-button'>
-        Submit File
-      </Button>  
+      {
+        isLoading ? <div className='d-flex justify-content-center my-3'>
+          <Spinner color='primary' />
+        </div> : <Fragment>
+          {renderListQuestion()}
+          <Card>
+            <CardBody>
+              <Form onSubmit={handleSubmit(onSubmit)}>
+                <Controller
+                  name="file"
+                  control={control}
+                  defaultValue={[]}
+                  render={({ field: { onChange, value } }) => (
+                    <Dropzone
+                      loading={submissionsLoading}
+                      onChange={onChange}
+                      value={value}
+                    />
+                  )}
+                />
+              </Form>
+            </CardBody>
+          </Card>
+        </Fragment>
+      }
     </Fragment>
   )
 }

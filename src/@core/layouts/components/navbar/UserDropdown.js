@@ -1,15 +1,16 @@
 // ** React Imports
-import { Link } from "react-router-dom"
-import { useState } from 'react'
+import { Link, useNavigate, useLocation } from "react-router-dom"
+import { useState, useEffect } from 'react'
 
 // ** Utils
-import { getUserData } from "@utils"
+import { getUserData, isUserLoggedIn } from "@utils"
 
 // ** Store & Actions
 import { useDispatch } from 'react-redux'
 import { handleLogout } from '@store/authentication'
 
 // ** Custom Components
+import toast from 'react-hot-toast'
 import Avatar from "@components/avatar"
 
 // ** Third Party Components
@@ -20,7 +21,8 @@ import {
   MessageSquare,
   Settings,
   HelpCircle,
-  Power
+  Power,
+  X
 } from "react-feather"
 
 // ** Reactstrap Imports
@@ -34,17 +36,56 @@ import {
 const UserDropdown = () => {
   // ** Store Vars
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const location = useLocation()
 
   // ** State
   const [userData] = useState(getUserData(true))
 
-  //** ComponentDidMount
-  // useEffect(() => {
-  //   if (isUserLoggedIn() !== null) {
-  //     setUserData(getUserData())
-  //   }
-  // }, [])
+  const parseJwt = (token) => {
+    try {
+      return JSON.parse(atob(token.split('.')[1]))
+    } catch (e) {
+      return null
+    }
+  }
 
+  //** ComponentDidMount
+  useEffect(() => {
+    if (isUserLoggedIn()) {
+      const currentTime = new Date()
+      const tokenExpired = new Date(parseJwt(userData.appToken).exp * 1000)
+      // currentTime.setHours(currentTime.getHours() + 1)
+      // currentTime.setMinutes(currentTime.getMinutes() + 59)
+
+      if (currentTime > tokenExpired) {
+        console.log(currentTime)
+        console.log(tokenExpired)
+        toast(t => (
+          <ToastContent t={t} />
+        ))
+        dispatch(handleLogout())
+        navigate('/login')
+      }
+    }
+  }, [location])
+
+  const ToastContent = ({ t }) => {
+    return (
+      <div className='d-flex'>
+        <div className='me-1'>
+          <Avatar size='sm' color='danger' icon={<X size={12} />} />
+        </div>
+        <div className='d-flex flex-column'>
+          <div className='d-flex justify-content-between'>
+            <h6>Session Expired</h6>
+            <X size={12} className='cursor-pointer' onClick={() => toast.dismiss(t.id)} />
+          </div>
+          <span>Please login again 🔑</span>
+        </div>
+      </div>
+    )
+  }
   return (
     <UncontrolledDropdown tag="li" className="dropdown-user nav-item">
       <DropdownToggle
@@ -66,11 +107,11 @@ const UserDropdown = () => {
         />
       </DropdownToggle>
       <DropdownMenu end>
-        <DropdownItem tag={Link} to="/" onClick={(e) => e.preventDefault()}>
+        <DropdownItem tag={Link} to="/student/profile">
           <User size={14} className="me-75" />
           <span className="align-middle">Profile</span>
         </DropdownItem>
-        <DropdownItem tag={Link} to="/" onClick={(e) => e.preventDefault()}>
+        {/* <DropdownItem tag={Link} to="/" onClick={(e) => e.preventDefault()}>
           <Mail size={14} className="me-75" />
           <span className="align-middle">Inbox</span>
         </DropdownItem>
@@ -81,20 +122,8 @@ const UserDropdown = () => {
         <DropdownItem tag={Link} to="/" onClick={(e) => e.preventDefault()}>
           <MessageSquare size={14} className="me-75" />
           <span className="align-middle">Chats</span>
-        </DropdownItem>
+        </DropdownItem> */}
         <DropdownItem divider />
-        <DropdownItem
-          tag={Link}
-          to="/pages/"
-          onClick={(e) => e.preventDefault()}
-        >
-          <Settings size={14} className="me-75" />
-          <span className="align-middle">Settings</span>
-        </DropdownItem>
-        <DropdownItem tag={Link} to="/" onClick={(e) => e.preventDefault()}>
-          <HelpCircle size={14} className="me-75" />
-          <span className="align-middle">FAQ</span>
-        </DropdownItem>
         <DropdownItem tag={Link} to="/login" onClick={() => dispatch(handleLogout())}>
           <Power size={14} className="me-75" />
           <span className="align-middle">Logout</span>

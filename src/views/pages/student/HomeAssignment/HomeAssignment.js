@@ -1,96 +1,113 @@
-import React, { useState } from 'react'; // Import React
-import { Card, CardHeader, CardTitle, Button } from "reactstrap";
-import OverlayHA from './HAOverlay';
+import { useState, useEffect } from "react" // Import React
+import { Card, CardHeader, CardTitle, Button, Spinner } from "reactstrap"
+import { useDispatch, useSelector } from "react-redux"
+import { getPASubmissions } from "@store/api/module"
+import { Lock } from "react-feather"
+import OverlayHA from "./HAOverlay"
 
-export default function HomeAssigment() {
+const HomeAssigment = () => {
+  const [isOpenClicked, setIsOpenClicked] = useState(null)
 
-    const [modules, setModules] = useState([
-    {
-        id: "MODUL 1",
-        title: "Searching",
-        links: {
-        soal: "https://www.soaljurnal1.com",
-        submit: "https://www.submitjurnal1.com",
-        },
-        duedate:"Monday, 7 September 2023, 23:59"
-    },
-    {
-        id: "MODUL 2",
-        title: "Knowledge Representation",
-        links: {
-        soal: "https://www.soaljurnal2.com",
-        submit: "https://www.submitjurnal2.com",
-        },
-        duedate:"Monday, 7 September 2023, 23:59"
-    },
-    {
-        id: "MODUL 3",
-        title: "Fuzzyfikasi",
-        links: {
-        soal: "https://www.soaljurnal3.com",
-        submit: "https://www.submitjurnal3.com",
-        },
-        duedate:"Monday, 7 September 2023, 23:59"
-    },
-    {
-        id: "MODUL 4",
-        title: "Defuzzyfikasi: Mamdani",
-        links: {
-        soal: "https://www.soaljurnal4.com",
-        submit: "https://www.submitjurnal4.com",
-        },
-        duedate:"Monday, 7 September 2023, 23:59"
-    },
-    {
-        id: "MODUL 5",
-        title: "Defuzzyfikasi: Sugeno",
-        links: {
-        soal: "https://www.soaljurnal5.com",
-        submit: "https://www.submitjurnal5.com",
-        },
-        duedate:"Monday, 7 September 2023, 23:59"
-    },
-    {
-        id: "MODUL 6",
-        title: "Algoritma Genetika",
-        links: {
-        soal: "https://www.soaljurnal6.com",
-        submit: "https://www.submitjurnal6.com",
-        },
-        duedate:"Monday, 7 September 2023, 23:59"
-    },
-]);
+  const handleOpenClick = (moduleId) => {
+    setIsOpenClicked(moduleId)
+  }
 
-    const [isOpenClicked, setIsOpenClicked] = useState(null);
+  const dispatch = useDispatch()
+  const { modules, isLoading } = useSelector((state) => state.module)
 
-    const handleOpenClick = (moduleId) => {
-        setIsOpenClicked(moduleId);
-    };
+  useEffect(() => {
+    dispatch(getPASubmissions())
+  }, [])
 
-    return (
-        <div>
-        {modules.map((module) => (
-            <div key={module.id}>
-                {isOpenClicked === module.id && (
-                    <OverlayHA
-                    moduleTitle={module.title}
-                    moduleNumber={module.id.split(' ')[1]}
-                    // linkSoal={module.links.soal}
-                    // linkSubmit={module.links.submit}
-                    duedate={module.duedate}
-                    />
-                )}
-
-                {isOpenClicked !== module.id && (
-                    <Card className='card-student'>
-                        <CardHeader>
-                            <CardTitle>{`${module.id} - ${module.title}`}</CardTitle>
-                            <Button color="relief-primary" onClick={() => handleOpenClick(module.id)}>Open</Button>
-                        </CardHeader>
-                    </Card>
-                )}
-            </div>
-        ))}
-        </div>
-    );
+  return (
+    <div>
+      <Card className="card-overlay-jurnal">
+        {/* INFO */}
+        <h1>Tugas Pendahuluan</h1>
+        <ol type="1">
+          <li>
+            Tugas Pendahuluan dikerjakan sesuai dengan NIM terakhir Praktikan.
+            <br />
+            <b>Contoh:</b> 1103211233 [mengerjakan soal NIM Ganjil]
+            <br />
+            <b>Contoh:</b> 1103211234 [mengerjakan soal NIM Genap]
+          </li>
+          <li>
+            Tugas Pendahuluan dikerjakan menggunakan Template Tugas Pendahuluan
+            yang dapat di akses <a target="_blank" href="https://telkomuniversityofficial-my.sharepoint.com/:w:/g/personal/ismilelab_365_telkomuniversity_ac_id/EQ38JdnZGVhLlAR_65esJYsBlf9nGGY-VwxA_dPwdTom5w?e=ZPgayf">di sini</a>.
+          </li>
+          <li>
+            Jika terdapat soal yang memerlukan jawaban untuk ditulis manual maka
+            jawaban dapat di foto/scan dan kemudian di masukan ke dalam File
+            Tugas Pendahuluan.
+          </li>
+          <li>
+            Jawaban Tugas Pendahuluan diketik secara berurutan. Soal kemudian
+            Jawaban.
+          </li>
+          <li>
+            Soal TP akan diunggah setiap hari<b> Kamis sore</b>, pastikan untuk
+            membaca pengumuman TP setiap hari Kamis di OA Line Lab I-Smile
+            (@qup6728v).
+          </li>
+          <li>
+            Pengumpulan Tugas Pendahuluan harus dilakukan paling lambat pada
+            hari <b>Minggu sebelum pukul 12.00 WIB</b>, melalui situs web resmi
+            laboratorium I-Smile.
+          </li>
+          <li>
+            Bagi praktikan yang <b>tidak mengumpulkan</b> Tugas Pendahuluan maka
+            nilai praktikum modul yang bersangkutan dipotong <b>sebanyak 50%</b>
+          </li>
+          <li>
+            <b>Keterlambatan</b> dalam mengumpulkan Tugas Pendahuluan akan
+            mengakibatkan <b>pengurangan nilai</b> pada Tugas Pendahuluan di
+            modul yang bersangkutan.
+          </li>
+        </ol>
+      </Card>
+      {
+        isLoading ? <div className='d-flex justify-content-center my-3'>
+          <Spinner color='primary' />
+        </div> : modules.map((item, index) => (
+          <div key={item.id}>
+            {isOpenClicked === item.id && (
+              <OverlayHA
+                moduleTitle={item.name}
+                moduleNumber={index + 1}
+                item={item}
+              />
+            )}
+            {isOpenClicked !== item.id && (
+              <Card className="card-student">
+                <CardHeader>
+                  <CardTitle>
+                    Modul {index + 1} - {item.name}
+                  </CardTitle>
+                  {item.isOpen && !item.isSubmitted ? (
+                    <Button
+                      color="relief-primary"
+                      onClick={() => handleOpenClick(item.id)}
+                    >
+                      Open
+                    </Button>
+                  ) : (
+                    <Button
+                      color="flat-dark"
+                      disabled={true}
+                      style={{ display: "flex", alignItems: "center" }}
+                    >
+                      <Lock size={13} style={{ marginRight: "5px" }} /> {item.isSubmitted ? "Submitted" : "Closed"}
+                    </Button>
+                  )}
+                </CardHeader>
+              </Card>
+            )}
+          </div>
+        ))
+      }
+    </div>
+  )
 }
+
+export default HomeAssigment

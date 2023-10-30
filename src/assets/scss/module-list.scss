@@ -1,0 +1,25 @@
+.card-module {
+    .module-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+  
+      &:not(:last-child) {
+        margin-bottom: 1.2rem;
+      }
+  
+      .avatar {
+        margin-right: 1.2rem;
+  
+        .avatar-content {
+          width: 42px;
+          height: 42px;
+        }
+      }
+  
+      .module-title {
+        margin-bottom: 0.2rem;
+        margin-top: 0.2rem;
+      }
+    }
+  }

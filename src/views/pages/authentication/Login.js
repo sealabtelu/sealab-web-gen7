@@ -31,7 +31,8 @@ import {
   Button,
   CardText,
   CardTitle,
-  FormFeedback
+  FormFeedback,
+  Spinner
 } from "reactstrap"
 
 // ** Illustrations Imports
@@ -41,6 +42,7 @@ import illustrationsDark from "@src/assets/images/pages/login-v2-dark.svg"
 
 // ** Styles
 import "@styles/react/pages/page-authentication.scss"
+import { useState } from 'react'
 
 const ToastContent = ({ t, name, role }) => {
   return (
@@ -76,11 +78,14 @@ const Login = () => {
     formState: { errors }
   } = useForm({ defaultValues })
 
+  const [isLoading, setIsLoading] = useState(false)
+
   const source = skin === "dark" ? illustrationsDark : illustrationsLight
 
-  const onSubmit = data => {
+  const onSubmit = async data => {
     if (Object.values(data).every(field => field.length > 0)) {
-      useJwt
+      setIsLoading(true)
+      await useJwt
         .login({ username: data.username, password: data.password })
         .then(res => {
           const data = { ...res.data.data, appToken: res.data.data.appToken }
@@ -90,13 +95,22 @@ const Login = () => {
             <ToastContent t={t} role={data.role} name={data.name || data.username || 'Unknown'} />
           ))
         })
-        .catch(err => {
-          console.log(err)
-          setError('username', {
-            type: 'manual',
-            message: err.response.data.message
-          })
+        .catch(({ response: { data, status } }) => {
+          if (status === 404) {
+            setError('username', {
+              type: 'manual',
+              message: data.message
+            })
+          } else if (status === 401) {
+            setError('password', {
+              type: 'manual',
+              message: data.message
+            })
+          } else {
+            console.log(err)
+          }
         })
+      setIsLoading(false)
     } else {
       for (const key in data) {
         if (data[key].length === 0) {
@@ -149,7 +163,8 @@ const Login = () => {
                       autoFocus
                       type='text'
                       placeholder='NIM or Username SSO'
-                      // invalid={errors.username && true}
+                      disabled={isLoading}
+                      invalid={errors.username && true}
                       {...field} />
                   )}
                 />
@@ -166,19 +181,22 @@ const Login = () => {
                     <InputPasswordToggle
                       id='login-password'
                       className='input-group-merge'
-                      // invalid={errors.password && true}
+                      disabled={isLoading}
+                      invalid={errors.password && true}
                       {...field} />
                   )}
                 />
+                {errors.password && <FormFeedback>{errors.password.message}</FormFeedback>}
               </div>
-              <div className="form-check mb-1">
+              {/* <div className="form-check mb-1">
                 <Input type="checkbox" id="remember-me" />
                 <Label className="form-check-label" for="remember-me">
                   Remember Me
                 </Label>
-              </div>
-              <Button type='submit' color="primary" block>
-                Sign in
+              </div> */}
+              <Button className='mt-2' type='submit' color="primary" block disabled={isLoading}>
+                {isLoading && <Spinner color='light' size='sm' />}
+                <span className='ms-50'>Sign in</span>
               </Button>
             </Form>
           </Col>

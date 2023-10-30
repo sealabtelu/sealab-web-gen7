@@ -1,96 +1,114 @@
-import React, { useState } from 'react' // Import React
-import { Card, CardHeader, CardTitle, Button } from "reactstrap"
-import PreTestOverlay from './PreTestOverlay'
+import React, { useState, useEffect } from "react" // Import React
+import { Card, CardHeader, CardTitle, Button, Spinner } from "reactstrap"
+import PreTestOverlay from "./PreTestOverlay"
+import { useDispatch, useSelector } from "react-redux"
+import { getPRTSubmissions } from "@store/api/module"
+import { Lock } from "react-feather"
 
 export default function PreTest() {
+  const [isOpenClicked, setIsOpenClicked] = useState(null)
+  const handleOpenClick = (moduleId) => {
+    setIsOpenClicked(moduleId)
+  }
 
-    const [modules, setModules] = useState([
-        {
-            id: "MODUL 1",
-            title: "Searching",
-            links: {
-                soal: "https://www.soaljurnal1.com",
-                submit: "https://www.submitjurnal1.com"
-            },
-            duedate: "Monday, 7 September 2023, 23:59"
-        },
-        {
-            id: "MODUL 2",
-            title: "Knowledge Representation",
-            links: {
-                soal: "https://www.soaljurnal2.com",
-                submit: "https://www.submitjurnal2.com"
-            },
-            duedate: "Monday, 7 September 2023, 23:59"
-        },
-        {
-            id: "MODUL 3",
-            title: "Fuzzyfikasi",
-            links: {
-                soal: "https://www.soaljurnal3.com",
-                submit: "https://www.submitjurnal3.com"
-            },
-            duedate: "Monday, 7 September 2023, 23:59"
-        },
-        {
-            id: "MODUL 4",
-            title: "Defuzzyfikasi: Mamdani",
-            links: {
-                soal: "https://www.soaljurnal4.com",
-                submit: "https://www.submitjurnal4.com"
-            },
-            duedate: "Monday, 7 September 2023, 23:59"
-        },
-        {
-            id: "MODUL 5",
-            title: "Defuzzyfikasi: Sugeno",
-            links: {
-                soal: "https://www.soaljurnal5.com",
-                submit: "https://www.submitjurnal5.com"
-            },
-            duedate: "Monday, 7 September 2023, 23:59"
-        },
-        {
-            id: "MODUL 6",
-            title: "Algoritma Genetika",
-            links: {
-                soal: "https://www.soaljurnal6.com",
-                submit: "https://www.submitjurnal6.com"
-            },
-            duedate: "Monday, 7 September 2023, 23:59"
-        }
-    ])
+  const dispatch = useDispatch()
+  const {isLoading, modules} = useSelector((state) => state.module)
 
-    const [isOpenClicked, setIsOpenClicked] = useState(null)
+  useEffect(() => {
+    dispatch(getPRTSubmissions())
+  }, [])
 
-    const handleOpenClick = (moduleId) => {
-        setIsOpenClicked(moduleId)
-    }
+  return (
+    <div>
+      <Card className="card-overlay-jurnal">
+        {/* INFO */}
+        <h1>Tes Awal</h1>
+        <ol type="1">
+          <li>
+            Setiap mahasiswa diharapkan hadir <b> tepat waktu </b> sesuai jadwal
+            tes awal.
+          </li>
+          <li>
+            Tes Awal diberikan sebelum pelaksanaan praktikum dimulai dan
+            dilaksanakan maksimal selama <b>20 menit.</b>
+          </li>
+          <li>
+            Jumlah soal yang dikerjakan praktikan sebanyak 10 butir soal dengan
+            tipe soal adalah Multiple choice (Pilihan Ganda) soal acak
+          </li>
+          <li>
+            Apabila praktikan datang pada saat tes awal sedang berlangsung, maka
+            praktikan diperbolehkan mengikuti tes awal{" "}
+            <b>tanpa ada tambahan waktu.</b>
+          </li>
+          <li>
+            Mahasiswa diharapkan mematuhi semua instruksi yang diberikan oleh
+            asisten praktikum
+          </li>
+          <li>
+            <b>Dilarang</b> berbicara atau berkomunikasi dengan mahasiswa lain
+            selama tes berlangsung.
+          </li>
+          <li>
+            Tes awal bersifat <b>close all</b>, praktikan <b>dilarang</b>{" "}
+            menggunakan bahan referensi atau sumber lain selama mengerjakan
+            kuis.
+          </li>
+          <li>
+            Praktikan diwajibkan <b>menjaga etika</b> yang baik selama tes
+            berlangsung.
+          </li>
+          <li>
+            <b>Dilarang</b> mencoba melakukan tindakan curang, menyalin jawaban
+            mahasiswa lain, atau menggunakan perangkat lain selain komputer yang
+            telah disediakan.
+          </li>
+          <li>
+            Apabila praktikan <b>terbukti</b> melakukan tindak kecurangan
+            pengerjaan tes awal dalam bentuk apapun, maka <b>nilai TA = 0</b>
+          </li>
+        </ol>
+      </Card>
+      {
+        isLoading ? <div className='d-flex justify-content-center my-3'>
+          <Spinner color='primary' />
+        </div> : modules.map((item, index) => (
+          <div key={item.id}>
+            {isOpenClicked === item.id && (
+              <PreTestOverlay
+                moduleTitle={item.name}
+                moduleNumber={index + 1}
+                item={item}
+              />
+            )}
 
-    return (
-        <div>
-            {modules.map((module) => (
-                <div key={module.id}>
-                    {isOpenClicked === module.id && (
-                        <PreTestOverlay
-                            moduleTitle={module.title}
-                            moduleNumber={module.id.split(' ')[1]}
-                            // linkSoal={module.links.soal}
-                            // linkSubmit={module.links.submit}
-                            duedate={module.duedate}
-                        />
-                    )}
-
-                    {isOpenClicked !== module.id && (
-                        <Card className='card-student'>
-                            <CardHeader>
-                                <CardTitle>{`${module.id} - ${module.title}`}</CardTitle>
-                                <Button color="relief-primary" onClick={() => handleOpenClick(module.id)}>Open</Button>
-                            </CardHeader>
-                        </Card>
-                    )}
-                </div>
-            ))}
-        </div>
-    )
+            {isOpenClicked !== item.id && (
+              <Card className="card-student">
+                <CardHeader>
+                  <CardTitle>
+                    Modul {index + 1} - {item.name}
+                  </CardTitle>
+                  {item.isOpen && !item.isSubmitted ? (
+                    <Button
+                      color="relief-primary"
+                      onClick={() => handleOpenClick(item.id)}
+                    >
+                      Open
+                    </Button>
+                  ) : (
+                    <Button
+                      color="flat-dark"
+                      disabled={true}
+                      style={{ display: "flex", alignItems: "center" }}
+                    >
+                      <Lock size={13} style={{ marginRight: "5px" }} />  {item.isSubmitted ? "Submitted" : "Closed"}
+                    </Button>
+                  )}
+                </CardHeader>
+              </Card>
+            )}
+          </div>
+        ))}
+    </div>
+  )
 }

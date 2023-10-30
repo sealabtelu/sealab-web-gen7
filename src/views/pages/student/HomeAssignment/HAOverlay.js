@@ -1,59 +1,96 @@
-/* eslint-disable react/prop-types */
-import { Card, Button, Row, Col, Container } from "reactstrap";
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from "react" // Import React
+import { Card, Button, Row, Col, Container } from "reactstrap"
+import { Link } from "react-router-dom"
+import { selectModule } from "@store/api/module"
+import { useDispatch } from "react-redux"
+import moment from "moment/moment"
 
-export default function OverlayHA({ moduleTitle, moduleNumber,linkSoal,duedate}) {
-    return (
-        <Card className="card-overlay-jurnal">
-            {/* INFO */}
-            <h1>HARAP DIBACA</h1>
-                <ol type="1">
-                    <li>
-                        Tugas Pendahuluan dikerjakan sesuai dengan NIM terakhir Praktikan.<br />
-                        <b>Contoh:</b> 1103211233 [mengerjakan soal NIM Ganjil]<br />
-                        <b>Contoh:</b> 1103211234 [mengerjakan soal NIM Genap]
-                    </li>
-                    <li>
-                        Tugas Pendahuluan dikerjakan menggunakan Template Tugas Pendahuluan di word dan dikumpulkan dalam format PDF
-                    </li>
-                    <li>
-                        Jika terdapat soal yang memerlukan jawaban untuk ditulis manual maka jawaban dapat di foto/scan dan kemudian di masukan ke dalam File Tugas Pendahuluan.
-                    </li>
-                    <li>
-                        Jawaban Tugas Pendahuluan diketik secara berurutan. Soal kemudian Jawaban.
-                    </li>
-                    <li>
-                        Format penamaan file Tugas Pendahuluan sebagai berikut:<br />
-                        <b>TP_NAMA_NIM_MODUL_HARI_SHIFT&shy;_KELOMPOK</b><br />
-                        <b>Contoh: TP_MUHAMMAD HILMY AZIZ_1103190001_MODUL 1_RABU_SHIFT 2_13</b>
-                    </li>
-                    <li>
-                        Tugas Pendahuluan dikumpulkan melalui website i-Smile dengan batas pengumpulan <b>Hari Sabtu 23:59 WIB.</b>
-                    </li>
-                    <li>
-                        Seluruh informasi kebutuhan untuk Praktikum Kecerdasan Buatan dapat diakses melalui Website i-Smile.
-                    </li>
-                </ol>
+const OverlayHA = ({ moduleTitle, moduleNumber, item }) => {
+  const dispatch = useDispatch()
+  const [timeRemaining, setTimeRemaining] = useState(0)
+  const [deadline, setDeadline] = useState("")
+  useEffect(() => {
+    const now = new Date()
+    const midnight = new Date("2023-10-29T12:00:00")
+    setDeadline(midnight)
+    // midnight.setHours(12, 0, 0, 0);
 
-                    <hr />
-            
-            {/* SUBMIT */}
-            <Container>
-                <Row>
-                    <Col>
-                        <h2>Tugas Pendahuluan</h2>
-                        <h3>MODUL {moduleNumber}: {moduleTitle}</h3>
-                        <p><b>Due Date: </b> &nbsp;{duedate} </p>
-                        <p><b>Time Remaining:</b> &nbsp; 1 Hour 23 Min</p>
-                        <p><b>Time Submitted:</b> &nbsp; </p>
-                    </Col>
-                    <Col xs='12' sm='6'>
-                    <div className="button-container">
-                        <Button tag={Link} to='/student/home-assignment/questionList' color="relief-primary" >Soal Tugas Pendahuluan</Button>
-                    </div>
-                    </Col>
-                </Row>
-            </Container>
-        </Card>
-    )
+    const timeDiff = midnight - now
+    if (timeDiff > 0) {
+      setTimeRemaining(Math.floor(timeDiff / 1000))
+    } else {
+      setTimeRemaining(0)
+    }
+
+    const interval = setInterval(() => {
+      if (timeRemaining > 0) {
+        setTimeRemaining(timeRemaining - 1)
+      } else {
+        clearInterval(interval)
+      }
+    }, 1000)
+
+    // Membersihkan interval saat komponen tidak lagi digunakan
+    return () => {
+      clearInterval(interval)
+    }
+  }, [timeRemaining])
+
+  const formatTime = (seconds) => {
+    const hour = Math.floor(seconds / 3600)
+    const minutes = Math.floor((seconds % 3600) / 60)
+    const remainingSeconds = seconds % 60
+    return `${hour}:${minutes}:${remainingSeconds < 10 ? "0" : ""
+      }${remainingSeconds}`
+  }
+
+  return (
+    <Card className="card-overlay-jurnal">
+      {/* SUBMIT */}
+      <Container>
+        <Row>
+          <Col>
+            {/* <h2>Tugas Pendahuluan</h2> */}
+            <h3 className="title-overlay">
+              <b>
+                MODUL {moduleNumber}: {moduleTitle}
+              </b>
+            </h3>
+            <p>
+              <b>Due Date: </b>{" "}
+              {moment(deadline).format("ddd DD MMM YYYY h:mm A")}
+            </p>
+            <p>
+              <b>Time Remaining: </b>
+              {formatTime(timeRemaining)}
+            </p>
+            {/* <p>
+              <b>Time Submitted:</b> &nbsp;{" "}
+            </p> */}
+          </Col>
+          <Col xs="12" sm="6">
+            <div className="button-container">
+              <Button
+                tag={Link}
+                to="/student/home-assignment/questionList"
+                color="relief-primary"
+                onClick={() => dispatch(selectModule(item))}
+              >
+                Soal Tugas Pendahuluan
+              </Button>
+              <Button
+                href="https://tinyurl.com/TemplateSoalTP"
+                target="_blank"
+                color="flat-dark"
+              >
+                <b>Template Jawaban TP</b>
+              </Button>
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    </Card>
+  )
 }
+
+export default OverlayHA

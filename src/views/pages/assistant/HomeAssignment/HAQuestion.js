@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 // ** Styles
 import '@styles/react/libs/editor/editor.scss'
+import '@src/assets/scss/question-list.scss'
 
 // ** Custom Components
 import Avatar from '@components/avatar'
@@ -26,7 +27,7 @@ import { addQuestion, editQuestion, clearSelected } from '@store/api/homeAssignm
 import { capitalize, isObjEmpty } from "@utils"
 
 // ** Reactstrap Imports
-import { Card, CardHeader, CardTitle, CardBody, Button, Label, Form } from 'reactstrap'
+import { Card, CardHeader, CardTitle, CardBody, Button, Label, Form, Spinner } from 'reactstrap'
 const defaultValues = {
   question: EditorState.createEmpty(),
   answerKey: EditorState.createEmpty()
@@ -36,7 +37,11 @@ const HAQuestion = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { action } = useParams()
-  const homeAssignment = useSelector(state => state.homeAssignmentQuestion)
+  const {
+    isLoading,
+    selectedQuestion
+  } = useSelector(state => state.homeAssignmentQuestion)
+
   const {
     control,
     reset,
@@ -44,8 +49,8 @@ const HAQuestion = () => {
   } = useForm({ defaultValues })
 
   useEffect(() => {
-    if (action === 'edit' && !isObjEmpty(homeAssignment.selectedQuestion)) {
-      const { question, answerKey } = homeAssignment.selectedQuestion
+    if (action === 'edit' && !isObjEmpty(selectedQuestion)) {
+      const { question, answerKey } = selectedQuestion
       reset({
         question: EditorState.createWithContent(ContentState.createFromBlockArray(htmlToDraft(question))),
         answerKey: EditorState.createWithContent(ContentState.createFromBlockArray(htmlToDraft(answerKey)))
@@ -58,13 +63,15 @@ const HAQuestion = () => {
   }, [])
 
   const onSubmit = ({ question, answerKey }) => {
-    const isEdit = action === 'edit' && !isObjEmpty(homeAssignment.selectedQuestion)
+    const isEdit = action === 'edit' && !isObjEmpty(selectedQuestion)
     const data = {
       question: draftToHtml(convertToRaw(question.getCurrentContent())),
       answerKey: draftToHtml(convertToRaw(answerKey.getCurrentContent()))
     }
-    dispatch(isEdit ? editQuestion(data) : addQuestion(data)).then(() => {
-      navigate('/assistant/preliminary-assignment/question-list')
+    dispatch(isEdit ? editQuestion(data) : addQuestion(data)).then(({ payload: { status } }) => {
+      if (status === 200) {
+        navigate('/assistant/preliminary-assignment/question-list')
+      }
     })
   }
 
@@ -79,8 +86,8 @@ const HAQuestion = () => {
             </div>
           </div>
           <div>
-            <Button color='relief-success' type='submit'>
-              {action === 'edit' ? <Edit size={14} /> : <PlusSquare size={14} />}
+            <Button color='relief-success' type='submit' disabled={isLoading} >
+            {isLoading ? <Spinner color='primary' type='grow' size='sm' /> : action === 'edit' ? <Edit size={14} /> : <PlusSquare size={14} />}
               <span className='align-middle'> {capitalize(action)}</span>
             </Button>
           </div>

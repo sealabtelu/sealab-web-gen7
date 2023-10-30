@@ -2,7 +2,7 @@
 import axios from 'axios'
 
 // ** Redux Imports
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk, isAnyOf } from '@reduxjs/toolkit'
 
 const endpoint = '/preliminary-assignment-question'
 
@@ -42,6 +42,7 @@ export const homeAssignmentQuestionSlice = createSlice({
   name: 'question',
   initialState: {
     questions: [],
+    isLoading: false,
     selectedQuestion: initialSelectedQuestion()
   },
   reducers: {
@@ -55,9 +56,24 @@ export const homeAssignmentQuestionSlice = createSlice({
     }
   },
   extraReducers: builder => {
-    builder.addCase(getListQuestion.fulfilled, (state, action) => {
-      state.questions = action.payload
-    })
+    builder
+      .addCase(getListQuestion.fulfilled, (state, action) => {
+        state.questions = action.payload
+      })
+      .addMatcher(isAnyOf(
+        addQuestion.fulfilled, addQuestion.rejected,
+        editQuestion.fulfilled, editQuestion.rejected,
+        getListQuestion.fulfilled, getListQuestion.rejected
+      ), (state) => {
+        state.isLoading = false
+      })
+      .addMatcher(isAnyOf(
+        addQuestion.pending,
+        editQuestion.pending,
+        getListQuestion.pending
+      ), (state) => {
+        state.isLoading = true
+      })
   }
 })
 
