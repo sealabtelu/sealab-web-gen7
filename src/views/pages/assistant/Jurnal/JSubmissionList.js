@@ -111,7 +111,7 @@ const JSubmissionList = () => {
 
   return (
     <Fragment>
-      <Breadcrumbs title='Journal' data={[{ title: 'Journal' }, { title: 'Submission' }]} />
+      <Breadcrumbs title='Journal' data={[{ title: 'Submission' }]} />
       <Card className='overflow-hidden'>
         <CardHeader>
           <CardTitle tag='h4'>Journal Submission</CardTitle>

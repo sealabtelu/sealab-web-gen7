@@ -1,8 +1,9 @@
-import { useEffect } from "react"
+import { Fragment, useEffect } from "react"
 import { Link } from "react-router-dom"
 
 // ** Custom Components
 import Avatar from "@components/avatar"
+import Breadcrumbs from '@components/breadcrumbs'
 
 // ** Icons Imports
 import * as Icon from "react-feather"
@@ -76,13 +77,16 @@ const JModuleList = () => {
   }
 
   return (
-    <Card className="card-module">
-      <CardHeader>
-        <CardTitle tag="h4">Journal</CardTitle>
-        <Icon.MoreVertical size={18} className="cursor-pointer" />
-      </CardHeader>
-      <CardBody>{renderListModule()}</CardBody>
-    </Card>
+    <Fragment>
+      <Breadcrumbs title='Journal' data={[{ title: 'Master Control' }]} />
+      <Card className="card-module">
+        <CardHeader>
+          <CardTitle tag="h4">Journal</CardTitle>
+          <Icon.MoreVertical size={18} className="cursor-pointer" />
+        </CardHeader>
+        <CardBody>{renderListModule()}</CardBody>
+      </Card>
+    </Fragment>
   )
 }
 
