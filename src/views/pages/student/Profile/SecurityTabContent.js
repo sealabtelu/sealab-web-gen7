@@ -102,7 +102,7 @@ const SecurityTabContent = ({ loading }) => {
                   name='oldPassword'
                   render={({ field }) => (
                     <InputPasswordToggle
-                      label='old Password'
+                      label='Old Password'
                       htmlFor='oldPassword'
                       className='input-group-merge'
                       disabled={loading}

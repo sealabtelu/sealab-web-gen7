@@ -7,6 +7,7 @@ import "@styles/react/libs/tables/react-dataTable-component.scss"
 import { useEffect } from "react"
 import { ChevronDown } from "react-feather"
 import Flatpickr from "react-flatpickr"
+import moment from 'moment/moment'
 import DataTable, { createTheme } from "react-data-table-component"
 
 // ** Utils
@@ -46,15 +47,25 @@ const BAP = () => {
 
   const basicColumns = [
     {
+      name: "#",
+      center: true,
+      grow: 0,
+      cell: (row, index) => index + 1
+    },
+    {
       name: "Date",
-      selector: (row) => row.date
+      minWidth: "20rem",
+      selector: (row) => row.date,
+      format: (row) => moment(row.date).utc().format("dddd, DD MMMM YYYY")
     },
     {
       name: "Module",
+      center: true,
       selector: (row) => row.module
     },
     {
       name: "Shift",
+      center: true,
       selector: (row) => row.shift
     }
   ]

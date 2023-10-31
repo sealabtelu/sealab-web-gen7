@@ -1,7 +1,6 @@
 import { lazy } from "react"
 
 import {
-  Mail,
   Home,
   Clipboard,
   Bookmark,
@@ -10,7 +9,8 @@ import {
   Book,
   AlertTriangle,
   User,
-  Circle
+  Circle,
+  BookOpen
 } from "react-feather"
 
 const HAModuleList = lazy(() => import("../../views/pages/assistant/HomeAssignment/HAModuleList"))
@@ -26,7 +26,7 @@ const JSubmissionList = lazy(() => import("../../views/pages/assistant/Jurnal/JS
 const SelectGroup = lazy(() => import("../../views/pages/assistant/Score/SelectGroup"))
 const InputScore = lazy(() => import("../../views/pages/assistant/Score/InputScore"))
 const InputResult = lazy(() => import("../../views/pages/assistant/Score/InputResult"))
-const ViewNilai = lazy(() => import("../../views/pages/assistant/HasilInput/ViewNilai"))
+const InputPreview = lazy(() => import("../../views/pages/assistant/Score/InputPreview"))
 const UpdateScore = lazy(() => import("../../views/pages/assistant/HasilInput/UpdateScore"))
 const BAP = lazy(() => import("../../views/pages/assistant/BAP/BAP"))
 const StudentList = lazy(() => import("../../views/pages/assistant/user/StudentList"))
@@ -98,8 +98,8 @@ const AssistantRoutes = [
     element: <InputResult />
   },
   {
-    path: "/assistant/hasil-input/view-nilai",
-    element: <ViewNilai />
+    path: "/assistant/input-result/preview",
+    element: <InputPreview />
   },
   {
     path: "/assistant/hasil-input/update-score",
@@ -123,7 +123,7 @@ export const AssistantMenu = [
   {
     id: "homeAssignment",
     title: "Home Assignment",
-    icon: <Clipboard size={20} />,
+    icon: <BookOpen size={20} />,
     children: [
       {
         id: 'homeAssignmentAdmin',
@@ -192,7 +192,7 @@ export const AssistantMenu = [
   {
     id: "inputResult",
     title: "Input Result",
-    icon: <Bookmark size={20} />,
+    icon: <Book size={20} />,
     navLink: "/assistant/input-result"
   },
   {

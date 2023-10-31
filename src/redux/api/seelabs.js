@@ -44,6 +44,20 @@ export const getInputResult = createAsyncThunk('seelabs/inputResult', async (par
   })
 })
 
+export const deleteInputResult = createAsyncThunk('seelabs/deleteInputResult', async (param, { rejectWithValue }) => {
+  try {
+    return await axios.delete(`${endpoint}/score`, { data: { ...param } })
+  } catch (err) {
+    return rejectWithValue(err.response.data)
+  }
+})
+
+export const getInputPreview = createAsyncThunk('seelabs/inputPreview', async (param) => {
+  return await axios.post(`${endpoint}/score/result`, param).then(res => {
+    return res.data.data
+  })
+})
+
 const initialGroupDetail = () => {
   const item = window.localStorage.getItem('seelabsGroupDetail')
   return item ? JSON.parse(item) : {}
@@ -58,8 +72,11 @@ export const seelabsSlice = createSlice({
   name: 'seelabs',
   initialState: {
     groups: [],
+    inputScoreResult: [],
+    inputScorePreview: [],
     groupDetail: initialGroupDetail(),
     currentDSG: initialCurrentDSG(),
+    currentModule: null,
     bap: [],
     score: [],
     isLoading: false,
@@ -87,6 +104,11 @@ export const seelabsSlice = createSlice({
       { value: 6, label: '6' }
     ]
   },
+  reducers: {
+    setModule: (state, action) => {
+      state.currentModule = action.payload
+    }
+  },
   extraReducers: builder => {
     builder
       .addCase(getGroupList.fulfilled, (state, action) => {
@@ -105,7 +127,13 @@ export const seelabsSlice = createSlice({
         state.bap = action.payload ?? []
       })
       .addCase(getInputResult.fulfilled, (state, action) => {
-        state.groups = action.payload ?? []
+        state.inputScoreResult = action.payload ?? []
+      })
+      .addCase(getInputResult.pending, (state) => {
+        state.inputScorePreview = []
+      })
+      .addCase(getInputPreview.fulfilled, (state, action) => {
+        state.inputScorePreview = action.payload ?? []
       })
       .addCase(getStudentScore.fulfilled, (state, action) => {
         state.score = action.payload ?? []
@@ -121,7 +149,9 @@ export const seelabsSlice = createSlice({
         getGroupDetail.pending,
         getBAP.pending,
         getStudentScore.pending,
-        getInputResult.pending
+        getInputResult.pending,
+        getInputPreview.pending,
+        deleteInputResult.pending
       ), (state) => {
         state.isLoading = true
       })
@@ -131,7 +161,9 @@ export const seelabsSlice = createSlice({
         inputScore.rejected, inputScore.fulfilled,
         getBAP.rejected, getBAP.fulfilled,
         getStudentScore.rejected, getStudentScore.fulfilled,
-        getInputResult.rejected, getInputResult.fulfilled
+        getInputResult.rejected, getInputResult.fulfilled,
+        getInputPreview.rejected, getInputPreview.fulfilled,
+        deleteInputResult.rejected, deleteInputResult.fulfilled
       ), (state) => {
         state.isSubmitLoading = false
         state.isLoading = false
@@ -139,6 +171,6 @@ export const seelabsSlice = createSlice({
   }
 })
 
-export const { } = seelabsSlice.actions
+export const { setModule } = seelabsSlice.actions
 
 export default seelabsSlice.reducer

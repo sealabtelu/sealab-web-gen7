@@ -1,5 +1,4 @@
 // ** Styles
-import '@src/assets/scss/pilih-group.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 
 // ** Third Party Components
