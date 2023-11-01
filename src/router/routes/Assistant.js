@@ -27,7 +27,7 @@ const SelectGroup = lazy(() => import("../../views/pages/assistant/Score/SelectG
 const InputScore = lazy(() => import("../../views/pages/assistant/Score/InputScore"))
 const InputResult = lazy(() => import("../../views/pages/assistant/Score/InputResult"))
 const InputPreview = lazy(() => import("../../views/pages/assistant/Score/InputPreview"))
-const UpdateScore = lazy(() => import("../../views/pages/assistant/HasilInput/UpdateScore"))
+const UpdateScore = lazy(() => import("../../views/pages/assistant/Score/UpdateScore"))
 const BAP = lazy(() => import("../../views/pages/assistant/BAP/BAP"))
 const StudentList = lazy(() => import("../../views/pages/assistant/user/StudentList"))
 const HomeDashboard = lazy(() => import("../../views/pages/assistant/user/Home"))
@@ -102,7 +102,7 @@ const AssistantRoutes = [
     element: <InputPreview />
   },
   {
-    path: "/assistant/hasil-input/update-score",
+    path: "/assistant/input-result/update-score",
     element: <UpdateScore />
   }
 ]

@@ -82,7 +82,7 @@ const InputPreview = () => {
       name: "Date",
       width: "12rem",
       selector: (row) => row.date,
-      format: (row) => moment(row.paSubmitTime).utc().format("ddd, DD MMM YYYY")
+      format: (row) => moment(row.date).utc().format("ddd, DD MMM YYYY")
     }
 
   ]
@@ -93,10 +93,10 @@ const InputPreview = () => {
       <Card >
         <CardHeader>
           <CardTitle tag='h4'>Score Preview</CardTitle>
-          {scores &&
+          {scores && !isLoading &&
             <div className="d-flex gap-1">
-              <Badge className="ms-auto" color="light-info" pill>{`Module ${module ?? 0}`}</Badge>
-              <Badge className="ms-auto" color="light-success" pill>{`Shift ${shift ?? 0}`}</Badge>
+              <Badge className="ms-auto" color="light-info" pill>{`Module ${module}`}</Badge>
+              <Badge className="ms-auto" color="light-success" pill>{`Shift ${shift}`}</Badge>
             </div>
           }
         </CardHeader>

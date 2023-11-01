@@ -12,17 +12,11 @@ export const getModules = createAsyncThunk("module/getModules", async () => {
   })
 })
 
-export const getAllSubmissions = createAsyncThunk(
-  "question/getAllSubmissions",
-  async (seelabsId, { getState }) => {
-    const data = {
-      seelabsId,
-      group: getState().seelabs.currentDSG.group
-    }
-    return await axios.post(`${endpoint}/submission/list`, data).then((res) => {
-      return res.data.data
-    })
-  }
+export const getAllSubmissions = createAsyncThunk("question/getAllSubmissions", async (param) => {
+  return await axios.post(`${endpoint}/submission/list`, param).then((res) => {
+    return res.data.data
+  })
+}
 )
 
 export const getPASubmissions = createAsyncThunk(

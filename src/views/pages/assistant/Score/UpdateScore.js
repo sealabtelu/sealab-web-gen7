@@ -1,6 +1,5 @@
 // ** Styles
 import '@src/assets/scss/pilih-group.scss'
-import '@styles/react/libs/flatpickr/flatpickr.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 
 import { Fragment, useEffect, useState } from "react"
@@ -9,13 +8,13 @@ import { Fragment, useEffect, useState } from "react"
 import { NavLink, useNavigate } from 'react-router-dom'
 import { ChevronDown } from 'react-feather'
 import Select from 'react-select'
-import Flatpickr from 'react-flatpickr'
 import DataTable, { createTheme } from 'react-data-table-component'
+import Breadcrumbs from '@components/breadcrumbs'
 import moment from 'moment/moment'
 
 
 // ** Utils
-import { selectThemeColors, formatUTCtoLocale } from '@utils'
+import { selectThemeColors, isObjEmpty } from '@utils'
 import { useForm, Controller } from 'react-hook-form'
 import { useSkin } from "@hooks/useSkin"
 
@@ -23,8 +22,8 @@ import { useSkin } from "@hooks/useSkin"
 import { Card, CardHeader, CardTitle, CardBody, Row, Col, Spinner, Label, Button, Form, FormFeedback, Input, ListGroup, ListGroupItem, Badge } from 'reactstrap'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { inputScore } from '@store/api/seelabs'
-import { getAllSubmissions, clearSubmissions } from '@store/api/module'
+import { updateScore, clearInputDetail } from '@store/api/seelabs'
+import { clearSubmissions } from '@store/api/module'
 
 const fileOptions = [
   { value: 'paFilePath', label: 'Home Assignment' },
@@ -37,15 +36,13 @@ createTheme("dark", {
   }
 })
 
-const InputScore = () => {
+const UpdateScore = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { skin } = useSkin()
 
   const {
-    currentDSG,
-    groupDetail,
-    moduleOptions,
+    inputScoreDetail,
     isLoading,
     isSubmitLoading
   } = useSelector(state => state.seelabs)
@@ -56,8 +53,7 @@ const InputScore = () => {
 
   const {
     control,
-    setValue,
-    formState: { errors },
+    // formState: { errors },
     handleSubmit
   } = useForm()
 
@@ -66,6 +62,7 @@ const InputScore = () => {
 
   useEffect(() => {
     dispatch(clearSubmissions())
+    dispatch(clearInputDetail())
   }, [])
 
   //increase counter
@@ -79,26 +76,25 @@ const InputScore = () => {
     if (counter > 0) setCounter(count => count - 1)
   }
 
-  const onSubmit = ({ date, module, scores }) => {
-    dispatch(inputScore({
-      date: formatUTCtoLocale(date),
-      module: module.value,
+  const onSubmit = ({ scores }) => {
+    dispatch(updateScore({
+      ...inputScoreDetail,
       scores: scores.map(item => ({
         ...item,
         status: item.d !== 0
       }))
     })).then(({ payload: { status } }) => {
       if (status === 200) {
-        navigate('/assistant/select-group')
+        navigate('/assistant/input-result')
       }
     })
   }
 
-  const CustomInput = ({ name }) => (
+  const CustomInput = ({ name, value }) => (
     <Controller
       name={name}
       control={control}
-      defaultValue={0}
+      defaultValue={value}
       render={({ field }) => (
         <Input
           type="number"
@@ -114,26 +110,25 @@ const InputScore = () => {
   const submissionColumns = [
     {
       name: "NIM",
-      grow: 1,
       minWidth: "9rem",
       selector: (row) => row.nim
     },
     {
       name: "Name",
-      grow: 2,
       wrap: true,
+      minWidth: '12rem',
       selector: (row) => row.name
     },
     {
       name: "TA",
-      grow: 1,
+      grow: 0,
       center: true,
       selector: (row) => row.prtScore
     },
     {
       name: "TP Submit Time",
-      grow: 2,
       wrap: true,
+      minWidth: '11rem',
       selector: (row) => row.paSubmitTime,
       format: (row) => moment(row.paSubmitTime).utc().format("ddd DD MMM YYYY h:mm A")
     },
@@ -175,13 +170,13 @@ const InputScore = () => {
       name: "Name",
       grow: 4,
       wrap: true,
-      selector: (row, index) => (
+      selector: ({ name, uid }, index) => (
         <Fragment>
-          {row.name}
+          {name}
           <Controller
             name={`scores[${index}].uid`}
             control={control}
-            defaultValue={row.uid}
+            defaultValue={uid}
             render={({ field }) => (
               <Input type='hidden' {...field} />
             )}
@@ -192,27 +187,30 @@ const InputScore = () => {
     {
       name: "TA",
       center: true,
-      selector: (row, index) => (
+      selector: ({ ta }, index) => (
         <CustomInput
           name={`scores[${index}].ta`}
+          value={ta}
         />
       )
     },
     {
       name: "TP",
       center: true,
-      selector: (row, index) => (
+      selector: ({ tp }, index) => (
         <CustomInput
           name={`scores[${index}].tp`}
+          value={tp}
         />
       )
     },
     {
       name: "D",
       center: true,
-      selector: (row, index) => (
+      selector: ({ d }, index) => (
         <CustomInput
           name={`scores[${index}].d`}
+          value={d}
         />
       )
 
@@ -220,92 +218,76 @@ const InputScore = () => {
     {
       name: "I1",
       center: true,
-      selector: (row, index) => (
+      selector: ({ i1 }, index) => (
         <CustomInput
           name={`scores[${index}].i1`}
+          value={i1}
         />
       )
     },
     {
       name: "I2",
       center: true,
-      selector: (row, index) => (
+      selector: ({ i2 }, index) => (
         <CustomInput
           name={`scores[${index}].i2`}
+          value={i2}
         />
       )
     }
   ]
 
   return (
-    <>
+    <Fragment>
+      <Breadcrumbs title='Input Result' data={[{ title: 'Group List', link: '/assistant/input-result' }, { title: 'Update' }]} />
       {/* GROUP INFO LINK */}
       <Card>
         <CardHeader>
-          <CardTitle tag='h4'>Input Score</CardTitle>
+          <CardTitle tag='h4'>Update Score</CardTitle>
         </CardHeader>
 
         <CardBody>
-          {/* INPUT SIDE */}
           <Form onSubmit={handleSubmit(onSubmit)}>
-            <Row >
-              {/* PILIH MODUL FIELD */}
-              <Col className='mb-1' md='4' sm='12'>
-                <Label className='form-label'>Select Module</Label>
-                <Controller
-                  name='module'
-                  control={control}
-                  // defaultValue={moduleOptions[0]}
-                  rules={{ required: "Select module!" }}
-                  render={({ field }) => (
-                    <Select
-                      theme={selectThemeColors}
-                      className={`react-select ${errors.module && "is-invalid"}`}
-                      classNamePrefix='select'
-                      options={moduleOptions}
-                      isClearable
-                      isDisabled={isLoading || isSubmitLoading}
-                      {...field}
-                      onChange={(selectedOption) => {
-                        if (selectedOption) {
-                          dispatch(getAllSubmissions({
-                            seelabsId: selectedOption.value,
-                            group: currentDSG.group
-                          })).then(({ payload }) => {
-                            groupDetail.map((item, index) => setValue(`scores[${index}].ta`, payload.find(x => x.name === item.name).prtScore))
-                          })
-                        } else {
-                          dispatch(clearSubmissions())
-                        }
-                        field.onChange(selectedOption)
-                      }}
-                    />
-                  )}
-                />
-                {errors && errors.module && (
-                  <FormFeedback>{errors.module.message}</FormFeedback>
-                )}
-              </Col>
-              {/* DATE PICKER FIELD */}
-              <Col className='mb-1' md='4' sm='12'>
-                <Label className='form-label' for='default-picker'>
-                  Date
-                </Label>
-                <Controller
-                  name='date'
-                  control={control}
-                  defaultValue={[new Date()]}
-                  render={({ field }) => (
-                    <Flatpickr
-                      className='form-control'
-                      disabled={isLoading || isSubmitLoading}
-                      // options={{ enableTime: false }}
-                      {...field} />
-                  )}
-                />
-              </Col>
-            </Row>
-            <Row>
+            <DataTable
+              responsive
+              striped
+              highlightOnHover
+              noHeader
+              progressPending={isLoading}
+              data={inputScoreDetail?.scores}
+              columns={inputColumns}
+              theme={skin}
+              className='react-dataTable my-1'
+              sortIcon={<ChevronDown size={10} />}
+              progressComponent={
+                <div className='d-flex justify-content-center my-1'>
+                  <Spinner color='primary' />
+                </div>
+              }
+            />
+            {
+              !isObjEmpty(inputScoreDetail) &&
+              <Button.Ripple color='primary' type='submit' block disabled={isLoading || isSubmitLoading}>
+                {isSubmitLoading && <Spinner color='light' size='sm' />}
+                <span className='align-middle'> Submit</span>
+              </Button.Ripple>
+            }
+          </Form>
+          {/* </Col>
+          </Row> */}
+
+        </CardBody>
+      </Card>
+
+
+      {/* PDF SIDE */}
+      {submissions.length > 0 &&
+        <Fragment>
+          <Card>
+            <CardHeader>
+              <CardTitle tag='h4'>Submission List</CardTitle>
+            </CardHeader>
+            <CardBody>
               <DataTable
                 responsive
                 striped
@@ -366,104 +348,62 @@ const InputScore = () => {
                   </div>
                 }
               />
-            </Row>
-            {!isLoading && (
+            </CardBody>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle tag='h4'>PDF View</CardTitle>
+            </CardHeader>
+            <CardBody>
               <Row>
-                <DataTable
-                  responsive
-                  striped
-                  highlightOnHover
-                  noHeader
-                  progressPending={isLoading}
-                  data={groupDetail}
-                  columns={inputColumns}
-                  theme={skin}
-                  className='react-dataTable my-1'
-                  sortIcon={<ChevronDown size={10} />}
-                  progressComponent={
-                    <div className='d-flex justify-content-center my-1'>
-                      <Spinner color='primary' />
-                    </div>
-                  }
-                />
-              </Row>
-            )}
+                {/* PDF SIDE */}
+                <Col md='12' sm='12'>
+                  {/* TP/JURNAL */}
+                  <Row className="row-input-score">
+                    <Col md='8'>
+                      <Label className='form-label'>Pilih File</Label>
+                      <Select
+                        theme={selectThemeColors}
+                        className='react-select'
+                        classNamePrefix='select'
+                        defaultValue={fileOptions[0]}
+                        name='clear'
+                        options={fileOptions}
+                        isClearable
+                        onChange={(e) => {
+                          setCounter(0)
+                          setSelectedFileOption(e.value)
+                        }}
+                      />
+                    </Col>
+                  </Row>
 
-            {/* SUBMIT */}
-            <Button.Ripple color='primary' type='submit' block disabled={isLoading || isSubmitLoading}>
-              {isSubmitLoading && <Spinner color='light' size='sm' />}
-              <span className='align-middle'> Submit</span>
-            </Button.Ripple>
-          </Form>
-          {/* </Col>
-          </Row> */}
+                  {/* NEXT STATE */}
+                  <Row>
+                    <Col className="next-state">
+                      <Button.Ripple className='next-state-button' color='primary' onClick={decrease}>Prev</Button.Ripple>
+                      <Button.Ripple className='next-state-button' color='primary' onClick={increase}>Next</Button.Ripple>
+                    </Col>
+                  </Row>
 
-        </CardBody>
-      </Card>
-
-      {/* PDF SIDE */}
-      {submissions.length > 0 &&
-        <Card>
-          <CardHeader>
-            <CardTitle tag='h4'>PDF View</CardTitle>
-          </CardHeader>
-
-          <CardBody>
-            <Row>
-              {/* PDF SIDE */}
-              <Col md='12' sm='12'>
-                {/* TP/JURNAL */}
-                <Row className="row-input-score">
-                  <Col md='8'>
-                    <Label className='form-label'>Pilih File</Label>
-                    <Select
-                      theme={selectThemeColors}
-                      className='react-select'
-                      classNamePrefix='select'
-                      defaultValue={fileOptions[0]}
-                      name='clear'
-                      options={fileOptions}
-                      isClearable
-                      onChange={(e) => {
-                        setCounter(0)
-                        setSelectedFileOption(e.value)
-                      }}
+                  {/* PDF */}
+                  <Row>
+                    <embed
+                      className='PdfContainer'
+                      // onLoad={(e) => console.log(e)}
+                      key={submissions[counter][selectedFileOption]}
+                      src={submissions[counter][selectedFileOption]}
+                      type='application/pdf'
                     />
-                  </Col>
-                </Row>
-
-                {/* NEXT STATE */}
-                <Row>
-                  <Col className="next-state">
-                    <Button.Ripple className='next-state-button' color='primary' onClick={decrease}>Prev</Button.Ripple>
-                    <Button.Ripple className='next-state-button' color='primary' onClick={increase}>Next</Button.Ripple>
-                  </Col>
-                </Row>
-
-                {/* PDF */}
-                <Row>
-                  {/* <iframe
-                    // key={submissions[counter][selectedFileOption]}
-                    // className='PdfContainer'
-                    loading='eager'
-                    height='700'
-                    key={submissions[counter][selectedFileOption]}
-                    src={`https://docs.google.com/viewer?url=${submissions[counter][selectedFileOption]}&embedded=true`}>
-                  </iframe> */}
-                  <embed
-                    className='PdfContainer'
-                    // onLoad={(e) => console.log(e)}
-                    key={submissions[counter][selectedFileOption]}
-                    src={submissions[counter][selectedFileOption]}
-                    type='application/pdf'
-                  />
-                </Row>
-              </Col>
-            </Row>
-          </CardBody>
-        </Card>
+                  </Row>
+                </Col>
+              </Row>
+            </CardBody>
+          </Card>
+        </Fragment>
       }
-    </>
+    </Fragment>
   )
 }
-export default InputScore
+export default UpdateScore

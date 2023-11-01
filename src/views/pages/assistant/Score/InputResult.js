@@ -3,8 +3,8 @@ import "@styles/react/libs/tables/react-dataTable-component.scss"
 
 // ** Third Party Components
 import { Fragment } from 'react'
-import { ChevronDown, Edit, FileText, Trash } from 'react-feather'
-import { NavLink } from 'react-router-dom'
+import { Edit, FileText, Trash } from 'react-feather'
+import { NavLink, useNavigate } from 'react-router-dom'
 import DataTable, { createTheme } from "react-data-table-component"
 import Select from 'react-select'
 import Swal from 'sweetalert2'
@@ -16,9 +16,10 @@ import { selectThemeColors } from '@utils'
 import { useSkin } from "@hooks/useSkin"
 
 // ** Reactstrap Imports
-import { Card, CardHeader, CardTitle, CardBody, Form, Row, Col, Label, Button, Spinner, ListGroup, ListGroupItem, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
+import { Card, CardHeader, CardTitle, CardBody, Row, Col, Label, Button, Spinner, ListGroup, ListGroupItem, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { getInputResult, getInputPreview, deleteInputResult, setModule } from '@store/api/seelabs'
+import { getInputResult, getInputPreview, deleteInputResult, getInputDetail, setModule } from '@store/api/seelabs'
+import { getAllSubmissions } from '@store/api/module'
 
 const MySwal = withReactContent(Swal)
 
@@ -30,6 +31,7 @@ createTheme("dark", {
 
 const InputResult = () => {
   const { skin } = useSkin()
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const {
@@ -111,16 +113,25 @@ const InputResult = () => {
         <div className='d-flex flex-column gap-1'>
           <UncontrolledButtonDropdown>
             <NavLink to="/assistant/input-result/preview">
-              <Button outline color='info'
-                onClick={() => dispatch(getInputPreview({ module: currentModule.value, group: row.group }))}
-              >
+              <Button outline color='primary' onClick={() => dispatch(getInputPreview({ module: currentModule.value, group: row.group }))}>
                 <FileText size={15} />
                 <span className='align-middle ms-25'>Preview</span>
               </Button>
             </NavLink>
-            <DropdownToggle className='dropdown-toggle-split' color='info' caret></DropdownToggle>
+            <DropdownToggle className='dropdown-toggle-split' color='primary' caret></DropdownToggle>
             <DropdownMenu>
-              <DropdownItem href='/' tag='a'>
+              <DropdownItem href='/' tag='a' onClick={e => {
+                e.preventDefault()
+                dispatch(getAllSubmissions({
+                  seelabsId: currentModule.value,
+                  group: row.group
+                }))
+                dispatch(getInputDetail({
+                  module: currentModule.value,
+                  group: row.group
+                }))
+                navigate('/assistant/input-result/update-score')
+              }}>
                 <Edit size={15} />
                 <span className='align-middle ms-50'>Edit</span>
               </DropdownItem>
@@ -152,16 +163,15 @@ const InputResult = () => {
             <Col className='mb-1' md='4' sm='12'>
               <Label className='form-label'>Select Module</Label>
               <Select
-                isClearable
                 theme={selectThemeColors}
                 className='react-select'
                 classNamePrefix='select'
                 options={moduleOptions}
                 value={currentModule}
                 disabled={isLoading || isSubmitLoading}
-                onChange={(e) => {
-                  dispatch(setModule(e))
-                  dispatch(getInputResult({ module: e.value }))
+                onChange={(selectedOption) => {
+                  dispatch(getInputResult({ module: selectedOption.value }))
+                  dispatch(setModule(selectedOption))
                 }}
               />
             </Col>
@@ -174,9 +184,6 @@ const InputResult = () => {
               progressPending={isLoading}
               theme={skin}
               className="react-dataTable my-1"
-              sortIcon={<ChevronDown size={10} />}
-              pagination
-              paginationRowsPerPageOptions={[10, 25, 50, 100]}
               progressComponent={
                 <div className="d-flex justify-content-center my-1">
                   <Spinner color="primary" />
