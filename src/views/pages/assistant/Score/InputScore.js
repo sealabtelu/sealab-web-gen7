@@ -118,7 +118,7 @@ const InputScore = () => {
       grow: 2,
       wrap: true,
       selector: (row) => row.paSubmitTime,
-      format: (row) => moment(row.paSubmitTime).utc().format("ddd DD MMM YYYY h:mm A")
+      format: (row) => moment(row.paSubmitTime).utc().format("ddd DD MMM YYYY HH:mm A")
     },
     {
       name: "TP",

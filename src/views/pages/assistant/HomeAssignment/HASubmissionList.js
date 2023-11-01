@@ -88,7 +88,7 @@ const HASubmissionList = () => {
       wrap: true,
       minWidth: '11rem',
       selector: (row) => row.submitTime,
-      format: (row) => moment(row.submitTime).utc().format("ddd DD MMM YYYY h:mm A")
+      format: (row) => moment(row.submitTime).utc().format("ddd DD MMM YYYY HH:mm A")
     },
     {
       name: "Link",

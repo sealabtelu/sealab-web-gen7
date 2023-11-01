@@ -58,7 +58,7 @@ const OverlayHA = ({ moduleTitle, moduleNumber, item }) => {
             </h3>
             <p>
               <b>Due Date: </b>{" "}
-              {moment(deadline).format("ddd DD MMM YYYY h:mm A")}
+              {moment(deadline).format("ddd DD MMM YYYY HH:mm A")}
             </p>
             <p>
               <b>Time Remaining: </b>
