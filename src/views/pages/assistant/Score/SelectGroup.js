@@ -7,6 +7,7 @@ import { NavLink } from 'react-router-dom'
 import { useForm, Controller } from 'react-hook-form'
 import { ChevronDown } from 'react-feather'
 import DataTable, { createTheme } from 'react-data-table-component'
+import Breadcrumbs from '@components/breadcrumbs'
 
 // ** Utils
 import { useSkin } from "@hooks/useSkin"
@@ -16,6 +17,7 @@ import { selectThemeColors } from '@utils'
 import { Card, CardHeader, CardTitle, CardBody, Form, Row, Col, Label, Button, Spinner, ListGroup, ListGroupItem } from 'reactstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { getGroupList, getGroupDetail } from '@store/api/seelabs'
+import { Fragment } from 'react'
 
 createTheme('dark', {
   background: {
@@ -88,79 +90,82 @@ const SelectGroup = () => {
   ]
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle tag='h4'>Select Group</CardTitle>
-      </CardHeader>
-      <CardBody>
-        <Form onSubmit={handleSubmit(onSubmit)}>
-          <Row className='align-items-end'>
-            <Col className='mb-1' md='4' sm='12'>
-              <Label className='form-label'>Select Day</Label>
-              <Controller
-                name='day'
-                control={control}
-                defaultValue={dayOptions[currentDSG.day - 1 ?? 0]}
-                render={({ field }) => (
-                  <Select
-                    theme={selectThemeColors}
-                    className='react-select'
-                    classNamePrefix='select'
-                    options={dayOptions}
-                    isClearable
-                    isDisabled={isLoading}
-                    {...field}
-                  />
-                )}
+    <Fragment>
+      <Breadcrumbs title='Input Score' data={[{ title: 'Group List' }]} />
+      <Card>
+        <CardHeader>
+          <CardTitle tag='h4'>Select Group</CardTitle>
+        </CardHeader>
+        <CardBody>
+          <Form onSubmit={handleSubmit(onSubmit)}>
+            <Row className='align-items-end'>
+              <Col className='mb-1' md='4' sm='12'>
+                <Label className='form-label'>Select Day</Label>
+                <Controller
+                  name='day'
+                  control={control}
+                  defaultValue={dayOptions[currentDSG.day - 1 ?? 0]}
+                  render={({ field }) => (
+                    <Select
+                      theme={selectThemeColors}
+                      className='react-select'
+                      classNamePrefix='select'
+                      options={dayOptions}
+                      isClearable
+                      isDisabled={isLoading}
+                      {...field}
+                    />
+                  )}
+                />
+              </Col>
+              <Col className='mb-1' md='4' sm='12'>
+                <Label className='form-label'>Select Shift</Label>
+                <Controller
+                  name='shift'
+                  control={control}
+                  defaultValue={shiftOptions[currentDSG.shift - 1 ?? 0]}
+                  render={({ field }) => (
+                    <Select
+                      theme={selectThemeColors}
+                      className='react-select'
+                      classNamePrefix='select'
+                      options={shiftOptions}
+                      isClearable
+                      isDisabled={isLoading}
+                      {...field}
+                    />
+                  )}
+                />
+              </Col>
+              <Col className='mb-1' md='4' sm='12'>
+                <Button.Ripple color='primary' type='submit' disabled={isLoading}>Find</Button.Ripple>
+              </Col>
+            </Row>
+          </Form>
+          <Row>
+            <div className='react-dataTable my-1'>
+              <DataTable
+                responsive
+                striped
+                highlightOnHover
+                noHeader
+                progressPending={isLoading}
+                data={groups}
+                columns={basicColumns}
+                theme={skin}
+                className='react-dataTable'
+                sortIcon={<ChevronDown size={10} />}
+                progressComponent={
+                  <div className='d-flex justify-content-center my-1'>
+                    <Spinner color='primary' />
+                  </div>
+                }
               />
-            </Col>
-            <Col className='mb-1' md='4' sm='12'>
-              <Label className='form-label'>Select Shift</Label>
-              <Controller
-                name='shift'
-                control={control}
-                defaultValue={shiftOptions[currentDSG.shift - 1 ?? 0]}
-                render={({ field }) => (
-                  <Select
-                    theme={selectThemeColors}
-                    className='react-select'
-                    classNamePrefix='select'
-                    options={shiftOptions}
-                    isClearable
-                    isDisabled={isLoading}
-                    {...field}
-                  />
-                )}
-              />
-            </Col>
-            <Col className='mb-1' md='4' sm='12'>
-              <Button.Ripple color='primary' type='submit' disabled={isLoading}>Find</Button.Ripple>
-            </Col>
+            </div>
           </Row>
-        </Form>
-        <Row>
-          <div className='react-dataTable my-1'>
-            <DataTable
-              responsive
-              striped
-              highlightOnHover
-              noHeader
-              progressPending={isLoading}
-              data={groups}
-              columns={basicColumns}
-              theme={skin}
-              className='react-dataTable'
-              sortIcon={<ChevronDown size={10} />}
-              progressComponent={
-                <div className='d-flex justify-content-center my-1'>
-                  <Spinner color='primary' />
-                </div>
-              }
-            />
-          </div>
-        </Row>
-      </CardBody>
-    </Card>
+        </CardBody>
+      </Card>
+    </Fragment>
   )
 }
 export default SelectGroup

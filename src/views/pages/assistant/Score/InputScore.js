@@ -13,6 +13,7 @@ import Flatpickr from 'react-flatpickr'
 import DataTable, { createTheme } from 'react-data-table-component'
 import moment from 'moment/moment'
 
+import Breadcrumbs from '@components/breadcrumbs'
 import PDFViewer from "@custom-components/pdf-viewer"
 
 // ** Utils
@@ -220,8 +221,9 @@ const InputScore = () => {
   ]
 
   return (
-    <>
+    <Fragment>
       {/* GROUP INFO LINK */}
+      <Breadcrumbs title='Input Score' data={[{ title: 'Group List', link: '/assistant/select-group' }, { title: 'Input' }]} />
       <Card>
         <CardHeader>
           <CardTitle tag='h4'>Input Score</CardTitle>
@@ -386,7 +388,7 @@ const InputScore = () => {
       {/* PDF SIDE */}
       <PDFViewer data={submissions} />
 
-    </>
+    </Fragment>
   )
 }
 export default InputScore
