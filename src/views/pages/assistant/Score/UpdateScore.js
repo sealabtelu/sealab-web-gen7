@@ -2,33 +2,28 @@
 import '@src/assets/scss/pilih-group.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 
-import { Fragment, useEffect, useState } from "react"
+import { Fragment, useEffect } from "react"
 
 // ** Third Party Components
 import { NavLink, useNavigate } from 'react-router-dom'
 import { ChevronDown } from 'react-feather'
-import Select from 'react-select'
 import DataTable, { createTheme } from 'react-data-table-component'
 import Breadcrumbs from '@components/breadcrumbs'
 import moment from 'moment/moment'
 
+import PDFViewer from "@custom-components/pdf-viewer"
 
 // ** Utils
-import { selectThemeColors, isObjEmpty } from '@utils'
+import { isObjEmpty } from '@utils'
 import { useForm, Controller } from 'react-hook-form'
 import { useSkin } from "@hooks/useSkin"
 
 // ** Reactstrap Imports
-import { Card, CardHeader, CardTitle, CardBody, Row, Col, Spinner, Label, Button, Form, FormFeedback, Input, ListGroup, ListGroupItem, Badge } from 'reactstrap'
+import { Card, CardHeader, CardTitle, CardBody, Spinner, Button, Form, Input, ListGroup, ListGroupItem, Badge } from 'reactstrap'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { updateScore, clearInputDetail } from '@store/api/seelabs'
 import { clearSubmissions } from '@store/api/module'
-
-const fileOptions = [
-  { value: 'paFilePath', label: 'Home Assignment' },
-  { value: 'jFilePath', label: 'Journal' }
-]
 
 createTheme("dark", {
   background: {
@@ -57,24 +52,10 @@ const UpdateScore = () => {
     handleSubmit
   } = useForm()
 
-  const [counter, setCounter] = useState(0)
-  const [selectedFileOption, setSelectedFileOption] = useState(fileOptions[0].value)
-
   useEffect(() => {
     dispatch(clearSubmissions())
     dispatch(clearInputDetail())
   }, [])
-
-  //increase counter
-  const increase = () => {
-    const pdfCount = submissions.filter(item => item[selectedFileOption] !== null).length - 1
-    if (counter < pdfCount) setCounter(count => count + 1)
-  }
-
-  //decrease counter
-  const decrease = () => {
-    if (counter > 0) setCounter(count => count - 1)
-  }
 
   const onSubmit = ({ scores }) => {
     dispatch(updateScore({
@@ -351,56 +332,8 @@ const UpdateScore = () => {
             </CardBody>
           </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle tag='h4'>PDF View</CardTitle>
-            </CardHeader>
-            <CardBody>
-              <Row>
-                {/* PDF SIDE */}
-                <Col md='12' sm='12'>
-                  {/* TP/JURNAL */}
-                  <Row className="row-input-score">
-                    <Col md='8'>
-                      <Label className='form-label'>Pilih File</Label>
-                      <Select
-                        theme={selectThemeColors}
-                        className='react-select'
-                        classNamePrefix='select'
-                        defaultValue={fileOptions[0]}
-                        name='clear'
-                        options={fileOptions}
-                        isClearable
-                        onChange={(e) => {
-                          setCounter(0)
-                          setSelectedFileOption(e.value)
-                        }}
-                      />
-                    </Col>
-                  </Row>
+          <PDFViewer data={submissions} />
 
-                  {/* NEXT STATE */}
-                  <Row>
-                    <Col className="next-state">
-                      <Button.Ripple className='next-state-button' color='primary' onClick={decrease}>Prev</Button.Ripple>
-                      <Button.Ripple className='next-state-button' color='primary' onClick={increase}>Next</Button.Ripple>
-                    </Col>
-                  </Row>
-
-                  {/* PDF */}
-                  <Row>
-                    <embed
-                      className='PdfContainer'
-                      // onLoad={(e) => console.log(e)}
-                      key={submissions[counter][selectedFileOption]}
-                      src={submissions[counter][selectedFileOption]}
-                      type='application/pdf'
-                    />
-                  </Row>
-                </Col>
-              </Row>
-            </CardBody>
-          </Card>
         </Fragment>
       }
     </Fragment>

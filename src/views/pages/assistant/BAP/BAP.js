@@ -77,7 +77,7 @@ const BAP = () => {
       </CardHeader>
 
       <CardBody>
-        <Row className="row-input-score">
+        <Row>
           <Col className="mb-1" md="4" sm="12">
             <Label className="form-label" for="default-picker">
               Pilih tanggal awal jaga

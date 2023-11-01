@@ -158,7 +158,7 @@ const InputResult = () => {
         </CardHeader>
 
         <CardBody>
-          <Row className='row-input-score'>
+          <Row>
             {/* FIELD INI GA DIPAKAI SEHARUSNYA */}
             <Col className='mb-1' md='4' sm='12'>
               <Label className='form-label'>Select Module</Label>

@@ -94,7 +94,7 @@ const SelectGroup = () => {
       </CardHeader>
       <CardBody>
         <Form onSubmit={handleSubmit(onSubmit)}>
-          <Row className='row-input-score'>
+          <Row className='align-items-end'>
             <Col className='mb-1' md='4' sm='12'>
               <Label className='form-label'>Select Day</Label>
               <Controller

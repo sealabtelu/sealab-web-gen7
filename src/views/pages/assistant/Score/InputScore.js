@@ -3,7 +3,7 @@ import '@src/assets/scss/pilih-group.scss'
 import '@styles/react/libs/flatpickr/flatpickr.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 
-import { Fragment, useEffect, useState } from "react"
+import { Fragment, useEffect } from "react"
 
 // ** Third Party Components
 import { NavLink, useNavigate } from 'react-router-dom'
@@ -13,6 +13,7 @@ import Flatpickr from 'react-flatpickr'
 import DataTable, { createTheme } from 'react-data-table-component'
 import moment from 'moment/moment'
 
+import PDFViewer from "@custom-components/pdf-viewer"
 
 // ** Utils
 import { selectThemeColors, formatUTCtoLocale } from '@utils'
@@ -25,11 +26,6 @@ import { Card, CardHeader, CardTitle, CardBody, Row, Col, Spinner, Label, Button
 import { useDispatch, useSelector } from 'react-redux'
 import { inputScore } from '@store/api/seelabs'
 import { getAllSubmissions, clearSubmissions } from '@store/api/module'
-
-const fileOptions = [
-  { value: 'paFilePath', label: 'Home Assignment' },
-  { value: 'jFilePath', label: 'Journal' }
-]
 
 createTheme("dark", {
   background: {
@@ -61,23 +57,9 @@ const InputScore = () => {
     handleSubmit
   } = useForm()
 
-  const [counter, setCounter] = useState(0)
-  const [selectedFileOption, setSelectedFileOption] = useState(fileOptions[0].value)
-
   useEffect(() => {
     dispatch(clearSubmissions())
   }, [])
-
-  //increase counter
-  const increase = () => {
-    const pdfCount = submissions.filter(item => item[selectedFileOption] !== null).length - 1
-    if (counter < pdfCount) setCounter(count => count + 1)
-  }
-
-  //decrease counter
-  const decrease = () => {
-    if (counter > 0) setCounter(count => count - 1)
-  }
 
   const onSubmit = ({ date, module, scores }) => {
     dispatch(inputScore({
@@ -402,67 +384,8 @@ const InputScore = () => {
       </Card>
 
       {/* PDF SIDE */}
-      {submissions.length > 0 &&
-        <Card>
-          <CardHeader>
-            <CardTitle tag='h4'>PDF View</CardTitle>
-          </CardHeader>
+      <PDFViewer data={submissions} />
 
-          <CardBody>
-            <Row>
-              {/* PDF SIDE */}
-              <Col md='12' sm='12'>
-                {/* TP/JURNAL */}
-                <Row className="row-input-score">
-                  <Col md='8'>
-                    <Label className='form-label'>Pilih File</Label>
-                    <Select
-                      theme={selectThemeColors}
-                      className='react-select'
-                      classNamePrefix='select'
-                      defaultValue={fileOptions[0]}
-                      name='clear'
-                      options={fileOptions}
-                      isClearable
-                      onChange={(e) => {
-                        setCounter(0)
-                        setSelectedFileOption(e.value)
-                      }}
-                    />
-                  </Col>
-                </Row>
-
-                {/* NEXT STATE */}
-                <Row>
-                  <Col className="next-state">
-                    <Button.Ripple className='next-state-button' color='primary' onClick={decrease}>Prev</Button.Ripple>
-                    <Button.Ripple className='next-state-button' color='primary' onClick={increase}>Next</Button.Ripple>
-                  </Col>
-                </Row>
-
-                {/* PDF */}
-                <Row>
-                  {/* <iframe
-                    // key={submissions[counter][selectedFileOption]}
-                    // className='PdfContainer'
-                    loading='eager'
-                    height='700'
-                    key={submissions[counter][selectedFileOption]}
-                    src={`https://docs.google.com/viewer?url=${submissions[counter][selectedFileOption]}&embedded=true`}>
-                  </iframe> */}
-                  <embed
-                    className='PdfContainer'
-                    // onLoad={(e) => console.log(e)}
-                    key={submissions[counter][selectedFileOption]}
-                    src={submissions[counter][selectedFileOption]}
-                    type='application/pdf'
-                  />
-                </Row>
-              </Col>
-            </Row>
-          </CardBody>
-        </Card>
-      }
     </>
   )
 }
