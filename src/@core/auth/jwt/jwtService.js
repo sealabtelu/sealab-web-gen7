@@ -21,7 +21,7 @@ export default class JwtService {
           config.headers.Authorization = `${this.jwtConfig.tokenType} ${accessToken}`
         }
         // ** Tambahkan header CORS
-        config.headers['Access-Control-Allow-Origin'] = import.meta.env.VITE_WEB_BASE_URL
+        // config.headers['Access-Control-Allow-Origin'] = import.meta.env.VITE_WEB_BASE_URL
         return config
       },
       (error) => Promise.reject(error)
