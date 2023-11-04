@@ -118,6 +118,7 @@ const TableFilter = ({ data, onFilterChange, isOpen }) => {
             type='number'
             placeholder='1'
             value={searchGroup}
+            onWheel={(e) => e.target.blur()}
             onChange={e => { setSearchGroup(e.target.value) }}
           />
         </Col>
