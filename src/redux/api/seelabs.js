@@ -6,6 +6,12 @@ import { createSlice, createAsyncThunk, isAnyOf } from '@reduxjs/toolkit'
 
 const endpoint = '/seelabs'
 
+export const getProctorSchedule = createAsyncThunk('seelabs/getProctorSchedule', async () => {
+  return await axios.get(`${endpoint}/proctor/schedule`).then(res => {
+    return res.data.data
+  })
+})
+
 export const getBAP = createAsyncThunk('seelabs/getBAP', async (date) => {
   return await axios.get(`${endpoint}/bap`, { params: { date } }).then(res => {
     return res.data.data
@@ -82,6 +88,7 @@ export const seelabsSlice = createSlice({
   name: 'seelabs',
   initialState: {
     groups: [],
+    proctorSchedule: [],
     inputScoreResult: [],
     inputScorePreview: {},
     inputScoreDetail: {},
@@ -137,6 +144,9 @@ export const seelabsSlice = createSlice({
         localStorage.setItem('seelabsGroupDetail', JSON.stringify(action.payload))
         localStorage.setItem('seelabsCurrentDSG', JSON.stringify(action.meta.arg))
       })
+      .addCase(getProctorSchedule.fulfilled, (state, action) => {
+        state.proctorSchedule = action.payload ?? []
+      })
       .addCase(getBAP.fulfilled, (state, action) => {
         state.bap = action.payload ?? []
       })
@@ -154,6 +164,9 @@ export const seelabsSlice = createSlice({
       })
       .addCase(getStudentScore.rejected, (state) => {
         state.score = []
+      })      
+      .addCase(getProctorSchedule.rejected, (state) => {
+        state.proctorSchedule = []
       })
       .addMatcher(isAnyOf(
         inputScore.pending,
@@ -162,6 +175,7 @@ export const seelabsSlice = createSlice({
         state.isSubmitLoading = true
       })
       .addMatcher(isAnyOf(
+        getProctorSchedule.pending,
         getGroupList.pending,
         getGroupDetail.pending,
         getBAP.pending,
@@ -174,6 +188,7 @@ export const seelabsSlice = createSlice({
         state.isLoading = true
       })
       .addMatcher(isAnyOf(
+        getProctorSchedule.rejected, getProctorSchedule.fulfilled,
         getGroupList.rejected, getGroupList.fulfilled,
         getGroupDetail.rejected, getGroupDetail.fulfilled,
         inputScore.rejected, inputScore.fulfilled,

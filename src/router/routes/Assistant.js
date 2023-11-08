@@ -10,7 +10,8 @@ import {
   AlertTriangle,
   User,
   Circle,
-  BookOpen
+  BookOpen,
+  Paperclip
 } from "react-feather"
 
 const HAModuleList = lazy(() => import("../../views/pages/assistant/HomeAssignment/HAModuleList"))
@@ -30,6 +31,7 @@ const InputPreview = lazy(() => import("../../views/pages/assistant/Score/InputP
 const UpdateScore = lazy(() => import("../../views/pages/assistant/Score/UpdateScore"))
 const BAP = lazy(() => import("../../views/pages/assistant/BAP/BAP"))
 const StudentList = lazy(() => import("../../views/pages/assistant/user/StudentList"))
+const ProctorSchedule = lazy(() => import("../../views/pages/assistant/Proctor/Proctor"))
 const HomeDashboard = lazy(() => import("../../views/pages/assistant/user/Home"))
 
 const AssistantRoutes = [
@@ -40,6 +42,10 @@ const AssistantRoutes = [
   {
     path: "/assistant/student-info",
     element: <StudentList />
+  },
+  {
+    path: "/assistant/proctor/schedule",
+    element: <ProctorSchedule />
   },
   {
     path: "/assistant/preliminary-assignment/master-control",
@@ -115,10 +121,16 @@ export const AssistantMenu = [
     navLink: "/assistant/home"
   },
   {
-    id: "StudentInfo",
+    id: "studentInfo",
     title: "Student Info",
     icon: <User size={20} />,
     navLink: "/assistant/student-info"
+  },
+  {
+    id: "proctorSchedule",
+    title: "Proctor",
+    icon: <Paperclip size={20} />,
+    navLink: "/assistant/proctor/schedule"
   },
   {
     id: "homeAssignment",
