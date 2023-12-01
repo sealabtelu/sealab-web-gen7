@@ -18,12 +18,12 @@ import {
 import { ChevronDown } from 'react-feather'
 import DataTable, { createTheme } from 'react-data-table-component'
 import moment from 'moment/moment'
-import Filter, { baseColumns, FilterToggle } from '@custom-components/filter'
+import Filter, { baseColumns, FilterToggle, RefreshButton, DownloadButton, DownloadProgress } from '@custom-components/filter'
 
 // ** Styles
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAnswerList } from '@store/api/homeAssignmentAnswer'
+import { getAnswerList, downloadSubmission } from '@store/api/homeAssignmentAnswer'
 import { useSkin } from "@hooks/useSkin"
 import { NavLink } from 'react-router-dom'
 
@@ -37,9 +37,10 @@ const HASubmissionList = () => {
   // ** state
   const dispatch = useDispatch()
   const { skin } = useSkin()
-  const { answers, isLoading } = useSelector(state => state.homeAssignmentAnswer)
+  const { answers, isLoading, isDownloadLoading } = useSelector(state => state.homeAssignmentAnswer)
   const [filteredData, setFilteredData] = useState([])
   const [isFilterOpen, setIsFilterOpen] = useState(false)
+  const [downloadProgress, setDownloadProgress] = useState({})
 
   useEffect(() => {
     dispatch(getAnswerList())
@@ -76,13 +77,17 @@ const HASubmissionList = () => {
     <Fragment>
       <Breadcrumbs title='Home Assignment' data={[{ title: 'Submission' }]} />
       <Card className='overflow-hidden'>
-        <CardHeader>
+        <CardHeader className='gap-1'>
           <CardTitle tag='h4'>Home Assignment Submission</CardTitle>
-          <FilterToggle value={isFilterOpen} onToggle={setIsFilterOpen} />
+          <div className='d-flex gap-1'>
+            <RefreshButton disabled={isLoading || isDownloadLoading} onClickHandler={getAnswerList} />
+            <DownloadButton disabled={isLoading || isDownloadLoading} onClickHandler={downloadSubmission} onDownload={setDownloadProgress} />
+            <FilterToggle value={isFilterOpen} onToggle={setIsFilterOpen} />
+          </div>
         </CardHeader>
         <CardBody>
           <Filter data={answers} onFilterChange={setFilteredData} isOpen={isFilterOpen} />
-
+          <DownloadProgress progress={downloadProgress} />
           <div className='react-dataTable'>
             <DataTable
               noHeader

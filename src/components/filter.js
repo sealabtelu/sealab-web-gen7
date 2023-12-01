@@ -3,11 +3,11 @@ import { useState, useEffect } from 'react'
 
 // ** Reactstrap Imports
 import Select from 'react-select'
-import { Input, Label, Row, Col, Button, Collapse } from 'reactstrap'
+import { Input, Label, Row, Col, Button, Collapse, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Progress } from 'reactstrap'
 import { selectThemeColors } from '@utils'
 import { useDispatch, useSelector } from 'react-redux'
 import { getModules } from '@store/api/module'
-import { Filter, RefreshCw } from 'react-feather'
+import { Download, Filter, RefreshCw, Trash2 } from 'react-feather'
 
 const TableFilter = ({ data, onFilterChange, isOpen }) => {
   // ** State
@@ -123,8 +123,8 @@ const TableFilter = ({ data, onFilterChange, isOpen }) => {
           />
         </Col>
         <Col lg='4' md='6' className='mb-1'>
-          <Button.Ripple className='btn-icon rounded-circle' outline color='primary' onClick={() => reset()}>
-            <RefreshCw size={16} />
+          <Button.Ripple className='btn-icon rounded-circle' outline color='danger' onClick={() => reset()}>
+            <Trash2 size={16} />
           </Button.Ripple>
         </Col>
       </Row>
@@ -140,6 +140,55 @@ export const FilterToggle = ({ value, onToggle }) => (
     <span className='ms-25'>Filter Settings</span>
   </Button.Ripple>
 )
+
+export const DownloadProgress = ({ progress }) => {
+  return progress.progress && (
+    <div className='mb-2' vis>
+      <div className='d-flex justify-content-between'>
+        <span>Downloading file do not close this page!</span>
+        <span>{`${progress.loaded}MB/${progress.total}MB (${progress.progress}%)`}</span>
+      </div>
+      <Progress striped className='progress-bar-success' value={progress.progress} />
+    </div>
+  )
+}
+
+export const RefreshButton = ({ disabled, onClickHandler }) => {
+  const dispatch = useDispatch()
+
+  return (
+    <Button.Ripple color='primary' outline disabled={disabled} onClick={() => dispatch(onClickHandler())}>
+      <RefreshCw size={16} />
+    </Button.Ripple>
+  )
+}
+
+export const DownloadButton = ({ disabled, onClickHandler, onDownload }) => {
+  const { modules, isLoading: isModuleLoading } = useSelector(state => state.module)
+  const dispatch = useDispatch()
+
+  const onDownloadHandler = (progressEvent) => {
+    onDownload({
+      loaded: (progressEvent.loaded / (1024 * 1024)).toFixed(2),
+      total: (progressEvent.total / (1024 * 1024)).toFixed(2),
+      progress: (progressEvent.progress * 100).toFixed(2)
+    })
+    console.log(progressEvent)
+  }
+
+  return (
+    <UncontrolledButtonDropdown>
+      <DropdownToggle color='primary' outline caret disabled={isModuleLoading || disabled}>
+        <Download size={16} />
+      </DropdownToggle>
+      <DropdownMenu>
+        {
+          modules.map(({ id, seelabsId }) => (<DropdownItem tag='div' key={id} onClick={() => { dispatch(onClickHandler({ module: seelabsId, onDownload: onDownloadHandler })) }}>Module {seelabsId}</DropdownItem>))
+        }
+      </DropdownMenu>
+    </UncontrolledButtonDropdown>
+  )
+}
 
 export const baseColumns = [
   {

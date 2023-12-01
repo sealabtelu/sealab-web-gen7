@@ -1,5 +1,6 @@
 // ** Axios Imports
 import axios from "axios"
+import { saveAs } from "file-saver"
 
 // ** Redux Imports
 import { createSlice, createAsyncThunk, isAnyOf } from "@reduxjs/toolkit"
@@ -24,11 +25,21 @@ export const getAnswerList = createAsyncThunk("answer/getAnswerList", async () =
   })
 })
 
+export const downloadSubmission = createAsyncThunk("answer/downloadSubmission", async ({ module, onDownload }) => {
+  return await axios.get(`${endpoint}/download-zip/${module}`, {
+    responseType: 'blob',
+    onDownloadProgress: data => onDownload(data)
+  }).then(response => {
+    saveAs(response.data, `J${module}.zip`)
+  })
+})
+
 export const journalAnswerSlice = createSlice({
   name: "answer",
   initialState: {
     answers: [],
-    isLoading: false
+    isLoading: false,
+    isDownloadLoading: false
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -40,8 +51,16 @@ export const journalAnswerSlice = createSlice({
           filePath: `${baseURL}${item.filePath}`
         }))
       })
+      .addCase(downloadSubmission.pending, (state) => {
+        state.isDownloadLoading = true
+      })
       .addMatcher(isAnyOf(addAnswer.pending, getAnswerList.pending), (state) => {
         state.isLoading = true
+      })
+      .addMatcher(isAnyOf(
+        downloadSubmission.fulfilled, downloadSubmission.rejected
+      ), (state) => {
+        state.isDownloadLoading = false
       })
       .addMatcher(
         isAnyOf(

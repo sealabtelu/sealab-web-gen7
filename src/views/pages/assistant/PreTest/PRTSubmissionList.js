@@ -19,7 +19,7 @@ import {
 // ** Third Party Components
 import { ChevronDown } from 'react-feather'
 import DataTable, { createTheme } from 'react-data-table-component'
-import Filter, { baseColumns, FilterToggle } from '@custom-components/filter'
+import Filter, { baseColumns, RefreshButton, FilterToggle } from '@custom-components/filter'
 
 // ** Styles
 import '@styles/react/libs/tables/react-dataTable-component.scss'
@@ -60,9 +60,12 @@ const PRTSubmissionList = () => {
     <Fragment>
       <Breadcrumbs title='Pre Test' data={[{ title: 'Submission' }]} />
       <Card className='overflow-hidden'>
-        <CardHeader>
+        <CardHeader className='gap-1'>
           <CardTitle tag='h4'>Pre Test Submission</CardTitle>
-          <FilterToggle value={isFilterOpen} onToggle={setIsFilterOpen} />
+          <div className='d-flex gap-1'>
+            <RefreshButton disabled={isLoading || isDownloadLoading} onClickHandler={getAnswerList} />
+            <FilterToggle value={isFilterOpen} onToggle={setIsFilterOpen} />
+          </div>
         </CardHeader>
         <CardBody>
           <Filter data={answers} onFilterChange={setFilteredData} isOpen={isFilterOpen} />
