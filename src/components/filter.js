@@ -141,14 +141,14 @@ export const FilterToggle = ({ value, onToggle }) => (
   </Button.Ripple>
 )
 
-export const DownloadProgress = ({ progress }) => {
-  return progress.progress && (
-    <div className='mb-2' vis>
+export const DownloadProgress = ({ progress: { progress, total, loaded } }) => {
+  return progress && (
+    <div className='mb-2'>
       <div className='d-flex justify-content-between'>
         <span>Downloading file do not close this page!</span>
-        <span>{`${progress.loaded}MB/${progress.total}MB (${progress.progress}%)`}</span>
+        <span>{`${loaded}MB/${total}MB (${progress}%)`}</span>
       </div>
-      <Progress striped className='progress-bar-success' value={progress.progress} />
+      <Progress striped className='progress-bar-success' value={progress} />
     </div>
   )
 }
@@ -173,7 +173,6 @@ export const DownloadButton = ({ disabled, onClickHandler, onDownload }) => {
       total: (progressEvent.total / (1024 * 1024)).toFixed(2),
       progress: (progressEvent.progress * 100).toFixed(2)
     })
-    console.log(progressEvent)
   }
 
   return (
