@@ -63,7 +63,7 @@ const PRTSubmissionList = () => {
         <CardHeader className='gap-1'>
           <CardTitle tag='h4'>Pre Test Submission</CardTitle>
           <div className='d-flex gap-1'>
-            <RefreshButton disabled={isLoading || isDownloadLoading} onClickHandler={getAnswerList} />
+            <RefreshButton disabled={isLoading} onClickHandler={getAnswerList} />
             <FilterToggle value={isFilterOpen} onToggle={setIsFilterOpen} />
           </div>
         </CardHeader>
