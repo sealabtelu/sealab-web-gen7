@@ -11,7 +11,8 @@ import {
   User,
   Circle,
   BookOpen,
-  Paperclip
+  Paperclip,
+  Star
 } from "react-feather"
 
 const HAModuleList = lazy(() => import("../../views/pages/assistant/HomeAssignment/HAModuleList"))
@@ -28,6 +29,7 @@ const SelectGroup = lazy(() => import("../../views/pages/assistant/Score/SelectG
 const InputScore = lazy(() => import("../../views/pages/assistant/Score/InputScore"))
 const InputResult = lazy(() => import("../../views/pages/assistant/Score/InputResult"))
 const InputPreview = lazy(() => import("../../views/pages/assistant/Score/InputPreview"))
+const InputOverview = lazy(() => import("../../views/pages/assistant/Score/InputOverview"))
 const UpdateScore = lazy(() => import("../../views/pages/assistant/Score/UpdateScore"))
 const BAP = lazy(() => import("../../views/pages/assistant/BAP/BAP"))
 const StudentList = lazy(() => import("../../views/pages/assistant/user/StudentList"))
@@ -96,8 +98,8 @@ const AssistantRoutes = [
     element: <InputScore />
   },
   {
-    path: "/assistant/BAP",
-    element: <BAP />
+    path: "/assistant/input-overview",
+    element: <InputOverview />
   },
   {
     path: "/assistant/input-result",
@@ -110,6 +112,10 @@ const AssistantRoutes = [
   {
     path: "/assistant/input-result/update-score",
     element: <UpdateScore />
+  },
+  {
+    path: "/assistant/BAP",
+    element: <BAP />
   }
 ]
 
@@ -196,16 +202,22 @@ export const AssistantMenu = [
     navLink: "/assistant/select-group"
   },
   {
-    id: "bap",
-    title: "BAP",
-    icon: <Bookmark size={20} />,
-    navLink: "/assistant/BAP"
-  },
-  {
     id: "inputResult",
     title: "Input Result",
     icon: <Book size={20} />,
     navLink: "/assistant/input-result"
+  },
+  {
+    id: "inputOverview",
+    title: "Input Overview",
+    icon: <Star size={20} />,
+    navLink: "/assistant/input-overview"
+  },
+  {
+    id: "bap",
+    title: "BAP",
+    icon: <Bookmark size={20} />,
+    navLink: "/assistant/BAP"
   },
   {
     id: "sanksiBermasalah",

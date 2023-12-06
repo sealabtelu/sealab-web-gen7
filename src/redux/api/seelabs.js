@@ -48,6 +48,12 @@ export const updateScore = createAsyncThunk('seelabs/inputScore', async (param) 
   return await axios.put(`${endpoint}/score`, param)
 })
 
+export const getInputOverview = createAsyncThunk('seelabs/inputOverview', async (param) => {
+  return await axios.get(`${endpoint}/input-overview`, { params: { ...param } }).then(res => {
+    return res.data.data
+  })
+})
+
 export const getInputResult = createAsyncThunk('seelabs/inputResult', async (param) => {
   return await axios.get(`${endpoint}/score`, { params: { ...param } }).then(res => {
     return res.data.data
@@ -89,6 +95,7 @@ export const seelabsSlice = createSlice({
   initialState: {
     groups: [],
     proctorSchedule: [],
+    inputScoreOverview: [],
     inputScoreResult: [],
     inputScorePreview: {},
     inputScoreDetail: {},
@@ -150,6 +157,9 @@ export const seelabsSlice = createSlice({
       .addCase(getBAP.fulfilled, (state, action) => {
         state.bap = action.payload ?? []
       })
+      .addCase(getInputOverview.fulfilled, (state, action) => {
+        state.inputScoreOverview = action.payload ?? []
+      })
       .addCase(getInputResult.fulfilled, (state, action) => {
         state.inputScoreResult = action.payload ?? []
       })
@@ -180,6 +190,7 @@ export const seelabsSlice = createSlice({
         getGroupDetail.pending,
         getBAP.pending,
         getStudentScore.pending,
+        getInputOverview.pending,
         getInputResult.pending,
         getInputPreview.pending,
         getInputDetail.pending,
@@ -195,6 +206,7 @@ export const seelabsSlice = createSlice({
         updateScore.rejected, inputScore.fulfilled,
         getBAP.rejected, getBAP.fulfilled,
         getStudentScore.rejected, getStudentScore.fulfilled,
+        getInputOverview.rejected, getInputOverview.fulfilled,
         getInputResult.rejected, getInputResult.fulfilled,
         getInputPreview.rejected, getInputPreview.fulfilled,
         getInputDetail.rejected, getInputDetail.fulfilled,
