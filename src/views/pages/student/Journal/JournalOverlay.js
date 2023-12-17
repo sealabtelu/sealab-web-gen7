@@ -19,6 +19,8 @@ import { Link, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 
 import { addAnswer } from "@store/api/journalAnswer"
+import { verify } from "@store/api/gformSurvey"
+import { getUserData } from "@utils"
 
 // ** Third Party Imports File Uploader
 import { Controller, useForm } from "react-hook-form"
@@ -28,10 +30,24 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
   //collase
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { isLoading: isVerifyLoading } = useSelector((state) => state.gformSurvey)
   const { isLoading } = useSelector((state) => state.journalAnswer)
+  const { appToken } = getUserData()
 
   const [isOpen, setIsOpen] = useState(false)
-  const toggle = () => setIsOpen(!isOpen)
+  const toggle = () => {
+    if (!isOpen) {
+      dispatch(verify()).then(({ payload: { isValid } }) => {
+        if (isValid) {
+          setIsOpen(!isOpen)
+        } else {
+          window.open(`https://docs.google.com/forms/d/e/1FAIpQLSdV-HWJ9D1QKx6UPVuy_ZGWotJxpTdpQQvGEP8EIyAP66792Q/viewform?usp=pp_url&entry.2072338726=${appToken}`)
+        }
+      })
+    } else {
+      setIsOpen(!isOpen)
+    }
+  }
 
   const {
     control,
@@ -75,7 +91,7 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
               <Button tag={Link} to="" color="relief-primary">
                 Soal Jurnal
               </Button>
-              <Button color="flat-dark" onClick={toggle}>
+              <Button color="flat-dark" onClick={toggle} disabled={isVerifyLoading} >
                 Submit File{" "}
                 <Upload
                   size={12}
@@ -97,8 +113,8 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
               defaultValue=''
               rules={{
                 required: "Please fill feedback!",
-                minLength: { value: 30, message: "Minimum 30 characters" },
-                pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b)(?!.*(\w)\2{3,}).*$/, message: "Don't copy paste same thing :D" }
+                minLength: { value: 30, message: "Minimum 30 characters" }
+                // pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b)(?!.*(\w)\2{3,}).*$/, message: "Don't copy paste same thing :D" }
               }}
               render={({ field }) => (
                 <Input
@@ -122,8 +138,8 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
               defaultValue=''
               rules={{
                 required: "Please fill feedback!",
-                minLength: { value: 30, message: "Minimum 30 characters" },
-                pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b)(?!.*(\w)\2{3,}).*$/, message: "Don't copy paste same thing :D" }
+                minLength: { value: 30, message: "Minimum 30 characters" }
+                // pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b)(?!.*(\w)\2{3,}).*$/, message: "Don't copy paste same thing :D" }
               }}
               render={({ field }) => (
                 <Input
@@ -147,8 +163,8 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
               defaultValue=''
               rules={{
                 required: "Please fill feedback!",
-                minLength: { value: 30, message: "Minimum 30 characters" },
-                pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b)(?!.*(\w)\2{3,}).*$/, message: "Don't copy paste same thing :D" }
+                minLength: { value: 30, message: "Minimum 30 characters" }
+                // pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b)(?!.*(\w)\2{3,}).*$/, message: "Don't copy paste same thing :D" }
               }}
               render={({ field }) => (
                 <Input
