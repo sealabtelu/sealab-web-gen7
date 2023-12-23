@@ -12,7 +12,8 @@ import {
   Circle,
   BookOpen,
   Paperclip,
-  Star
+  Star,
+  FileText
 } from "react-feather"
 
 const HAModuleList = lazy(() => import("../../views/pages/assistant/HomeAssignment/HAModuleList"))
@@ -35,6 +36,7 @@ const BAP = lazy(() => import("../../views/pages/assistant/BAP/BAP"))
 const StudentList = lazy(() => import("../../views/pages/assistant/user/StudentList"))
 const ProctorSchedule = lazy(() => import("../../views/pages/assistant/Proctor/Proctor"))
 const HomeDashboard = lazy(() => import("../../views/pages/assistant/user/Home"))
+const Swagger = lazy(() => import("../../views/pages/assistant/Swagger/Swagger"))
 
 const AssistantRoutes = [
   {
@@ -116,6 +118,10 @@ const AssistantRoutes = [
   {
     path: "/assistant/BAP",
     element: <BAP />
+  },
+  {
+    path: "/assistant/swagger",
+    element: <Swagger />
   }
 ]
 
@@ -198,13 +204,13 @@ export const AssistantMenu = [
   {
     id: "inputScore",
     title: "Input Score",
-    icon: <Clipboard size={20} />,
+    icon: <FileText size={20} />,
     navLink: "/assistant/select-group"
   },
   {
     id: "inputResult",
     title: "Input Result",
-    icon: <Book size={20} />,
+    icon: <Clipboard size={20} />,
     navLink: "/assistant/input-result"
   },
   {
@@ -226,6 +232,12 @@ export const AssistantMenu = [
     navLink: "https://bit.ly/CatatanPraktikanBermasalah",
     externalLink: true,
     newTab: true
+  },
+  {
+    id: "swagger",
+    title: "API Docs",
+    icon: <Book size={20} />,
+    navLink: "/assistant/swagger"
   }
 ]
 

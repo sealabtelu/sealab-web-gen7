@@ -84,6 +84,7 @@
     "sortablejs": "^1.12.0",
     "stream-browserify": "^3.0.0",
     "styled-components": "^5.3.5",
+    "swagger-ui-react": "^5.10.5",
     "sweetalert2": "^11.4.14",
     "sweetalert2-react-content": "^5.0.0",
     "swiper": "^8.1.5",
