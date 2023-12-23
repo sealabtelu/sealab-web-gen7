@@ -88,6 +88,7 @@ export default () => {
     },
     build: {
       rollupOptions: {
+        external: ['#swagger-ui'],
         plugins: [rollupNodePolyFill()]
       }
     }
