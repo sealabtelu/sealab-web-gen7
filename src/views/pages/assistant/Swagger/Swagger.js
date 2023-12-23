@@ -1,5 +1,5 @@
 // ** Styles
-import "swagger-ui-react/swagger-ui.css"
+import "/swagger-ui-react/swagger-ui.css"
 
 // ** Third Party Components
 import { Fragment, useEffect } from "react"
