@@ -31,7 +31,7 @@ const Swagger = () => {
 
   return (
     <Fragment>
-      <Breadcrumbs title='Swagger UI' data={[{ title: 'API Docs' }]} />
+      <Breadcrumbs title='API Docs' data={[{ title: 'Swagger UI' }]} />
       <Card>
         <CardHeader>
           <CardTitle>

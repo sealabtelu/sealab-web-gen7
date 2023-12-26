@@ -10,7 +10,7 @@ export default () => {
   return defineConfig({
     plugins: [react()],
     define: {
-      // global: {} //'globalThis'
+      global: 'global' //'globalThis'
     },
     server: {
       port: 3000,
@@ -88,6 +88,7 @@ export default () => {
       }
     },
     build: {
+      chunkSizeWarningLimit: 1200,
       rollupOptions: {
         plugins: [
           rollupNodePolyFill(),
