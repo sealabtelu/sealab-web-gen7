@@ -104,7 +104,7 @@ export const moduleSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getAllSubmissions.fulfilled, (state, action) => {
-        const baseURL = `${import.meta.env.VITE_API_BASE_URL}upload/`
+        const baseURL = `${import.meta.env.VITE_API_BASE_URL}/upload/`
         state.submissions = action.payload.map((item) => ({
           ...item,
           paFilePath: item.paFilePath && `${baseURL}${item.paFilePath}`,

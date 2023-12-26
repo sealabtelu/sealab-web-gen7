@@ -45,7 +45,7 @@ export const journalAnswerSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getAnswerList.fulfilled, (state, action) => {
-        const baseURL = `${import.meta.env.VITE_API_BASE_URL}upload/`
+        const baseURL = `${import.meta.env.VITE_API_BASE_URL}/upload/`
         state.answers = action.payload.map((item) => ({
           ...item,
           filePath: `${baseURL}${item.filePath}`
