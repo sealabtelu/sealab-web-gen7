@@ -10,7 +10,10 @@ import {
   AlertTriangle,
   User,
   Circle,
-  BookOpen
+  BookOpen,
+  Paperclip,
+  Star,
+  FileText
 } from "react-feather"
 
 const HAModuleList = lazy(() => import("../../views/pages/assistant/HomeAssignment/HAModuleList"))
@@ -27,10 +30,13 @@ const SelectGroup = lazy(() => import("../../views/pages/assistant/Score/SelectG
 const InputScore = lazy(() => import("../../views/pages/assistant/Score/InputScore"))
 const InputResult = lazy(() => import("../../views/pages/assistant/Score/InputResult"))
 const InputPreview = lazy(() => import("../../views/pages/assistant/Score/InputPreview"))
+const InputOverview = lazy(() => import("../../views/pages/assistant/Score/InputOverview"))
 const UpdateScore = lazy(() => import("../../views/pages/assistant/Score/UpdateScore"))
 const BAP = lazy(() => import("../../views/pages/assistant/BAP/BAP"))
 const StudentList = lazy(() => import("../../views/pages/assistant/user/StudentList"))
+const ProctorSchedule = lazy(() => import("../../views/pages/assistant/Proctor/Proctor"))
 const HomeDashboard = lazy(() => import("../../views/pages/assistant/user/Home"))
+const Swagger = lazy(() => import("../../views/pages/assistant/Swagger/Swagger"))
 
 const AssistantRoutes = [
   {
@@ -40,6 +46,10 @@ const AssistantRoutes = [
   {
     path: "/assistant/student-info",
     element: <StudentList />
+  },
+  {
+    path: "/assistant/proctor/schedule",
+    element: <ProctorSchedule />
   },
   {
     path: "/assistant/preliminary-assignment/master-control",
@@ -90,8 +100,8 @@ const AssistantRoutes = [
     element: <InputScore />
   },
   {
-    path: "/assistant/BAP",
-    element: <BAP />
+    path: "/assistant/input-overview",
+    element: <InputOverview />
   },
   {
     path: "/assistant/input-result",
@@ -104,6 +114,14 @@ const AssistantRoutes = [
   {
     path: "/assistant/input-result/update-score",
     element: <UpdateScore />
+  },
+  {
+    path: "/assistant/BAP",
+    element: <BAP />
+  },
+  {
+    path: "/assistant/swagger",
+    element: <Swagger />
   }
 ]
 
@@ -115,10 +133,16 @@ export const AssistantMenu = [
     navLink: "/assistant/home"
   },
   {
-    id: "StudentInfo",
+    id: "studentInfo",
     title: "Student Info",
     icon: <User size={20} />,
     navLink: "/assistant/student-info"
+  },
+  {
+    id: "proctorSchedule",
+    title: "Proctor",
+    icon: <Paperclip size={20} />,
+    navLink: "/assistant/proctor/schedule"
   },
   {
     id: "homeAssignment",
@@ -180,8 +204,20 @@ export const AssistantMenu = [
   {
     id: "inputScore",
     title: "Input Score",
-    icon: <Clipboard size={20} />,
+    icon: <FileText size={20} />,
     navLink: "/assistant/select-group"
+  },
+  {
+    id: "inputResult",
+    title: "Input Result",
+    icon: <Clipboard size={20} />,
+    navLink: "/assistant/input-result"
+  },
+  {
+    id: "inputOverview",
+    title: "Input Overview",
+    icon: <Star size={20} />,
+    navLink: "/assistant/input-overview"
   },
   {
     id: "bap",
@@ -190,18 +226,18 @@ export const AssistantMenu = [
     navLink: "/assistant/BAP"
   },
   {
-    id: "inputResult",
-    title: "Input Result",
-    icon: <Book size={20} />,
-    navLink: "/assistant/input-result"
-  },
-  {
     id: "sanksiBermasalah",
     title: "Sanksi Bermasalah",
     icon: <AlertTriangle size={20} />,
     navLink: "https://bit.ly/CatatanPraktikanBermasalah",
     externalLink: true,
     newTab: true
+  },
+  {
+    id: "swagger",
+    title: "API Docs",
+    icon: <Book size={20} />,
+    navLink: "/assistant/swagger"
   }
 ]
 

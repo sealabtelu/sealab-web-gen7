@@ -2,6 +2,7 @@ import fs from 'fs'
 import * as path from 'path'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import nodeResolve from '@rollup/plugin-node-resolve'
 import rollupNodePolyFill from 'rollup-plugin-node-polyfills'
 import NodeGlobalsPolyfillPlugin from '@esbuild-plugins/node-globals-polyfill'
 
@@ -9,7 +10,7 @@ export default () => {
   return defineConfig({
     plugins: [react()],
     define: {
-      global: 'globalThis'
+      global: 'global' //'globalThis'
     },
     server: {
       port: 3000,
@@ -87,8 +88,12 @@ export default () => {
       }
     },
     build: {
+      chunkSizeWarningLimit: 1200,
       rollupOptions: {
-        plugins: [rollupNodePolyFill()]
+        plugins: [
+          rollupNodePolyFill(),
+          nodeResolve({ browser: true })
+        ]
       }
     }
   })

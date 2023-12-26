@@ -82,6 +82,7 @@ const UpdateScore = () => {
           min="0" max="100"
           className="input-group-field-number text-center"
           placeholder="..."
+          onWheel={(e) => e.target.blur()}
           disabled={isLoading || isSubmitLoading}
           {...field} />
       )}

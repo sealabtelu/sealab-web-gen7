@@ -8,7 +8,9 @@ import homeAssignmentAnswer from "./api/homeAssignmentAnswer"
 import journalAnswer from "./api/journalAnswer"
 import preTestQuestion from "./api/preTestQuestion"
 import preTestAnswer from "./api/preTestAnswer"
+import gformSurvey from "./api/gformSurvey"
 import seelabs from "./api/seelabs"
+import swagger from "./api/swagger"
 import user from "./api/user"
 
 const rootReducer = {
@@ -21,7 +23,9 @@ const rootReducer = {
   journalAnswer,
   preTestQuestion,
   preTestAnswer,
+  gformSurvey,
   seelabs,
+  swagger,
   user
 }
 

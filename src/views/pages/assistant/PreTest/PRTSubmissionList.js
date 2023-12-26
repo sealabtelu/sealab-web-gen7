@@ -1,5 +1,5 @@
 // ** React Imports
-import { Fragment, useEffect } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 
 // ** Custom Components
 import Breadcrumbs from '@components/breadcrumbs'
@@ -11,7 +11,6 @@ import {
   CardTitle,
   CardBody,
   Spinner,
-  Button,
   ListGroup,
   ListGroupItem,
   Badge
@@ -20,6 +19,7 @@ import {
 // ** Third Party Components
 import { ChevronDown } from 'react-feather'
 import DataTable, { createTheme } from 'react-data-table-component'
+import Filter, { baseColumns, RefreshButton, FilterToggle } from '@custom-components/filter'
 
 // ** Styles
 import '@styles/react/libs/tables/react-dataTable-component.scss'
@@ -38,51 +38,15 @@ const PRTSubmissionList = () => {
   const dispatch = useDispatch()
   const { skin } = useSkin()
   const { answers, isLoading } = useSelector(state => state.journalAnswer)
+  const [filteredData, setFilteredData] = useState([])
+  const [isFilterOpen, setIsFilterOpen] = useState(false)
 
   useEffect(() => {
     dispatch(getAnswerList())
   }, [])
 
   const basicColumns = [
-    {
-      name: 'NIM',
-      minWidth: '9rem',
-      sortable: true,
-      selector: ({ studentInfo: row }) => row.nim
-    },
-    {
-      name: 'Name',
-      sortable: true,
-      wrap: true,
-      minWidth: '17rem',
-      selector: ({ studentInfo: row }) => row.name
-    },
-    {
-      name: 'Day',
-      sortable: true,
-      selector: ({ studentInfo: row }) => {
-        const days = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu']
-        return days[row.day - 1]
-      }
-    },
-    {
-      name: 'Shift',
-      sortable: true,
-      minWidth: '8rem',
-      selector: ({ studentInfo: row }) => `Shift ${row.shift}`
-    },
-    {
-      name: 'Group',
-      sortable: true,
-      minWidth: '9rem',
-      selector: ({ studentInfo: row }) => `Group ${row.group}`
-    },
-    {
-      name: 'Module',
-      sortable: true,
-      minWidth: '9rem',
-      selector: row => row.moduleInfo.split(':')[0]
-    },
+    ...baseColumns,
     {
       name: "Score",
       sortable: true,
@@ -96,16 +60,22 @@ const PRTSubmissionList = () => {
     <Fragment>
       <Breadcrumbs title='Pre Test' data={[{ title: 'Submission' }]} />
       <Card className='overflow-hidden'>
-        <CardHeader>
+        <CardHeader className='gap-1'>
           <CardTitle tag='h4'>Pre Test Submission</CardTitle>
+          <div className='d-flex gap-1'>
+            <RefreshButton disabled={isLoading} onClickHandler={getAnswerList} />
+            <FilterToggle value={isFilterOpen} onToggle={setIsFilterOpen} />
+          </div>
         </CardHeader>
         <CardBody>
+          <Filter data={answers} onFilterChange={setFilteredData} isOpen={isFilterOpen} />
+
           <div className='react-dataTable'>
             <DataTable
               noHeader
               pagination
               expandableRows
-              data={answers}
+              data={filteredData}
               columns={basicColumns}
               progressPending={isLoading}
               theme={skin}
