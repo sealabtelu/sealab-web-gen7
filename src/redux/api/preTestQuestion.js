@@ -16,7 +16,7 @@ export const getListQuestionStudent = createAsyncThunk('question/getListQuestion
   try {
     return await axios.post(`${endpoint}/student`, {
       idModule: getState().module.selectedModule.id,
-      idStudent: getState().auth.userData.idStudent
+      idStudent: getState().user.profile.idStudent
     }).then(res => {
       return res.data.data
     })

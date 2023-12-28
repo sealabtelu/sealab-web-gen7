@@ -1,8 +1,5 @@
 // ** Auth Endpoints
 export default {
-  loginEndpoint: "/user/login",
-  logoutEndpoint: "/jwt/logout",
-
   // ** This will be prefixed in authorization header with token
   // ? e.g. Authorization: Bearer <token>
   tokenType: "Bearer",

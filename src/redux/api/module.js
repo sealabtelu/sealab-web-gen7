@@ -23,7 +23,7 @@ export const getPASubmissions = createAsyncThunk(
   "question/getPASubmissions",
   async (_, { getState }) => {
     return await axios
-      .get(`${endpoint}/submission/pa/${getState().auth.userData.idStudent}`)
+      .get(`${endpoint}/submission/pa/${getState().user.profile.idStudent}`)
       .then((res) => {
         return res.data.data
       })
@@ -34,7 +34,7 @@ export const getPRTSubmissions = createAsyncThunk(
   "question/getPRTSubmissions",
   async (_, { getState }) => {
     return await axios
-      .get(`${endpoint}/submission/prt/${getState().auth.userData.idStudent}`)
+      .get(`${endpoint}/submission/prt/${getState().user.profile.idStudent}`)
       .then((res) => {
         return res.data.data
       })
@@ -45,7 +45,7 @@ export const getJSubmissions = createAsyncThunk(
   "question/getJSubmissions",
   async (_, { getState }) => {
     return await axios
-      .get(`${endpoint}/submission/j/${getState().auth.userData.idStudent}`)
+      .get(`${endpoint}/submission/j/${getState().user.profile.idStudent}`)
       .then((res) => {
         return res.data.data
       })

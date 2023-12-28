@@ -13,7 +13,7 @@ export const addAnswer = createAsyncThunk(
     const data = {
       ...param,
       idModule: getState().module.selectedModule.id,
-      idStudent: getState().auth.userData.idStudent
+      idStudent: getState().user.profile.idStudent
     }
     return await axios.postForm(endpoint, data)
   }

@@ -7,7 +7,7 @@ import { createSlice, createAsyncThunk, isAnyOf } from '@reduxjs/toolkit'
 const endpoint = '/gform-survey'
 
 export const verify = createAsyncThunk("gformSurvey/verify", async (_, { getState }) => {
-  return await axios.get(`${endpoint}/verify/${getState().auth.userData.idUser}`).then((res) => {
+  return await axios.get(`${endpoint}/verify/${getState().user.profile.idUser}`).then((res) => {
     return res.data.data
   })
 })

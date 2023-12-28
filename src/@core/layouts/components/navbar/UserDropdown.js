@@ -7,7 +7,7 @@ import { getUserData, isUserLoggedIn } from "@utils"
 
 // ** Store & Actions
 import { useDispatch } from 'react-redux'
-import { handleLogout } from '@store/authentication'
+import { handleLogout } from '@store/api/user'
 
 // ** Custom Components
 import toast from 'react-hot-toast'

@@ -10,8 +10,7 @@ import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
-import { changePassword } from "@store/api/user"
-import { handleLogout } from '@store/authentication'
+import { changePassword, handleLogout } from "@store/api/user"
 
 // ** Custom Components
 import InputPasswordToggle from '@components/input-password-toggle'

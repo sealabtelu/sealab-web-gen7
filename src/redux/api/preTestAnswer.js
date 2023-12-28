@@ -9,7 +9,7 @@ const endpoint = '/pre-test-answer'
 export const addAnswer = createAsyncThunk('question/addAnswer', async (param, { getState }) => {
   const data = {
     ...param,
-    idStudent: getState().auth.userData.idStudent
+    idStudent: getState().user.profile.idStudent
   }
   return await axios.post(endpoint, data)
 })

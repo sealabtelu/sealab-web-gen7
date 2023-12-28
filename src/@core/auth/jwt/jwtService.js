@@ -72,8 +72,4 @@ export default class JwtService {
   setToken(value) {
     localStorage.setItem(this.jwtConfig.storageTokenKeyName, value)
   }
-
-  login(...args) {
-    return axios.post(this.jwtConfig.loginEndpoint, ...args)
-  }
 }
