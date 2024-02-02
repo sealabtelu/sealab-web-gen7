@@ -10,7 +10,7 @@ export default () => {
   return defineConfig({
     plugins: [react()],
     define: {
-      global: 'global' //'globalThis'
+      global: 'globalThis'
     },
     server: {
       port: 3000,
