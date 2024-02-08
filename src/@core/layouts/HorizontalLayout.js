@@ -21,7 +21,6 @@ import themeConfig from "@configs/themeConfig"
 import Customizer from "@components/customizer"
 import ScrollToTop from "@components/scrolltop"
 import NavbarComponent from "./components/navbar"
-import FooterComponent from "./components/footer"
 import MenuComponent from "./components/menu/horizontal-menu"
 
 // ** Custom Hooks
