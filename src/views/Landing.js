@@ -6,8 +6,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 
 const Landing = () => {
-    const [nightMode, setNightMode] = useState(parseInt(localStorage.getItem('nightmode')));
-
+    const [nightMode, setNightMode] = useState(parseInt(localStorage.getItem('nightmode')) === NaN ? 1 : parseInt(localStorage.getItem('nightmode')));
       useEffect(() => {
         const turnTheme = (mode) => {
           const textItems = mode ? document.querySelectorAll('.light-text,.light-text-reverse') : document.querySelectorAll('.dark-text,.dark-text-reverse');
@@ -26,6 +25,8 @@ const Landing = () => {
           toggleClass(backItems, mode ? 'light-background' : 'dark-background', mode ? 'dark-background' : 'light-background');
           toggleClass(cardItems, mode ? 'light-card' : 'dark-card', mode ? 'dark-card' : 'light-card');
           toggleClass(cardTextItems, mode ? 'light-card-text' : 'dark-card-text', mode ? 'dark-card-text' : 'light-card-text');
+          
+          localStorage.setItem('nightmode', nightMode);
         }
 
         turnTheme(nightMode);
@@ -47,7 +48,6 @@ const Landing = () => {
                             <a href="#assistants" class="dark-text">ASSISTANTS</a>
                             <a onClick={() => {
         setNightMode(prevMode => prevMode === 1 ? 0 : 1);
-        localStorage.setItem('nightmode', nightMode);
       }}><i class="bi bi-sun dark-text"></i></a>
                         </div>
                     </section>
