@@ -332,7 +332,7 @@ h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
 
 .social-icons {
     display: flex;
-    justify-content:center;
+    justify-content:center;;
 }
 .social-icons img {
     width: 2vw;
@@ -354,6 +354,7 @@ footer {
 }
 .social-media img {
     width: 3.5vw; /* Adjust the size as needed */
+    margin-right: 1vw;
 }
 
 @media screen and (orientation:portrait) {
