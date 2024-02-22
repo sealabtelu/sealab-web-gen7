@@ -14,9 +14,9 @@ export default () => {
     },
     server: {
       port: 3000,
-      proxy: 'https://ismilelab-telu.com/',
+      proxy: 'https://sealab-telu.com/',
       cors: {
-        origin: ['https://ismilelab-telu.com/', 'http://localhost:3000'],
+        origin: ['https://sealab-telu.com/', 'http://localhost:3000'],
         methods: ['GET', 'PATCH', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
       }

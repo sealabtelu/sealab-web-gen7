@@ -47,13 +47,13 @@ const HomeAssigment = () => {
           </li>
           <li>
             Soal TP akan diunggah setiap hari<b> Kamis sore</b>, pastikan untuk
-            membaca pengumuman TP setiap hari Kamis di OA Line Lab I-Smile
+            membaca pengumuman TP setiap hari Kamis di OA Line Lab SEA
             (@qup6728v).
           </li>
           <li>
             Pengumpulan Tugas Pendahuluan harus dilakukan paling lambat pada
             hari <b>Minggu sebelum pukul 12.00 WIB</b>, melalui situs web resmi
-            laboratorium I-Smile.
+            laboratorium SEA.
           </li>
           <li>
             Bagi praktikan yang <b>tidak mengumpulkan</b> Tugas Pendahuluan maka

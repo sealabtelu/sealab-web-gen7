@@ -32,7 +32,7 @@ export default function Journal() {
           </li>
           <li>
             Pengumpulan Jurnal sesuai dengan <b>arahan dari asisten</b>{" "}
-            Laboratorium I-Smile.
+            Laboratorium SEA.
           </li>
         </ol>
       </Card>

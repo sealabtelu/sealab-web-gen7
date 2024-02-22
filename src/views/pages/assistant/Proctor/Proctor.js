@@ -82,7 +82,7 @@ const Proctor = () => {
           <div className='alert-body'>
             <AlertCircle size={15} />
             <span className='ms-1'>
-              Seelabs status is <strong>invalid</strong>. Please ensure that your <strong>Seelabs Proctor</strong> password is the same as your <strong>I-Smile</strong> account
+              Seelabs status is <strong>invalid</strong>. Please ensure that your <strong>Seelabs Proctor</strong> password is the same as your <strong>SEA</strong> account
             </span>
           </div>
         </Alert>

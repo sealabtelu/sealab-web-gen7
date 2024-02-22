@@ -11,7 +11,7 @@ const Footer = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          I-Smile Laboratory
+          SEA Laboratory
         </a>
         <span className="d-none d-sm-inline-block">, All rights Reserved</span>
       </span>

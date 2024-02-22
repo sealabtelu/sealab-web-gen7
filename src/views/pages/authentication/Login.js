@@ -102,11 +102,11 @@ const Login = () => {
         <Card className='mb-0'>
           <CardBody>
             <Link className='brand-logo' to='/'>
-              <img style={{ width: 'auto', height: '50px' }} src={logo} alt="I-Smile" />
-              {/* <h2 className="brand-text text-primary ms-1">I-Smile</h2> */}
+              <img style={{ width: 'auto', height: '50px' }} src={logo} alt="SEA" />
+              {/* <h2 className="brand-text text-primary ms-1">SEA</h2> */}
             </Link>
             <CardTitle tag='h4' className='mb-1'>
-              Welcome to I-Smile Laboratory! 👋
+              Welcome to SEA Laboratory! 👋
             </CardTitle>
             <CardText className='mb-2'>Please sign-in to your account and start the adventure</CardText>
             <Form className='auth-login-form mt-2' onSubmit={handleSubmit(onSubmit)}>
