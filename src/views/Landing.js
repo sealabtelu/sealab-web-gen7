@@ -1,12 +1,12 @@
 // ** Styles
-import '@src/assets/scss/home.css';
-import '@src/assets/scss/nav.css';
+import '@src/assets/scss/home.scss';
+import '@src/assets/scss/nav.scss';
 import { useEffect, useState } from 'react';
 
 import { Link } from 'react-router-dom'
 
 const Landing = () => {
-    const [nightMode, setNightMode] = useState(parseInt(localStorage.getItem('nightmode')) === NaN ? 1 : parseInt(localStorage.getItem('nightmode')));
+    const [nightMode, setNightMode] = useState(isNaN(parseInt(localStorage.getItem('nightmode'))) ? 1 : parseInt(localStorage.getItem('nightmode')));
       useEffect(() => {
         const turnTheme = (mode) => {
           const textItems = mode ? document.querySelectorAll('.light-text,.light-text-reverse') : document.querySelectorAll('.dark-text,.dark-text-reverse');
