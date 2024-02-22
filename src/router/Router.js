@@ -19,6 +19,7 @@ import { getRoutes } from "./routes"
 // ** Components
 const Login = lazy(() => import('../views/pages/authentication/Login'))
 const Landing = lazy(() => import("../views/Landing"))
+const LandingLegacy = lazy(() => import("../views/LandingLegacy"))
 const Error = lazy(() => import('../views/pages/misc/Error'))
 const NotAuthorized = lazy(() => import('../views/pages/misc/NotAuthorized'))
 
@@ -41,6 +42,11 @@ const Router = () => {
       path: '/',
       element: <BlankLayout />,
       children: [{ path: '/', element: <Landing /> }]
+    },
+    {
+      path: '/legacy',
+      element: <BlankLayout />,
+      children: [{ path: '/legacy', element: <LandingLegacy /> }]
     },
     {
       path: '/home',
