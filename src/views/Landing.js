@@ -28,19 +28,22 @@ const Landing = () => {
           
           localStorage.setItem('nightmode', nightMode);
         }
-
         turnTheme(nightMode);
     }, [nightMode]);
+    const [showMenu,setShowMenu] = useState(false)
+    const toggletheme = () => {
+        setShowMenu(!showMenu);
+    }
   return (
     <>
     <body class="landing">
     <div class="bodytohidenav">
         <nav class="navbar">
             <div style={{position: 'relative'}}>
-                <section id="togel">
-                    <i class="fa fa-bars" onclick="showMenu(this)"></i>
+                <section id="togel" style={{right: showMenu ? "-100vw" : "-300vw"}}>
+                    <i class="fa fa-bars" onClick={toggletheme}></i>
                     <a href="index.html" class="logo-nav"><img src="src/views/pages/assets/SEA-logo.png" alt="Logo"/></a>
-                    <div class="close" onclick="hideMenu(this)"></div>
+                    <div class="close" onClick={toggletheme}></div>
                         <div>
                             <a href="#home" class="dark-text">HOME</a>
                             <a href="#programs" class="dark-text">PROGRAMS</a>
