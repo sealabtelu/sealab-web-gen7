@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Menjalankan git pull dari branch 'development' di repository remote 'origin'
-git pull origin development
+git pull origin master
 
 # Melakukan build aplikasi
 yarn build
