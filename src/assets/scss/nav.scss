@@ -9,15 +9,15 @@ body {
 }
 
 :root{
-    --light-color:rgb(250, 255, 255);
+    --light-color:rgb(255, 255, 255);
     --theme-color:rgb(67, 197, 240);
     --dark-background: #4b4b4b;
     --dark-color: #333333;
     --transparent-color:#dbf7ff3f;
     --light-card: var(--theme-color);
     --dark-card: var(--transparent-color);
-    --light-cardtext: var(--theme-color);
-    --dark-cardtext: var(--light-color);
+    --light-card-text: var(--theme-color);
+    --dark-card-text: var(--light-color);
 }
 
 nav.navbar{

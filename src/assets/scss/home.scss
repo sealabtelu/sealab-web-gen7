@@ -11,8 +11,8 @@
     --transparent-color:#dbf7ff3f;
     --light-card: var(--theme-color);
     --dark-card: var(--transparent-color);
-    --light-cardtext: rgb(67, 197, 240);
-    --dark-cardtext: var(--light-color);
+    --light-card-text: rgb(67, 197, 240);
+    --dark-card-text: var(--light-color);
 }
 body.landing *{
     box-sizing: unset;
@@ -48,7 +48,7 @@ h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
 
 .welcome, .lab-text{
     font-size: calc(3vw + 3vh);
-    font-family: 'Cascadia Mono Extrabold', 'Poppins Bold' ,Arial, Helvetica, sans-serif;
+    font-family: 'Cascadia Mono Extrabold', 'Poppins Bold' , Arial, Helvetica, sans-serif;
     text-align: center;
 }
 

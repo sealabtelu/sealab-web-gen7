@@ -2,8 +2,21 @@
 import '@src/assets/scss/home.scss';
 import '@src/assets/scss/nav.scss';
 import { useEffect, useState } from 'react';
-
 import { Link } from 'react-router-dom'
+
+import logo from '@src/views/pages/assets/SEA-logo.png';
+
+import instagram from '@src/views/pages/assets/assistants/instagram_social.svg';
+import linkedin from '@src/views/pages/assets/assistants/linkedin_social.svg';
+import sgfundamental from '@src/views/pages/assets/sgfundamental_logo.png';
+import sgdesktop from '@src/views/pages/assets/sgdesktop_logo.png';
+import sggame from '@src/views/pages/assets/sggame_logo.png';
+import sgweb from '@src/views/pages/assets/sgweb_logo.png';
+import sgmob from '@src/views/pages/assets/sgmobile_logo.png';
+import instagramicon from '@src/views/pages/assets/instagram_icon.png';
+import lineicon from '@src/views/pages/assets/line_icon.png'
+import youtubeicon from '@src/views/pages/assets/youtube_icon.png';
+
 
 const Landing = () => {
     const [nightMode, setNightMode] = useState(isNaN(parseInt(localStorage.getItem('nightmode'))) ? 1 : parseInt(localStorage.getItem('nightmode')));
@@ -42,7 +55,7 @@ const Landing = () => {
             <div style={{position: 'relative'}}>
                 <section id="togel" style={{right: showMenu ? "-100vw" : "-300vw"}}>
                     <i class="fa fa-bars" onClick={toggletheme}></i>
-                    <a href="index.html" class="logo-nav"><img src="src/views/pages/assets/SEA-logo.png" alt="Logo"/></a>
+                    <a href="index.html" class="logo-nav"><img src={logo} alt="Logo"/></a>
                     <div class="close" onClick={toggletheme}></div>
                         <div>
                             <a href="#home" class="dark-text">HOME</a>
@@ -88,35 +101,35 @@ const Landing = () => {
                             </p>
                         </div>
                         <div class="study-card dark-card">
-                            <img src="src/views/pages/assets/sgfundamental_logo.png" alt="Study Group Fundamental"/>
+                            <img src={sgfundamental} alt="Study Group Fundamental"/>
                             <div class="study-card-text">
                                 <h4>Fundamental</h4>
                                 <p>Divisi ini membantu anggota study group membangun dasar-dasar yang kuat dalam pemrograman.</p>
                             </div>
                         </div>
                         <div class="study-card dark-card">
-                            <img src="src/views/pages/assets/sgdesktop_logo.png" alt="Study Group Fundamental"/>
+                            <img src={sgdesktop} alt="Study Group Fundamental"/>
                             <div class="study-card-text">
                                 <h4>Desktop Development</h4>
                                 <p>Divisi ini mengeksplorasi pengembangan perangkat lunak desktop untuk berbagai platform.</p>
                             </div>
                         </div>
                         <div class="study-card dark-card">
-                            <img src="src/views/pages/assets/sgmobile_logo.png" alt="Study Group Fundamental"/>
+                            <img src={sgmob}alt="Study Group Fundamental"/>
                             <div class="study-card-text">
                                 <h4>Mobile Development</h4>
                                 <p>Divisi ini fokus dalam pengembangan aplikasi mobile untuk platform Android dengan bahasa Kotlin</p>
                             </div>
                         </div>
                         <div class="study-card dark-card">
-                            <img src="src/views/pages/assets/sgweb_logo.png" alt="Study Group Fundamental"/>
+                            <img src={sgweb} alt="Study Group Fundamental"/>
                             <div class="study-card-text">
                                 <h4>Web Development</h4>
                                 <p>Divisi ini akan merambah dunia web mulai dari html hingga framework web modern</p>
                             </div>
                         </div>
                         <div class="study-card dark-card">
-                            <img src="src/views/pages/assets/sggame_logo.png" alt="Study Group Fundamental"/>
+                            <img src={sggame} alt="Study Group Fundamental"/>
                             <div class="study-card-text">
                                 <h4>Game Development</h4>
                                 <p>Divisi ini mengajak anggotanya untuk memahami seluk-beluk pembuatan permainan menggunakan unity engine.</p>
@@ -163,8 +176,8 @@ const Landing = () => {
                             <h3>Cetta Maulana Andhika</h3>
                             <h4>Wakil Koordinator Asisten</h4>
                             <div class="social-icons">
-                                <a href="https://www.instagram.com/cettamaulana_" target="_blank"><img src="src/views/pages/assets/assistants/instagram_social.svg" alt="Instagram"/></a>
-                                <a href="https://www.linkedin.com/in/cettama/" target="_blank"><img src="src/views/pages/assets/assistants/linkedin_social.svg" alt="LinkedIn"/></a>
+                                <a href="https://www.instagram.com/cettamaulana_" target="_blank"><img src={instagram} alt="Instagram"/></a>
+                                <a href="https://www.linkedin.com/in/cettama/" target="_blank"><img src={linkedin} alt="LinkedIn"/></a>
                             </div>
                         </div>
                         <div class="assistant-card dark-card">
@@ -172,8 +185,8 @@ const Landing = () => {
                             <h3>Faraday Barr Fatahillah</h3>
                             <h4>Koordinator Asisten</h4>
                             <div class="social-icons">
-                                <a href="https://www.instagram.com/faraday.bf/" target="_blank"><img src="src/views/pages/assets/assistants/instagram_social.svg" alt="Instagram"/></a>
-                                <a href="https://www.linkedin.com/in/faradaybarr/" target="_blank"><img src="src/views/pages/assets/assistants/linkedin_social.svg" alt="LinkedIn"/></a>
+                                <a href="https://www.instagram.com/faraday.bf/" target="_blank"><img src={instagram} alt="Instagram"/></a>
+                                <a href="https://www.linkedin.com/in/faradaybarr/" target="_blank"><img src={linkedin} alt="LinkedIn"/></a>
                             </div>
                         </div>
                         <div class="assistant-card dark-card">
@@ -181,8 +194,8 @@ const Landing = () => {
                             <h3>Aldo Nitehe Lase</h3>
                             <h4>Koordinator Riset</h4>
                             <div class="social-icons">
-                                <a href="https://www.instagram.com/lase_aldo" target="_blank"><img src="src/views/pages/assets/assistants/instagram_social.svg" alt="Instagram"/></a>
-                                <a href="https://www.linkedin.com/in/aldolase/" target="_blank"><img src="src/views/pages/assets/assistants/linkedin_social.svg" alt="LinkedIn"/></a>
+                                <a href="https://www.instagram.com/lase_aldo" target="_blank"><img src={instagram} alt="Instagram"/></a>
+                                <a href="https://www.linkedin.com/in/aldolase/" target="_blank"><img src={linkedin} alt="LinkedIn"/></a>
                             </div>
                         </div>
                     </section>
@@ -192,8 +205,8 @@ const Landing = () => {
                             <h3>Kinanti Rahayu Az-Zahra</h3>
                             <h4>Sekretaris</h4>
                             <div class="social-icons">
-                                <a href="https://www.instagram.com/kinanra/" target="_blank"><img src="src/views/pages/assets/assistants/instagram_social.svg" alt="Instagram"/></a>
-                                <a href="https://www.linkedin.com/in/kinantirahayuazhra/" target="_blank"><img src="src/views/pages/assets/assistants/linkedin_social.svg" alt="LinkedIn"/></a>
+                                <a href="https://www.instagram.com/kinanra/" target="_blank"><img src={instagram} alt="Instagram"/></a>
+                                <a href="https://www.linkedin.com/in/kinantirahayuazhra/" target="_blank"><img src={linkedin} alt="LinkedIn"/></a>
                             </div>
                         </div>
                         <div class="assistant-card dark-card">
@@ -201,8 +214,8 @@ const Landing = () => {
                             <h3>Sam Alim Ramadhan</h3>
                             <h4>Sekretaris</h4>
                             <div class="social-icons">
-                                <a href="https://www.instagram.com/limeysplash_/" target="_blank"><img src="src/views/pages/assets/assistants/instagram_social.svg" alt="Instagram"/></a>
-                                <a href="https://www.linkedin.com/in/samalimramadhan/" target="_blank"><img src="src/views/pages/assets/assistants/linkedin_social.svg" alt="LinkedIn"/></a>
+                                <a href="https://www.instagram.com/limeysplash_/" target="_blank"><img src={instagram} alt="Instagram"/></a>
+                                <a href="https://www.linkedin.com/in/samalimramadhan/" target="_blank"><img src={linkedin} alt="LinkedIn"/></a>
                             </div>
                         </div>
                         <div class="assistant-card dark-card">
@@ -210,8 +223,8 @@ const Landing = () => {
                             <h3>Azmi Taqiuddin Syah</h3>
                             <h4>Bendahara</h4>
                             <div class="social-icons">
-                                <a href="https://www.instagram.com/miuddinsyah_" target="_blank"><img src="src/views/pages/assets/assistants/instagram_social.svg" alt="Instagram"/></a>
-                                <a href="https://www.linkedin.com/in/miuddinsyah/" target="_blank"><img src="src/views/pages/assets/assistants/linkedin_social.svg" alt="LinkedIn"/></a>
+                                <a href="https://www.instagram.com/miuddinsyah_" target="_blank"><img src={instagram} alt="Instagram"/></a>
+                                <a href="https://www.linkedin.com/in/miuddinsyah/" target="_blank"><img src={linkedin} alt="LinkedIn"/></a>
                             </div>
                         </div>
                     </section>
@@ -221,8 +234,8 @@ const Landing = () => {
                             <h3>Panji Christoper Silalahi</h3>
                             <h4>Praktikum</h4>
                             <div class="social-icons">
-                                <a href="https://www.instagram.com/panjichrst_/" target="_blank"><img src="src/views/pages/assets/assistants/instagram_social.svg" alt="Instagram"/></a>
-                                <a href="https://www.linkedin.com/in/pajichrstp/" target="_blank"><img src="src/views/pages/assets/assistants/linkedin_social.svg" alt="LinkedIn"/></a>
+                                <a href="https://www.instagram.com/panjichrst_/" target="_blank"><img src={instagram} alt="Instagram"/></a>
+                                <a href="https://www.linkedin.com/in/pajichrstp/" target="_blank"><img src={linkedin} alt="LinkedIn"/></a>
                             </div>
                         </div>
                         <div class="assistant-card dark-card">
@@ -230,8 +243,8 @@ const Landing = () => {
                             <h3>Yohannes Yogas Herlambang</h3>
                             <h4>Praktikum</h4>
                             <div class="social-icons">
-                                <a href="https://www.instagram.com/ygs.hrlmbng" target="_blank"><img src="src/views/pages/assets/assistants/instagram_social.svg" alt="Instagram"/></a>
-                                <a href="https://www.linkedin.com/in/yogas-herlambang-9672931bb/" target="_blank"><img src="src/views/pages/assets/assistants/linkedin_social.svg" alt="LinkedIn"/></a>
+                                <a href="https://www.instagram.com/ygs.hrlmbng" target="_blank"><img src={instagram} alt="Instagram"/></a>
+                                <a href="https://www.linkedin.com/in/yogas-herlambang-9672931bb/" target="_blank"><img src={linkedin} alt="LinkedIn"/></a>
                             </div>
                         </div>
                         <div class="assistant-card dark-card">
@@ -239,8 +252,8 @@ const Landing = () => {
                             <h3>Muh. Abyan Ridhan Siregar</h3>
                             <h4>Praktikum</h4>
                             <div class="social-icons">
-                                <a href="https://www.instagram.com/muhammadabyann" target="_blank"><img src="src/views/pages/assets/assistants/instagram_social.svg" alt="Instagram"/></a>
-                                <a href="https://www.linkedin.com/in/muhammad-abyan-8451471b6/" target="_blank"><img src="src/views/pages/assets/assistants/linkedin_social.svg" alt="LinkedIn"/></a>
+                                <a href="https://www.instagram.com/muhammadabyann" target="_blank"><img src={instagram} alt="Instagram"/></a>
+                                <a href="https://www.linkedin.com/in/muhammad-abyan-8451471b6/" target="_blank"><img src={linkedin} alt="LinkedIn"/></a>
                             </div>
                         </div>
                         <div class="assistant-card dark-card">
@@ -248,8 +261,8 @@ const Landing = () => {
                             <h3>Sef Sofa Maulanaja</h3>
                             <h4>Praktikum</h4>
                             <div class="social-icons">
-                                <a href="https://www.instagram.com/maulanaja_/" target="_blank"><img src="src/views/pages/assets/assistants/instagram_social.svg" alt="Instagram"/></a>
-                                <a href="https://www.linkedin.com/in/sefsofamaulanaja/" target="_blank"><img src="src/views/pages/assets/assistants/linkedin_social.svg" alt="LinkedIn"/></a>
+                                <a href="https://www.instagram.com/maulanaja_/" target="_blank"><img src={instagram} alt="Instagram"/></a>
+                                <a href="https://www.linkedin.com/in/sefsofamaulanaja/" target="_blank"><img src={linkedin} alt="LinkedIn"/></a>
                             </div>
                         </div>
                     </section>
@@ -259,8 +272,8 @@ const Landing = () => {
                             <h3>Kinanti Aria Widaswara</h3>
                             <h4>Public Relation</h4>
                             <div class="social-icons">
-                                <a href="https://www.instagram.com/kinanti.aria/" target="_blank"><img src="src/views/pages/assets/assistants/instagram_social.svg" alt="Instagram"/></a>
-                                <a href="https://www.linkedin.com/in/kinantiaria/" target="_blank"><img src="src/views/pages/assets/assistants/linkedin_social.svg" alt="LinkedIn"/></a>
+                                <a href="https://www.instagram.com/kinanti.aria/" target="_blank"><img src={instagram} alt="Instagram"/></a>
+                                <a href="https://www.linkedin.com/in/kinantiaria/" target="_blank"><img src={linkedin} alt="LinkedIn"/></a>
                             </div>
                         </div>
                         <div class="assistant-card dark-card">
@@ -268,8 +281,8 @@ const Landing = () => {
                             <h3>Axel David</h3>
                             <h4>Public Relation</h4>
                             <div class="social-icons">
-                                <a href="https://www.instagram.com/axelldvid/" target="_blank"><img src="src/views/pages/assets/assistants/instagram_social.svg" alt="Instagram"/></a>
-                                <a href="https://www.linkedin.com/in/axelldavid/" target="_blank"><img src="src/views/pages/assets/assistants/linkedin_social.svg" alt="LinkedIn"/></a>
+                                <a href="https://www.instagram.com/axelldvid/" target="_blank"><img src={instagram} alt="Instagram"/></a>
+                                <a href="https://www.linkedin.com/in/axelldavid/" target="_blank"><img src={linkedin} alt="LinkedIn"/></a>
                             </div>
                         </div>
                         <div class="assistant-card dark-card">
@@ -277,8 +290,8 @@ const Landing = () => {
                             <h3>Sulthan Nauval Abdillah</h3>
                             <h4>Public Relation</h4>
                             <div class="social-icons">
-                                <a href="https://www.instagram.com/sulthan.13" target="_blank"><img src="src/views/pages/assets/assistants/instagram_social.svg" alt="Instagram"/></a>
-                                <a href="https://www.linkedin.com/in/sulthannauval/" target="_blank"><img src="src/views/pages/assets/assistants/linkedin_social.svg" alt="LinkedIn"/></a>
+                                <a href="https://www.instagram.com/sulthan.13" target="_blank"><img src={instagram} alt="Instagram"/></a>
+                                <a href="https://www.linkedin.com/in/sulthannauval/" target="_blank"><img src={linkedin} alt="LinkedIn"/></a>
                             </div>
                         </div>
                     </section>
@@ -288,8 +301,8 @@ const Landing = () => {
                             <h3>Muh. Farrel Ahadi Tama</h3>
                             <h4>Inventaris</h4>
                             <div class="social-icons">
-                                <a href="https://www.instagram.com/farrel.tamaa/" target="_blank"><img src="src/views/pages/assets/assistants/instagram_social.svg" alt="Instagram"/></a>
-                                <a href="https://www.linkedin.com/in/muhammad-farrel-ahadi-tama-0b0628220/" target="_blank"><img src="src/views/pages/assets/assistants/linkedin_social.svg" alt="LinkedIn"/></a>
+                                <a href="https://www.instagram.com/farrel.tamaa/" target="_blank"><img src={instagram} alt="Instagram"/></a>
+                                <a href="https://www.linkedin.com/in/muhammad-farrel-ahadi-tama-0b0628220/" target="_blank"><img src={linkedin} alt="LinkedIn"/></a>
                             </div>
                         </div>
                         <div class="assistant-card dark-card">
@@ -297,8 +310,8 @@ const Landing = () => {
                             <h3>Andreas Wahyu Prayogo</h3>
                             <h4>Inventaris</h4>
                             <div class="social-icons">
-                                <a href="https://www.instagram.com/andreewp__" target="_blank"><img src="src/views/pages/assets/assistants/instagram_social.svg" alt="Instagram"/></a>
-                                <a href="https://www.linkedin.com/in/andreewp__" target="_blank"><img src="src/views/pages/assets/assistants/linkedin_social.svg" alt="LinkedIn"/></a>
+                                <a href="https://www.instagram.com/andreewp__" target="_blank"><img src={instagram} alt="Instagram"/></a>
+                                <a href="https://www.linkedin.com/in/andreewp__" target="_blank"><img src={linkedin} alt="LinkedIn"/></a>
                             </div>
                         </div>
                         <div class="assistant-card dark-card">
@@ -306,8 +319,8 @@ const Landing = () => {
                             <h3>Fadhil Dzikri Aqila</h3>
                             <h4>Inventaris</h4>
                             <div class="social-icons">
-                                <a href="https://www.instagram.com/fxdhil.dz/" target="_blank"><img src="src/views/pages/assets/assistants/instagram_social.svg" alt="Instagram"/></a>
-                                <a href="https://www.linkedin.com/in/fxdhil.dz" target="_blank"><img src="src/views/pages/assets/assistants/linkedin_social.svg" alt="LinkedIn"/></a>
+                                <a href="https://www.instagram.com/fxdhil.dz/" target="_blank"><img src={instagram} alt="Instagram"/></a>
+                                <a href="https://www.linkedin.com/in/fxdhil.dz" target="_blank"><img src={linkedin} alt="LinkedIn"/></a>
                             </div>
                         </div>
                     </section>
@@ -328,9 +341,9 @@ const Landing = () => {
             <div class="social-media">
                 <h2 class="dark-text">FOLLOW US</h2>
                 <div>
-                    <a href="https://www.instagram.com/sea.laboratory/" target="_blank"><img src="src/views/pages/assets/instagram_icon.png" alt="Instagram"/></a>
-                    <a href="https://liff.line.me/1645278921-kWRPP32q/?accountId=748waapd" target="_blank"><img src="src/views/pages/assets/line_icon.png" alt="Line"/></a>
-                    <a href="https://www.youtube.com/@SEALaboratory" target="_blank"><img src="src/views/pages/assets/youtube_icon.png" alt="Youtube"/></a>
+                    <a href="https://www.instagram.com/sea.laboratory/" target="_blank"><img src={instagramicon} alt="Instagram"/></a>
+                    <a href="https://liff.line.me/1645278921-kWRPP32q/?accountId=748waapd" target="_blank"><img src={lineicon} alt="Line"/></a>
+                    <a href="https://www.youtube.com/@SEALaboratory" target="_blank"><img src={youtubeicon} alt="Youtube"/></a>
                 </div>
             </div>
         </footer>
