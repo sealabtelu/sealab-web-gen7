@@ -19,22 +19,22 @@ import instagramicon from '@src/assets/images/landing/instagram_icon.png'
 import lineicon from '@src/assets/images/landing/line_icon.png'
 import youtubeicon from '@src/assets/images/landing/youtube_icon.png'
 
-import cma from "@src/assets/images/landing/assistants/cma.png"
-import ara from "@src/assets/images/landing/assistants/ara.png"
-import dao from "@src/assets/images/landing/assistants/dao.png"
-import krz from "@src/assets/images/landing/assistants/krz.png"
-import ats from "@src/assets/images/landing/assistants/ats.png"
-import sam from "@src/assets/images/landing/assistants/sam.png"
-import yog from "@src/assets/images/landing/assistants/yog.png"
-import yna from "@src/assets/images/landing/assistants/yna.png"
-import ars from "@src/assets/images/landing/assistants/ars.png"
-import sef from "@src/assets/images/landing/assistants/sef.png"
-import kin from "@src/assets/images/landing/assistants/kin.png"
-import axl from "@src/assets/images/landing/assistants/axl.png"
-import sna from "@src/assets/images/landing/assistants/sna.png"
-import tam from "@src/assets/images/landing/assistants/tam.png"
-import and from "@src/assets/images/landing/assistants/and.png"
-import fdz from "@src/assets/images/landing/assistants/fdz.png"
+import cma from '@src/assets/images/landing/assistants/cma.png'
+import ara from '@src/assets/images/landing/assistants/ara.png'
+import dao from '@src/assets/images/landing/assistants/dao.png'
+import krz from '@src/assets/images/landing/assistants/krz.png'
+import ats from '@src/assets/images/landing/assistants/ats.png'
+import sam from '@src/assets/images/landing/assistants/sam.png'
+import yog from '@src/assets/images/landing/assistants/yog.png'
+import yna from '@src/assets/images/landing/assistants/yna.png'
+import ars from '@src/assets/images/landing/assistants/ars.png'
+import sef from '@src/assets/images/landing/assistants/sef.png'
+import kin from '@src/assets/images/landing/assistants/kin.png'
+import axl from '@src/assets/images/landing/assistants/axl.png'
+import sna from '@src/assets/images/landing/assistants/sna.png'
+import tam from '@src/assets/images/landing/assistants/tam.png'
+import and from '@src/assets/images/landing/assistants/and.png'
+import fdz from '@src/assets/images/landing/assistants/fdz.png'
 
 const Landing = () => {
   const [nightMode, setNightMode] = useState(JSON.parse(localStorage.getItem('nightmode')) ?? false)
