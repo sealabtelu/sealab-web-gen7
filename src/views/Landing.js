@@ -38,36 +38,36 @@ import and from '@src/assets/images/landing/assistants/and.png'
 import fdz from '@src/assets/images/landing/assistants/fdz.png'
 
 const Landing = () => {
-  const [nightMode, setNightMode] = useState(JSON.parse(localStorage.getItem('nightmode')) ?? false)
+  // const [nightMode, setNightMode] = useState(JSON.parse(localStorage.getItem('nightmode')) ?? false)
   const { skin, setSkin } = useSkin()
-  useEffect(() => {
-    skin === 'light' ? setNightMode(false) : setNightMode(true)
-  }, []);
-  useEffect(() => {
-    const turnTheme = (mode) => {
-      const textItems = mode ? document.querySelectorAll('.light-text,.light-text-reverse') : document.querySelectorAll('.dark-text,.dark-text-reverse')
-      const backItems = mode ? document.querySelectorAll('.light-background,.light-background-reverse') : document.querySelectorAll('.dark-background,.dark-background-reverse')
-      const cardItems = mode ? document.querySelectorAll('.light-card') : document.querySelectorAll('.dark-card')
-      const cardTextItems = mode ? document.querySelectorAll('.light-card-text') : document.querySelectorAll('.dark-card-text')
+  // useEffect(() => {
+  //   skin === 'light' ? setNightMode(false) : setNightMode(true)
+  // }, [])
+  // useEffect(() => {
+  //   const turnTheme = (mode) => {
+  //     const textItems = mode ? document.querySelectorAll('.light-text,.light-text-reverse') : document.querySelectorAll('.dark-text,.dark-text-reverse')
+  //     const backItems = mode ? document.querySelectorAll('.light-background,.light-background-reverse') : document.querySelectorAll('.dark-background,.dark-background-reverse')
+  //     const cardItems = mode ? document.querySelectorAll('.light-card') : document.querySelectorAll('.dark-card')
+  //     const cardTextItems = mode ? document.querySelectorAll('.light-card-text') : document.querySelectorAll('.dark-card-text')
 
-      const toggleClass = (items, class1, class2) => {
-        items.forEach(item => {
-          item.classList.remove(class1)
-          item.classList.add(class2)
-        })
-      }
-      
+  //     const toggleClass = (items, class1, class2) => {
+  //       items.forEach(item => {
+  //         item.classList.remove(class1)
+  //         item.classList.add(class2)
+  //       })
+  //     }
 
-      toggleClass(textItems, mode ? 'light-text' : 'dark-text', mode ? 'dark-text' : 'light-text')
-      toggleClass(backItems, mode ? 'light-background' : 'dark-background', mode ? 'dark-background' : 'light-background')
-      toggleClass(cardItems, mode ? 'light-card' : 'dark-card', mode ? 'dark-card' : 'light-card')
-      toggleClass(cardTextItems, mode ? 'light-card-text' : 'dark-card-text', mode ? 'dark-card-text' : 'light-card-text')
-      nightMode ? setSkin("dark") : setSkin("light");
 
-      localStorage.setItem('nightmode', nightMode)
-    }
-    turnTheme(nightMode)
-  }, [nightMode])
+  //     toggleClass(textItems, mode ? 'light-text' : 'dark-text', mode ? 'dark-text' : 'light-text')
+  //     toggleClass(backItems, mode ? 'light-background' : 'dark-background', mode ? 'dark-background' : 'light-background')
+  //     toggleClass(cardItems, mode ? 'light-card' : 'dark-card', mode ? 'dark-card' : 'light-card')
+  //     toggleClass(cardTextItems, mode ? 'light-card-text' : 'dark-card-text', mode ? 'dark-card-text' : 'light-card-text')
+  //     nightMode ? setSkin("dark") : setSkin("light");
+
+  //     localStorage.setItem('nightmode', nightMode)
+  //   }
+  //   turnTheme(nightMode)
+  // }, [nightMode])
   const [showMenu, setShowMenu] = useState(false)
   const togglemenu = () => {
     setShowMenu(!showMenu)
@@ -78,9 +78,8 @@ const Landing = () => {
         <nav className="navbar">
           <div style={{ position: 'relative' }}>
             <section id="togel" style={{ right: showMenu ? "-100vw" : "-300vw" }}>
-              <Menu className="fa fa-bars" onClick={togglemenu}/>
-              {/* <i className="fa fa-bars" onClick={toggletheme}></i> */}
-              <a href="index.html" className="logo-nav"><img src={logo} alt="Logo" /></a>
+              <Menu className="fa fa-bars" onClick={togglemenu} />
+              <a href="/" className="logo-nav"><img src={logo} alt="Logo" /></a>
               <div className="close" onClick={togglemenu}></div>
               <div>
                 <a href="#home" className="dark-text">HOME</a>
@@ -88,7 +87,8 @@ const Landing = () => {
                 <a href="#about" className="dark-text">ABOUT</a>
                 <a href="#assistants" className="dark-text">ASSISTANTS</a>
                 <a onClick={() => {
-                  setNightMode(!nightMode)
+                  skin === "dark" ? setSkin("light") : setSkin("dark")
+                  // setNightMode(!nightMode)
                 }}>
                   <Sun />
                 </a>
