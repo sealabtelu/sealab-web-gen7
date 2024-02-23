@@ -13,9 +13,28 @@ import sgdesktop from '@src/views/pages/assets/sgdesktop_logo.png';
 import sggame from '@src/views/pages/assets/sggame_logo.png';
 import sgweb from '@src/views/pages/assets/sgweb_logo.png';
 import sgmob from '@src/views/pages/assets/sgmobile_logo.png';
+
+import cma from "@src/views/pages/assets/assistants/cma.png"
+import ara from "@src/views/pages/assets/assistants/ara.png"
+import dao from "@src/views/pages/assets/assistants/dao.png"
+import krz from "@src/views/pages/assets/assistants/krz.png"
+import ats from "@src/views/pages/assets/assistants/ats.png"
+import sam from "@src/views/pages/assets/assistants/sam.png"
+import yog from "@src/views/pages/assets/assistants/yog.png"
+import yna from "@src/views/pages/assets/assistants/yna.png"
+import ars from "@src/views/pages/assets/assistants/ars.png"
+import sef from "@src/views/pages/assets/assistants/sef.png"
+import kin from "@src/views/pages/assets/assistants/kin.png"
+import axl from "@src/views/pages/assets/assistants/axl.png"
+import yna from "@src/views/pages/assets/assistants/sna.png"
+import tam from "@src/views/pages/assets/assistants/tam.png"
+import and from "@src/views/pages/assets/assistants/and.png"
+import fdz from "@src/views/pages/assets/assistants/fdz.png"
+
 import instagramicon from '@src/views/pages/assets/instagram_icon.png';
 import lineicon from '@src/views/pages/assets/line_icon.png'
 import youtubeicon from '@src/views/pages/assets/youtube_icon.png';
+import { fromJSON } from 'postcss';
 
 import cma from "@src/views/pages/assets/assistants/cma.png"
 import ara from "@src/views/pages/assets/assistants/ara.png"
