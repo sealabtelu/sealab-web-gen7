@@ -41,6 +41,9 @@ const Landing = () => {
   const [nightMode, setNightMode] = useState(JSON.parse(localStorage.getItem('nightmode')) ?? false)
   const { skin, setSkin } = useSkin()
   useEffect(() => {
+    skin === 'light' ? setNightMode(false) : setNightMode(true)
+  }, []);
+  useEffect(() => {
     const turnTheme = (mode) => {
       const textItems = mode ? document.querySelectorAll('.light-text,.light-text-reverse') : document.querySelectorAll('.dark-text,.dark-text-reverse')
       const backItems = mode ? document.querySelectorAll('.light-background,.light-background-reverse') : document.querySelectorAll('.dark-background,.dark-background-reverse')
