@@ -19,32 +19,34 @@ import { Link, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 
 import { addAnswer } from "@store/api/journalAnswer"
-import { verify } from "@store/api/gformSurvey"
-import { getUserData } from "@utils"
+// import { verify } from "@store/api/gformSurvey"
+// import { getUserData } from "@utils"
 
 // ** Third Party Imports File Uploader
 import { Controller, useForm } from "react-hook-form"
 import Dropzone from "@custom-components/dropzone"
 
 export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
-  //collase
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { isLoading: isVerifyLoading } = useSelector((state) => state.gformSurvey)
   const { isLoading } = useSelector((state) => state.journalAnswer)
-  const { appToken } = getUserData()
+  // const { appToken } = getUserData()
 
   const [isOpen, setIsOpen] = useState(false)
   const toggle = () => {
     if (!isOpen) {
-      dispatch(verify()).then(({ payload: { isValid } }) => {
-        if (isValid) {
-          setIsOpen(!isOpen)
-        } else {
-          window.open(`https://docs.google.com/forms/d/e/1FAIpQLSdV-HWJ9D1QKx6UPVuy_ZGWotJxpTdpQQvGEP8EIyAP66792Q/viewform?usp=pp_url&entry.2072338726=${appToken}`)
-          alert("Isi dulu Google Formnya! Baru boleh submit jurnal :D")
-        }
-      })
+      // Uncoment jika butuh survey
+      // dispatch(verify()).then(({ payload: { isValid } }) => {
+      //   if (isValid) {
+      //     setIsOpen(!isOpen)
+      //   } else {
+      //     window.open(`https://docs.google.com/forms/d/e/1FAIpQLSdV-HWJ9D1QKx6UPVuy_ZGWotJxpTdpQQvGEP8EIyAP66792Q/viewform?usp=pp_url&entry.2072338726=${appToken}`)
+      //     alert("Isi dulu Google Formnya! Baru boleh submit jurnal :D")
+      //   }
+      // })
+      // Jika kode diatas di uncomment hapus ini
+      setIsOpen(!isOpen)
     } else {
       setIsOpen(!isOpen)
     }
