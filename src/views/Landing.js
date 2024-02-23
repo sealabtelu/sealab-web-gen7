@@ -348,7 +348,7 @@ const Landing = () => {
           </section>
         </div>
 
-        <footer className="dark-background">
+        <footer className="dark-background landing-footer">
           <div className="address">
             <h2 className="dark-text">ADDRESS</h2>
             <p>
