@@ -4,7 +4,8 @@ import '@src/assets/scss/nav.scss'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { Sun } from 'react-feather'
+import { Sun, Menu } from 'react-feather'
+import { useSkin } from "@hooks/useSkin"
 
 import logo from '@src/assets/images/landing/SEA-logo.png'
 
@@ -38,6 +39,7 @@ import fdz from '@src/assets/images/landing/assistants/fdz.png'
 
 const Landing = () => {
   const [nightMode, setNightMode] = useState(JSON.parse(localStorage.getItem('nightmode')) ?? false)
+  const { skin, setSkin } = useSkin()
   useEffect(() => {
     const turnTheme = (mode) => {
       const textItems = mode ? document.querySelectorAll('.light-text,.light-text-reverse') : document.querySelectorAll('.dark-text,.dark-text-reverse')
@@ -51,18 +53,20 @@ const Landing = () => {
           item.classList.add(class2)
         })
       }
+      
 
       toggleClass(textItems, mode ? 'light-text' : 'dark-text', mode ? 'dark-text' : 'light-text')
       toggleClass(backItems, mode ? 'light-background' : 'dark-background', mode ? 'dark-background' : 'light-background')
       toggleClass(cardItems, mode ? 'light-card' : 'dark-card', mode ? 'dark-card' : 'light-card')
       toggleClass(cardTextItems, mode ? 'light-card-text' : 'dark-card-text', mode ? 'dark-card-text' : 'light-card-text')
+      nightMode ? setSkin("dark") : setSkin("light");
 
       localStorage.setItem('nightmode', nightMode)
     }
     turnTheme(nightMode)
   }, [nightMode])
   const [showMenu, setShowMenu] = useState(false)
-  const toggletheme = () => {
+  const togglemenu = () => {
     setShowMenu(!showMenu)
   }
   return (
@@ -71,10 +75,10 @@ const Landing = () => {
         <nav className="navbar">
           <div style={{ position: 'relative' }}>
             <section id="togel" style={{ right: showMenu ? "-100vw" : "-300vw" }}>
-              {/* <Menu/> */}
+              <Menu className="fa fa-bars" onClick={togglemenu}/>
               {/* <i className="fa fa-bars" onClick={toggletheme}></i> */}
               <a href="index.html" className="logo-nav"><img src={logo} alt="Logo" /></a>
-              <div className="close" onClick={toggletheme}></div>
+              <div className="close" onClick={togglemenu}></div>
               <div>
                 <a href="#home" className="dark-text">HOME</a>
                 <a href="#programs" className="dark-text">PROGRAMS</a>
@@ -348,7 +352,7 @@ const Landing = () => {
           </section>
         </div>
 
-        <footer className="dark-background">
+        <footer className="dark-background landing-footer">
           <div className="address">
             <h2 className="dark-text">ADDRESS</h2>
             <p>

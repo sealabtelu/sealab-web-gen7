@@ -13,7 +13,7 @@ div.landing *{
     box-sizing: unset;
 }
 
-h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
+h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
     color: #ffffff;
 }
 
@@ -337,7 +337,7 @@ h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
     padding: 0.4vw 0.5vw;
     padding-bottom: 0;
 }
-footer {
+.landing-footer {
     display: flex;
     justify-content: space-around;
     background-color: var(--light-color);
