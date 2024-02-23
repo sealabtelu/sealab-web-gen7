@@ -19,6 +19,22 @@ import instagramicon from '@src/assets/images/landing/instagram_icon.png'
 import lineicon from '@src/assets/images/landing/line_icon.png'
 import youtubeicon from '@src/assets/images/landing/youtube_icon.png'
 
+import cma from "@src/assets/images/landing/assistants/cma.png"
+import ara from "@src/assets/images/landing/assistants/ara.png"
+import dao from "@src/assets/images/landing/assistants/dao.png"
+import krz from "@src/assets/images/landing/assistants/krz.png"
+import ats from "@src/assets/images/landing/assistants/ats.png"
+import sam from "@src/assets/images/landing/assistants/sam.png"
+import yog from "@src/assets/images/landing/assistants/yog.png"
+import yna from "@src/assets/images/landing/assistants/yna.png"
+import ars from "@src/assets/images/landing/assistants/ars.png"
+import sef from "@src/assets/images/landing/assistants/sef.png"
+import kin from "@src/assets/images/landing/assistants/kin.png"
+import axl from "@src/assets/images/landing/assistants/axl.png"
+import sna from "@src/assets/images/landing/assistants/sna.png"
+import tam from "@src/assets/images/landing/assistants/tam.png"
+import and from "@src/assets/images/landing/assistants/and.png"
+import fdz from "@src/assets/images/landing/assistants/fdz.png"
 
 const Landing = () => {
   const [nightMode, setNightMode] = useState(JSON.parse(localStorage.getItem('nightmode')) ?? false)
@@ -176,7 +192,7 @@ const Landing = () => {
               <h2>ASSISTANTS</h2>
               <section className="executive-card">
                 <div className="assistant-card dark-card">
-                  <img src="src/assets/images/landing/assistants/cma.png" alt="CMA" />
+                  <img src={cma} alt="CMA" />
                   <h3>Cetta Maulana Andhika</h3>
                   <h4>Wakil Koordinator Asisten</h4>
                   <div className="social-icons">
@@ -185,7 +201,7 @@ const Landing = () => {
                   </div>
                 </div>
                 <div className="assistant-card dark-card">
-                  <img src="src/assets/images/landing/assistants/ara.png" alt="ARA" />
+                  <img src={ara} alt="ARA" />
                   <h3>Faraday Barr Fatahillah</h3>
                   <h4>Koordinator Asisten</h4>
                   <div className="social-icons">
@@ -194,7 +210,7 @@ const Landing = () => {
                   </div>
                 </div>
                 <div className="assistant-card dark-card">
-                  <img src="src/assets/images/landing/assistants/dao.png" alt="DAO" />
+                  <img src={dao} alt="DAO" />
                   <h3>Aldo Nitehe Lase</h3>
                   <h4>Koordinator Riset</h4>
                   <div className="social-icons">
@@ -205,7 +221,7 @@ const Landing = () => {
               </section>
               <section className="administration-card dark-card">
                 <div className="assistant-card dark-card">
-                  <img src="src/assets/images/landing/assistants/krz.png" alt="KRZ" />
+                  <img src={krz} alt="KRZ" />
                   <h3>Kinanti Rahayu Az-Zahra</h3>
                   <h4>Sekretaris</h4>
                   <div className="social-icons">
@@ -214,7 +230,7 @@ const Landing = () => {
                   </div>
                 </div>
                 <div className="assistant-card dark-card">
-                  <img src="src/assets/images/landing/assistants/sam.png" alt="SAM" style={{ objectPosition: '50% 50%' }} />
+                  <img src={sam} alt="SAM" style={{ objectPosition: '50% 50%' }} />
                   <h3>Sam Alim Ramadhan</h3>
                   <h4>Sekretaris</h4>
                   <div className="social-icons">
@@ -223,7 +239,7 @@ const Landing = () => {
                   </div>
                 </div>
                 <div className="assistant-card dark-card">
-                  <img src="src/assets/images/landing/assistants/ats.png" alt="ATS" />
+                  <img src={ats} alt="ATS" />
                   <h3>Azmi Taqiuddin Syah</h3>
                   <h4>Bendahara</h4>
                   <div className="social-icons">
@@ -234,7 +250,7 @@ const Landing = () => {
               </section>
               <section className="practicum-card">
                 <div className="assistant-card dark-card">
-                  <img src="src/assets/images/landing/assistants/yna.png" alt="YNA" />
+                  <img src={yna} alt="YNA" />
                   <h3>Panji Christoper Silalahi</h3>
                   <h4>Praktikum</h4>
                   <div className="social-icons">
@@ -243,7 +259,7 @@ const Landing = () => {
                   </div>
                 </div>
                 <div className="assistant-card dark-card">
-                  <img src="src/assets/images/landing/assistants/yog.png" alt="YOG" />
+                  <img src={yog} alt="YOG" />
                   <h3>Yohannes Yogas Herlambang</h3>
                   <h4>Praktikum</h4>
                   <div className="social-icons">
@@ -252,7 +268,7 @@ const Landing = () => {
                   </div>
                 </div>
                 <div className="assistant-card dark-card">
-                  <img src="src/assets/images/landing/assistants/ars.png" alt="ARS" />
+                  <img src={ars} alt="ARS" />
                   <h3>Muh. Abyan Ridhan Siregar</h3>
                   <h4>Praktikum</h4>
                   <div className="social-icons">
@@ -261,7 +277,7 @@ const Landing = () => {
                   </div>
                 </div>
                 <div className="assistant-card dark-card">
-                  <img src="src/assets/images/landing/assistants/sef.png" alt="SEF" style={{ objectPosition: '50% 70%' }} />
+                  <img src={sef} alt="SEF" style={{ objectPosition: '50% 70%' }} />
                   <h3>Sef Sofa Maulanaja</h3>
                   <h4>Praktikum</h4>
                   <div className="social-icons">
@@ -272,7 +288,7 @@ const Landing = () => {
               </section>
               <section className="publicrelation-card">
                 <div className="assistant-card dark-card">
-                  <img src="src/assets/images/landing/assistants/kin.png" alt="KIN" />
+                  <img src={kin} alt="KIN" />
                   <h3>Kinanti Aria Widaswara</h3>
                   <h4>Public Relation</h4>
                   <div className="social-icons">
@@ -281,7 +297,7 @@ const Landing = () => {
                   </div>
                 </div>
                 <div className="assistant-card dark-card">
-                  <img src="src/assets/images/landing/assistants/axl.png" alt="AXL" style={{ objectPosition: '50% 30%' }} />
+                  <img src={axl} alt="AXL" style={{ objectPosition: '50% 30%' }} />
                   <h3>Axel David</h3>
                   <h4>Public Relation</h4>
                   <div className="social-icons">
@@ -290,7 +306,7 @@ const Landing = () => {
                   </div>
                 </div>
                 <div className="assistant-card dark-card">
-                  <img src="src/assets/images/landing/assistants/sna.png" alt="SNA" style={{ objectPosition: '50% 55%' }} />
+                  <img src={sna} alt="SNA" style={{ objectPosition: '50% 55%' }} />
                   <h3>Sulthan Nauval Abdillah</h3>
                   <h4>Public Relation</h4>
                   <div className="social-icons">
@@ -301,7 +317,7 @@ const Landing = () => {
               </section>
               <section className="logistics-card">
                 <div className="assistant-card dark-card">
-                  <img src="src/assets/images/landing/assistants/tam.png" alt="TAM" />
+                  <img src={tam} alt="TAM" />
                   <h3>Muh. Farrel Ahadi Tama</h3>
                   <h4>Inventaris</h4>
                   <div className="social-icons">
@@ -310,7 +326,7 @@ const Landing = () => {
                   </div>
                 </div>
                 <div className="assistant-card dark-card">
-                  <img src="src/assets/images/landing/assistants/and.png" alt="AND" style={{ objectPosition: '50% 50%' }} />
+                  <img src={and} alt="AND" style={{ objectPosition: '50% 50%' }} />
                   <h3>Andreas Wahyu Prayogo</h3>
                   <h4>Inventaris</h4>
                   <div className="social-icons">
@@ -319,7 +335,7 @@ const Landing = () => {
                   </div>
                 </div>
                 <div className="assistant-card dark-card">
-                  <img src="src/assets/images/landing/assistants/fdz.png" alt="FDZ" style={{ objectPosition: '50% 50%' }} />
+                  <img src={fdz} alt="FDZ" style={{ objectPosition: '50% 50%' }} />
                   <h3>Fadhil Dzikri Aqila</h3>
                   <h4>Inventaris</h4>
                   <div className="social-icons">
