@@ -229,7 +229,7 @@ export const AssistantMenu = [
     id: "sanksiBermasalah",
     title: "Sanksi Bermasalah",
     icon: <AlertTriangle size={20} />,
-    navLink: "https://bit.ly/CatatanPraktikanBermasalah",
+    navLink: "https://bit.ly/CatatanMasalahPraktikanAlpro2024",
     externalLink: true,
     newTab: true
   },
