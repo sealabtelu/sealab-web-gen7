@@ -5,21 +5,25 @@ body {
     overflow-x: hidden;
 }
 
-.bodytohidenav{
-    overflow-x: hidden;
-}
+@import '../../@core/scss/base/bootstrap-extended/include'; // Bootstrap includes
+@import '../../@core/scss/base/components/include'; // Components includes
 
 :root{
     --light-color:rgb(250, 255, 255);
     --theme-color:rgb(67, 197, 240);
-    --dark-background: #4b4b4b;
+    --dark-background: #161d31;
     --dark-color: #333333;
     --transparent-color:#dbf7ff3f;
     --light-card: var(--theme-color);
-    --dark-card: var(--transparent-color);
+    --dark-card: #283046;
     --light-cardtext: var(--theme-color);
     --dark-cardtext: var(--light-color);
 }
+
+.bodytohidenav{
+    overflow-x: hidden;
+}
+
 
 nav.navbar{
     overflow: visible;
@@ -125,7 +129,7 @@ nav section div {
 }
 
 .dark-card{
-    background-color: var(--dark-color);
+    background-color: $theme-dark-card-bg;
 }
 .light-card{
     background-color: var(--light-card);
@@ -161,7 +165,7 @@ nav section div {
     background-color: var(--light-color);
 }
 .dark-background{
-    background-color: var(--dark-background);
+    background-color: $theme-dark-body-bg;
 }
 .theme-background{
     background-color: var(--theme-color);

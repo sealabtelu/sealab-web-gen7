@@ -226,7 +226,7 @@ const Landing = () => {
                   </div>
                 </div>
               </section>
-              <section className="administration-card dark-card">
+              <section className="administration-card">
                 <div className="assistant-card dark-card">
                   <img src={krz} alt="KRZ" />
                   <h3>Kinanti Rahayu Az-Zahra</h3>
