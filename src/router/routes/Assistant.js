@@ -163,25 +163,25 @@ export const AssistantMenu = [
       }
     ]
   },
-  {
-    id: "preTest",
-    title: "Pre Test",
-    icon: <Edit3 size={20} />,
-    children: [
-      {
-        id: 'preTestAdmin',
-        title: 'Master Control',
-        icon: <Circle />,
-        navLink: "/assistant/pre-test/master-control"
-      },
-      {
-        id: 'preTestSubmission',
-        title: 'Submission',
-        icon: <Circle />,
-        navLink: "/assistant/pre-test/submission"
-      }
-    ]
-  },
+  // {
+  //   id: "preTest",
+  //   title: "Pre Test",
+  //   icon: <Edit3 size={20} />,
+  //   children: [
+  //     {
+  //       id: 'preTestAdmin',
+  //       title: 'Master Control',
+  //       icon: <Circle />,
+  //       navLink: "/assistant/pre-test/master-control"
+  //     },
+  //     {
+  //       id: 'preTestSubmission',
+  //       title: 'Submission',
+  //       icon: <Circle />,
+  //       navLink: "/assistant/pre-test/submission"
+  //     }
+  //   ]
+  // },
   {
     id: "journal",
     title: "Journal",
