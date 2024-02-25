@@ -70,7 +70,7 @@ export const StudentMenu = [
     id: "labworkModule",
     title: "Labwork Module",
     icon: <Book size={20} />,
-    navLink: "https://bit.ly/ModulIsmile2023",
+    navLink: "https://bit.ly/ModulAlproSEA2024",
     externalLink: true,
     newTab: true
   }
