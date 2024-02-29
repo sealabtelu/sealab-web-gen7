@@ -34,7 +34,7 @@ const HomeAssigment = () => {
           </li>
           <li>
             Tugas Pendahuluan dikerjakan menggunakan Template Tugas Pendahuluan
-            yang dapat di akses <a target="_blank" href="https://telkomuniversityofficial-my.sharepoint.com/:w:/g/personal/ismilelab_365_telkomuniversity_ac_id/EQ38JdnZGVhLlAR_65esJYsBlf9nGGY-VwxA_dPwdTom5w?e=ZPgayf">di sini</a>.
+            yang dapat di akses <a target="_blank" href="https://telkomuniversityofficial-my.sharepoint.com/:w:/g/personal/yogasherlambang_student_telkomuniversity_ac_id/EbhL8XLdtQNFsF2myz1wM-UBwpKOxhaeIsYMsULGEf-pgQ?e=amCIzq">di sini</a>.
           </li>
           <li>
             Jika terdapat soal yang memerlukan jawaban untuk ditulis manual maka
@@ -48,7 +48,7 @@ const HomeAssigment = () => {
           <li>
             Soal TP akan diunggah setiap hari<b> Kamis sore</b>, pastikan untuk
             membaca pengumuman TP setiap hari Kamis di OA Line Lab SEA
-            (@qup6728v).
+            (@748waapd).
           </li>
           <li>
             Pengumpulan Tugas Pendahuluan harus dilakukan paling lambat pada
