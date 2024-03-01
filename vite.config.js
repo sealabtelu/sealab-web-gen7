@@ -2,16 +2,12 @@ import fs from 'fs'
 import * as path from 'path'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import nodeResolve from '@rollup/plugin-node-resolve'
 import rollupNodePolyFill from 'rollup-plugin-node-polyfills'
-import NodeGlobalsPolyfillPlugin from '@esbuild-plugins/node-globals-polyfill'
+import { polyfillNode } from "esbuild-plugin-polyfill-node"
 
 export default () => {
   return defineConfig({
     plugins: [react()],
-    define: {
-      global: 'globalThis'
-    },
     server: {
       port: 3000,
       proxy: 'https://ismilelab-telu.com/',
@@ -71,10 +67,7 @@ export default () => {
           '.js': 'jsx'
         },
         plugins: [
-          NodeGlobalsPolyfillPlugin({
-            buffer: true,
-            process: true
-          }),
+          polyfillNode(),
           {
             name: 'load-js-files-as-jsx',
             setup(build) {
@@ -90,10 +83,7 @@ export default () => {
     build: {
       chunkSizeWarningLimit: 1200,
       rollupOptions: {
-        plugins: [
-          rollupNodePolyFill(),
-          nodeResolve({ browser: true })
-        ]
+        plugins: [rollupNodePolyFill()]
       }
     }
   })
