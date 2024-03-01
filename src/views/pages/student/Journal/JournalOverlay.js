@@ -80,10 +80,10 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
               </b>
             </h3>
             <p>
-              <b>Due Date: </b> &nbsp;{" "}
+              //<b>Due Date: </b> &nbsp;{" "}
             </p>
             <p>
-              <b>Time Remaining:</b> &nbsp; 1 Hour 23 Min
+              //<b>Time Remaining:</b> &nbsp; 1 Hour 23 Min
             </p>
             <p>
               <b>Time Submitted:</b> &nbsp;{" "}
@@ -117,7 +117,7 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
               rules={{
                 required: "Please fill feedback!",
                 minLength: { value: 30, message: "Minimum 30 characters" }
-                // pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b)(?!.*(\w)\2{3,}).*$/, message: "Don't copy paste same thing :D" }
+                pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b)(?!.*(\w)\2{3,}).*$/, message: "Don't copy paste same thing :D" }
               }}
               render={({ field }) => (
                 <Input
@@ -142,7 +142,7 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
               rules={{
                 required: "Please fill feedback!",
                 minLength: { value: 30, message: "Minimum 30 characters" }
-                // pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b)(?!.*(\w)\2{3,}).*$/, message: "Don't copy paste same thing :D" }
+                pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b)(?!.*(\w)\2{3,}).*$/, message: "Don't copy paste same thing :D" }
               }}
               render={({ field }) => (
                 <Input
@@ -167,7 +167,7 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
               rules={{
                 required: "Please fill feedback!",
                 minLength: { value: 30, message: "Minimum 30 characters" }
-                // pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b)(?!.*(\w)\2{3,}).*$/, message: "Don't copy paste same thing :D" }
+                pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b)(?!.*(\w)\2{3,}).*$/, message: "Don't copy paste same thing :D" }
               }}
               render={({ field }) => (
                 <Input
