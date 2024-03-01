@@ -79,20 +79,36 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
                 MODUL {moduleNumber}: {moduleTitle}
               </b>
             </h3>
+            /*
             <p>
-              //<b>Due Date: </b> &nbsp;{" "}
+              <b>Due Date: </b> &nbsp;{" "}
             </p>
             <p>
-              //<b>Time Remaining:</b> &nbsp; 1 Hour 23 Min
+              <b>Time Remaining:</b> &nbsp; 1 Hour 23 Min
             </p>
             <p>
               <b>Time Submitted:</b> &nbsp;{" "}
             </p>
+            */
           </Col>
           <Col xs="12" sm="6">
             <div className="button-container">
-              <Button tag={Link} to="" color="relief-primary">
+              {/* <Button tag={Link} to="" color="relief-primary">
                 Soal Jurnal
+              </Button> */}
+              <Button
+                href="https://telkomuniversityofficial-my.sharepoint.com/:w:/g/personal/yogasherlambang_student_telkomuniversity_ac_id/EURPZd5VOrhEqXJgzWvyP1QBrNTBqNE8zVm9gyXXGH9xSA?e=qinDNu"
+                target="_blank"
+                color="relief-primary"
+              >
+                <b>Soal Jurnal</b>
+              </Button>
+              <Button
+                href="https://telkomuniversityofficial-my.sharepoint.com/:w:/g/personal/yogasherlambang_student_telkomuniversity_ac_id/Ed5WvGBgoEBNj9L05gBy7XUBqsWBcrV5KD335lMjrS30BA?e=XTroru"
+                target="_blank"
+                color="relief-primary"
+              >
+                <b>Soal Tes Akhir</b>
               </Button>
               <Button color="flat-dark" onClick={toggle} disabled={isVerifyLoading} >
                 Submit File{" "}
