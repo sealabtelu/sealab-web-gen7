@@ -79,7 +79,7 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
                 MODUL {moduleNumber}: {moduleTitle}
               </b>
             </h3>
-            /*
+            {/*
             <p>
               <b>Due Date: </b> &nbsp;{" "}
             </p>
@@ -89,7 +89,7 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
             <p>
               <b>Time Submitted:</b> &nbsp;{" "}
             </p>
-            */
+            */}
           </Col>
           <Col xs="12" sm="6">
             <div className="button-container">
@@ -132,7 +132,7 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
               defaultValue=''
               rules={{
                 required: "Please fill feedback!",
-                minLength: { value: 30, message: "Minimum 30 characters" }
+                minLength: { value: 30, message: "Minimum 30 characters" },
                 pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b)(?!.*(\w)\2{3,}).*$/, message: "Don't copy paste same thing :D" }
               }}
               render={({ field }) => (
@@ -157,7 +157,7 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
               defaultValue=''
               rules={{
                 required: "Please fill feedback!",
-                minLength: { value: 30, message: "Minimum 30 characters" }
+                minLength: { value: 30, message: "Minimum 30 characters" },
                 pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b)(?!.*(\w)\2{3,}).*$/, message: "Don't copy paste same thing :D" }
               }}
               render={({ field }) => (
@@ -182,7 +182,7 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
               defaultValue=''
               rules={{
                 required: "Please fill feedback!",
-                minLength: { value: 30, message: "Minimum 30 characters" }
+                minLength: { value: 30, message: "Minimum 30 characters" },
                 pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b)(?!.*(\w)\2{3,}).*$/, message: "Don't copy paste same thing :D" }
               }}
               render={({ field }) => (
