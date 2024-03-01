@@ -56,14 +56,14 @@ const OverlayHA = ({ moduleTitle, moduleNumber, item }) => {
                 MODUL {moduleNumber}: {moduleTitle}
               </b>
             </h3>
-            <p>
+            {/* <p>
               <b>Due Date: </b>{" "}
               {moment(deadline).format("ddd DD MMM YYYY HH:mm A")}
             </p>
             <p>
               <b>Time Remaining: </b>
               {formatTime(timeRemaining)}
-            </p>
+            </p> */}
             {/* <p>
               <b>Time Submitted:</b> &nbsp;{" "}
             </p> */}
@@ -79,7 +79,7 @@ const OverlayHA = ({ moduleTitle, moduleNumber, item }) => {
                 Soal Tugas Pendahuluan
               </Button>
               <Button
-                href="https://tinyurl.com/TemplateSoalTP"
+                href="https://telkomuniversityofficial-my.sharepoint.com/:w:/g/personal/yogasherlambang_student_telkomuniversity_ac_id/EbhL8XLdtQNFsF2myz1wM-UBwpKOxhaeIsYMsULGEf-pgQ?e=Eilyd6"
                 target="_blank"
                 color="flat-dark"
               >
