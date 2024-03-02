@@ -26,6 +26,9 @@ const HomeAssigment = () => {
         <h1>Tugas Pendahuluan</h1>
         <ol type="1">
           <li>
+            Pastikan kalian sudah menonton video praktikum di Youtube channel <a target="_blank" href="https://www.youtube.com/@SEALaboratory">SEA Laboratory</a>
+          </li>
+          <li>
             Tugas Pendahuluan dikerjakan sesuai dengan NIM terakhir Praktikan.
             <br />
             <b>Contoh:</b> 1103211233 [mengerjakan soal NIM Ganjil]
@@ -35,11 +38,6 @@ const HomeAssigment = () => {
           <li>
             Tugas Pendahuluan dikerjakan menggunakan Template Tugas Pendahuluan
             yang dapat di akses <a target="_blank" href="https://telkomuniversityofficial-my.sharepoint.com/:w:/g/personal/yogasherlambang_student_telkomuniversity_ac_id/EbhL8XLdtQNFsF2myz1wM-UBwpKOxhaeIsYMsULGEf-pgQ?e=amCIzq">di sini</a>.
-          </li>
-          <li>
-            Jika terdapat soal yang memerlukan jawaban untuk ditulis manual maka
-            jawaban dapat di foto/scan dan kemudian di masukan ke dalam File
-            Tugas Pendahuluan.
           </li>
           <li>
             Jawaban Tugas Pendahuluan diketik secara berurutan. Soal kemudian
