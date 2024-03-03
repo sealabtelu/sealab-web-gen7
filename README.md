@@ -46,7 +46,7 @@ tmux new -s sea-web
 tmux a -t sea-web
 cd sealab-web
 ```
-Sebelum menjalankan aplikasi setting dulu `.env` sesuai dengan contoh di `.env.example` lalu ganti value `globalThis` pada `vite.config.js` menjadi `global`. Kemudian untuk menjalankan web ketik:
+Sebelum menjalankan aplikasi setting dulu `.env` sesuai dengan contoh di `.env.example` kemudian untuk menjalankan web ketik:
 
 ```bash
 chmod +x deploy.sh

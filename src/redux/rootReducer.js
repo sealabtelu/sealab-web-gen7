@@ -11,6 +11,7 @@ import gformSurvey from "./api/gformSurvey"
 import seelabs from "./api/seelabs"
 import swagger from "./api/swagger"
 import user from "./api/user"
+import codePlayground from "./api/codePlayground"
 
 const rootReducer = {
   navbar,
@@ -24,7 +25,8 @@ const rootReducer = {
   gformSurvey,
   seelabs,
   swagger,
-  user
+  user,
+  codePlayground
 }
 
 export default rootReducer

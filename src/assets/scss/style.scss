@@ -15,6 +15,15 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 	background-color: #fff;
 }
 
+pre.bash {
+	background-color: #252525;
+	color: white;
+	padding: 20px;
+	border-top: 15px solid #5c5c5c;
+	border-radius: 10px;
+	white-space: normal;
+}
+
 .card-student {
 	margin-bottom: 1rem;
 }
@@ -22,8 +31,10 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 .card-overlay-jurnal {
 	padding: 10px;
 	margin-bottom: 1rem;
+
 	li {
-		line-height: 1.5; /* Set line height for better readability */
+		line-height: 1.5;
+		/* Set line height for better readability */
 	}
 
 	.title-overlay {
@@ -43,6 +54,7 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 	.container {
 		.col {
 			padding: 1rem;
+
 			h3 {
 				font-size: 18px;
 			}
@@ -80,7 +92,7 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 }
 
 .rdt_TableCell {
-    height: auto !important;
+	height: auto !important;
 }
 
 .dropzone {
