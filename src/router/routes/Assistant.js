@@ -13,7 +13,8 @@ import {
   BookOpen,
   Paperclip,
   Star,
-  FileText
+  FileText,
+  Code
 } from "react-feather"
 
 const HAModuleList = lazy(() => import("../../views/pages/assistant/HomeAssignment/HAModuleList"))
@@ -37,6 +38,7 @@ const StudentList = lazy(() => import("../../views/pages/assistant/user/StudentL
 const ProctorSchedule = lazy(() => import("../../views/pages/assistant/Proctor/Proctor"))
 const HomeDashboard = lazy(() => import("../../views/pages/assistant/user/Home"))
 const Swagger = lazy(() => import("../../views/pages/assistant/Swagger/Swagger"))
+const CodePlayground = lazy(() => import('../../views/CodePlayground'))
 
 const AssistantRoutes = [
   {
@@ -118,6 +120,10 @@ const AssistantRoutes = [
   {
     path: "/assistant/BAP",
     element: <BAP />
+  },
+  {
+    path: "/assistant/code-playground",
+    element: <CodePlayground />
   },
   {
     path: "/assistant/swagger",
@@ -232,6 +238,12 @@ export const AssistantMenu = [
     navLink: "https://bit.ly/CatatanMasalahPraktikanAlpro2024",
     externalLink: true,
     newTab: true
+  },
+  {
+    id: "codePlayground",
+    title: "Code Playground",
+    icon: <Code size={20} />,
+    navLink: "/assistant/code-playground"
   },
   {
     id: "swagger",
