@@ -1,5 +1,5 @@
 import { lazy } from "react"
-import { Book, BookOpen, Bookmark, Edit3, PenTool } from "react-feather"
+import { Book, BookOpen, Bookmark, Code, Edit3, PenTool } from "react-feather"
 
 const Score = lazy(() => import("../../views/pages/student/Score/Score"))
 const HAQuestionList = lazy(() => import("../../views/pages/student/HomeAssignment/HAQuestionList"))
@@ -7,8 +7,8 @@ const PRTQuestionList = lazy(() => import("../../views/pages/student/PreTest/PRT
 const HomeAssigment = lazy(() => import("../../views/pages/student/HomeAssignment/HomeAssignment"))
 const PreTest = lazy(() => import("../../views/pages/student/PreTest/PreTest"))
 const Journal = lazy(() => import("../../views/pages/student/Journal/Journal"))
-const Profile = lazy(() => import("../../views/pages/student/Profile/Profile")
-)
+const Profile = lazy(() => import("../../views/pages/student/Profile/Profile"))
+const CodePlayground = lazy(() => import('../../views/CodePlayground'))
 
 const StudentRoutes = [
   {
@@ -34,6 +34,10 @@ const StudentRoutes = [
   {
     path: "/student/journal",
     element: <Journal />
+  },
+  {
+    path: "/assistant/code-playground",
+    element: <CodePlayground />
   },
   {
     path: "/student/profile",
@@ -65,6 +69,12 @@ export const StudentMenu = [
     title: "Journal",
     icon: <PenTool size={20} />,
     navLink: "student/journal"
+  },
+  {
+    id: "codePlayground",
+    title: "Code Playground",
+    icon: <Code size={20} />,
+    navLink: "assistant/code-playground"
   },
   {
     id: "labworkModule",
