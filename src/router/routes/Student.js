@@ -36,7 +36,7 @@ const StudentRoutes = [
     element: <Journal />
   },
   {
-    path: "/assistant/code-playground",
+    path: "/student/code-playground",
     element: <CodePlayground />
   },
   {
@@ -62,19 +62,19 @@ export const StudentMenu = [
     id: "preTest",
     title: "Pre Test",
     icon: <Edit3 size={20} />,
-    navLink: "student/pre-test"
+    navLink: "/student/pre-test"
   },
   {
     id: "journal",
     title: "Journal",
     icon: <PenTool size={20} />,
-    navLink: "student/journal"
+    navLink: "/student/journal"
   },
   {
     id: "codePlayground",
     title: "Code Playground",
     icon: <Code size={20} />,
-    navLink: "assistant/code-playground"
+    navLink: "/student/code-playground"
   },
   {
     id: "labworkModule",

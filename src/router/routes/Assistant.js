@@ -243,7 +243,7 @@ export const AssistantMenu = [
     id: "codePlayground",
     title: "Code Playground",
     icon: <Code size={20} />,
-    navLink: "assistant/code-playground"
+    navLink: "/assistant/code-playground"
   },
   {
     id: "swagger",
