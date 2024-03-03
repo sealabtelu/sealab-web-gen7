@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import Select from 'react-select'
 import Editor from '@monaco-editor/react'
 
-import { Card, CardHeader, CardTitle, CardBody, Row, Col, Label, Button, Input } from 'reactstrap'
+import { Card, CardHeader, CardTitle, CardBody, Row, Col, Label, Button, Input, Collapse } from 'reactstrap'
 import { getRuntimes, execute } from '@store/api/codePlayground'
+import { ChevronDown, ChevronUp } from "react-feather"
 
 const CodePlayground = () => {
     const dispatch = useDispatch()
@@ -17,6 +18,7 @@ const CodePlayground = () => {
     const [code, setCode] = useState("")
     const [runtimes, setRuntimes] = useState([])
     const [input, setInput] = useState("")
+    const [isInputOpen, setisInputOpen] = useState(true)
 
     useEffect(() => {
         dispatch(getRuntimes())
@@ -85,26 +87,27 @@ const CodePlayground = () => {
                         />
                     </Col>
                     <Col className='mb-1' md='6'>
-                        <Label className="form-label">
-                            <h5>Input</h5>
-                        </Label>
-
-                        <Input
-                            type='textarea'
-                            rows='3'
-                            className="mb-2"
-                            placeholder="Optional stdin here..."
-                            disabled={isLoading}
-                            value={input}
-                            onChange={({ target: { value } }) => setInput(value)}
-                        />
-
-                        <Label className="form-label">
-                            <h5>Output</h5>
-                        </Label>
-                        <pre className="bash" style={{ height: '60vh' }}>
-                            {output ?? 'Click "Run Code" to see the output here'}
-                        </pre>
+                        <div className="h-100 d-flex flex-column">
+                            <div className="d-flex justify-content-between align-items-start" style={{ cursor: 'pointer' }} onClick={() => setisInputOpen(!isInputOpen)}>
+                                <h5 >Input</h5>
+                                {isInputOpen ? <ChevronDown size={20} /> : <ChevronUp size={20} />}
+                            </div>
+                            <Collapse isOpen={isInputOpen} >
+                                <Input
+                                    type='textarea'
+                                    rows='3'
+                                    className="mb-2"
+                                    placeholder="Optional stdin here..."
+                                    disabled={isLoading}
+                                    value={input}
+                                    onChange={({ target: { value } }) => setInput(value)}
+                                />
+                            </Collapse>
+                            <h5 className="mt-1">Output</h5>
+                            <pre className="bash flex-grow-1 m-0" >
+                                {output ?? 'Click "Run Code" to see the output here'}
+                            </pre>
+                        </div>
                     </Col>
                 </Row>
             </CardBody>
