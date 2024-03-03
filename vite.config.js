@@ -73,7 +73,7 @@ export default () => {
             setup(build) {
               build.onLoad({ filter: /src\\.*\.js$/ }, async args => ({
                 loader: 'jsx',
-                contents: await fs.readFileSync(args.path, 'utf8')
+                contents: fs.readFileSync(args.path, 'utf8')
               }))
             }
           }
