@@ -132,8 +132,8 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
               defaultValue=''
               rules={{
                 required: "Please fill feedback!",
-                minLength: { value: 30, message: "Minimum 30 characters" },
-                pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b)(?!.*(\w)\2{3,}).*$/, message: "Don't copy paste same thing :D" }
+                minLength: { value: 45, message: "Minimum 45 characters" },
+                // pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b)(?!.*(\w)\2{3,}).*$/, message: "Don't copy paste same thing :D" }
               }}
               render={({ field }) => (
                 <Input
@@ -157,8 +157,8 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
               defaultValue=''
               rules={{
                 required: "Please fill feedback!",
-                minLength: { value: 30, message: "Minimum 30 characters" },
-                pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b)(?!.*(\w)\2{3,}).*$/, message: "Don't copy paste same thing :D" }
+                minLength: { value: 45, message: "Minimum 45 characters" },
+                // pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b)(?!.*(\w)\2{3,}).*$/, message: "Don't copy paste same thing :D" }
               }}
               render={({ field }) => (
                 <Input
@@ -182,8 +182,8 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
               defaultValue=''
               rules={{
                 required: "Please fill feedback!",
-                minLength: { value: 30, message: "Minimum 30 characters" },
-                pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b)(?!.*(\w)\2{3,}).*$/, message: "Don't copy paste same thing :D" }
+                minLength: { value: 45, message: "Minimum 45 characters" },
+                // pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b)(?!.*(\w)\2{3,}).*$/, message: "Don't copy paste same thing :D" }
               }}
               render={({ field }) => (
                 <Input
