@@ -97,14 +97,14 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
                 Soal Jurnal
               </Button> */}
               <Button
-                href="https://telkomuniversityofficial-my.sharepoint.com/:w:/g/personal/yogasherlambang_student_telkomuniversity_ac_id/EURPZd5VOrhEqXJgzWvyP1QBrNTBqNE8zVm9gyXXGH9xSA?e=qinDNu"
+                href="https://telkomuniversityofficial-my.sharepoint.com/:w:/g/personal/yogasherlambang_student_telkomuniversity_ac_id/Eag7J2bZUotChtceR86cHnsB4xLuchWGg5b84l7uddu_UA?e=f7ekMp"
                 target="_blank"
                 color="relief-primary"
               >
                 <b>Soal Jurnal</b>
               </Button>
               <Button
-                href="https://telkomuniversityofficial-my.sharepoint.com/:w:/g/personal/yogasherlambang_student_telkomuniversity_ac_id/Ed5WvGBgoEBNj9L05gBy7XUBqsWBcrV5KD335lMjrS30BA?e=XTroru"
+                href="https://telkomuniversityofficial-my.sharepoint.com/:w:/g/personal/yogasherlambang_student_telkomuniversity_ac_id/ETdbSpYAj19Cnozmy3K6hSMBI77VyvthWl0rLGe8GQVcOQ?e=wNX0wY"
                 target="_blank"
                 color="relief-primary"
               >
