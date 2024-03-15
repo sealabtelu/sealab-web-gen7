@@ -133,7 +133,7 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
               rules={{
                 required: "Please fill feedback!",
                 minLength: { value: 45, message: "Minimum 45 characters" },
-                pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b.*\b\1\b.*\b\1\b.*\b\1\b)(?!.*(\w|W)\2{2})(?!.*(.)\3(.)\4(.)\10)(?!.*\b(..*)\5{2,}\b)(?!.*\b((.).*)\6{2,}\7\b)(?!.*\b\W{3,}\b)(?!.*(\W)\w\8)(?!.*\b\w+(\w)\w+\9\w+\9\w+\9\b)(?!.*\b\w{15,}\b)(?!Lorem)(?!lorem)(?!LOREM).*$/, message: "Yang bener isi feedbacknya yaa 😉" }
+                pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b.*\b\1\b.*\b\1\b.*\b\1\b)(?!.*(\w|W)\2{2})(?!.*(.)\3(.)\4(.)\5)(?!.*\b(..*)\6{2,}\b)(?!.*\b((.).*)\7{2,}\8\b)(?!.*\b\W{3,}\b)(?!.*(\W)\w\9)(?!.*\b\w+(\w)\w+\10\w+\10\w+\10\b)(?!.*\b\w{15,}\b)(?!.*Lorem)(?!.*lorem)(?!.*LOREM).*$/, message: "Yang bener isi feedbacknya yaa 😉" }
               }}
               render={({ field }) => (
                 <Input
@@ -158,7 +158,7 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
               rules={{
                 required: "Please fill feedback!",
                 minLength: { value: 45, message: "Minimum 45 characters" },
-                pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b.*\b\1\b.*\b\1\b.*\b\1\b)(?!.*(\w|W)\2{2})(?!.*(.)\3(.)\4(.)\10)(?!.*\b(..*)\5{2,}\b)(?!.*\b((.).*)\6{2,}\7\b)(?!.*\b\W{3,}\b)(?!.*(\W)\w\8)(?!.*\b\w+(\w)\w+\9\w+\9\w+\9\b)(?!.*\b\w{15,}\b)(?!Lorem)(?!lorem)(?!LOREM).*$/, message: "Yang bener isi feedbacknya yaa 😉" }
+                pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b.*\b\1\b.*\b\1\b.*\b\1\b)(?!.*(\w|W)\2{2})(?!.*(.)\3(.)\4(.)\5)(?!.*\b(..*)\6{2,}\b)(?!.*\b((.).*)\7{2,}\8\b)(?!.*\b\W{3,}\b)(?!.*(\W)\w\9)(?!.*\b\w+(\w)\w+\10\w+\10\w+\10\b)(?!.*\b\w{15,}\b)(?!.*Lorem)(?!.*lorem)(?!.*LOREM).*$/, message: "Yang bener isi feedbacknya yaa 😉" }
               }}
               render={({ field }) => (
                 <Input
@@ -183,7 +183,7 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
               rules={{
                 required: "Please fill feedback!",
                 minLength: { value: 45, message: "Minimum 45 characters" },
-                pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b.*\b\1\b.*\b\1\b.*\b\1\b)(?!.*(\w|W)\2{2})(?!.*(.)\3(.)\4(.)\10)(?!.*\b(..*)\5{2,}\b)(?!.*\b((.).*)\6{2,}\7\b)(?!.*\b\W{3,}\b)(?!.*(\W)\w\8)(?!.*\b\w+(\w)\w+\9\w+\9\w+\9\b)(?!.*\b\w{15,}\b)(?!Lorem)(?!lorem)(?!LOREM).*$/, message: "Yang bener isi feedbacknya yaa 😉" }
+                pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b.*\b\1\b.*\b\1\b.*\b\1\b)(?!.*(\w|W)\2{2})(?!.*(.)\3(.)\4(.)\5)(?!.*\b(..*)\6{2,}\b)(?!.*\b((.).*)\7{2,}\8\b)(?!.*\b\W{3,}\b)(?!.*(\W)\w\9)(?!.*\b\w+(\w)\w+\10\w+\10\w+\10\b)(?!.*\b\w{15,}\b)(?!.*Lorem)(?!.*lorem)(?!.*LOREM).*$/, message: "Yang bener isi feedbacknya yaa 😉" }
               }}
               render={({ field }) => (
                 <Input
