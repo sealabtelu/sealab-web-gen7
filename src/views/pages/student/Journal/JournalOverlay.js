@@ -97,14 +97,14 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
                 Soal Jurnal
               </Button> */}
               <Button
-                href="https://telkomuniversityofficial-my.sharepoint.com/:w:/g/personal/yogasherlambang_student_telkomuniversity_ac_id/Eag7J2bZUotChtceR86cHnsB4xLuchWGg5b84l7uddu_UA?e=f7ekMp"
+                href="https://telkomuniversityofficial-my.sharepoint.com/:w:/g/personal/yogasherlambang_student_telkomuniversity_ac_id/EfDroSK_oNRNgCvdOLGL9cwB41J0GC6_XHaSibh-e9igrw?e=06QOQb"
                 target="_blank"
                 color="relief-primary"
               >
                 <b>Soal Jurnal</b>
               </Button>
               <Button
-                href="https://telkomuniversityofficial-my.sharepoint.com/:w:/g/personal/yogasherlambang_student_telkomuniversity_ac_id/ETdbSpYAj19Cnozmy3K6hSMBI77VyvthWl0rLGe8GQVcOQ?e=wNX0wY"
+                href="https://telkomuniversityofficial-my.sharepoint.com/:w:/g/personal/yogasherlambang_student_telkomuniversity_ac_id/EZg4YDG4KEJPjYM4ElTzwb0B4UsOUNbDczk6PAiHoXrTUQ?e=XGyHQT"
                 target="_blank"
                 color="relief-primary"
               >
@@ -133,7 +133,7 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
               rules={{
                 required: "Please fill feedback!",
                 minLength: { value: 45, message: "Minimum 45 characters" },
-                pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b.*\b\1\b.*\b\1\b.*\b\1\b.*\b\1\b)(?!.*(\w|W)\2{2})(?!.*(.)\3(.)\4(.)\5)(?!.*\b(..*)\6{2,}\b)(?!.*\b((.).*)\7{2,}\8\b)(?!.*\b\W{3,}\b)(?!.*(\W)\w\9)(?!.*\b\w+(\w)\w+\10\w+\10\w+\10\b)(?!.*\b\w{15,}\b)(?!.*Lorem)(?!.*lorem)(?!.*LOREM).*$/, message: "Yang bener isi feedbacknya yaa 😉" }
+                //pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b.*\b\1\b.*\b\1\b.*\b\1\b)(?!.*(\w|W)\2{2})(?!.*(.)\3(.)\4(.)\10)(?!.*\b(..*)\5{2,}\b)(?!.*\b((.).*)\6{2,}\7\b)(?!.*\b\W{3,}\b)(?!.*(\W)\w\8)(?!.*\b\w+(\w)\w+\9\w+\9\w+\9\b)(?!.*\b\w{15,}\b)(?!Lorem)(?!lorem)(?!LOREM).*$/, message: "Yang bener isi feedbacknya yaa 😉" }
               }}
               render={({ field }) => (
                 <Input
@@ -158,7 +158,7 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
               rules={{
                 required: "Please fill feedback!",
                 minLength: { value: 45, message: "Minimum 45 characters" },
-                pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b.*\b\1\b.*\b\1\b.*\b\1\b.*\b\1\b)(?!.*(\w|W)\2{2})(?!.*(.)\3(.)\4(.)\5)(?!.*\b(..*)\6{2,}\b)(?!.*\b((.).*)\7{2,}\8\b)(?!.*\b\W{3,}\b)(?!.*(\W)\w\9)(?!.*\b\w+(\w)\w+\10\w+\10\w+\10\b)(?!.*\b\w{15,}\b)(?!.*Lorem)(?!.*lorem)(?!.*LOREM).*$/, message: "Yang bener isi feedbacknya yaa 😉" }
+                 pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b.*\b\1\b.*\b\1\b)(?!.*(\w|\W)\2{3,})(?!.*(.)\3(.)\4(.)\10)(?!.*(.)\11(.)\12\11\11)(?!.*\b(\w.*)\5{2,}\b)(?!.*\b((.).*)\6{2,}\7\b)(?!.*\b\W{3,}\b)(?!.*(\W)\w\8)(?!.*\b\w+(\w)\w+\9\w+\9\w+\9\b)(?!.*\b\w{15,}\b)(?!.*Lorem)(?!.*lorem)(?!.*LOREM).*$/, message: "Yang bener isi feedbacknya ya... 😉" }
               }}
               render={({ field }) => (
                 <Input
@@ -183,7 +183,7 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
               rules={{
                 required: "Please fill feedback!",
                 minLength: { value: 45, message: "Minimum 45 characters" },
-                pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b.*\b\1\b.*\b\1\b.*\b\1\b.*\b\1\b)(?!.*(\w|W)\2{2})(?!.*(.)\3(.)\4(.)\5)(?!.*\b(..*)\6{2,}\b)(?!.*\b((.).*)\7{2,}\8\b)(?!.*\b\W{3,}\b)(?!.*(\W)\w\9)(?!.*\b\w+(\w)\w+\10\w+\10\w+\10\b)(?!.*\b\w{15,}\b)(?!.*Lorem)(?!.*lorem)(?!.*LOREM).*$/, message: "Yang bener isi feedbacknya yaa 😉" }
+                // pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b)(?!.*(\w)\2{3,}).*$/, message: "Don't copy paste same thing :D" }
               }}
               render={({ field }) => (
                 <Input
