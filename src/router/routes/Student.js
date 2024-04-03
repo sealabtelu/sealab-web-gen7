@@ -80,7 +80,7 @@ export const StudentMenu = [
     id: "labworkModule",
     title: "Labwork Module",
     icon: <Book size={20} />,
-    navLink: "https://bit.ly/ModulAlproSEA2024",
+    navLink: "https://telkomuniversityofficial-my.sharepoint.com/:b:/g/personal/sealaboratory_365_telkomuniversity_ac_id/EYRxsYu4GdtLiTIUAeeNVOwB-6JUEe_CrMRvwcN9lwkc2w?e=Dt6XxW",
     externalLink: true,
     newTab: true
   }
