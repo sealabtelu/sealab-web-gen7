@@ -176,12 +176,7 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
             <Label className="form-label mt-1" for="laboratoryfeedback">
               <b>Feedback for laboratory</b>
             </Label>
-            {/* Gform Feedback */}
-            <Label className="form-label mt-1">
-                <b>Feedback</b>
-            </Label>
-            <br></br>
-            <a href="https://forms.gle/GtZPkkCbkEY6o4qc8">Isi atau nilai 0</a>
+
             <Controller
               name="laboratoryfeedback"
               control={control}
@@ -203,6 +198,17 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
             {errors && errors.laboratoryfeedback && (
               <FormFeedback>{errors.laboratoryfeedback.message}</FormFeedback>
             )}
+            {/* Gform Feedback */}
+            <br></br>
+            <Label className="form-label mt-1">
+                <b>Kesan Pesan</b>
+            </Label>
+            <br></br>
+            <Button
+                href="https://forms.gle/GtZPkkCbkEY6o4qc8"
+                target="_blank"
+                color="relief-primary"
+            >Isi ini atau nilai kamu 0 🤬</Button>
             <Label className="form-label mt-1" for="file">
               <b>Journal File</b>
             </Label>
