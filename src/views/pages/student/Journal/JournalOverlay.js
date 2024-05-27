@@ -195,9 +195,6 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
                 />
               )}
             />
-            {errors && errors.laboratoryfeedback && (
-              <FormFeedback>{errors.laboratoryfeedback.message}</FormFeedback>
-            )}
             {/* Gform Feedback */}
             <br></br>
             <Label className="form-label mt-1">
@@ -212,6 +209,9 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
             <Label className="form-label mt-1" for="file">
               <b>Journal File</b>
             </Label>
+            {errors && errors.laboratoryfeedback && (
+              <FormFeedback>{errors.laboratoryfeedback.message}</FormFeedback>
+            )}
             <Controller
               name="file"
               control={control}
