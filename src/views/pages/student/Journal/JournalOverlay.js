@@ -120,15 +120,9 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
             </div>
           </Col>
         </Row>
-
-        <Label className="form-label" for="assistantFeedback">
-            <b>Feedback</b>
-        </Label>
-        <a href="https://forms.gle/GtZPkkCbkEY6o4qc8">Isi atau nilai 0</a>
-        {/*
         <Collapse isOpen={isOpen}>
           <Form onSubmit={handleSubmit(onSubmit)}>
-            {/* Assistant Feedback * /}
+            {/* Assistant Feedback */}
             <Label className="form-label" for="assistantFeedback">
               <b>Feedback for assistant</b>
             </Label>
@@ -153,7 +147,7 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
             {errors && errors.assistantFeedback && (
               <FormFeedback>{errors.assistantFeedback.message}</FormFeedback>
             )}
-            {/* Practicum Feedback * /}
+            {/* Practicum Feedback */}
             <Label className="form-label mt-1" for="sessionfeedback">
               <b>Feedback for session</b>
             </Label>
@@ -178,10 +172,16 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
             {errors && errors.sessionfeedback && (
               <FormFeedback>{errors.sessionfeedback.message}</FormFeedback>
             )}
-            {/* Laboratory Feedback * /}
+            {/* Laboratory Feedback */}
             <Label className="form-label mt-1" for="laboratoryfeedback">
               <b>Feedback for laboratory</b>
             </Label>
+            {/* Gform Feedback */}
+            <Label className="form-label mt-1">
+                <b>Feedback</b>
+            </Label>
+            <br></br>
+            <a href="https://forms.gle/GtZPkkCbkEY6o4qc8">Isi atau nilai 0</a>
             <Controller
               name="laboratoryfeedback"
               control={control}
@@ -220,7 +220,6 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
             />
           </Form>
         </Collapse>
-        */}
       </Container>
       {/* </CardBody> */}
     </Card>
