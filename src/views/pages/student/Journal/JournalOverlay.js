@@ -97,19 +97,19 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
                 Soal Jurnal
               </Button> */}
               <Button
-                href="https://telkomuniversityofficial-my.sharepoint.com/:w:/g/personal/sealaboratory_365_telkomuniversity_ac_id/EXrZiUkiGaRCrAOUPfqJRv4BYKL0cuY4KWQ5XT-alSwxkQ?e=vpjBkE"
+                href="https://telkomuniversityofficial-my.sharepoint.com/:b:/r/personal/sealaboratory_365_telkomuniversity_ac_id/Documents/SEA%209/PRAKTIKUM/Modul%201/Jurnal%20Modul%201%20real.pdf?csf=1&web=1&e=l0dZ7l"
                 target="_blank"
                 color="relief-primary"
               >
                 <b>Soal Jurnal</b>
               </Button>
-              <Button
+              {/* <Button
                 href="https://telkomuniversityofficial-my.sharepoint.com/:w:/g/personal/sealaboratory_365_telkomuniversity_ac_id/ETNCppgpJWxMjdeWW9d-ARwB5q737duGdJ6kVlqgVrnhkw?e=Lq5yLY"
                 target="_blank"
                 color="relief-primary"
               >
                 <b>Soal Tes Akhir</b>
-              </Button>
+              </Button> */}
               <Button color="flat-dark" onClick={toggle} disabled={isVerifyLoading} >
                 Submit File{" "}
                 <Upload
@@ -197,7 +197,7 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
             />
             {/* Gform Feedback */}
             <br></br>
-            <Label className="form-label mt-1">
+            {/* <Label className="form-label mt-1">
                 <b>Kesan Pesan</b>
             </Label>
             <br></br>
@@ -206,7 +206,7 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
                 target="_blank"
                 color="relief-primary"
             >Isi ini atau nilai kamu 0 🤬</Button>
-            <br></br>
+            <br></br> */}
             <Label className="form-label mt-1" for="file">
               <b>Journal File</b>
             </Label>
