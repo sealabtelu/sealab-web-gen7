@@ -15,7 +15,7 @@ Its user-friendly design helps reduce the administrative workload, improves docu
     <br>2.1 [User Guide](https://github.com/sealabtelu/sealab-web-gen7/blob/sealab/README.md#user-guide)
     <br>2.2 [User Flows](https://github.com/sealabtelu/sealab-web-gen7/blob/sealab/README.md#user-flows)
     <br>2.3 [Appendix & FAQ](https://github.com/sealabtelu/sealab-web-gen7/blob/sealab/README.md#appendix-and-faq)<br>
-3. [Techninal Troubleshoot](https://github.com/sealabtelu/sealab-web-gen7/blob/sealab/README.md#technical-troubleshoot)
+3. [Technical Troubleshoot](https://github.com/sealabtelu/sealab-web-gen7/blob/sealab/README.md#technical-troubleshoot)
 
 ## User Guide
 If you are currently participating in the practicum at SEA Laboratory, you can get started right here:
