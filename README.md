@@ -32,15 +32,15 @@ Practicum participants are required to complete every assignment given throughou
 
 1. **Home Assignment**
    The home assignment is a task given several days before the practicum session begins. Assignment details are announced on SEA's Instagram and Official Line Account.
-![image](https://hackmd.io/_uploads/BJU6KpTTR.png)
+![](https://hackmd.io/_uploads/BJU6KpTTR.png)
 
 
 2. **Journal Assignment**
    The journal assignment is completed during the practicum session. It serves as both an exercise and a test of what has been learned during the practicum and from the previous home assignment.
-![image](https://hackmd.io/_uploads/HkEgcaaTR.png)
+![](https://hackmd.io/_uploads/HkEgcaaTR.png)
 
 After the practicum session is finished, the laboratory assistant will review and grade the assignments. Once grading is completed, participants can view their grades in the Score section.
-![image](https://hackmd.io/_uploads/HJGN9ppaC.png)
+![](https://hackmd.io/_uploads/HJGN9ppaC.png)
 
 
 Here is the overall user flow in brief:
