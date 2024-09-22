@@ -129,5 +129,3 @@ Sebelum menjalankan aplikasi setting dulu `.env` sesuai dengan contoh di `.env.e
 chmod +x deploy.sh
 ./deploy.sh
 ```
-
-###### tags: `Templates` `Documentation`
