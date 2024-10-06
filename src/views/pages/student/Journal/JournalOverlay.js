@@ -1,39 +1,27 @@
-import React, { useState } from "react"
-import {
-  Card,
-  Button,
-  Row,
-  Form,
-  Col,
-  Collapse,
-  CardBody,
-  Label,
-  Input,
-  FormFeedback,
-  Container
-} from "reactstrap"
+import React, { useState } from "react";
+import { Card, Button, Row, Form, Col, Collapse, CardBody, Label, Input, FormFeedback, Container } from "reactstrap";
 
-import { Upload } from "react-feather"
+import { Upload } from "react-feather";
 
-import { Link, useNavigate } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-import { addAnswer } from "@store/api/journalAnswer"
+import { addAnswer } from "@store/api/journalAnswer";
 // import { verify } from "@store/api/gformSurvey"
 // import { getUserData } from "@utils"
 
 // ** Third Party Imports File Uploader
-import { Controller, useForm } from "react-hook-form"
-import Dropzone from "@custom-components/dropzone"
+import { Controller, useForm } from "react-hook-form";
+import Dropzone from "@custom-components/dropzone";
 
 export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const { isLoading: isVerifyLoading } = useSelector((state) => state.gformSurvey)
-  const { isLoading } = useSelector((state) => state.journalAnswer)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { isLoading: isVerifyLoading } = useSelector((state) => state.gformSurvey);
+  const { isLoading } = useSelector((state) => state.journalAnswer);
   // const { appToken } = getUserData()
 
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
   const toggle = () => {
     if (!isOpen) {
       // Uncoment jika butuh survey
@@ -46,25 +34,25 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
       //   }
       // })
       // Jika kode diatas di uncomment hapus ini
-      setIsOpen(!isOpen)
+      setIsOpen(!isOpen);
     } else {
-      setIsOpen(!isOpen)
+      setIsOpen(!isOpen);
     }
-  }
+  };
 
   const {
     control,
     handleSubmit,
-    formState: { errors }
-  } = useForm()
+    formState: { errors },
+  } = useForm();
 
   const onSubmit = (data) => {
     dispatch(addAnswer({ ...data, file: data.file[0] })).then(({ payload: { status } }) => {
       if (status === 200) {
-        navigate("/student/journal")
+        navigate("/student/journal");
       }
-    })
-  }
+    });
+  };
 
   return (
     <Card className="card-overlay-jurnal">
@@ -97,25 +85,21 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
                 Soal Jurnal
               </Button> */}
               <Button
-                href="https://telkomuniversityofficial-my.sharepoint.com/:b:/r/personal/sealaboratory_365_telkomuniversity_ac_id/Documents/SEA%209/PRAKTIKUM/Modul%201/Jurnal%20Modul%201%20real.pdf?csf=1&web=1&e=l0dZ7l"
+                href="https://telkomuniversityofficial-my.sharepoint.com/:w:/r/personal/sealaboratory_365_telkomuniversity_ac_id/_layouts/15/Doc.aspx?sourcedoc=%7BA3F1F442-F7DA-4F22-BC79-170EAEDB39A7%7D&file=Jurnal_Modul%202.docx&action=default&mobileredirect=true"
                 target="_blank"
                 color="relief-primary"
               >
                 <b>Soal Jurnal</b>
               </Button>
-              {/* <Button
-                href="https://telkomuniversityofficial-my.sharepoint.com/:w:/g/personal/sealaboratory_365_telkomuniversity_ac_id/ETNCppgpJWxMjdeWW9d-ARwB5q737duGdJ6kVlqgVrnhkw?e=Lq5yLY"
+              <Button
+                href="https://telkomuniversityofficial-my.sharepoint.com/:w:/r/personal/sealaboratory_365_telkomuniversity_ac_id/_layouts/15/Doc.aspx?sourcedoc=%7B8B2BC3CA-A885-41A7-AB8F-B2F595E13FD3%7D&file=TA_Modul%202.docx&action=default&mobileredirect=true"
                 target="_blank"
                 color="relief-primary"
               >
                 <b>Soal Tes Akhir</b>
-              </Button> */}
-              <Button color="flat-dark" onClick={toggle} disabled={isVerifyLoading} >
-                Submit File{" "}
-                <Upload
-                  size={12}
-                  style={{ marginLeft: "5px", color: "black" }}
-                />
+              </Button>
+              <Button color="flat-dark" onClick={toggle} disabled={isVerifyLoading}>
+                Submit File <Upload size={12} style={{ marginLeft: "5px", color: "black" }} />
               </Button>
             </div>
           </Col>
@@ -129,24 +113,15 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
             <Controller
               name="assistantFeedback"
               control={control}
-              defaultValue=''
+              defaultValue=""
               rules={{
                 required: "Please fill feedback!",
                 minLength: { value: 45, message: "Minimum 45 characters" },
                 // pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b.*\b\1\b.*\b\1\b)(?!.*(\w|\W)\2{3,})(?!.*(.)\3(.)\4(.)\10)(?!.*(.)\11(.)\12\11\11)(?!.*\b(\w.*)\5{2,}\b)(?!.*\b((.).*)\6{2,}\7\b)(?!.*\b\W{3,}\b)(?!.*(\W)\w\8)(?!.*\b\w+(\w)\w+\9\w+\9\w+\9\b)(?!.*\b\w{15,}\b)(?!.*Lorem)(?!.*lorem)(?!.*LOREM).*$/, message: "Yang bener isi feedbacknya ya... 😉" }
               }}
-              render={({ field }) => (
-                <Input
-                  type="textarea"
-                  disabled={isLoading}
-                  invalid={errors.assistantFeedback && true}
-                  {...field}
-                />
-              )}
+              render={({ field }) => <Input type="textarea" disabled={isLoading} invalid={errors.assistantFeedback && true} {...field} />}
             />
-            {errors && errors.assistantFeedback && (
-              <FormFeedback>{errors.assistantFeedback.message}</FormFeedback>
-            )}
+            {errors && errors.assistantFeedback && <FormFeedback>{errors.assistantFeedback.message}</FormFeedback>}
             {/* Practicum Feedback */}
             <Label className="form-label mt-1" for="sessionfeedback">
               <b>Feedback for session</b>
@@ -154,24 +129,15 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
             <Controller
               name="sessionfeedback"
               control={control}
-              defaultValue=''
+              defaultValue=""
               rules={{
                 required: "Please fill feedback!",
                 minLength: { value: 45, message: "Minimum 45 characters" },
-                 // pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b.*\b\1\b.*\b\1\b)(?!.*(\w|\W)\2{3,})(?!.*(.)\3(.)\4(.)\10)(?!.*(.)\11(.)\12\11\11)(?!.*\b(\w.*)\5{2,}\b)(?!.*\b((.).*)\6{2,}\7\b)(?!.*\b\W{3,}\b)(?!.*(\W)\w\8)(?!.*\b\w+(\w)\w+\9\w+\9\w+\9\b)(?!.*\b\w{15,}\b)(?!.*Lorem)(?!.*lorem)(?!.*LOREM).*$/, message: "Yang bener isi feedbacknya ya... 😉" }
+                // pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b.*\b\1\b.*\b\1\b)(?!.*(\w|\W)\2{3,})(?!.*(.)\3(.)\4(.)\10)(?!.*(.)\11(.)\12\11\11)(?!.*\b(\w.*)\5{2,}\b)(?!.*\b((.).*)\6{2,}\7\b)(?!.*\b\W{3,}\b)(?!.*(\W)\w\8)(?!.*\b\w+(\w)\w+\9\w+\9\w+\9\b)(?!.*\b\w{15,}\b)(?!.*Lorem)(?!.*lorem)(?!.*LOREM).*$/, message: "Yang bener isi feedbacknya ya... 😉" }
               }}
-              render={({ field }) => (
-                <Input
-                  type="textarea"
-                  disabled={isLoading}
-                  invalid={errors.sessionfeedback && true}
-                  {...field}
-                />
-              )}
+              render={({ field }) => <Input type="textarea" disabled={isLoading} invalid={errors.sessionfeedback && true} {...field} />}
             />
-            {errors && errors.sessionfeedback && (
-              <FormFeedback>{errors.sessionfeedback.message}</FormFeedback>
-            )}
+            {errors && errors.sessionfeedback && <FormFeedback>{errors.sessionfeedback.message}</FormFeedback>}
             {/* Laboratory Feedback */}
             <Label className="form-label mt-1" for="laboratoryfeedback">
               <b>Feedback for laboratory</b>
@@ -180,20 +146,13 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
             <Controller
               name="laboratoryfeedback"
               control={control}
-              defaultValue=''
+              defaultValue=""
               rules={{
                 required: "Please fill feedback!",
                 minLength: { value: 45, message: "Minimum 45 characters" },
                 // pattern: { value: /^(?!.*\b(\w+)\b.*\b\1\b.*\b\1\b.*\b\1\b)(?!.*(\w|\W)\2{3,})(?!.*(.)\3(.)\4(.)\10)(?!.*(.)\11(.)\12\11\11)(?!.*\b(\w.*)\5{2,}\b)(?!.*\b((.).*)\6{2,}\7\b)(?!.*\b\W{3,}\b)(?!.*(\W)\w\8)(?!.*\b\w+(\w)\w+\9\w+\9\w+\9\b)(?!.*\b\w{15,}\b)(?!.*Lorem)(?!.*lorem)(?!.*LOREM).*$/, message: "Yang bener isi feedbacknya ya... 😉" }
               }}
-              render={({ field }) => (
-                <Input
-                  type="textarea"
-                  invalid={errors.laboratoryfeedback && true}
-                  disabled={isLoading}
-                  {...field}
-                />
-              )}
+              render={({ field }) => <Input type="textarea" invalid={errors.laboratoryfeedback && true} disabled={isLoading} {...field} />}
             />
             {/* Gform Feedback */}
             <br></br>
@@ -210,25 +169,12 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
             <Label className="form-label mt-1" for="file">
               <b>Journal File</b>
             </Label>
-            {errors && errors.laboratoryfeedback && (
-              <FormFeedback>{errors.laboratoryfeedback.message}</FormFeedback>
-            )}
-            <Controller
-              name="file"
-              control={control}
-              defaultValue={[]}
-              render={({ field: { onChange, value } }) => (
-                <Dropzone
-                  loading={isLoading}
-                  onChange={onChange}
-                  value={value}
-                />
-              )}
-            />
+            {errors && errors.laboratoryfeedback && <FormFeedback>{errors.laboratoryfeedback.message}</FormFeedback>}
+            <Controller name="file" control={control} defaultValue={[]} render={({ field: { onChange, value } }) => <Dropzone loading={isLoading} onChange={onChange} value={value} />} />
           </Form>
         </Collapse>
       </Container>
       {/* </CardBody> */}
     </Card>
-  )
+  );
 }
