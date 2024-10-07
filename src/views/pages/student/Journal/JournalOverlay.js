@@ -84,6 +84,9 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
               {/* <Button tag={Link} to="" color="relief-primary">
                 Soal Jurnal
               </Button> */}
+              <Button href="https://drive.google.com/file/d/1IdxMW8YdvBGYMxQHQJJgxfN6T8NezJsp/view?usp=sharing" target="_blank" color="relief-primary">
+                <b>Modul</b>
+              </Button>
               <Button href="https://drive.google.com/file/d/1IebUJpg2cSUq4999x9NTZ_zS4JH2pY4I/view?usp=drive_link" target="_blank" color="relief-primary">
                 <b>Soal Jurnal</b>
               </Button>
