@@ -87,11 +87,7 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
               <Button href="https://drive.google.com/file/d/1IebUJpg2cSUq4999x9NTZ_zS4JH2pY4I/view?usp=drive_link" target="_blank" color="relief-primary">
                 <b>Soal Jurnal</b>
               </Button>
-              <Button
-                href="https://telkomuniversityofficial-my.sharepoint.com/:w:/r/personal/sealaboratory_365_telkomuniversity_ac_id/_layouts/15/Doc.aspx?sourcedoc=%7B8B2BC3CA-A885-41A7-AB8F-B2F595E13FD3%7D&file=TA_Modul%202.docx&action=default&mobileredirect=true"
-                target="_blank"
-                color="relief-primary"
-              >
+              <Button href="https://drive.google.com/file/d/19ErrWQXXV2pBiZsXhU0lVmT6dsMcjomd/view?usp=sharing" target="_blank" color="relief-primary">
                 <b>Soal Tes Akhir</b>
               </Button>
               <Button color="flat-dark" onClick={toggle} disabled={isVerifyLoading}>
