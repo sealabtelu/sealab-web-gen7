@@ -84,11 +84,7 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
               {/* <Button tag={Link} to="" color="relief-primary">
                 Soal Jurnal
               </Button> */}
-              <Button
-                href="https://telkomuniversityofficial-my.sharepoint.com/:w:/r/personal/sealaboratory_365_telkomuniversity_ac_id/_layouts/15/Doc.aspx?sourcedoc=%7BA3F1F442-F7DA-4F22-BC79-170EAEDB39A7%7D&file=Jurnal_Modul%202.docx&action=default&mobileredirect=true"
-                target="_blank"
-                color="relief-primary"
-              >
+              <Button href="https://drive.google.com/file/d/1IebUJpg2cSUq4999x9NTZ_zS4JH2pY4I/view?usp=drive_link" target="_blank" color="relief-primary">
                 <b>Soal Jurnal</b>
               </Button>
               <Button
