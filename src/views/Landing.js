@@ -35,6 +35,7 @@ import ddd from "@src/assets/images/landing/assistants/ddd.png";
 import kap from "@src/assets/images/landing/assistants/kap.png";
 import bac from "@src/assets/images/landing/assistants/bac.png";
 import sch from "@src/assets/images/landing/assistants/sch.png";
+import awn from "@src/assets/images/landing/assistants/awn.png";
 
 const Landing = () => {
   const [nightMode, setNightMode] = useState(JSON.parse(localStorage.getItem("nightmode")) ?? false);
@@ -367,7 +368,7 @@ const Landing = () => {
                     </a>
                   </div>
                 </div>
-                {/* <div className="assistant-card dark-card">
+                <div className="assistant-card dark-card">
                   <img src={awn} alt="AWN" style={{ objectPosition: "50% 30%" }} />
                   <h3>Maulana Hafiz</h3>
                   <h4>Public Relation</h4>
@@ -379,7 +380,7 @@ const Landing = () => {
                       <img src={linkedin} alt="LinkedIn" />
                     </a>
                   </div>
-                </div> */}
+                </div>
                 <div className="assistant-card dark-card">
                   <img src={pin} alt="PIN" style={{ objectPosition: "50% 55%" }} />
                   <h3>M. Fajri Nur Arifin</h3>
