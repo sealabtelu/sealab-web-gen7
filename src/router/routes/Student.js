@@ -80,7 +80,7 @@ export const StudentMenu = [
     id: "labworkModule",
     title: "Labwork Module",
     icon: <Book size={20} />,
-    navLink: "https://telkomuniversityofficial-my.sharepoint.com/:b:/g/personal/sealaboratory_365_telkomuniversity_ac_id/EYRxsYu4GdtLiTIUAeeNVOwB-6JUEe_CrMRvwcN9lwkc2w?e=Dt6XxW",
+    navLink: "https://telkomuniversityofficial-my.sharepoint.com/:b:/g/personal/sealaboratory_365_telkomuniversity_ac_id/EcJumF1-ccVEv36nKJUy8V8B809ucD_faMLMg5tP_LHlQw?e=QR2xtY",
     externalLink: true,
     newTab: true
   }
