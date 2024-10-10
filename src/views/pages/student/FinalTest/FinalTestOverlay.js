@@ -14,7 +14,7 @@ import { addAnswer } from "@store/api/journalAnswer";
 import { Controller, useForm } from "react-hook-form";
 import Dropzone from "@custom-components/dropzone";
 
-export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
+export default function FinalTestOverlay({ moduleTitle, moduleNumber }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isLoading: isVerifyLoading } = useSelector((state) => state.gformSurvey);
@@ -84,14 +84,8 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
               {/* <Button tag={Link} to="" color="relief-primary">
                 Soal Jurnal
               </Button> */}
-              <Button href="https://bit.ly/TemplateModul2" target="_blank" color="relief-primary">
-                <b>Template Jawaban</b>
-              </Button>
-              <Button href="https://drive.google.com/file/d/1IebUJpg2cSUq4999x9NTZ_zS4JH2pY4I/view?usp=drive_link" target="_blank" color="relief-primary">
-                <b>Soal Jurnal</b>
-              </Button>
-              <Button color="flat-dark" onClick={toggle} disabled={isVerifyLoading}>
-                Submit File <Upload size={12} style={{ marginLeft: "5px", color: "black" }} />
+              <Button href="https://drive.google.com/file/d/19ErrWQXXV2pBiZsXhU0lVmT6dsMcjomd/view?usp=sharing" target="_blank" color="relief-primary">
+                <b>Soal Tes Akhir</b>
               </Button>
             </div>
           </Col>

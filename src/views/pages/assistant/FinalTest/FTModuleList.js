@@ -13,7 +13,7 @@ import { Card, CardHeader, CardTitle, CardBody, Button, Input } from "reactstrap
 
 // ** Store & Actions
 import { useDispatch, useSelector } from "react-redux";
-import { getModules, setJStatus } from "@store/api/module";
+import { getModules, setFTStatus } from "@store/api/module";
 
 // ** Styles
 import "@src/assets/scss/module-list.scss";
@@ -38,7 +38,7 @@ const JModuleList = () => {
               <Avatar className="rounded" color="light-info" content={(index + 1).toString()} />
               <div>
                 <h6 className="module-title">
-                  Module {index + 1} : {item.name}
+                  TA {index + 1} : {item.name}
                 </h6>
               </div>
             </div>
@@ -50,7 +50,7 @@ const JModuleList = () => {
               }}
             >
               <div className="form-switch form-check-success">
-                <Input type="switch" checked={item.isJOpen} disabled={isLoading} onChange={({ target: { checked } }) => dispatch(setJStatus({ id: item.id, isOpen: checked }))} />
+                <Input type="switch" checked={item.isFTOpen} disabled={isLoading} onChange={({ target: { checked } }) => dispatch(setFTStatus({ id: item.id, isOpen: checked }))} />
               </div>
             </div>
           </div>
@@ -63,10 +63,10 @@ const JModuleList = () => {
 
   return (
     <Fragment>
-      <Breadcrumbs title="Journal" data={[{ title: "Master Control" }]} />
+      <Breadcrumbs title="Final Test" data={[{ title: "Master Control" }]} />
       <Card className="card-module">
         <CardHeader>
-          <CardTitle tag="h4">Journal</CardTitle>
+          <CardTitle tag="h4">Final Test</CardTitle>
           <Icon.MoreVertical size={18} className="cursor-pointer" />
         </CardHeader>
         <CardBody>{renderListModule()}</CardBody>
