@@ -47,10 +47,10 @@ const HomeAssigment = () => {
           </li>
           <li>Jawaban Tugas Pendahuluan diketik secara berurutan. Soal kemudian Jawaban.</li>
           <li>
-            Soal TP akan diunggah setiap hari<b> Kamis sore</b>, pastikan untuk membaca pengumuman TP setiap hari Kamis di OA Line Lab SEA (@748waapd).
+            Soal TP akan diunggah setiap hari<b> Jumat siang</b>, pastikan untuk membaca pengumuman TP setiap hari Jumat di OA Line Lab SEA (@748waapd).
           </li>
           <li>
-            Pengumpulan Tugas Pendahuluan harus dilakukan paling lambat pada hari <b>Minggu sebelum pukul 12.00 WIB</b>, melalui situs web resmi laboratorium SEA.
+            Pengumpulan Tugas Pendahuluan harus dilakukan paling lambat pada hari <b>Minggu sebelum pukul 23.59 WIB</b>, melalui situs web resmi laboratorium SEA.
           </li>
           <li>
             Bagi praktikan yang <b>tidak mengumpulkan</b> Tugas Pendahuluan maka nilai praktikum modul yang bersangkutan dipotong <b>sebanyak 50%</b>
