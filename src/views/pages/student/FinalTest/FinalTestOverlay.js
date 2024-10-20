@@ -84,7 +84,7 @@ export default function FinalTestOverlay({ moduleTitle, moduleNumber }) {
               {/* <Button tag={Link} to="" color="relief-primary">
                 Soal Jurnal
               </Button> */}
-              <Button href="https://drive.google.com/file/d/19ErrWQXXV2pBiZsXhU0lVmT6dsMcjomd/view?usp=sharing" target="_blank" color="relief-primary">
+              <Button href="https://docs.google.com/document/d/1jC9DZq3MDXjA-Y0MsZoig67JovEEJtDV/edit?usp=sharing&ouid=117252223377899543456&rtpof=true&sd=true" target="_blank" color="relief-primary">
                 <b>Soal Tes Akhir</b>
               </Button>
             </div>

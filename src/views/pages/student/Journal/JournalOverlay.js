@@ -87,7 +87,7 @@ export default function PreTestOverlay({ moduleTitle, moduleNumber }) {
               <Button href="https://bit.ly/TemplateModul2" target="_blank" color="relief-primary">
                 <b>Template Jawaban</b>
               </Button>
-              <Button href="https://drive.google.com/file/d/1IebUJpg2cSUq4999x9NTZ_zS4JH2pY4I/view?usp=drive_link" target="_blank" color="relief-primary">
+              <Button href="https://docs.google.com/document/d/1hxNAx3osu6jK_ZQXztz1W5ceRggFgB5I/edit?usp=drive_link&ouid=117252223377899543456&rtpof=true&sd=true" target="_blank" color="relief-primary">
                 <b>Soal Jurnal</b>
               </Button>
               <Button color="flat-dark" onClick={toggle} disabled={isVerifyLoading}>
